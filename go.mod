@@ -16,8 +16,3 @@ require (
 	github.com/openzipkin/zipkin-go-opentracing v0.3.5
 	github.com/stretchr/testify v1.3.0 // indirect
 )
-
-replace (
-	golang.org/x/tools v0.0.0-20190322203728-c1a832b0ad89 => github.com/golang/tools v0.0.0-20190322203728-c1a832b0ad89
-	golang.org/x/image v0.0.0-20180708004352-c73c2afc3b81 => github.com/golang/image v0.0.0-20180708004352-c73c2afc3b81
-)
