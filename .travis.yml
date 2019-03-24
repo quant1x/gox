@@ -1,17 +1,17 @@
 language: go
 go:
-- 1.11.4
-- master
+  - 1.11.4
+  - master
 env:
   matrix:
-  - GO111MODULE=on
-  - CODECOV_TOKEN="81bb74a9-76b5-4cba-b0da-998a252e4cfd"
+    - GO111MODULE=on
+    - CODECOV_TOKEN="81bb74a9-76b5-4cba-b0da-998a252e4cfd"
   global:
     secure: Xv7bviy3K/z4pyPLeassY3enPGc0m8ZyAvO8rypcqvSDlzna1x5l5coi/A1jselfT//smctQ5haDRu5t4iuXmkmiNNnXqmUn2+ke2e918L/EO2agRytvM+Ct051OCcO4xnu5USnhOlc/vJL7e1X6h8v1FbFaPHj6yIE9v43hZ6HbZhQ4CqPBY0qbele07elhqcV7zxibpjmacBsMfRXlpZmLWqv/MHLZjTfpT2leZqPxoLMD4kKKqP+nCG+M/MY7y/Oi1HQDfo5f01nZl6wBGQcM3Ol+QoaI2IXqn+JjZaCyhI66fLvQbbeLy5vxGF015mU6314YASudkKeITXYHdHLBvGjRTdXKigTgjWgoQlJL0f1sMzAv+VRtau1sUsXPwf9wy0XQMp0MdSQIa2wLrdlTuLY+T8RAAafLR7+MPHsKE0RxDz+Vsf/b6zldZAE2GV3XopCObQEJlgpoGseqfXiAo++5qtYO08Xbpxy0sDCQbpUFNokPKF/ie7mrsk/nXkOMmDE4rPBWTJc/RHpuUE+yclS0erotN9pUX3k/cnXNZjj5oZk93kbEh9FnipDvhMrz+FuyNB+iZFa3MD8ZOeasnmxPSIZUItwF0YVdjOiNCTEEZwLI+FwrYrmUT3iUqAHsP+4wosh3mg0KzHs/OAr50tM5yqT3r2YYhAUBpFw=
 sudo: required
 before_install:
-- go get -t -v ./...
+  - go get -t -v ./...
 script:
-- go test -race -coverprofile=coverage.txt -covermode=atomic
+  - go test -race -coverprofile=coverage.txt -covermode=atomic
 after_success:
-- bash <(curl -s https://codecov.io/bash) -t 81bb74a9-76b5-4cba-b0da-998a252e4cfd
+  - bash <(curl -s https://codecov.io/bash) -t 81bb74a9-76b5-4cba-b0da-998a252e4cfd
