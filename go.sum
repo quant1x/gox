@@ -1,0 +1,4 @@
+github.com/golang/sys v0.0.0-20190329044733-9eb1bfa1ce65 h1:fi9Q7R+N6Otidri5frkcJ25pMGZXGqRd7eg6Hsd+Bh4=
+github.com/golang/sys v0.0.0-20190329044733-9eb1bfa1ce65/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
+rsc.io/qr v0.2.0 h1:6vBLea5/NRMVTz8V66gipeLycZMl/+UlFmk8DvqQ6WY=
+rsc.io/qr v0.2.0/go.mod h1:IF+uZjkb9fqyeF/4tlBoynqmQxUoPfWEKh921coOuXs=
