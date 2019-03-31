@@ -1,4 +1,4 @@
-package goapi
+package traceid
 
 import (
 	"testing"
