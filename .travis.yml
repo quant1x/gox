@@ -12,6 +12,7 @@ sudo: required
 before_install:
   - go get -t -v ./...
 script:
-  - go test -race -coverprofile=coverage.txt -covermode=atomic
+  #- go test -race -coverprofile=coverage.txt -covermode=atomic
+  - go.test.sh
 after_success:
   - bash <(curl -s https://codecov.io/bash) -t 81bb74a9-76b5-4cba-b0da-998a252e4cfd
