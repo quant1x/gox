@@ -11,3 +11,6 @@ assembly/version.properties
 .factorypath
 .project
 .settings/
+
+# go.test.sh
+coverage.txt
