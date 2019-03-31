@@ -7,4 +7,8 @@ go 1.11.4
 
 //require golang.org/x/sys v0.0.0-20190329044733-9eb1bfa1ce65 // indirect
 
-require rsc.io/qr v0.2.0
+require (
+	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
+	github.com/modern-go/reflect2 v1.0.1
+	rsc.io/qr v0.2.0
+)
