@@ -1,5 +1,3 @@
-[![GoDoc](https://godoc.org/github.com/mymmsc/gox/util?status.svg)](https://godoc.org/github.com/mymmsc/gox/util) [![Build Status](https://travis-ci.org/emirpasic/gods.svg)](https://travis-ci.org/emirpasic/gods) [![Go Report Card](https://goreportcard.com/badge/github.com/mymmsc/gox/util)](https://goreportcard.com/report/github.com/mymmsc/gox/util) [![PyPI](https://img.shields.io/pypi/l/Django.svg?maxAge=2592000)](https://github.com/mymmsc/gox/util/blob/master/LICENSE)
-
 # GoDS (Go Data Structures)
 
 Implementation of various data structures and algorithms in Go.

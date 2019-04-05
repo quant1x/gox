@@ -11,8 +11,8 @@ package linkedliststack
 
 import (
 	"fmt"
-	"github.com/mymmsc/gox/util/singlylinkedlist"
 	"github.com/mymmsc/gox/util"
+	"github.com/mymmsc/gox/util/singlylinkedlist"
 	"strings"
 )
 

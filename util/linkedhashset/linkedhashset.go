@@ -15,8 +15,8 @@ package linkedhashset
 
 import (
 	"fmt"
-	"github.com/mymmsc/gox/util/doublylinkedlist"
 	"github.com/mymmsc/gox/util"
+	"github.com/mymmsc/gox/util/doublylinkedlist"
 	"strings"
 )
 
