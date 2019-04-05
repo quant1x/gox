@@ -6,17 +6,16 @@ package redblacktree
 
 import (
 	"github.com/mymmsc/gox/util"
-	"github.com/mymmsc/gox/util/containers"
 )
 
 func assertIteratorImplementation() {
-	var _ containers.ReverseIteratorWithKey = (*Iterator)(nil)
+	var _ util.ReverseIteratorWithKey = (*Iterator)(nil)
 }
 
 // Iterator holding the iterator's state
 type Iterator struct {
-	tree     *util.Tree
-	node     *util.Node
+	tree     *Tree
+	node     *Node
 	position position
 }
 
@@ -27,7 +26,7 @@ const (
 )
 
 // Iterator returns a stateful iterator whose elements are key/value pairs.
-func (tree *util.Tree) Iterator() Iterator {
+func (tree *Tree) Iterator() Iterator {
 	return Iterator{tree: tree, node: nil, position: begin}
 }
 

@@ -5,12 +5,12 @@
 package arraystack
 
 import (
-	"github.com/mymmsc/gox/util/containers"
+	"github.com/mymmsc/gox/util"
 )
 
 func assertSerializationImplementation() {
-	var _ containers.JSONSerializer = (*Stack)(nil)
-	var _ containers.JSONDeserializer = (*Stack)(nil)
+	var _ util.JSONSerializer = (*Stack)(nil)
+	var _ util.JSONDeserializer = (*Stack)(nil)
 }
 
 // ToJSON outputs the JSON representation of the stack.

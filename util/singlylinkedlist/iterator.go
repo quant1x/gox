@@ -4,24 +4,21 @@
 
 package singlylinkedlist
 
-import (
-	"github.com/mymmsc/gox/util"
-	"github.com/mymmsc/gox/util/containers"
-)
+import "github.com/mymmsc/gox/util"
 
 func assertIteratorImplementation() {
-	var _ containers.IteratorWithIndex = (*Iterator)(nil)
+	var _ util.IteratorWithIndex = (*Iterator)(nil)
 }
 
 // Iterator holding the iterator's state
 type Iterator struct {
-	list    *util.List
+	list    *List
 	index   int
-	element *util.element
+	element *element
 }
 
 // Iterator returns a stateful iterator whose values can be fetched by an index.
-func (list *util.List) Iterator() Iterator {
+func (list *List) Iterator() Iterator {
 	return Iterator{list: list, index: -1, element: nil}
 }
 

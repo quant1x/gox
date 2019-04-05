@@ -14,7 +14,7 @@ package binaryheap
 import (
 	"fmt"
 	"github.com/mymmsc/gox/util"
-	"github.com/mymmsc/gox/util/lists/arraylist"
+	"github.com/mymmsc/gox/util/arraylist"
 	"strings"
 )
 

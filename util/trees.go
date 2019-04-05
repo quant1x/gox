@@ -9,11 +9,9 @@
 // Reference: https://en.wikipedia.org/wiki/Tree_%28data_structure%29
 package util
 
-import "github.com/mymmsc/gox/util/containers"
-
 // Tree interface that all trees implement
 type Tree interface {
-	containers.Container
+	Container
 	// Empty() bool
 	// Size() int
 	// Clear()

@@ -11,8 +11,9 @@ package singlylinkedlist
 
 import (
 	"fmt"
-	"github.com/mymmsc/gox/util"
 	"strings"
+
+	"github.com/mymmsc/gox/util"
 )
 
 func assertListImplementation() {

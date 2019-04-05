@@ -4,17 +4,14 @@
 
 package treebidimap
 
-import (
-	"github.com/mymmsc/gox/util"
-	"github.com/mymmsc/gox/util/containers"
-)
+import "github.com/mymmsc/gox/util"
 
 func assertEnumerableImplementation() {
-	var _ containers.EnumerableWithKey = (*util.Map)(nil)
+	var _ util.EnumerableWithKey = (*Map)(nil)
 }
 
 // Each calls the given function once for each element, passing that element's key and value.
-func (m *util.Map) Each(f func(key interface{}, value interface{})) {
+func (m *Map) Each(f func(key interface{}, value interface{})) {
 	iterator := m.Iterator()
 	for iterator.Next() {
 		f(iterator.Key(), iterator.Value())
@@ -23,8 +20,8 @@ func (m *util.Map) Each(f func(key interface{}, value interface{})) {
 
 // Map invokes the given function once for each element and returns a container
 // containing the values returned by the given function as key/value pairs.
-func (m *util.Map) Map(f func(key1 interface{}, value1 interface{}) (interface{}, interface{})) *util.Map {
-	newMap := util.NewWith(m.keyComparator, m.valueComparator)
+func (m *Map) Map(f func(key1 interface{}, value1 interface{}) (interface{}, interface{})) *Map {
+	newMap := NewWith(m.keyComparator, m.valueComparator)
 	iterator := m.Iterator()
 	for iterator.Next() {
 		key2, value2 := f(iterator.Key(), iterator.Value())
@@ -34,8 +31,8 @@ func (m *util.Map) Map(f func(key1 interface{}, value1 interface{}) (interface{}
 }
 
 // Select returns a new container containing all elements for which the given function returns a true value.
-func (m *util.Map) Select(f func(key interface{}, value interface{}) bool) *util.Map {
-	newMap := util.NewWith(m.keyComparator, m.valueComparator)
+func (m *Map) Select(f func(key interface{}, value interface{}) bool) *Map {
+	newMap := NewWith(m.keyComparator, m.valueComparator)
 	iterator := m.Iterator()
 	for iterator.Next() {
 		if f(iterator.Key(), iterator.Value()) {
@@ -47,7 +44,7 @@ func (m *util.Map) Select(f func(key interface{}, value interface{}) bool) *util
 
 // Any passes each element of the container to the given function and
 // returns true if the function ever returns true for any element.
-func (m *util.Map) Any(f func(key interface{}, value interface{}) bool) bool {
+func (m *Map) Any(f func(key interface{}, value interface{}) bool) bool {
 	iterator := m.Iterator()
 	for iterator.Next() {
 		if f(iterator.Key(), iterator.Value()) {
@@ -59,7 +56,7 @@ func (m *util.Map) Any(f func(key interface{}, value interface{}) bool) bool {
 
 // All passes each element of the container to the given function and
 // returns true if the function returns true for all elements.
-func (m *util.Map) All(f func(key interface{}, value interface{}) bool) bool {
+func (m *Map) All(f func(key interface{}, value interface{}) bool) bool {
 	iterator := m.Iterator()
 	for iterator.Next() {
 		if !f(iterator.Key(), iterator.Value()) {
@@ -72,7 +69,7 @@ func (m *util.Map) All(f func(key interface{}, value interface{}) bool) bool {
 // Find passes each element of the container to the given function and returns
 // the first (key,value) for which the function is true or nil,nil otherwise if no element
 // matches the criteria.
-func (m *util.Map) Find(f func(key interface{}, value interface{}) bool) (interface{}, interface{}) {
+func (m *Map) Find(f func(key interface{}, value interface{}) bool) (interface{}, interface{}) {
 	iterator := m.Iterator()
 	for iterator.Next() {
 		if f(iterator.Key(), iterator.Value()) {

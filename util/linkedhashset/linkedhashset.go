@@ -15,19 +15,19 @@ package linkedhashset
 
 import (
 	"fmt"
+	"github.com/mymmsc/gox/util/doublylinkedlist"
 	"github.com/mymmsc/gox/util"
-	"github.com/mymmsc/gox/util/sets"
 	"strings"
 )
 
 func assertSetImplementation() {
-	var _ sets.Set = (*Set)(nil)
+	var _ util.Set = (*Set)(nil)
 }
 
 // Set holds elements in go's native map
 type Set struct {
 	table    map[interface{}]struct{}
-	ordering *sets.List
+	ordering *doublylinkedlist.List
 }
 
 var itemExists = struct{}{}
@@ -36,7 +36,7 @@ var itemExists = struct{}{}
 func New(values ...interface{}) *Set {
 	set := &Set{
 		table:    make(map[interface{}]struct{}),
-		ordering: sets.New(),
+		ordering: doublylinkedlist.New(),
 	}
 	if len(values) > 0 {
 		set.Add(values...)

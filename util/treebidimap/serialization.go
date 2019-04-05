@@ -7,26 +7,25 @@ package treebidimap
 import (
 	"encoding/json"
 	"github.com/mymmsc/gox/util"
-	"github.com/mymmsc/gox/util/containers"
 )
 
 func assertSerializationImplementation() {
-	var _ containers.JSONSerializer = (*maps.Map)(nil)
-	var _ containers.JSONDeserializer = (*maps.Map)(nil)
+	var _ util.JSONSerializer = (*Map)(nil)
+	var _ util.JSONDeserializer = (*Map)(nil)
 }
 
 // ToJSON outputs the JSON representation of the map.
-func (m *maps.Map) ToJSON() ([]byte, error) {
+func (m *Map) ToJSON() ([]byte, error) {
 	elements := make(map[string]interface{})
 	it := m.Iterator()
 	for it.Next() {
-		elements[maps.ToString(it.Key())] = it.Value()
+		elements[util.ToString(it.Key())] = it.Value()
 	}
 	return json.Marshal(&elements)
 }
 
 // FromJSON populates the map from the input JSON representation.
-func (m *maps.Map) FromJSON(data []byte) error {
+func (m *Map) FromJSON(data []byte) error {
 	elements := make(map[string]interface{})
 	err := json.Unmarshal(data, &elements)
 	if err == nil {

@@ -6,22 +6,22 @@ package treeset
 
 import (
 	"github.com/mymmsc/gox/util"
-	"github.com/mymmsc/gox/util/containers"
+	rbt "github.com/mymmsc/gox/util/redblacktree"
 )
 
 func assertIteratorImplementation() {
-	var _ containers.ReverseIteratorWithIndex = (*Iterator)(nil)
+	var _ util.ReverseIteratorWithIndex = (*Iterator)(nil)
 }
 
 // Iterator returns a stateful iterator whose values can be fetched by an index.
 type Iterator struct {
 	index    int
-	iterator util.Iterator
-	tree     *util.Tree
+	iterator rbt.Iterator
+	tree     *rbt.Tree
 }
 
 // Iterator holding the iterator's state
-func (set *util.Set) Iterator() Iterator {
+func (set *Set) Iterator() Iterator {
 	return Iterator{index: -1, iterator: set.tree.Iterator(), tree: set.tree}
 }
 

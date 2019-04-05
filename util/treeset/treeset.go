@@ -12,24 +12,24 @@ package treeset
 import (
 	"fmt"
 	"github.com/mymmsc/gox/util"
-	"github.com/mymmsc/gox/util/sets"
+	rbt "github.com/mymmsc/gox/util/redblacktree"
 	"strings"
 )
 
 func assertSetImplementation() {
-	var _ sets.Set = (*Set)(nil)
+	var _ util.Set = (*Set)(nil)
 }
 
 // Set holds elements in a red-black tree
 type Set struct {
-	tree *util.Tree
+	tree *rbt.Tree
 }
 
 var itemExists = struct{}{}
 
 // NewWith instantiates a new empty set with the custom comparator.
-func NewWith(comparator sets.Comparator, values ...interface{}) *Set {
-	set := &Set{tree: util.NewWith(comparator)}
+func NewWith(comparator util.Comparator, values ...interface{}) *Set {
+	set := &Set{tree: rbt.NewWith(comparator)}
 	if len(values) > 0 {
 		set.Add(values...)
 	}
@@ -38,7 +38,7 @@ func NewWith(comparator sets.Comparator, values ...interface{}) *Set {
 
 // NewWithIntComparator instantiates a new empty set with the IntComparator, i.e. keys are of type int.
 func NewWithIntComparator(values ...interface{}) *Set {
-	set := &Set{tree: util.NewWithIntComparator()}
+	set := &Set{tree: rbt.NewWithIntComparator()}
 	if len(values) > 0 {
 		set.Add(values...)
 	}
@@ -47,7 +47,7 @@ func NewWithIntComparator(values ...interface{}) *Set {
 
 // NewWithStringComparator instantiates a new empty set with the StringComparator, i.e. keys are of type string.
 func NewWithStringComparator(values ...interface{}) *Set {
-	set := &Set{tree: util.NewWithStringComparator()}
+	set := &Set{tree: rbt.NewWithStringComparator()}
 	if len(values) > 0 {
 		set.Add(values...)
 	}

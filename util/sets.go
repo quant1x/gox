@@ -9,15 +9,13 @@
 // Reference: https://en.wikipedia.org/wiki/Set_%28abstract_data_type%29
 package util
 
-import "github.com/mymmsc/gox/util/containers"
-
 // Set interface that all sets implement
 type Set interface {
 	Add(elements ...interface{})
 	Remove(elements ...interface{})
 	Contains(elements ...interface{}) bool
 
-	containers.Container
+	Container
 	// Empty() bool
 	// Size() int
 	// Clear()

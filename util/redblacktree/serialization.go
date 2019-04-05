@@ -7,16 +7,15 @@ package redblacktree
 import (
 	"encoding/json"
 	"github.com/mymmsc/gox/util"
-	"github.com/mymmsc/gox/util/containers"
 )
 
 func assertSerializationImplementation() {
-	var _ containers.JSONSerializer = (*util.Tree)(nil)
-	var _ containers.JSONDeserializer = (*util.Tree)(nil)
+	var _ util.JSONSerializer = (*Tree)(nil)
+	var _ util.JSONDeserializer = (*Tree)(nil)
 }
 
 // ToJSON outputs the JSON representation of the tree.
-func (tree *util.Tree) ToJSON() ([]byte, error) {
+func (tree *Tree) ToJSON() ([]byte, error) {
 	elements := make(map[string]interface{})
 	it := tree.Iterator()
 	for it.Next() {
@@ -26,7 +25,7 @@ func (tree *util.Tree) ToJSON() ([]byte, error) {
 }
 
 // FromJSON populates the tree from the input JSON representation.
-func (tree *util.Tree) FromJSON(data []byte) error {
+func (tree *Tree) FromJSON(data []byte) error {
 	elements := make(map[string]interface{})
 	err := json.Unmarshal(data, &elements)
 	if err == nil {

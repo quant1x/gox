@@ -4,10 +4,12 @@
 
 package arraylist
 
-import "github.com/mymmsc/gox/util/containers"
+import (
+	"github.com/mymmsc/gox/util"
+)
 
 func assertIteratorImplementation() {
-	var _ containers.ReverseIteratorWithIndex = (*Iterator)(nil)
+	var _ util.ReverseIteratorWithIndex = (*Iterator)(nil)
 }
 
 // Iterator holding the iterator's state

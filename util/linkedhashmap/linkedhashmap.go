@@ -14,25 +14,25 @@ package linkedhashmap
 import (
 	"fmt"
 	"github.com/mymmsc/gox/util"
-	"github.com/mymmsc/gox/util/maps"
+	"github.com/mymmsc/gox/util/doublylinkedlist"
 	"strings"
 )
 
 func assertMapImplementation() {
-	var _ maps.Map = (*Map)(nil)
+	var _ util.Map = (*Map)(nil)
 }
 
 // Map holds the elements in a red-black tree
 type Map struct {
 	table    map[interface{}]interface{}
-	ordering *maps.List
+	ordering *doublylinkedlist.List
 }
 
 // New instantiates a linked-hash-map.
 func New() *Map {
 	return &Map{
 		table:    make(map[interface{}]interface{}),
-		ordering: maps.New(),
+		ordering: doublylinkedlist.New(),
 	}
 }
 

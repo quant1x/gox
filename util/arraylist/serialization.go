@@ -6,12 +6,12 @@ package arraylist
 
 import (
 	"encoding/json"
-	"github.com/mymmsc/gox/util/containers"
+	"github.com/mymmsc/gox/util"
 )
 
 func assertSerializationImplementation() {
-	var _ containers.JSONSerializer = (*List)(nil)
-	var _ containers.JSONDeserializer = (*List)(nil)
+	var _ util.JSONSerializer = (*List)(nil)
+	var _ util.JSONDeserializer = (*List)(nil)
 }
 
 // ToJSON outputs the JSON representation of list's elements.

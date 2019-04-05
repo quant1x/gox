@@ -6,12 +6,11 @@ package linkedliststack
 
 import (
 	"fmt"
-	"github.com/mymmsc/gox/util"
 	"testing"
 )
 
 func TestStackPush(t *testing.T) {
-	stack := util.New()
+	stack := New()
 	if actualValue := stack.Empty(); actualValue != true {
 		t.Errorf("Got %v expected %v", actualValue, true)
 	}
@@ -34,7 +33,7 @@ func TestStackPush(t *testing.T) {
 }
 
 func TestStackPeek(t *testing.T) {
-	stack := util.New()
+	stack := New()
 	if actualValue, ok := stack.Peek(); actualValue != nil || ok {
 		t.Errorf("Got %v expected %v", actualValue, nil)
 	}
@@ -47,7 +46,7 @@ func TestStackPeek(t *testing.T) {
 }
 
 func TestStackPop(t *testing.T) {
-	stack := util.New()
+	stack := New()
 	stack.Push(1)
 	stack.Push(2)
 	stack.Push(3)
@@ -73,7 +72,7 @@ func TestStackPop(t *testing.T) {
 }
 
 func TestStackIterator(t *testing.T) {
-	stack := util.New()
+	stack := New()
 	stack.Push("a")
 	stack.Push("b")
 	stack.Push("c")
@@ -117,7 +116,7 @@ func TestStackIterator(t *testing.T) {
 }
 
 func TestStackIteratorBegin(t *testing.T) {
-	stack := util.New()
+	stack := New()
 	it := stack.Iterator()
 	it.Begin()
 	stack.Push("a")
@@ -133,7 +132,7 @@ func TestStackIteratorBegin(t *testing.T) {
 }
 
 func TestStackIteratorFirst(t *testing.T) {
-	stack := util.New()
+	stack := New()
 	it := stack.Iterator()
 	if actualValue, expectedValue := it.First(), false; actualValue != expectedValue {
 		t.Errorf("Got %v expected %v", actualValue, expectedValue)
@@ -150,7 +149,7 @@ func TestStackIteratorFirst(t *testing.T) {
 }
 
 func TestStackSerialization(t *testing.T) {
-	stack := util.New()
+	stack := New()
 	stack.Push("a")
 	stack.Push("b")
 	stack.Push("c")
@@ -177,7 +176,7 @@ func TestStackSerialization(t *testing.T) {
 	assert()
 }
 
-func benchmarkPush(b *testing.B, stack *util.Stack, size int) {
+func benchmarkPush(b *testing.B, stack *Stack, size int) {
 	for i := 0; i < b.N; i++ {
 		for n := 0; n < size; n++ {
 			stack.Push(n)
@@ -185,7 +184,7 @@ func benchmarkPush(b *testing.B, stack *util.Stack, size int) {
 	}
 }
 
-func benchmarkPop(b *testing.B, stack *util.Stack, size int) {
+func benchmarkPop(b *testing.B, stack *Stack, size int) {
 	for i := 0; i < b.N; i++ {
 		for n := 0; n < size; n++ {
 			stack.Pop()
@@ -196,7 +195,7 @@ func benchmarkPop(b *testing.B, stack *util.Stack, size int) {
 func BenchmarkLinkedListStackPop100(b *testing.B) {
 	b.StopTimer()
 	size := 100
-	stack := util.New()
+	stack := New()
 	for n := 0; n < size; n++ {
 		stack.Push(n)
 	}
@@ -207,7 +206,7 @@ func BenchmarkLinkedListStackPop100(b *testing.B) {
 func BenchmarkLinkedListStackPop1000(b *testing.B) {
 	b.StopTimer()
 	size := 1000
-	stack := util.New()
+	stack := New()
 	for n := 0; n < size; n++ {
 		stack.Push(n)
 	}
@@ -218,7 +217,7 @@ func BenchmarkLinkedListStackPop1000(b *testing.B) {
 func BenchmarkLinkedListStackPop10000(b *testing.B) {
 	b.StopTimer()
 	size := 10000
-	stack := util.New()
+	stack := New()
 	for n := 0; n < size; n++ {
 		stack.Push(n)
 	}
@@ -229,7 +228,7 @@ func BenchmarkLinkedListStackPop10000(b *testing.B) {
 func BenchmarkLinkedListStackPop100000(b *testing.B) {
 	b.StopTimer()
 	size := 100000
-	stack := util.New()
+	stack := New()
 	for n := 0; n < size; n++ {
 		stack.Push(n)
 	}
@@ -240,7 +239,7 @@ func BenchmarkLinkedListStackPop100000(b *testing.B) {
 func BenchmarkLinkedListStackPush100(b *testing.B) {
 	b.StopTimer()
 	size := 100
-	stack := util.New()
+	stack := New()
 	b.StartTimer()
 	benchmarkPush(b, stack, size)
 }
@@ -248,7 +247,7 @@ func BenchmarkLinkedListStackPush100(b *testing.B) {
 func BenchmarkLinkedListStackPush1000(b *testing.B) {
 	b.StopTimer()
 	size := 1000
-	stack := util.New()
+	stack := New()
 	for n := 0; n < size; n++ {
 		stack.Push(n)
 	}
@@ -259,7 +258,7 @@ func BenchmarkLinkedListStackPush1000(b *testing.B) {
 func BenchmarkLinkedListStackPush10000(b *testing.B) {
 	b.StopTimer()
 	size := 10000
-	stack := util.New()
+	stack := New()
 	for n := 0; n < size; n++ {
 		stack.Push(n)
 	}
@@ -270,7 +269,7 @@ func BenchmarkLinkedListStackPush10000(b *testing.B) {
 func BenchmarkLinkedListStackPush100000(b *testing.B) {
 	b.StopTimer()
 	size := 100000
-	stack := util.New()
+	stack := New()
 	for n := 0; n < size; n++ {
 		stack.Push(n)
 	}

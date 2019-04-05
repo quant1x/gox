@@ -9,10 +9,6 @@
 // Reference: https://en.wikipedia.org/wiki/List_%28abstract_data_type%29
 package util
 
-import (
-	"github.com/mymmsc/gox/util/containers"
-)
-
 // List interface that all lists implement
 type List interface {
 	Get(index int) (interface{}, bool)
@@ -24,7 +20,7 @@ type List interface {
 	Insert(index int, values ...interface{})
 	Set(index int, value interface{})
 
-	containers.Container
+	Container
 	// Empty() bool
 	// Size() int
 	// Clear()

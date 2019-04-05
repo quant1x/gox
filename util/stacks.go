@@ -9,15 +9,13 @@
 // Reference: https://en.wikipedia.org/wiki/Stack_%28abstract_data_type%29
 package util
 
-import "github.com/mymmsc/gox/util/containers"
-
 // Stack interface that all stacks implement
 type Stack interface {
 	Push(value interface{})
 	Pop() (value interface{}, ok bool)
 	Peek() (value interface{}, ok bool)
 
-	containers.Container
+	Container
 	// Empty() bool
 	// Size() int
 	// Clear()

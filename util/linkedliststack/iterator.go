@@ -4,23 +4,20 @@
 
 package linkedliststack
 
-import (
-	"github.com/mymmsc/gox/util"
-	"github.com/mymmsc/gox/util/containers"
-)
+import "github.com/mymmsc/gox/util"
 
 func assertIteratorImplementation() {
-	var _ containers.IteratorWithIndex = (*Iterator)(nil)
+	var _ util.IteratorWithIndex = (*Iterator)(nil)
 }
 
 // Iterator returns a stateful iterator whose values can be fetched by an index.
 type Iterator struct {
-	stack *util.Stack
+	stack *Stack
 	index int
 }
 
 // Iterator returns a stateful iterator whose values can be fetched by an index.
-func (stack *util.Stack) Iterator() Iterator {
+func (stack *Stack) Iterator() Iterator {
 	return Iterator{stack: stack, index: -1}
 }
 

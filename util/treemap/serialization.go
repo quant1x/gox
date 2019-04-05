@@ -4,22 +4,19 @@
 
 package treemap
 
-import (
-	"github.com/mymmsc/gox/util"
-	"github.com/mymmsc/gox/util/containers"
-)
+import "github.com/mymmsc/gox/util"
 
 func assertSerializationImplementation() {
-	var _ containers.JSONSerializer = (*util.Map)(nil)
-	var _ containers.JSONDeserializer = (*util.Map)(nil)
+	var _ util.JSONSerializer = (*Map)(nil)
+	var _ util.JSONDeserializer = (*Map)(nil)
 }
 
 // ToJSON outputs the JSON representation of the map.
-func (m *util.Map) ToJSON() ([]byte, error) {
+func (m *Map) ToJSON() ([]byte, error) {
 	return m.tree.ToJSON()
 }
 
 // FromJSON populates the map from the input JSON representation.
-func (m *util.Map) FromJSON(data []byte) error {
+func (m *Map) FromJSON(data []byte) error {
 	return m.tree.FromJSON(data)
 }

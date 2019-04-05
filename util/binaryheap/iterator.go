@@ -6,21 +6,20 @@ package binaryheap
 
 import (
 	"github.com/mymmsc/gox/util"
-	"github.com/mymmsc/gox/util/containers"
 )
 
 func assertIteratorImplementation() {
-	var _ containers.ReverseIteratorWithIndex = (*Iterator)(nil)
+	var _ util.ReverseIteratorWithIndex = (*Iterator)(nil)
 }
 
 // Iterator returns a stateful iterator whose values can be fetched by an index.
 type Iterator struct {
-	heap  *util.Heap
+	heap  *Heap
 	index int
 }
 
 // Iterator returns a stateful iterator whose values can be fetched by an index.
-func (heap *util.Heap) Iterator() Iterator {
+func (heap *Heap) Iterator() Iterator {
 	return Iterator{heap: heap, index: -1}
 }
 

@@ -5,13 +5,12 @@
 package binaryheap
 
 import (
-	"github.com/mymmsc/gox/util"
 	"math/rand"
 	"testing"
 )
 
 func TestBinaryHeapPush(t *testing.T) {
-	heap := util.NewWithIntComparator()
+	heap := NewWithIntComparator()
 
 	if actualValue := heap.Empty(); actualValue != true {
 		t.Errorf("Got %v expected %v", actualValue, true)
@@ -36,7 +35,7 @@ func TestBinaryHeapPush(t *testing.T) {
 }
 
 func TestBinaryHeapPushBulk(t *testing.T) {
-	heap := util.NewWithIntComparator()
+	heap := NewWithIntComparator()
 
 	heap.Push(15, 20, 3, 1, 2)
 
@@ -49,7 +48,7 @@ func TestBinaryHeapPushBulk(t *testing.T) {
 }
 
 func TestBinaryHeapPop(t *testing.T) {
-	heap := util.NewWithIntComparator()
+	heap := NewWithIntComparator()
 
 	if actualValue := heap.Empty(); actualValue != true {
 		t.Errorf("Got %v expected %v", actualValue, true)
@@ -81,7 +80,7 @@ func TestBinaryHeapPop(t *testing.T) {
 }
 
 func TestBinaryHeapRandom(t *testing.T) {
-	heap := util.NewWithIntComparator()
+	heap := NewWithIntComparator()
 
 	rand.Seed(3)
 	for i := 0; i < 10000; i++ {
@@ -100,7 +99,7 @@ func TestBinaryHeapRandom(t *testing.T) {
 }
 
 func TestBinaryHeapIteratorOnEmpty(t *testing.T) {
-	heap := util.NewWithIntComparator()
+	heap := NewWithIntComparator()
 	it := heap.Iterator()
 	for it.Next() {
 		t.Errorf("Shouldn't iterate on empty heap")
@@ -108,7 +107,7 @@ func TestBinaryHeapIteratorOnEmpty(t *testing.T) {
 }
 
 func TestBinaryHeapIteratorNext(t *testing.T) {
-	heap := util.NewWithIntComparator()
+	heap := NewWithIntComparator()
 	heap.Push(3) // [3]
 	heap.Push(2) // [2,3]
 	heap.Push(1) // [1,3,2](2 swapped with 1, hence last)
@@ -145,7 +144,7 @@ func TestBinaryHeapIteratorNext(t *testing.T) {
 }
 
 func TestBinaryHeapIteratorPrev(t *testing.T) {
-	heap := util.NewWithIntComparator()
+	heap := NewWithIntComparator()
 	heap.Push(3) // [3]
 	heap.Push(2) // [2,3]
 	heap.Push(1) // [1,3,2](2 swapped with 1, hence last)
@@ -184,7 +183,7 @@ func TestBinaryHeapIteratorPrev(t *testing.T) {
 }
 
 func TestBinaryHeapIteratorBegin(t *testing.T) {
-	heap := util.NewWithIntComparator()
+	heap := NewWithIntComparator()
 	it := heap.Iterator()
 	it.Begin()
 	heap.Push(2)
@@ -200,7 +199,7 @@ func TestBinaryHeapIteratorBegin(t *testing.T) {
 }
 
 func TestListIteratorEnd(t *testing.T) {
-	heap := util.NewWithIntComparator()
+	heap := NewWithIntComparator()
 	it := heap.Iterator()
 
 	if index := it.Index(); index != -1 {
@@ -227,7 +226,7 @@ func TestListIteratorEnd(t *testing.T) {
 }
 
 func TestStackIteratorFirst(t *testing.T) {
-	heap := util.NewWithIntComparator()
+	heap := NewWithIntComparator()
 	it := heap.Iterator()
 	if actualValue, expectedValue := it.First(), false; actualValue != expectedValue {
 		t.Errorf("Got %v expected %v", actualValue, expectedValue)
@@ -244,7 +243,7 @@ func TestStackIteratorFirst(t *testing.T) {
 }
 
 func TestBinaryHeapIteratorLast(t *testing.T) {
-	tree := util.NewWithIntComparator()
+	tree := NewWithIntComparator()
 	it := tree.Iterator()
 	if actualValue, expectedValue := it.Last(), false; actualValue != expectedValue {
 		t.Errorf("Got %v expected %v", actualValue, expectedValue)
@@ -261,7 +260,7 @@ func TestBinaryHeapIteratorLast(t *testing.T) {
 }
 
 func TestBinaryHeapSerialization(t *testing.T) {
-	heap := util.NewWithStringComparator()
+	heap := NewWithStringComparator()
 
 	heap.Push("c") // ["c"]
 	heap.Push("b") // ["b","c"]
@@ -292,7 +291,7 @@ func TestBinaryHeapSerialization(t *testing.T) {
 	assert()
 }
 
-func benchmarkPush(b *testing.B, heap *util.Heap, size int) {
+func benchmarkPush(b *testing.B, heap *Heap, size int) {
 	for i := 0; i < b.N; i++ {
 		for n := 0; n < size; n++ {
 			heap.Push(n)
@@ -300,7 +299,7 @@ func benchmarkPush(b *testing.B, heap *util.Heap, size int) {
 	}
 }
 
-func benchmarkPop(b *testing.B, heap *util.Heap, size int) {
+func benchmarkPop(b *testing.B, heap *Heap, size int) {
 	for i := 0; i < b.N; i++ {
 		for n := 0; n < size; n++ {
 			heap.Pop()
@@ -311,7 +310,7 @@ func benchmarkPop(b *testing.B, heap *util.Heap, size int) {
 func BenchmarkBinaryHeapPop100(b *testing.B) {
 	b.StopTimer()
 	size := 100
-	heap := util.NewWithIntComparator()
+	heap := NewWithIntComparator()
 	for n := 0; n < size; n++ {
 		heap.Push(n)
 	}
@@ -322,7 +321,7 @@ func BenchmarkBinaryHeapPop100(b *testing.B) {
 func BenchmarkBinaryHeapPop1000(b *testing.B) {
 	b.StopTimer()
 	size := 1000
-	heap := util.NewWithIntComparator()
+	heap := NewWithIntComparator()
 	for n := 0; n < size; n++ {
 		heap.Push(n)
 	}
@@ -333,7 +332,7 @@ func BenchmarkBinaryHeapPop1000(b *testing.B) {
 func BenchmarkBinaryHeapPop10000(b *testing.B) {
 	b.StopTimer()
 	size := 10000
-	heap := util.NewWithIntComparator()
+	heap := NewWithIntComparator()
 	for n := 0; n < size; n++ {
 		heap.Push(n)
 	}
@@ -344,7 +343,7 @@ func BenchmarkBinaryHeapPop10000(b *testing.B) {
 func BenchmarkBinaryHeapPop100000(b *testing.B) {
 	b.StopTimer()
 	size := 100000
-	heap := util.NewWithIntComparator()
+	heap := NewWithIntComparator()
 	for n := 0; n < size; n++ {
 		heap.Push(n)
 	}
@@ -355,7 +354,7 @@ func BenchmarkBinaryHeapPop100000(b *testing.B) {
 func BenchmarkBinaryHeapPush100(b *testing.B) {
 	b.StopTimer()
 	size := 100
-	heap := util.NewWithIntComparator()
+	heap := NewWithIntComparator()
 	b.StartTimer()
 	benchmarkPush(b, heap, size)
 }
@@ -363,7 +362,7 @@ func BenchmarkBinaryHeapPush100(b *testing.B) {
 func BenchmarkBinaryHeapPush1000(b *testing.B) {
 	b.StopTimer()
 	size := 1000
-	heap := util.NewWithIntComparator()
+	heap := NewWithIntComparator()
 	for n := 0; n < size; n++ {
 		heap.Push(n)
 	}
@@ -374,7 +373,7 @@ func BenchmarkBinaryHeapPush1000(b *testing.B) {
 func BenchmarkBinaryHeapPush10000(b *testing.B) {
 	b.StopTimer()
 	size := 10000
-	heap := util.NewWithIntComparator()
+	heap := NewWithIntComparator()
 	for n := 0; n < size; n++ {
 		heap.Push(n)
 	}
@@ -385,7 +384,7 @@ func BenchmarkBinaryHeapPush10000(b *testing.B) {
 func BenchmarkBinaryHeapPush100000(b *testing.B) {
 	b.StopTimer()
 	size := 100000
-	heap := util.NewWithIntComparator()
+	heap := NewWithIntComparator()
 	for n := 0; n < size; n++ {
 		heap.Push(n)
 	}

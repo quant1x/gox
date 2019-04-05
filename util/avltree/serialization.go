@@ -7,12 +7,11 @@ package avltree
 import (
 	"encoding/json"
 	"github.com/mymmsc/gox/util"
-	"github.com/mymmsc/gox/util/containers"
 )
 
 func assertSerializationImplementation() {
-	var _ containers.JSONSerializer = (*Tree)(nil)
-	var _ containers.JSONDeserializer = (*Tree)(nil)
+	var _ util.JSONSerializer = (*Tree)(nil)
+	var _ util.JSONDeserializer = (*Tree)(nil)
 }
 
 // ToJSON outputs the JSON representation of the tree.

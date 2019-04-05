@@ -6,20 +6,20 @@ package linkedhashset
 
 import (
 	"github.com/mymmsc/gox/util"
-	"github.com/mymmsc/gox/util/containers"
+	"github.com/mymmsc/gox/util/doublylinkedlist"
 )
 
 func assertIteratorImplementation() {
-	var _ containers.ReverseIteratorWithIndex = (*Iterator)(nil)
+	var _ util.ReverseIteratorWithIndex = (*Iterator)(nil)
 }
 
 // Iterator holding the iterator's state
 type Iterator struct {
-	iterator sets.Iterator
+	iterator doublylinkedlist.Iterator
 }
 
 // Iterator returns a stateful iterator whose values can be fetched by an index.
-func (set *sets.Set) Iterator() Iterator {
+func (set *Set) Iterator() Iterator {
 	return Iterator{iterator: set.ordering.Iterator()}
 }
 

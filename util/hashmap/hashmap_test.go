@@ -6,12 +6,11 @@ package hashmap
 
 import (
 	"fmt"
-	"github.com/mymmsc/gox/util"
 	"testing"
 )
 
 func TestMapPut(t *testing.T) {
-	m := util.New()
+	m := New()
 	m.Put(5, "e")
 	m.Put(6, "f")
 	m.Put(7, "g")
@@ -53,7 +52,7 @@ func TestMapPut(t *testing.T) {
 }
 
 func TestMapRemove(t *testing.T) {
-	m := util.New()
+	m := New()
 	m.Put(5, "e")
 	m.Put(6, "f")
 	m.Put(7, "g")
@@ -120,7 +119,7 @@ func TestMapRemove(t *testing.T) {
 }
 
 func TestMapSerialization(t *testing.T) {
-	m := util.New()
+	m := New()
 	m.Put("a", 1.0)
 	m.Put("b", 2.0)
 	m.Put("c", 3.0)
@@ -169,7 +168,7 @@ func sameElements(a []interface{}, b []interface{}) bool {
 	return true
 }
 
-func benchmarkGet(b *testing.B, m *util.Map, size int) {
+func benchmarkGet(b *testing.B, m *Map, size int) {
 	for i := 0; i < b.N; i++ {
 		for n := 0; n < size; n++ {
 			m.Get(n)
@@ -177,7 +176,7 @@ func benchmarkGet(b *testing.B, m *util.Map, size int) {
 	}
 }
 
-func benchmarkPut(b *testing.B, m *util.Map, size int) {
+func benchmarkPut(b *testing.B, m *Map, size int) {
 	for i := 0; i < b.N; i++ {
 		for n := 0; n < size; n++ {
 			m.Put(n, struct{}{})
@@ -185,7 +184,7 @@ func benchmarkPut(b *testing.B, m *util.Map, size int) {
 	}
 }
 
-func benchmarkRemove(b *testing.B, m *util.Map, size int) {
+func benchmarkRemove(b *testing.B, m *Map, size int) {
 	for i := 0; i < b.N; i++ {
 		for n := 0; n < size; n++ {
 			m.Remove(n)
@@ -196,7 +195,7 @@ func benchmarkRemove(b *testing.B, m *util.Map, size int) {
 func BenchmarkHashMapGet100(b *testing.B) {
 	b.StopTimer()
 	size := 100
-	m := util.New()
+	m := New()
 	for n := 0; n < size; n++ {
 		m.Put(n, struct{}{})
 	}
@@ -207,7 +206,7 @@ func BenchmarkHashMapGet100(b *testing.B) {
 func BenchmarkHashMapGet1000(b *testing.B) {
 	b.StopTimer()
 	size := 1000
-	m := util.New()
+	m := New()
 	for n := 0; n < size; n++ {
 		m.Put(n, struct{}{})
 	}
@@ -218,7 +217,7 @@ func BenchmarkHashMapGet1000(b *testing.B) {
 func BenchmarkHashMapGet10000(b *testing.B) {
 	b.StopTimer()
 	size := 10000
-	m := util.New()
+	m := New()
 	for n := 0; n < size; n++ {
 		m.Put(n, struct{}{})
 	}
@@ -229,7 +228,7 @@ func BenchmarkHashMapGet10000(b *testing.B) {
 func BenchmarkHashMapGet100000(b *testing.B) {
 	b.StopTimer()
 	size := 100000
-	m := util.New()
+	m := New()
 	for n := 0; n < size; n++ {
 		m.Put(n, struct{}{})
 	}
@@ -240,7 +239,7 @@ func BenchmarkHashMapGet100000(b *testing.B) {
 func BenchmarkHashMapPut100(b *testing.B) {
 	b.StopTimer()
 	size := 100
-	m := util.New()
+	m := New()
 	b.StartTimer()
 	benchmarkPut(b, m, size)
 }
@@ -248,7 +247,7 @@ func BenchmarkHashMapPut100(b *testing.B) {
 func BenchmarkHashMapPut1000(b *testing.B) {
 	b.StopTimer()
 	size := 1000
-	m := util.New()
+	m := New()
 	for n := 0; n < size; n++ {
 		m.Put(n, struct{}{})
 	}
@@ -259,7 +258,7 @@ func BenchmarkHashMapPut1000(b *testing.B) {
 func BenchmarkHashMapPut10000(b *testing.B) {
 	b.StopTimer()
 	size := 10000
-	m := util.New()
+	m := New()
 	for n := 0; n < size; n++ {
 		m.Put(n, struct{}{})
 	}
@@ -270,7 +269,7 @@ func BenchmarkHashMapPut10000(b *testing.B) {
 func BenchmarkHashMapPut100000(b *testing.B) {
 	b.StopTimer()
 	size := 100000
-	m := util.New()
+	m := New()
 	for n := 0; n < size; n++ {
 		m.Put(n, struct{}{})
 	}
@@ -281,7 +280,7 @@ func BenchmarkHashMapPut100000(b *testing.B) {
 func BenchmarkHashMapRemove100(b *testing.B) {
 	b.StopTimer()
 	size := 100
-	m := util.New()
+	m := New()
 	for n := 0; n < size; n++ {
 		m.Put(n, struct{}{})
 	}
@@ -292,7 +291,7 @@ func BenchmarkHashMapRemove100(b *testing.B) {
 func BenchmarkHashMapRemove1000(b *testing.B) {
 	b.StopTimer()
 	size := 1000
-	m := util.New()
+	m := New()
 	for n := 0; n < size; n++ {
 		m.Put(n, struct{}{})
 	}
@@ -303,7 +302,7 @@ func BenchmarkHashMapRemove1000(b *testing.B) {
 func BenchmarkHashMapRemove10000(b *testing.B) {
 	b.StopTimer()
 	size := 10000
-	m := util.New()
+	m := New()
 	for n := 0; n < size; n++ {
 		m.Put(n, struct{}{})
 	}
@@ -314,7 +313,7 @@ func BenchmarkHashMapRemove10000(b *testing.B) {
 func BenchmarkHashMapRemove100000(b *testing.B) {
 	b.StopTimer()
 	size := 100000
-	m := util.New()
+	m := New()
 	for n := 0; n < size; n++ {
 		m.Put(n, struct{}{})
 	}

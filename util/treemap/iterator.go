@@ -6,20 +6,20 @@ package treemap
 
 import (
 	"github.com/mymmsc/gox/util"
-	"github.com/mymmsc/gox/util/containers"
+	rbt "github.com/mymmsc/gox/util/redblacktree"
 )
 
 func assertIteratorImplementation() {
-	var _ containers.ReverseIteratorWithKey = (*Iterator)(nil)
+	var _ util.ReverseIteratorWithKey = (*Iterator)(nil)
 }
 
 // Iterator holding the iterator's state
 type Iterator struct {
-	iterator util.Iterator
+	iterator rbt.Iterator
 }
 
 // Iterator returns a stateful iterator whose elements are key/value pairs.
-func (m *util.Map) Iterator() Iterator {
+func (m *Map) Iterator() Iterator {
 	return Iterator{iterator: m.tree.Iterator()}
 }
 

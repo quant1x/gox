@@ -18,6 +18,7 @@ package hashbidimap
 import (
 	"fmt"
 	"github.com/mymmsc/gox/util"
+	"github.com/mymmsc/gox/util/hashmap"
 )
 
 func assertMapImplementation() {
@@ -26,13 +27,13 @@ func assertMapImplementation() {
 
 // Map holds the elements in two hashmaps.
 type Map struct {
-	forwardMap util.Map
-	inverseMap util.Map
+	forwardMap hashmap.Map
+	inverseMap hashmap.Map
 }
 
 // New instantiates a bidirectional map.
 func New() *Map {
-	return &Map{*util.New(), *util.New()}
+	return &Map{*hashmap.New(), *hashmap.New()}
 }
 
 // Put inserts element into the map.

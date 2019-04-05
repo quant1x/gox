@@ -4,22 +4,19 @@
 
 package linkedliststack
 
-import (
-	"github.com/mymmsc/gox/util"
-	"github.com/mymmsc/gox/util/containers"
-)
+import "github.com/mymmsc/gox/util"
 
 func assertSerializationImplementation() {
-	var _ containers.JSONSerializer = (*util.Stack)(nil)
-	var _ containers.JSONDeserializer = (*util.Stack)(nil)
+	var _ util.JSONSerializer = (*Stack)(nil)
+	var _ util.JSONDeserializer = (*Stack)(nil)
 }
 
 // ToJSON outputs the JSON representation of the stack.
-func (stack *util.Stack) ToJSON() ([]byte, error) {
+func (stack *Stack) ToJSON() ([]byte, error) {
 	return stack.list.ToJSON()
 }
 
 // FromJSON populates the stack from the input JSON representation.
-func (stack *util.Stack) FromJSON(data []byte) error {
+func (stack *Stack) FromJSON(data []byte) error {
 	return stack.list.FromJSON(data)
 }

@@ -6,15 +6,14 @@ package doublylinkedlist
 
 import (
 	"github.com/mymmsc/gox/util"
-	"github.com/mymmsc/gox/util/containers"
 )
 
 func assertEnumerableImplementation() {
-	var _ containers.EnumerableWithIndex = (*util.List)(nil)
+	var _ util.EnumerableWithIndex = (*List)(nil)
 }
 
 // Each calls the given function once for each element, passing that element's index and value.
-func (list *util.List) Each(f func(index int, value interface{})) {
+func (list *List) Each(f func(index int, value interface{})) {
 	iterator := list.Iterator()
 	for iterator.Next() {
 		f(iterator.Index(), iterator.Value())
@@ -23,8 +22,8 @@ func (list *util.List) Each(f func(index int, value interface{})) {
 
 // Map invokes the given function once for each element and returns a
 // container containing the values returned by the given function.
-func (list *util.List) Map(f func(index int, value interface{}) interface{}) *util.List {
-	newList := &util.List{}
+func (list *List) Map(f func(index int, value interface{}) interface{}) *List {
+	newList := &List{}
 	iterator := list.Iterator()
 	for iterator.Next() {
 		newList.Add(f(iterator.Index(), iterator.Value()))
@@ -33,8 +32,8 @@ func (list *util.List) Map(f func(index int, value interface{}) interface{}) *ut
 }
 
 // Select returns a new container containing all elements for which the given function returns a true value.
-func (list *util.List) Select(f func(index int, value interface{}) bool) *util.List {
-	newList := &util.List{}
+func (list *List) Select(f func(index int, value interface{}) bool) *List {
+	newList := &List{}
 	iterator := list.Iterator()
 	for iterator.Next() {
 		if f(iterator.Index(), iterator.Value()) {
@@ -46,7 +45,7 @@ func (list *util.List) Select(f func(index int, value interface{}) bool) *util.L
 
 // Any passes each element of the container to the given function and
 // returns true if the function ever returns true for any element.
-func (list *util.List) Any(f func(index int, value interface{}) bool) bool {
+func (list *List) Any(f func(index int, value interface{}) bool) bool {
 	iterator := list.Iterator()
 	for iterator.Next() {
 		if f(iterator.Index(), iterator.Value()) {
@@ -58,7 +57,7 @@ func (list *util.List) Any(f func(index int, value interface{}) bool) bool {
 
 // All passes each element of the container to the given function and
 // returns true if the function returns true for all elements.
-func (list *util.List) All(f func(index int, value interface{}) bool) bool {
+func (list *List) All(f func(index int, value interface{}) bool) bool {
 	iterator := list.Iterator()
 	for iterator.Next() {
 		if !f(iterator.Index(), iterator.Value()) {
@@ -71,7 +70,7 @@ func (list *util.List) All(f func(index int, value interface{}) bool) bool {
 // Find passes each element of the container to the given function and returns
 // the first (index,value) for which the function is true or -1,nil otherwise
 // if no element matches the criteria.
-func (list *util.List) Find(f func(index int, value interface{}) bool) (index int, value interface{}) {
+func (list *List) Find(f func(index int, value interface{}) bool) (index int, value interface{}) {
 	iterator := list.Iterator()
 	for iterator.Next() {
 		if f(iterator.Index(), iterator.Value()) {

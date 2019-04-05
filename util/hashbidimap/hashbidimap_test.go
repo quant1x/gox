@@ -6,12 +6,11 @@ package hashbidimap
 
 import (
 	"fmt"
-	"github.com/mymmsc/gox/util"
 	"testing"
 )
 
 func TestMapPut(t *testing.T) {
-	m := util.New()
+	m := New()
 	m.Put(5, "e")
 	m.Put(6, "f")
 	m.Put(7, "g")
@@ -53,7 +52,7 @@ func TestMapPut(t *testing.T) {
 }
 
 func TestMapRemove(t *testing.T) {
-	m := util.New()
+	m := New()
 	m.Put(5, "e")
 	m.Put(6, "f")
 	m.Put(7, "g")
@@ -120,7 +119,7 @@ func TestMapRemove(t *testing.T) {
 }
 
 func TestMapGetKey(t *testing.T) {
-	m := util.New()
+	m := New()
 	m.Put(5, "e")
 	m.Put(6, "f")
 	m.Put(7, "g")
@@ -152,7 +151,7 @@ func TestMapGetKey(t *testing.T) {
 }
 
 func TestMapSerialization(t *testing.T) {
-	m := util.New()
+	m := New()
 	m.Put("a", 1.0)
 	m.Put("b", 2.0)
 	m.Put("c", 3.0)
@@ -201,7 +200,7 @@ func sameElements(a []interface{}, b []interface{}) bool {
 	return true
 }
 
-func benchmarkGet(b *testing.B, m *util.Map, size int) {
+func benchmarkGet(b *testing.B, m *Map, size int) {
 	for i := 0; i < b.N; i++ {
 		for n := 0; n < size; n++ {
 			m.Get(n)
@@ -209,7 +208,7 @@ func benchmarkGet(b *testing.B, m *util.Map, size int) {
 	}
 }
 
-func benchmarkPut(b *testing.B, m *util.Map, size int) {
+func benchmarkPut(b *testing.B, m *Map, size int) {
 	for i := 0; i < b.N; i++ {
 		for n := 0; n < size; n++ {
 			m.Put(n, n)
@@ -217,7 +216,7 @@ func benchmarkPut(b *testing.B, m *util.Map, size int) {
 	}
 }
 
-func benchmarkRemove(b *testing.B, m *util.Map, size int) {
+func benchmarkRemove(b *testing.B, m *Map, size int) {
 	for i := 0; i < b.N; i++ {
 		for n := 0; n < size; n++ {
 			m.Remove(n)
@@ -228,7 +227,7 @@ func benchmarkRemove(b *testing.B, m *util.Map, size int) {
 func BenchmarkHashBidiMapGet100(b *testing.B) {
 	b.StopTimer()
 	size := 100
-	m := util.New()
+	m := New()
 	for n := 0; n < size; n++ {
 		m.Put(n, n)
 	}
@@ -239,7 +238,7 @@ func BenchmarkHashBidiMapGet100(b *testing.B) {
 func BenchmarkHashBidiMapGet1000(b *testing.B) {
 	b.StopTimer()
 	size := 1000
-	m := util.New()
+	m := New()
 	for n := 0; n < size; n++ {
 		m.Put(n, n)
 	}
@@ -250,7 +249,7 @@ func BenchmarkHashBidiMapGet1000(b *testing.B) {
 func BenchmarkHashBidiMapGet10000(b *testing.B) {
 	b.StopTimer()
 	size := 10000
-	m := util.New()
+	m := New()
 	for n := 0; n < size; n++ {
 		m.Put(n, n)
 	}
@@ -261,7 +260,7 @@ func BenchmarkHashBidiMapGet10000(b *testing.B) {
 func BenchmarkHashBidiMapGet100000(b *testing.B) {
 	b.StopTimer()
 	size := 100000
-	m := util.New()
+	m := New()
 	for n := 0; n < size; n++ {
 		m.Put(n, n)
 	}
@@ -272,7 +271,7 @@ func BenchmarkHashBidiMapGet100000(b *testing.B) {
 func BenchmarkHashBidiMapPut100(b *testing.B) {
 	b.StopTimer()
 	size := 100
-	m := util.New()
+	m := New()
 	b.StartTimer()
 	benchmarkPut(b, m, size)
 }
@@ -280,7 +279,7 @@ func BenchmarkHashBidiMapPut100(b *testing.B) {
 func BenchmarkHashBidiMapPut1000(b *testing.B) {
 	b.StopTimer()
 	size := 1000
-	m := util.New()
+	m := New()
 	for n := 0; n < size; n++ {
 		m.Put(n, n)
 	}
@@ -291,7 +290,7 @@ func BenchmarkHashBidiMapPut1000(b *testing.B) {
 func BenchmarkHashBidiMapPut10000(b *testing.B) {
 	b.StopTimer()
 	size := 10000
-	m := util.New()
+	m := New()
 	for n := 0; n < size; n++ {
 		m.Put(n, n)
 	}
@@ -302,7 +301,7 @@ func BenchmarkHashBidiMapPut10000(b *testing.B) {
 func BenchmarkHashBidiMapPut100000(b *testing.B) {
 	b.StopTimer()
 	size := 100000
-	m := util.New()
+	m := New()
 	for n := 0; n < size; n++ {
 		m.Put(n, n)
 	}
@@ -313,7 +312,7 @@ func BenchmarkHashBidiMapPut100000(b *testing.B) {
 func BenchmarkHashBidiMapRemove100(b *testing.B) {
 	b.StopTimer()
 	size := 100
-	m := util.New()
+	m := New()
 	for n := 0; n < size; n++ {
 		m.Put(n, n)
 	}
@@ -324,7 +323,7 @@ func BenchmarkHashBidiMapRemove100(b *testing.B) {
 func BenchmarkHashBidiMapRemove1000(b *testing.B) {
 	b.StopTimer()
 	size := 1000
-	m := util.New()
+	m := New()
 	for n := 0; n < size; n++ {
 		m.Put(n, n)
 	}
@@ -335,7 +334,7 @@ func BenchmarkHashBidiMapRemove1000(b *testing.B) {
 func BenchmarkHashBidiMapRemove10000(b *testing.B) {
 	b.StopTimer()
 	size := 10000
-	m := util.New()
+	m := New()
 	for n := 0; n < size; n++ {
 		m.Put(n, n)
 	}
@@ -346,7 +345,7 @@ func BenchmarkHashBidiMapRemove10000(b *testing.B) {
 func BenchmarkHashBidiMapRemove100000(b *testing.B) {
 	b.StopTimer()
 	size := 100000
-	m := util.New()
+	m := New()
 	for n := 0; n < size; n++ {
 		m.Put(n, n)
 	}

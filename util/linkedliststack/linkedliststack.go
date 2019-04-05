@@ -11,6 +11,7 @@ package linkedliststack
 
 import (
 	"fmt"
+	"github.com/mymmsc/gox/util/singlylinkedlist"
 	"github.com/mymmsc/gox/util"
 	"strings"
 )
@@ -21,12 +22,12 @@ func assertStackImplementation() {
 
 // Stack holds elements in a singly-linked-list
 type Stack struct {
-	list *util.List
+	list *singlylinkedlist.List
 }
 
 // New nnstantiates a new empty stack
 func New() *Stack {
-	return &Stack{list: &util.List{}}
+	return &Stack{list: &singlylinkedlist.List{}}
 }
 
 // Push adds a value onto the top of the stack

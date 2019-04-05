@@ -5,11 +5,11 @@
 package arraystack
 
 import (
-	"github.com/mymmsc/gox/util/containers"
+	"github.com/mymmsc/gox/util"
 )
 
 func assertIteratorImplementation() {
-	var _ containers.ReverseIteratorWithIndex = (*Iterator)(nil)
+	var _ util.ReverseIteratorWithIndex = (*Iterator)(nil)
 }
 
 // Iterator returns a stateful iterator whose values can be fetched by an index.

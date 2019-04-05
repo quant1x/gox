@@ -4,10 +4,12 @@
 
 package arraylist
 
-import "github.com/mymmsc/gox/util/containers"
+import (
+	"github.com/mymmsc/gox/util"
+)
 
 func assertEnumerableImplementation() {
-	var _ containers.EnumerableWithIndex = (*List)(nil)
+	var _ util.EnumerableWithIndex = (*List)(nil)
 }
 
 // Each calls the given function once for each element, passing that element's index and value.

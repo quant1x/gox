@@ -15,8 +15,6 @@
 // Reference: https://en.wikipedia.org/wiki/Associative_array
 package util
 
-import "github.com/mymmsc/gox/util/containers"
-
 // Map interface that all maps implement
 type Map interface {
 	Put(key interface{}, value interface{})
@@ -24,7 +22,7 @@ type Map interface {
 	Remove(key interface{})
 	Keys() []interface{}
 
-	containers.Container
+	Container
 	// Empty() bool
 	// Size() int
 	// Clear()
