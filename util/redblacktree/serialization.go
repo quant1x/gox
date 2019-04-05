@@ -1,0 +1,39 @@
+// Copyright (c) 2015, Emir Pasic. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+package redblacktree
+
+import (
+	"encoding/json"
+	"github.com/mymmsc/gox/util"
+	"github.com/mymmsc/gox/util/containers"
+)
+
+func assertSerializationImplementation() {
+	var _ containers.JSONSerializer = (*util.Tree)(nil)
+	var _ containers.JSONDeserializer = (*util.Tree)(nil)
+}
+
+// ToJSON outputs the JSON representation of the tree.
+func (tree *util.Tree) ToJSON() ([]byte, error) {
+	elements := make(map[string]interface{})
+	it := tree.Iterator()
+	for it.Next() {
+		elements[util.ToString(it.Key())] = it.Value()
+	}
+	return json.Marshal(&elements)
+}
+
+// FromJSON populates the tree from the input JSON representation.
+func (tree *util.Tree) FromJSON(data []byte) error {
+	elements := make(map[string]interface{})
+	err := json.Unmarshal(data, &elements)
+	if err == nil {
+		tree.Clear()
+		for key, value := range elements {
+			tree.Put(key, value)
+		}
+	}
+	return err
+}
