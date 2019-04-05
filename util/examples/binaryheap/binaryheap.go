@@ -5,6 +5,7 @@
 package main
 
 import (
+	"github.com/mymmsc/gox/util"
 	"github.com/mymmsc/gox/util/binaryheap"
 )
 
@@ -29,7 +30,7 @@ func main() {
 
 	// Max-heap
 	inverseIntComparator := func(a, b interface{}) int {
-		return -utils.IntComparator(a, b)
+		return -util.IntComparator(a, b)
 	}
 	heap = binaryheap.NewWith(inverseIntComparator) // empty (min-heap)
 	heap.Push(2)                                    // 2
