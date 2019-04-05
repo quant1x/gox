@@ -19,9 +19,9 @@ package treebidimap
 
 import (
 	"fmt"
+	"github.com/mymmsc/gox/util"
 	"github.com/mymmsc/gox/util/maps"
 	"github.com/mymmsc/gox/util/trees/redblacktree"
-	"github.com/mymmsc/gox/util/utils"
 	"strings"
 )
 
@@ -33,8 +33,8 @@ func assertMapImplementation() {
 type Map struct {
 	forwardMap      redblacktree.Tree
 	inverseMap      redblacktree.Tree
-	keyComparator   utils.Comparator
-	valueComparator utils.Comparator
+	keyComparator   util.Comparator
+	valueComparator util.Comparator
 }
 
 type data struct {
@@ -43,7 +43,7 @@ type data struct {
 }
 
 // NewWith instantiates a bidirectional map.
-func NewWith(keyComparator utils.Comparator, valueComparator utils.Comparator) *Map {
+func NewWith(keyComparator util.Comparator, valueComparator util.Comparator) *Map {
 	return &Map{
 		forwardMap:      *redblacktree.NewWith(keyComparator),
 		inverseMap:      *redblacktree.NewWith(valueComparator),
@@ -54,12 +54,12 @@ func NewWith(keyComparator utils.Comparator, valueComparator utils.Comparator) *
 
 // NewWithIntComparators instantiates a bidirectional map with the IntComparator for key and value, i.e. keys and values are of type int.
 func NewWithIntComparators() *Map {
-	return NewWith(utils.IntComparator, utils.IntComparator)
+	return NewWith(util.IntComparator, util.IntComparator)
 }
 
 // NewWithStringComparators instantiates a bidirectional map with the StringComparator for key and value, i.e. keys and values are of type string.
 func NewWithStringComparators() *Map {
-	return NewWith(utils.StringComparator, utils.StringComparator)
+	return NewWith(util.StringComparator, util.StringComparator)
 }
 
 // Put inserts element into the map.

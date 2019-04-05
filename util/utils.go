@@ -7,7 +7,7 @@
 // Provided functionalities:
 // - sorting
 // - comparators
-package utils
+package util
 
 import (
 	"fmt"

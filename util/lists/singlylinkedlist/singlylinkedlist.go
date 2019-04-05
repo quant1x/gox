@@ -11,10 +11,10 @@ package singlylinkedlist
 
 import (
 	"fmt"
+	"github.com/mymmsc/gox/util"
 	"strings"
 
 	"github.com/mymmsc/gox/util/lists"
-	"github.com/mymmsc/gox/util/utils"
 )
 
 func assertListImplementation() {
@@ -190,14 +190,14 @@ func (list *List) Clear() {
 }
 
 // Sort sort values (in-place) using.
-func (list *List) Sort(comparator utils.Comparator) {
+func (list *List) Sort(comparator util.Comparator) {
 
 	if list.size < 2 {
 		return
 	}
 
 	values := list.Values()
-	utils.Sort(values, comparator)
+	util.Sort(values, comparator)
 
 	list.Clear()
 

@@ -11,10 +11,10 @@ package arraylist
 
 import (
 	"fmt"
+	"github.com/mymmsc/gox/util"
 	"strings"
 
 	"github.com/mymmsc/gox/util/lists"
-	"github.com/mymmsc/gox/util/utils"
 )
 
 func assertListImplementation() {
@@ -133,11 +133,11 @@ func (list *List) Clear() {
 }
 
 // Sort sorts values (in-place) using.
-func (list *List) Sort(comparator utils.Comparator) {
+func (list *List) Sort(comparator util.Comparator) {
 	if len(list.elements) < 2 {
 		return
 	}
-	utils.Sort(list.elements[:list.size], comparator)
+	util.Sort(list.elements[:list.size], comparator)
 }
 
 // Swap swaps the two values at the specified positions.

@@ -7,7 +7,7 @@
 package containers
 
 import (
-	"github.com/mymmsc/gox/util/utils"
+	"github.com/mymmsc/gox/util"
 	"testing"
 )
 
@@ -35,7 +35,7 @@ func (container ContainerTest) Values() []interface{} {
 func TestGetSortedValuesInts(t *testing.T) {
 	container := ContainerTest{}
 	container.values = []interface{}{5, 1, 3, 2, 4}
-	values := GetSortedValues(container, utils.IntComparator)
+	values := GetSortedValues(container, util.IntComparator)
 	for i := 1; i < container.Size(); i++ {
 		if values[i-1].(int) > values[i].(int) {
 			t.Errorf("Not sorted!")
@@ -46,7 +46,7 @@ func TestGetSortedValuesInts(t *testing.T) {
 func TestGetSortedValuesStrings(t *testing.T) {
 	container := ContainerTest{}
 	container.values = []interface{}{"g", "a", "d", "e", "f", "c", "b"}
-	values := GetSortedValues(container, utils.StringComparator)
+	values := GetSortedValues(container, util.StringComparator)
 	for i := 1; i < container.Size(); i++ {
 		if values[i-1].(string) > values[i].(string) {
 			t.Errorf("Not sorted!")

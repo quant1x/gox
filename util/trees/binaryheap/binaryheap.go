@@ -13,9 +13,9 @@ package binaryheap
 
 import (
 	"fmt"
+	"github.com/mymmsc/gox/util"
 	"github.com/mymmsc/gox/util/lists/arraylist"
 	"github.com/mymmsc/gox/util/trees"
-	"github.com/mymmsc/gox/util/utils"
 	"strings"
 )
 
@@ -26,22 +26,22 @@ func assertTreeImplementation() {
 // Heap holds elements in an array-list
 type Heap struct {
 	list       *arraylist.List
-	Comparator utils.Comparator
+	Comparator util.Comparator
 }
 
 // NewWith instantiates a new empty heap tree with the custom comparator.
-func NewWith(comparator utils.Comparator) *Heap {
+func NewWith(comparator util.Comparator) *Heap {
 	return &Heap{list: arraylist.New(), Comparator: comparator}
 }
 
 // NewWithIntComparator instantiates a new empty heap with the IntComparator, i.e. elements are of type int.
 func NewWithIntComparator() *Heap {
-	return &Heap{list: arraylist.New(), Comparator: utils.IntComparator}
+	return &Heap{list: arraylist.New(), Comparator: util.IntComparator}
 }
 
 // NewWithStringComparator instantiates a new empty heap with the StringComparator, i.e. elements are of type string.
 func NewWithStringComparator() *Heap {
-	return &Heap{list: arraylist.New(), Comparator: utils.StringComparator}
+	return &Heap{list: arraylist.New(), Comparator: util.StringComparator}
 }
 
 // Push adds a value onto the heap and bubbles it up accordingly.

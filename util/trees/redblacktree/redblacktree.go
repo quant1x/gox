@@ -13,8 +13,8 @@ package redblacktree
 
 import (
 	"fmt"
+	"github.com/mymmsc/gox/util"
 	"github.com/mymmsc/gox/util/trees"
-	"github.com/mymmsc/gox/util/utils"
 )
 
 func assertTreeImplementation() {
@@ -31,7 +31,7 @@ const (
 type Tree struct {
 	Root       *Node
 	size       int
-	Comparator utils.Comparator
+	Comparator util.Comparator
 }
 
 // Node is a single element within the tree
@@ -45,18 +45,18 @@ type Node struct {
 }
 
 // NewWith instantiates a red-black tree with the custom comparator.
-func NewWith(comparator utils.Comparator) *Tree {
+func NewWith(comparator util.Comparator) *Tree {
 	return &Tree{Comparator: comparator}
 }
 
 // NewWithIntComparator instantiates a red-black tree with the IntComparator, i.e. keys are of type int.
 func NewWithIntComparator() *Tree {
-	return &Tree{Comparator: utils.IntComparator}
+	return &Tree{Comparator: util.IntComparator}
 }
 
 // NewWithStringComparator instantiates a red-black tree with the StringComparator, i.e. keys are of type string.
 func NewWithStringComparator() *Tree {
-	return &Tree{Comparator: utils.StringComparator}
+	return &Tree{Comparator: util.StringComparator}
 }
 
 // Put inserts node into the tree.

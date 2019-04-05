@@ -5,13 +5,13 @@
 package main
 
 import (
+	"github.com/mymmsc/gox/util"
 	"github.com/mymmsc/gox/util/maps/treebidimap"
-	"github.com/mymmsc/gox/util/utils"
 )
 
 // TreeBidiMapExample to demonstrate basic usage of TreeBidiMap
 func main() {
-	m := treebidimap.NewWith(utils.IntComparator, utils.StringComparator)
+	m := treebidimap.NewWith(util.IntComparator, util.StringComparator)
 	m.Put(1, "x")        // 1->x
 	m.Put(3, "b")        // 1->x, 3->b (ordered)
 	m.Put(1, "a")        // 1->a, 3->b (ordered)

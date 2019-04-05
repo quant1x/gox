@@ -6,8 +6,8 @@ package hashmap
 
 import (
 	"encoding/json"
+	"github.com/mymmsc/gox/util"
 	"github.com/mymmsc/gox/util/containers"
-	"github.com/mymmsc/gox/util/utils"
 )
 
 func assertSerializationImplementation() {
@@ -19,7 +19,7 @@ func assertSerializationImplementation() {
 func (m *Map) ToJSON() ([]byte, error) {
 	elements := make(map[string]interface{})
 	for key, value := range m.m {
-		elements[utils.ToString(key)] = value
+		elements[util.ToString(key)] = value
 	}
 	return json.Marshal(&elements)
 }

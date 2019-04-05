@@ -7,8 +7,8 @@ package linkedhashmap
 import (
 	"bytes"
 	"encoding/json"
+	"github.com/mymmsc/gox/util"
 	"github.com/mymmsc/gox/util/containers"
-	"github.com/mymmsc/gox/util/utils"
 )
 
 func assertSerializationImplementation() {
@@ -91,7 +91,7 @@ func (m *Map) FromJSON(data []byte) error {
 		return index1 - index2
 	}
 
-	utils.Sort(keys, byIndex)
+	util.Sort(keys, byIndex)
 
 	m.Clear()
 

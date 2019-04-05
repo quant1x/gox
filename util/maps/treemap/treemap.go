@@ -13,9 +13,9 @@ package treemap
 
 import (
 	"fmt"
+	"github.com/mymmsc/gox/util"
 	"github.com/mymmsc/gox/util/maps"
 	rbt "github.com/mymmsc/gox/util/trees/redblacktree"
-	"github.com/mymmsc/gox/util/utils"
 	"strings"
 )
 
@@ -29,7 +29,7 @@ type Map struct {
 }
 
 // NewWith instantiates a tree map with the custom comparator.
-func NewWith(comparator utils.Comparator) *Map {
+func NewWith(comparator util.Comparator) *Map {
 	return &Map{tree: rbt.NewWith(comparator)}
 }
 

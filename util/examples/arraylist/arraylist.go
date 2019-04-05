@@ -5,8 +5,8 @@
 package main
 
 import (
+	"github.com/mymmsc/gox/util"
 	"github.com/mymmsc/gox/util/lists/arraylist"
-	"github.com/mymmsc/gox/util/utils"
 )
 
 // ArrayListExample to demonstrate basic usage of ArrayList
@@ -14,7 +14,7 @@ func main() {
 	list := arraylist.New()
 	list.Add("a")                         // ["a"]
 	list.Add("c", "b")                    // ["a","c","b"]
-	list.Sort(utils.StringComparator)     // ["a","b","c"]
+	list.Sort(util.StringComparator)      // ["a","b","c"]
 	_, _ = list.Get(0)                    // "a",true
 	_, _ = list.Get(100)                  // nil,false
 	_ = list.Contains("a", "b", "c")      // true

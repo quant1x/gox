@@ -11,9 +11,9 @@ package treeset
 
 import (
 	"fmt"
+	"github.com/mymmsc/gox/util"
 	"github.com/mymmsc/gox/util/sets"
 	rbt "github.com/mymmsc/gox/util/trees/redblacktree"
-	"github.com/mymmsc/gox/util/utils"
 	"strings"
 )
 
@@ -29,7 +29,7 @@ type Set struct {
 var itemExists = struct{}{}
 
 // NewWith instantiates a new empty set with the custom comparator.
-func NewWith(comparator utils.Comparator, values ...interface{}) *Set {
+func NewWith(comparator util.Comparator, values ...interface{}) *Set {
 	set := &Set{tree: rbt.NewWith(comparator)}
 	if len(values) > 0 {
 		set.Add(values...)

@@ -6,12 +6,12 @@ package treebidimap
 
 import (
 	"fmt"
-	"github.com/mymmsc/gox/util/utils"
+	"github.com/mymmsc/gox/util"
 	"testing"
 )
 
 func TestMapPut(t *testing.T) {
-	m := NewWith(utils.IntComparator, utils.StringComparator)
+	m := NewWith(util.IntComparator, util.StringComparator)
 	m.Put(5, "e")
 	m.Put(6, "f")
 	m.Put(7, "g")
@@ -53,7 +53,7 @@ func TestMapPut(t *testing.T) {
 }
 
 func TestMapRemove(t *testing.T) {
-	m := NewWith(utils.IntComparator, utils.StringComparator)
+	m := NewWith(util.IntComparator, util.StringComparator)
 	m.Put(5, "e")
 	m.Put(6, "f")
 	m.Put(7, "g")
@@ -120,7 +120,7 @@ func TestMapRemove(t *testing.T) {
 }
 
 func TestMapGetKey(t *testing.T) {
-	m := NewWith(utils.IntComparator, utils.StringComparator)
+	m := NewWith(util.IntComparator, util.StringComparator)
 	m.Put(5, "e")
 	m.Put(6, "f")
 	m.Put(7, "g")
@@ -171,7 +171,7 @@ func sameElements(a []interface{}, b []interface{}) bool {
 }
 
 func TestMapEach(t *testing.T) {
-	m := NewWith(utils.StringComparator, utils.IntComparator)
+	m := NewWith(util.StringComparator, util.IntComparator)
 	m.Put("c", 3)
 	m.Put("a", 1)
 	m.Put("b", 2)
@@ -201,7 +201,7 @@ func TestMapEach(t *testing.T) {
 }
 
 func TestMapMap(t *testing.T) {
-	m := NewWith(utils.StringComparator, utils.IntComparator)
+	m := NewWith(util.StringComparator, util.IntComparator)
 	m.Put("c", 3)
 	m.Put("a", 1)
 	m.Put("b", 2)
@@ -223,7 +223,7 @@ func TestMapMap(t *testing.T) {
 }
 
 func TestMapSelect(t *testing.T) {
-	m := NewWith(utils.StringComparator, utils.IntComparator)
+	m := NewWith(util.StringComparator, util.IntComparator)
 	m.Put("c", 3)
 	m.Put("a", 1)
 	m.Put("b", 2)
@@ -242,7 +242,7 @@ func TestMapSelect(t *testing.T) {
 }
 
 func TestMapAny(t *testing.T) {
-	m := NewWith(utils.StringComparator, utils.IntComparator)
+	m := NewWith(util.StringComparator, util.IntComparator)
 	m.Put("c", 3)
 	m.Put("a", 1)
 	m.Put("b", 2)
@@ -261,7 +261,7 @@ func TestMapAny(t *testing.T) {
 }
 
 func TestMapAll(t *testing.T) {
-	m := NewWith(utils.StringComparator, utils.IntComparator)
+	m := NewWith(util.StringComparator, util.IntComparator)
 	m.Put("c", 3)
 	m.Put("a", 1)
 	m.Put("b", 2)
@@ -280,7 +280,7 @@ func TestMapAll(t *testing.T) {
 }
 
 func TestMapFind(t *testing.T) {
-	m := NewWith(utils.StringComparator, utils.IntComparator)
+	m := NewWith(util.StringComparator, util.IntComparator)
 	m.Put("c", 3)
 	m.Put("a", 1)
 	m.Put("b", 2)
@@ -299,7 +299,7 @@ func TestMapFind(t *testing.T) {
 }
 
 func TestMapChaining(t *testing.T) {
-	m := NewWith(utils.StringComparator, utils.IntComparator)
+	m := NewWith(util.StringComparator, util.IntComparator)
 	m.Put("c", 3)
 	m.Put("a", 1)
 	m.Put("b", 2)
@@ -341,7 +341,7 @@ func TestMapIteratorPrevOnEmpty(t *testing.T) {
 }
 
 func TestMapIteratorNext(t *testing.T) {
-	m := NewWith(utils.StringComparator, utils.IntComparator)
+	m := NewWith(util.StringComparator, util.IntComparator)
 	m.Put("c", 3)
 	m.Put("a", 1)
 	m.Put("b", 2)
@@ -378,7 +378,7 @@ func TestMapIteratorNext(t *testing.T) {
 }
 
 func TestMapIteratorPrev(t *testing.T) {
-	m := NewWith(utils.StringComparator, utils.IntComparator)
+	m := NewWith(util.StringComparator, util.IntComparator)
 	m.Put("c", 3)
 	m.Put("a", 1)
 	m.Put("b", 2)
@@ -417,7 +417,7 @@ func TestMapIteratorPrev(t *testing.T) {
 }
 
 func TestMapIteratorBegin(t *testing.T) {
-	m := NewWith(utils.IntComparator, utils.StringComparator)
+	m := NewWith(util.IntComparator, util.StringComparator)
 	it := m.Iterator()
 	it.Begin()
 	m.Put(3, "c")
@@ -433,7 +433,7 @@ func TestMapIteratorBegin(t *testing.T) {
 }
 
 func TestMapTreeIteratorEnd(t *testing.T) {
-	m := NewWith(utils.IntComparator, utils.StringComparator)
+	m := NewWith(util.IntComparator, util.StringComparator)
 	it := m.Iterator()
 	m.Put(3, "c")
 	m.Put(1, "a")
@@ -446,7 +446,7 @@ func TestMapTreeIteratorEnd(t *testing.T) {
 }
 
 func TestMapIteratorFirst(t *testing.T) {
-	m := NewWith(utils.IntComparator, utils.StringComparator)
+	m := NewWith(util.IntComparator, util.StringComparator)
 	m.Put(3, "c")
 	m.Put(1, "a")
 	m.Put(2, "b")
@@ -460,7 +460,7 @@ func TestMapIteratorFirst(t *testing.T) {
 }
 
 func TestMapIteratorLast(t *testing.T) {
-	m := NewWith(utils.IntComparator, utils.StringComparator)
+	m := NewWith(util.IntComparator, util.StringComparator)
 	m.Put(3, "c")
 	m.Put(1, "a")
 	m.Put(2, "b")
@@ -475,7 +475,7 @@ func TestMapIteratorLast(t *testing.T) {
 
 func TestMapSerialization(t *testing.T) {
 	for i := 0; i < 10; i++ {
-		original := NewWith(utils.StringComparator, utils.StringComparator)
+		original := NewWith(util.StringComparator, util.StringComparator)
 		original.Put("d", "4")
 		original.Put("e", "5")
 		original.Put("c", "3")
@@ -490,7 +490,7 @@ func TestMapSerialization(t *testing.T) {
 		}
 		assertSerialization(original, "B", t)
 
-		deserialized := NewWith(utils.StringComparator, utils.StringComparator)
+		deserialized := NewWith(util.StringComparator, util.StringComparator)
 		err = deserialized.FromJSON(serialized)
 		if err != nil {
 			t.Errorf("Got error %v", err)

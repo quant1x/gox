@@ -10,8 +10,8 @@
 package lists
 
 import (
+	"github.com/mymmsc/gox/util"
 	"github.com/mymmsc/gox/util/containers"
-	"github.com/mymmsc/gox/util/utils"
 )
 
 // List interface that all lists implement
@@ -20,7 +20,7 @@ type List interface {
 	Remove(index int)
 	Add(values ...interface{})
 	Contains(values ...interface{}) bool
-	Sort(comparator utils.Comparator)
+	Sort(comparator util.Comparator)
 	Swap(index1, index2 int)
 	Insert(index int, values ...interface{})
 	Set(index int, value interface{})

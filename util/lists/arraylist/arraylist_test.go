@@ -6,7 +6,7 @@ package arraylist
 
 import (
 	"fmt"
-	"github.com/mymmsc/gox/util/utils"
+	"github.com/mymmsc/gox/util"
 	"testing"
 )
 
@@ -131,9 +131,9 @@ func TestListSwap(t *testing.T) {
 
 func TestListSort(t *testing.T) {
 	list := New()
-	list.Sort(utils.StringComparator)
+	list.Sort(util.StringComparator)
 	list.Add("e", "f", "g", "a", "b", "c", "d")
-	list.Sort(utils.StringComparator)
+	list.Sort(util.StringComparator)
 	for i := 1; i < list.Size(); i++ {
 		a, _ := list.Get(i - 1)
 		b, _ := list.Get(i)
