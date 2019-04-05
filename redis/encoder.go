@@ -8,8 +8,8 @@ import (
 	"io"
 	"strconv"
 
-	"github.com/mymmsc/goapi/redis/utils/bufio2"
-	"github.com/mymmsc/goapi/redis/utils/errors"
+	"github.com/mymmsc/gox/redis/utils/bufio2"
+	"github.com/mymmsc/gox/redis/utils/errors"
 )
 
 const (

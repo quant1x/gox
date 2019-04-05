@@ -10,7 +10,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/mymmsc/goapi/redis/utils/assert"
+	"github.com/mymmsc/gox/redis/utils/assert"
 )
 
 var tmap = make(map[int64][]byte)

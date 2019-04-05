@@ -11,7 +11,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/mymmsc/goapi/redis/utils/errors"
+	"github.com/mymmsc/gox/redis/utils/errors"
 )
 
 type rollingFile struct {

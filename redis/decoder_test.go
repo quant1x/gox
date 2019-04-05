@@ -7,7 +7,7 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/mymmsc/goapi/redis/utils/assert"
+	"github.com/mymmsc/gox/redis/utils/assert"
 )
 
 func TestBtoi64(t *testing.T) {

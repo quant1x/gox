@@ -3,7 +3,7 @@
 
 package assert
 
-import "github.com/mymmsc/goapi/redis/utils/log"
+import "github.com/mymmsc/gox/redis/utils/log"
 
 func Must(b bool) {
 	if b {

@@ -7,7 +7,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/mymmsc/goapi/redis/utils/trace"
+	"github.com/mymmsc/gox/redis/utils/trace"
 )
 
 var TraceEnabled = true

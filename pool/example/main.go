@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/mymmsc/goapi/pool"
+	"github.com/mymmsc/gox/pool"
 	"net"
 	"os"
 	"os/signal"

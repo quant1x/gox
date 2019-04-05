@@ -13,8 +13,8 @@ import (
 	"sync"
 	"sync/atomic"
 
-	"github.com/mymmsc/goapi/redis/utils/errors"
-	"github.com/mymmsc/goapi/redis/utils/trace"
+	"github.com/mymmsc/gox/redis/utils/errors"
+	"github.com/mymmsc/gox/redis/utils/trace"
 )
 
 const (

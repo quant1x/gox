@@ -1,4 +1,4 @@
-module github.com/mymmsc/goapi
+module github.com/mymmsc/gox
 
 go 1.11.4
 
