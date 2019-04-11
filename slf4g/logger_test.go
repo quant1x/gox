@@ -2,12 +2,11 @@ package slf4g
 
 import (
 	"fmt"
-	//"tars/util/logger"
 	"testing"
 	"time"
 )
 
-func XTestLogger(t *testing.T) {
+func TestLogger(t *testing.T) {
 	SetLogPath("/data/logs/test")
 	//logger := api.GetLogger("test1")
 	//SetConsole()

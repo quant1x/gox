@@ -25,6 +25,8 @@ const (
 	__logger_roller_days int = 7
 	__logget_global_skip = 3
 	__logget_local_skip = 2
+	// 时间戳 - 毫秒
+	Timestamp = "2006-01-02T15:04:05.000"
 )
 
 var (
@@ -60,7 +62,7 @@ type logValue struct {
 func init() {
 	now := time.Now()
 	currUnixTime = now.Unix()
-	currDateTime = now.Format("2006-01-02 15:04:05.999")
+	currDateTime = now.Format(Timestamp)
 	currDateHour = now.Format("2006010215")
 	currDateDay = now.Format("20060102")
 	go func() {
@@ -74,7 +76,7 @@ func init() {
 			<-tm.C
 			now = time.Now()
 			currUnixTime = now.Unix()
-			currDateTime = now.Format("2006-01-02 15:04:05.999")
+			currDateTime = now.Format(Timestamp)
 			currDateHour = now.Format("2006010215")
 			currDateDay = now.Format("20060102")
 		}
@@ -233,10 +235,10 @@ func (l *Logger) writef(skip int, level LogLevel, format string, v []interface{}
 	}
 
 	t := time.Now()
-	ms := (t.UnixNano() / int64(time.Millisecond)) % 1000
+	//ms := (t.UnixNano() / int64(time.Millisecond)) % 1000
 	buf := bytes.NewBuffer(nil)
 	if l.writer.NeedPrefix() {
-		fmt.Fprintf(buf, "%s.%03d|", t.Format("2006-01-02T15:04:05"), ms)
+		fmt.Fprintf(buf, "%s|", t.Format(Timestamp))
 		if logLevel == DEBUG {
 			_, file, line, ok := runtime.Caller(skip)
 			if !ok {
