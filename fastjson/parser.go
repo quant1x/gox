@@ -1,4 +1,4 @@
-package json
+package fastjson
 
 import (
 	"fmt"
@@ -17,7 +17,7 @@ type Parser struct {
 	// b contains working copy of the string to be parsed.
 	b []byte
 
-	// c is a cache for json values.
+	// c is a cache for fastjson values.
 	c cache
 }
 

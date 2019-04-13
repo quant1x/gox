@@ -1,4 +1,4 @@
-package json
+package fastjson
 
 import (
 	"fmt"
@@ -529,14 +529,14 @@ func TestParserParse(t *testing.T) {
 		}
 	})
 
-	t.Run("empty-json", func(t *testing.T) {
+	t.Run("empty-fastjson", func(t *testing.T) {
 		_, err := p.Parse("")
 		if err == nil {
-			t.Fatalf("expecting non-nil error when parsing empty json")
+			t.Fatalf("expecting non-nil error when parsing empty fastjson")
 		}
 		_, err = p.Parse("\n\t    \n")
 		if err == nil {
-			t.Fatalf("expecting non-nil error when parsing empty json")
+			t.Fatalf("expecting non-nil error when parsing empty fastjson")
 		}
 	})
 
@@ -551,11 +551,11 @@ func TestParserParse(t *testing.T) {
 		}
 	})
 
-	t.Run("invalid-json", func(t *testing.T) {
+	t.Run("invalid-fastjson", func(t *testing.T) {
 		f := func(s string) {
 			t.Helper()
 			if _, err := p.Parse(s); err == nil {
-				t.Fatalf("expecting non-nil error when parsing invalid json %q", s)
+				t.Fatalf("expecting non-nil error when parsing invalid fastjson %q", s)
 			}
 		}
 
@@ -587,7 +587,7 @@ func TestParserParse(t *testing.T) {
 
 		v, err := p.Parse(`"{\"foo\": 123}"`)
 		if err != nil {
-			t.Fatalf("unexpected error when parsing json string: %s", err)
+			t.Fatalf("unexpected error when parsing fastjson string: %s", err)
 		}
 		sb := v.GetStringBytes()
 		if string(sb) != `{"foo": 123}` {
@@ -1094,7 +1094,7 @@ func TestParserParse(t *testing.T) {
 			t.Fatalf("unexpected n; got %d; want %d", n, 21473)
 		}
 
-		// Make sure the json remains valid after visiting all the items.
+		// Make sure the fastjson remains valid after visiting all the items.
 		ss := v.String()
 		if ss != s {
 			t.Fatalf("unexpected string representation for object; got\n%q; want\n%q", ss, s)
@@ -1106,7 +1106,7 @@ func TestParserParse(t *testing.T) {
 func TestParseBigObject(t *testing.T) {
 	const itemsCount = 10000
 
-	// build big json object
+	// build big fastjson object
 	var ss []string
 	for i := 0; i < itemsCount; i++ {
 		s := fmt.Sprintf(`"key_%d": "value_%d"`, i, i)

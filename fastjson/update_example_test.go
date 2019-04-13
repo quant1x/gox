@@ -1,8 +1,8 @@
-package json_test
+package fastjson_test
 
 import (
 	"fmt"
-	fastjson "github.com/mymmsc/gox/json"
+	fastjson "github.com/mymmsc/gox/fastjson"
 	"log"
 
 )

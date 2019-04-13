@@ -1,4 +1,4 @@
-package json
+package fastjson
 
 import (
 	"fmt"
@@ -83,8 +83,8 @@ func TestGetString(t *testing.T) {
 		t.Fatalf("unexpected non-empty value obtained: %q", s)
 	}
 
-	// invalid json
-	s = GetString([]byte("invalid json"), "foobar", "baz")
+	// invalid fastjson
+	s = GetString([]byte("invalid fastjson"), "foobar", "baz")
 	if s != "" {
 		t.Fatalf("unexpected non-empty value obtained: %q", s)
 	}
@@ -111,8 +111,8 @@ func TestGetBytes(t *testing.T) {
 		t.Fatalf("unexpected non-empty value obtained: %q", b)
 	}
 
-	// invalid json
-	b = GetBytes([]byte("invalid json"), "foobar", "baz")
+	// invalid fastjson
+	b = GetBytes([]byte("invalid fastjson"), "foobar", "baz")
 	if b != nil {
 		t.Fatalf("unexpected non-empty value obtained: %q", b)
 	}
@@ -139,8 +139,8 @@ func TestGetInt(t *testing.T) {
 		t.Fatalf("unexpected non-zero value obtained: %d", n)
 	}
 
-	// invalid json
-	n = GetInt([]byte("invalid json"), "foobar", "baz")
+	// invalid fastjson
+	n = GetInt([]byte("invalid fastjson"), "foobar", "baz")
 	if n != 0 {
 		t.Fatalf("unexpected non-empty value obtained: %d", n)
 	}
@@ -167,8 +167,8 @@ func TestGetFloat64(t *testing.T) {
 		t.Fatalf("unexpected non-zero value obtained: %f", f)
 	}
 
-	// invalid json
-	f = GetFloat64([]byte("invalid json"), "foobar", "baz")
+	// invalid fastjson
+	f = GetFloat64([]byte("invalid fastjson"), "foobar", "baz")
 	if f != 0 {
 		t.Fatalf("unexpected non-empty value obtained: %f", f)
 	}
@@ -195,8 +195,8 @@ func TestGetBool(t *testing.T) {
 		t.Fatalf("unexpected true value obtained")
 	}
 
-	// invalid json
-	b = GetBool([]byte("invalid json"), "foobar", "baz")
+	// invalid fastjson
+	b = GetBool([]byte("invalid fastjson"), "foobar", "baz")
 	if b {
 		t.Fatalf("unexpected true value obtained")
 	}
@@ -229,7 +229,7 @@ func TestExists(t *testing.T) {
 	}
 
 	if Exists([]byte(`invalid JSON`), "foo", "bar") {
-		t.Fatalf("Exists returned true on invalid json")
+		t.Fatalf("Exists returned true on invalid fastjson")
 	}
 }
 

@@ -1,4 +1,4 @@
-package json
+package fastjson
 
 import (
 	"sync/atomic"

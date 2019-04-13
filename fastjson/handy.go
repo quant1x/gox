@@ -1,4 +1,4 @@
-package json
+package fastjson
 
 var handyPool ParserPool
 
@@ -129,7 +129,7 @@ func Exists(data []byte, keys ...string) bool {
 	return ok
 }
 
-// Parse parses json string s.
+// Parse parses fastjson string s.
 //
 // The function is slower than the Parser.Parse for re-used Parser.
 func Parse(s string) (*Value, error) {
@@ -137,7 +137,7 @@ func Parse(s string) (*Value, error) {
 	return p.Parse(s)
 }
 
-// MustParse parses json string s.
+// MustParse parses fastjson string s.
 //
 // The function panics if s cannot be parsed.
 // The function is slower than the Parser.Parse for re-used Parser.
@@ -149,7 +149,7 @@ func MustParse(s string) *Value {
 	return v
 }
 
-// ParseBytes parses b containing json.
+// ParseBytes parses b containing fastjson.
 //
 // The function is slower than the Parser.ParseBytes for re-used Parser.
 func ParseBytes(b []byte) (*Value, error) {
@@ -157,7 +157,7 @@ func ParseBytes(b []byte) (*Value, error) {
 	return p.ParseBytes(b)
 }
 
-// MustParseBytes parses b containing json.
+// MustParseBytes parses b containing fastjson.
 //
 // The function banics if b cannot be parsed.
 // The function is slower than the Parser.ParseBytes for re-used Parser.
