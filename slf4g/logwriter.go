@@ -1,13 +1,13 @@
 package slf4g
 
 import (
+	"compress/gzip"
 	"fmt"
+	"io"
 	"os"
 	"path/filepath"
 	"strconv"
 	"time"
-	"io"
-	"compress/gzip"
 )
 
 const (

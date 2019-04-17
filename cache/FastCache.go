@@ -1,4 +1,4 @@
-package gox
+package cache
 
 import (
 	"os"
@@ -37,7 +37,7 @@ func OpenCache(name string, size int64) (*FastCache, error) {
 
 func (fc *FastCache) Close() {
 	if fc != nil && fc.f != nil {
-		_ =fc.f.Close()
-		_ =syscall.Munmap(fc.Data)
+		_ = fc.f.Close()
+		_ = syscall.Munmap(fc.Data)
 	}
 }
