@@ -18,6 +18,7 @@ func TestLogger(t *testing.T) {
 	Debug("debug")
 	Error("error")
 	Warn("warn")
+	Info("测试中文")
 	fmt.Println("ok")
 	//slf4g.FlushLogger()
 	//FlushLogger()
