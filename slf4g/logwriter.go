@@ -1,13 +1,13 @@
 package slf4g
 
 import (
+	"compress/gzip"
 	"fmt"
+	"io"
 	"os"
 	"path/filepath"
 	"strconv"
 	"time"
-	"io"
-	"compress/gzip"
 )
 
 const (
@@ -60,9 +60,11 @@ func reOpenFile(path string, currFile **os.File, openTime *int64) {
 		fmt.Println("open log file error", err)
 	}
 }
+
 func (w *ConsoleWriter) Write(v []byte) {
 	os.Stdout.Write(v)
 }
+
 func (w *ConsoleWriter) NeedPrefix() bool {
 	return true
 }
@@ -110,6 +112,7 @@ func NewRollFileWriter(logpath, name string, num, sizeMB int) *RollFileWriter {
 	}
 	return w
 }
+
 func (w *RollFileWriter) NeedPrefix() bool {
 	return true
 }
@@ -151,7 +154,7 @@ func gzipFile(source string) error {
 }
 
 func (w *DateWriter) Write(v []byte) {
-	fullPath := filepath.Join(w.logpath, w.name + ".log")
+	fullPath := filepath.Join(w.logpath, w.name+".log")
 	if w.currFile == nil || w.openTime+10 < currUnixTime {
 		reOpenFile(fullPath, &w.currFile, &w.openTime)
 	}
@@ -164,7 +167,7 @@ func (w *DateWriter) Write(v []byte) {
 	if w.currDate != currDate /* || currUnixTime % 2 == 0*/ {
 		// 文件改名
 		sourceFile := fullPath
-		destFile := filepath.Join(w.logpath, w.name + "_" + w.currDate + ".log")
+		destFile := filepath.Join(w.logpath, w.name+"_"+w.currDate+".log")
 		// 删除已有的目标文件
 		w.currFile.Close()
 		w.currFile = nil;
@@ -213,7 +216,7 @@ func (w *DateWriter) cleanOldLogs() {
 	for i := 0; i < 30; i++ {
 		t = t.Add(duration)
 		k := t.Format(format)
-		fullPath := filepath.Join(w.logpath, w.name + "_" + k + ".log.gz")
+		fullPath := filepath.Join(w.logpath, w.name+"_"+k+".log.gz")
 		if _, err := os.Stat(fullPath); !os.IsNotExist(err) {
 			os.Remove(fullPath)
 		}

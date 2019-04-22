@@ -2,11 +2,14 @@ package slf4g
 
 import (
 	"bytes"
+	"context"
 	"fmt"
 	"os"
+	"os/signal"
 	"path/filepath"
 	"reflect"
 	"runtime"
+	"syscall"
 	"time"
 )
 
@@ -82,6 +85,20 @@ func init() {
 		}
 	}()
 	go flushLog(true)
+
+	sigs := make(chan os.Signal)
+	signal.Notify(sigs, syscall.SIGHUP, syscall.SIGINT, syscall.SIGTERM, syscall.SIGQUIT, syscall.SIGSTOP)
+	_, cancel := context.WithCancel(context.Background())
+
+	go func() {
+		s := <- sigs
+		Infof("exit sign, [%+v]", s)
+		FlushLogger()
+		fmt.Println("exit", s)
+		cancel()
+		os.Exit(0)
+	}()
+
 }
 
 func (lv *LogLevel) String() string {
