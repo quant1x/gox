@@ -69,7 +69,7 @@ func init() {
 	currDateHour = now.Format("2006010215")
 	currDateDay = now.Format("20060102")
 	go func() {
-		tm := time.NewTimer(time.Second)
+		tm := time.NewTimer(time.Millisecond)
 		if err := recover(); err != nil { // avoid timer panic
 		}
 		for {

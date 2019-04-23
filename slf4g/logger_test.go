@@ -10,7 +10,7 @@ func TestLogger(t *testing.T) {
 	SetLogPath("/data/logs/test")
 	//logger := api.GetLogger("test1")
 	//SetConsole()
-	for i := 0; i < 20000; i++  {
+	for i := 0; i < 200; i++  {
 		Infof("info-%d", i)
 		time.Sleep(time.Millisecond * 1)
 	}
@@ -21,5 +21,5 @@ func TestLogger(t *testing.T) {
 	Info("测试中文")
 	fmt.Println("ok")
 	//slf4g.FlushLogger()
-	//FlushLogger()
+	FlushLogger()
 }

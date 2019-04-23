@@ -154,17 +154,18 @@ func gzipFile(source string) error {
 }
 
 func (w *DateWriter) Write(v []byte) {
-	fullPath := filepath.Join(w.logpath, w.name+".log")
-	if w.currFile == nil || w.openTime+10 < currUnixTime {
+	fullPath := filepath.Join(w.logpath, w.name + ".log")
+	//isNewFile := false
+	if w.currFile == nil || w.openTime + 10 < currUnixTime {
 		reOpenFile(fullPath, &w.currFile, &w.openTime)
+		w.currDate = w.getFileDate()
 	}
 	if w.currFile == nil {
 		return
 	}
 
-	w.currFile.Write(v)
 	currDate := w.getCurrDate()
-	if w.currDate != currDate /* || currUnixTime % 2 == 0*/ {
+	if w.currDate != currDate {
 		// 文件改名
 		sourceFile := fullPath
 		destFile := filepath.Join(w.logpath, w.name+"_"+w.currDate+".log")
@@ -186,6 +187,7 @@ func (w *DateWriter) Write(v []byte) {
 		// 清理旧文件 [wangfeng on 2018/12/25 12:39]
 		os.Remove(destFile)
 	}
+	w.currFile.Write(v)
 }
 
 func (w *DateWriter) NeedPrefix() bool {
@@ -201,6 +203,14 @@ func NewDateWriter(logpath, name string, dateType DateType, num int) *DateWriter
 	}
 	w.currDate = w.getCurrDate()
 	return w
+}
+
+func (w *DateWriter) getFotmat() string {
+	format := "20060102"
+	if w.dateType == HOUR {
+		format = "2006010215"
+	}
+	return format
 }
 
 func (w *DateWriter) cleanOldLogs() {
@@ -229,4 +239,13 @@ func (w *DateWriter) getCurrDate() string {
 		return currDateHour
 	}
 	return currDateDay // DAY
+}
+
+func (w *DateWriter) getFileDate() string {
+	fi, err := w.currFile.Stat()
+	if err == nil {
+		return fi.ModTime().Format(w.getFotmat())
+	} else {
+		return ""
+	}
 }
