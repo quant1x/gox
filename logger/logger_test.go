@@ -20,6 +20,6 @@ func TestLogger(t *testing.T) {
 	Warn("warn")
 	Info("测试中文")
 	fmt.Println("ok")
-	//slf4g.FlushLogger()
+	//logger.FlushLogger()
 	FlushLogger()
 }

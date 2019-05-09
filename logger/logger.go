@@ -123,7 +123,7 @@ func SetLogPath(path string) {
 	SetLevel(DEBUG)
 }
 
-// GetLogger return an slf4g instance
+// GetLogger return an logger instance
 func GetLogger(name string) *Logger {
 	if lg, ok := loggerMap[name]; ok {
 		return lg
