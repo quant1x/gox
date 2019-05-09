@@ -1,4 +1,4 @@
-package slf4g
+package logger
 
 import (
 	"fmt"
