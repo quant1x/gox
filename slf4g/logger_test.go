@@ -10,7 +10,7 @@ func TestLogger(t *testing.T) {
 	SetLogPath("/data/logs/test")
 	//logger := api.GetLogger("test1")
 	//SetConsole()
-	for i := 0; i < 200; i++  {
+	for i := 0; i < 200; i++ {
 		Infof("info-%d", i)
 		time.Sleep(time.Millisecond * 1)
 	}

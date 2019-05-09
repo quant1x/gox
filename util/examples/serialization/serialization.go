@@ -2,8 +2,8 @@ package serialization
 
 import (
 	"fmt"
-	"github.com/mymmsc/gox/util/hashmap"
 	"github.com/mymmsc/gox/util/arraylist"
+	"github.com/mymmsc/gox/util/hashmap"
 )
 
 // ListSerializationExample demonstrates how to serialize and deserialize lists to and from JSON

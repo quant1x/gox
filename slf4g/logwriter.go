@@ -154,9 +154,9 @@ func gzipFile(source string) error {
 }
 
 func (w *DateWriter) Write(v []byte) {
-	fullPath := filepath.Join(w.logpath, w.name + ".log")
+	fullPath := filepath.Join(w.logpath, w.name+".log")
 	//isNewFile := false
-	if w.currFile == nil || w.openTime + 10 < currUnixTime {
+	if w.currFile == nil || w.openTime+10 < currUnixTime {
 		reOpenFile(fullPath, &w.currFile, &w.openTime)
 		w.currDate = w.getFileDate()
 	}

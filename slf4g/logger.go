@@ -26,7 +26,7 @@ const (
 const (
 	// 保持7天 [wangfeng on 2018/12/25 12:38]
 	__logger_roller_days int = 7
-	__logget_global_skip = 3
+	//__logget_global_skip = 3
 	__logget_local_skip = 2
 	// 时间戳 - 毫秒
 	Timestamp = "2006-01-02T15:04:05.000"
@@ -91,7 +91,7 @@ func init() {
 	_, cancel := context.WithCancel(context.Background())
 
 	go func() {
-		s := <- sigs
+		s := <-sigs
 		Infof("exit sign, [%+v]", s)
 		FlushLogger()
 		fmt.Println("exit", s)

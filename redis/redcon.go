@@ -1,4 +1,4 @@
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    // Package redcon implements a Redis compatible server framework
+// Package redcon implements a Redis compatible server framework
 package redis
 
 import (
@@ -873,4 +873,3 @@ func Parse(raw []byte) (Command, error) {
 	return cmds[0], nil
 
 }
-

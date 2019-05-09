@@ -15,7 +15,7 @@ func main() {
 	list.Add("a")                         // ["a"]
 	list.Append("b")                      // ["a","b"] (same as Add())
 	list.Prepend("c")                     // ["c","a","b"]
-	list.Sort(util.StringComparator)     // ["a","b","c"]
+	list.Sort(util.StringComparator)      // ["a","b","c"]
 	_, _ = list.Get(0)                    // "a",true
 	_, _ = list.Get(100)                  // nil,false
 	_ = list.Contains("a", "b", "c")      // true

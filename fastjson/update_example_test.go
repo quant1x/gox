@@ -2,9 +2,8 @@ package fastjson_test
 
 import (
 	"fmt"
-	fastjson "github.com/mymmsc/gox/fastjson"
+	"github.com/mymmsc/gox/fastjson"
 	"log"
-
 )
 
 func ExampleObject_Del() {

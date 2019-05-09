@@ -40,4 +40,3 @@ func benchCreateArenaObject(a *Arena) *Value {
 	o.Set("key3", aa)
 	return o
 }
-

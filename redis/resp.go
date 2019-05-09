@@ -4,8 +4,8 @@
 package redis
 
 import (
-	"fmt"
 	"errors"
+	"fmt"
 )
 
 type RespType byte
@@ -16,11 +16,10 @@ const (
 	TypeInt       RespType = ':'
 	TypeBulkBytes RespType = '$'
 	TypeArray     RespType = '*'
-
 )
 
 var (
-	ErrInvalid  = errors.New("invalid redis packet")
+	ErrInvalid = errors.New("invalid redis packet")
 )
 
 func (t RespType) String() string {
