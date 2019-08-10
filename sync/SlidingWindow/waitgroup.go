@@ -1,4 +1,4 @@
-package SlidingWaitGroup
+package SlidingWindow
 
 import (
 	"context"
@@ -6,25 +6,25 @@ import (
 	"sync"
 )
 
-// SlidingWaitGroup has the same role and close to the
+// SlidingWindow has the same role and close to the
 // same API as the Golang sync.WaitGroup but adds a limit of
 // the amount of goroutines started concurrently.
-type SlidingWaitGroup struct {
+type SlidingWindow struct {
 	Size int
 
 	current chan struct{}
 	wg      sync.WaitGroup
 }
 
-// New creates a SlidingWaitGroup.
+// New creates a SlidingWindow.
 // The limit parameter is the maximum amount of
 // goroutines which can be started concurrently.
-func New(limit int) SlidingWaitGroup {
+func New(limit int) SlidingWindow {
 	size := math.MaxInt32 // 2^32 - 1
 	if limit > 0 {
 		size = limit
 	}
-	return SlidingWaitGroup{
+	return SlidingWindow{
 		Size: size,
 
 		current: make(chan struct{}, size),
@@ -38,7 +38,7 @@ func New(limit int) SlidingWaitGroup {
 // been called.
 //
 // See sync.WaitGroup documentation for more information.
-func (s *SlidingWaitGroup) Add() {
+func (s *SlidingWindow) Add() {
 	s.AddWithContext(context.Background())
 }
 
@@ -50,7 +50,7 @@ func (s *SlidingWaitGroup) Add() {
 // is acquired.
 //
 // See sync.WaitGroup documentation for more information.
-func (s *SlidingWaitGroup) AddWithContext(ctx context.Context) error {
+func (s *SlidingWindow) AddWithContext(ctx context.Context) error {
 	select {
 	case <-ctx.Done():
 		return ctx.Err()
@@ -61,15 +61,15 @@ func (s *SlidingWaitGroup) AddWithContext(ctx context.Context) error {
 	return nil
 }
 
-// Done decrements the SlidingWaitGroup counter.
+// Done decrements the SlidingWindow counter.
 // See sync.WaitGroup documentation for more information.
-func (s *SlidingWaitGroup) Done() {
+func (s *SlidingWindow) Done() {
 	<-s.current
 	s.wg.Done()
 }
 
-// Wait blocks until the SlidingWaitGroup counter is zero.
+// Wait blocks until the SlidingWindow counter is zero.
 // See sync.WaitGroup documentation for more information.
-func (s *SlidingWaitGroup) Wait() {
+func (s *SlidingWindow) Wait() {
 	s.wg.Wait()
 }

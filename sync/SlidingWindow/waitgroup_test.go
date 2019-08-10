@@ -1,4 +1,4 @@
-package SlidingWaitGroup
+package SlidingWindow
 
 import (
 	"context"
