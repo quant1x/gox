@@ -1,4 +1,4 @@
-package sync
+package SlidingWaitGroup
 
 import (
 	"context"
@@ -19,7 +19,7 @@ type SlidingWaitGroup struct {
 // New creates a SlidingWaitGroup.
 // The limit parameter is the maximum amount of
 // goroutines which can be started concurrently.
-func NewSlidingWaitGroup(limit int) SlidingWaitGroup {
+func New(limit int) SlidingWaitGroup {
 	size := math.MaxInt32 // 2^32 - 1
 	if limit > 0 {
 		size = limit
