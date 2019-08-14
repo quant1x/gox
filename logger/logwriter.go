@@ -168,7 +168,7 @@ func (w *DateWriter) Write(v []byte) {
 	if w.currDate != currDate {
 		// 文件改名
 		sourceFile := fullPath
-		destFile := filepath.Join(w.logpath, w.name+"_"+w.currDate+".log")
+		destFile := filepath.Join(w.logpath, w.name+".log."+w.currDate)
 		// 删除已有的目标文件
 		w.currFile.Close()
 		w.currFile = nil;
@@ -226,7 +226,7 @@ func (w *DateWriter) cleanOldLogs() {
 	for i := 0; i < 30; i++ {
 		t = t.Add(duration)
 		k := t.Format(format)
-		fullPath := filepath.Join(w.logpath, w.name+"_"+k+".log.gz")
+		fullPath := filepath.Join(w.logpath, w.name+".log."+k+".gz")
 		if _, err := os.Stat(fullPath); !os.IsNotExist(err) {
 			os.Remove(fullPath)
 		}
