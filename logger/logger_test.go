@@ -2,12 +2,18 @@ package logger
 
 import (
 	"fmt"
+	"github.com/mymmsc/gox/gls"
+	"github.com/mymmsc/gox/mdc"
+	"github.com/satori/go.uuid"
 	"testing"
 	"time"
 )
 
 func TestLogger(t *testing.T) {
 	SetLogPath("/data/logs/test")
+	u1 := uuid.NewV4()
+	defer gls.DeleteGls(gls.GoID())
+	mdc.Set(mdc.APP_TRACEID, u1.String())
 	//logger := api.GetLogger("test1")
 	//SetConsole()
 	for i := 0; i < 200; i++ {
@@ -22,4 +28,5 @@ func TestLogger(t *testing.T) {
 	fmt.Println("ok")
 	//logger.FlushLogger()
 	FlushLogger()
+	mdc.Remove(mdc.APP_TRACEID)
 }

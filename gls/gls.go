@@ -101,11 +101,28 @@ func Get(key interface{}) interface{} {
 
 // Set key and element to goroutine local storage
 func Set(key interface{}, value interface{}) {
-	glsMap := GetGls(GoID())
+	goid := GoID()
+	if !IsGlsEnabled(goid) {
+		ResetGls(goid, make(map[interface{}]interface{}))
+	}
+	glsMap := GetGls(goid)
 	if glsMap == nil {
 		panic("gls not enabled for this goroutine")
 	}
 	glsMap[key] = value
+}
+
+func Remove(key interface{}) {
+	goid := GoID()
+	glsMap := GetGls(goid)
+	if glsMap != nil {
+		// 删除key
+		delete(glsMap, key)
+	}
+	// 如果map为空, 则删除
+	if len(glsMap) == 0 {
+		DeleteGls(goid)
+	}
 }
 
 // IsGlsEnabled test if the gls is available for specified goroutine
