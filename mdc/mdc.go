@@ -10,12 +10,16 @@ const (
 )
 
 func init() {
-	RefreshTraceId()
+	GenTraceId()
 }
 
-func RefreshTraceId()  {
+func GenTraceId()  {
 	u1 := uuid.NewV4()
 	Set(APP_TRACEID, u1.String())
+}
+
+func RemoveTraceId() {
+	Remove(APP_TRACEID)
 }
 
 func Set(key string, value interface{}) {
