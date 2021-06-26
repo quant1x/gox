@@ -1,6 +1,6 @@
 module github.com/mymmsc/gox
 
-go 1.14
+go 1.16
 
 // latest
 //replace golang.org/x/sys v0.0.0-20190329044733-9eb1bfa1ce65 => github.com/golang/sys v0.0.0-20190329044733-9eb1bfa1ce65
