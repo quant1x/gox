@@ -6,7 +6,6 @@ import (
 	"testing"
 	"time"
 
-	//monkey "bou.ke/monkey"
 	monkey "github.com/mymmsc/gox/aop"
 )
 

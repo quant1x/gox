@@ -5,7 +5,7 @@ import (
 	"os"
 	"strings"
 
-	"bou.ke/monkey"
+	monkey "github.com/mymmsc/gox/aop"
 )
 
 func main() {
