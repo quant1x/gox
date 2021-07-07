@@ -5,6 +5,10 @@ import (
 	"strconv"
 )
 
+const (
+	IGNORE_FLOAT = false
+)
+
 func ParseUint(s string) uint64 {
 	return parseUint64BestEffort(s)
 }
@@ -49,7 +53,7 @@ func parseUint64BestEffort(s string) uint64 {
 	if i <= j {
 		return 0
 	}
-	if i < uint(len(s)) {
+	if !IGNORE_FLOAT && i < uint(len(s)) {
 		// Unparsed tail left.
 		return 0
 	}
@@ -96,7 +100,7 @@ func parseInt64BestEffort(s string) int64 {
 	if i <= j {
 		return 0
 	}
-	if i < uint(len(s)) {
+	if !IGNORE_FLOAT && i < uint(len(s)) {
 		// Unparsed tail left.
 		return 0
 	}
