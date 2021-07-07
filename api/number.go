@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	IGNORE_FLOAT = false
+	IGNORE_FLOAT = true
 )
 
 func ParseUint(s string) uint64 {
