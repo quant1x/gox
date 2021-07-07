@@ -9,7 +9,7 @@ func ParseUint(s string) uint64 {
 	return parseUint64BestEffort(s)
 }
 
-func Parseint(s string) int64 {
+func ParseInt(s string) int64 {
 	return parseInt64BestEffort(s)
 }
 
