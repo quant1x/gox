@@ -1,6 +1,7 @@
 package fastjson
 
 import (
+	"encoding/json"
 	"fmt"
 	"strings"
 	"testing"
@@ -1176,4 +1177,29 @@ func testParseGetSerial(s string) error {
 		}
 	}
 	return nil
+}
+
+type KLine struct {
+	Day [][]string `json:"day"`
+}
+
+
+type ActionStatus struct {
+	Code int `json:"code,status"`
+	Msg string `json:"msg"`
+}
+
+type klineData struct {
+	ActionStatus
+	Data map[string]KLine `json:"data"`
+}
+
+func TestParseKLine(t *testing.T) {
+	data := `{"code":1,"msg":"success","data":{"sh000001":{"day":[["2021-07-09","3512.230","3524.090","3529.310","3485.050","349884317.000"]],"qt":{"sh000001":["1","\u4e0a\u8bc1\u6307\u6570","000001","3524.09","3525.50","3512.23","349884317","174942159","174942159","0.00","0","0.00","0","0.00","0","0.00","0","0.00","0","0.00","0","0.00","0","0.00","0","0.00","0","0.00","0","","20210709155956","-1.41","-0.04","3529.31","3485.05","3524.09\/349884317\/493020839328","349884317","49302084","0.82","14.22","","3529.31","3485.05","1.26","392004.84","500586.05","0.00","-1","-1","1.12","0","3510.12","","","","","","49302083.9328","0.0000","0"," ","ZS","1.47","0.15","","","","3731.69","3174.66","-2.31","-2.40","3.26","","","-0.98"],"market":["2021-07-10 07:04:01|HK_close_\u5df2\u4f11\u5e02|SH_close_\u5df2\u4f11\u5e02|SZ_close_\u5df2\u4f11\u5e02|US_close_\u5df2\u6536\u76d8|SQ_close_\u5df2\u4f11\u5e02|DS_close_\u5df2\u4f11\u5e02|ZS_close_\u5df2\u4f11\u5e02|NEWSH_close_\u5df2\u4f11\u5e02|NEWSZ_close_\u5df2\u4f11\u5e02|NEWHK_close_\u5df2\u4f11\u5e02|NEWUS_close_\u5df2\u6536\u76d8|REPO_close_\u5df2\u4f11\u5e02|UK_close_\u5df2\u4f11\u5e02|KCB_close_\u5df2\u4f11\u5e02|IT_close_\u5df2\u4f11\u5e02|MY_close_\u5df2\u4f11\u5e02|EU_close_\u5df2\u4f11\u5e02|AH_close_\u5df2\u4f11\u5e02|DE_close_\u5df2\u4f11\u5e02|JW_close_\u5df2\u4f11\u5e02|CYB_close_\u5df2\u4f11\u5e02|USA_open_\u76d8\u540e\u4ea4\u6613|USB_close_\u5df2\u6536\u76d8"],"zhishu":["Rank_A_sh","Rank_A_sh","1132","91","711","1934","169.260","-1.440","-0.844","1353133343","49280702","sh688305","sh688682"]},"mx_price":{"mx":[],"price":[]},"prec":"3525.500","version":"14"}}}`
+	var kline klineData
+	err := json.Unmarshal([]byte(data), &kline)
+	if err != nil {
+		t.Fatalf("解析json失败: %s", err)
+	}
+	t.Logf("kline: %+v", kline);
 }
