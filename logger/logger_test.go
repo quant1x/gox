@@ -10,7 +10,7 @@ import (
 )
 
 func TestLogger(t *testing.T) {
-	SetLogPath("/data/logs/test")
+	SetLogPath("/opt/logs/test")
 	u1 := uuid.NewV4()
 	defer gls.DeleteGls(gls.GoID())
 	mdc.Set(mdc.APP_TRACEID, u1.String())
