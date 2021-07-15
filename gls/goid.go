@@ -1,7 +1,7 @@
 package gls
 
 import (
-	"github.com/modern-go/reflect2"
+	reflect "github.com/modern-go/reflect2"
 	"unsafe"
 )
 
@@ -9,7 +9,7 @@ import (
 var goidOffset uintptr = 128
 
 func init() {
-	gType := reflect2.TypeByName("runtime.g").(reflect2.StructType)
+	gType := reflect.TypeByName("runtime.g").(reflect.StructType)
 	if gType == nil {
 		panic("failed to get runtime.g type")
 	}

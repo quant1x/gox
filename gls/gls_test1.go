@@ -10,23 +10,31 @@ func TestGls(t *testing.T) {
 	wg.Add(1)
 	go WithGls(func() {
 		if nil != Get("hello") {
-			t.Fail()
+			t.Errorf("1...\n")
+			return
+			//t.Fail()
 		}
 		Set("hello", "world")
 		if "world" != Get("hello") {
-			t.Fail()
+			t.Errorf("2...\n")
+			return
+			//t.Fail()
 		}
 		if !IsGlsEnabled(GoID()) {
-			t.Fail()
+			t.Errorf("3...\n")
+			return
+			//t.Fail()
 		}
 		wg.Done()
 	})()
 	wg.Wait()
 	if IsGlsEnabled(GoID()) {
-		t.Fail()
+		t.Fatalf("4...\n")
+		//t.Fail()
 	}
 	if nil != Get("hello") {
-		t.Fail()
+		t.Fatalf("5...\n")
+		//t.Fail()
 	}
 	//SetIndex("hello", "world") // will panic
 }
@@ -38,7 +46,9 @@ func TestNestedGls(t *testing.T) {
 		Set("hello", "world")
 		go WithGls(func() {
 			if "world" != Get("hello") {
-				t.Fail()
+				t.Errorf("6...\n")
+				return
+				//t.Fail()
 			}
 			wg.Done()
 		})()
