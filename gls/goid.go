@@ -18,8 +18,11 @@ func init() {
 }
 
 // GoID returns the goroutine id of current goroutine
+//go:nocheckptr
 func GoID() int64 {
 	g := getg()
+	// TODO: fatal error: checkptr: pointer arithmetic result points to invalid allocation
+	// go:nocheckptr
 	p_goid := (*int64)(unsafe.Pointer(g + goidOffset))
 	return *p_goid
 }
