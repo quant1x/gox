@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/mymmsc/gox/gls"
 	"github.com/mymmsc/gox/mdc"
-	"github.com/satori/go.uuid"
+	"github.com/mymmsc/gox/util/uuid"
 	"testing"
 	"time"
 )

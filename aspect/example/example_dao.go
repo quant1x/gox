@@ -1,6 +1,6 @@
 package example
 
-import "github.com/go-xorm/xorm"
+import "xorm.io/xorm"
 
 type ExampleDao struct {
 }

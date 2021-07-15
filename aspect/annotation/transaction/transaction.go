@@ -1,9 +1,9 @@
 package transaction
 
 import (
-	"github.com/go-xorm/xorm"
 	"github.com/mymmsc/gox/aspect/aop"
 	"reflect"
+	"xorm.io/xorm"
 )
 
 var methodSessionMap = make(map[string]*joinPointSessionInfo)

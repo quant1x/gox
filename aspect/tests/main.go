@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/go-xorm/xorm"
+	"xorm.io/xorm"
 	"github.com/mymmsc/gox/aspect/annotation/transaction"
 	"github.com/mymmsc/gox/aspect/example"
 )
