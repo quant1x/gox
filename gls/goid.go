@@ -22,7 +22,6 @@ func init() {
 func GoID() int64 {
 	g := getg()
 	// TODO: fatal error: checkptr: pointer arithmetic result points to invalid allocation
-	// go:nocheckptr
 	p_goid := (*int64)(unsafe.Pointer(g + goidOffset))
 	return *p_goid
 }
