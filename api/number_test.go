@@ -3,62 +3,29 @@ package api
 import "testing"
 
 func TestParseFloat(t *testing.T) {
-	type args struct {
-		s string
-	}
-	tests := []struct {
-		name string
-		args args
-		want float64
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := ParseFloat(tt.args.s); got != tt.want {
-				t.Errorf("ParseFloat() = %v, want %v", got, tt.want)
-			}
-		})
+	s := "123.456"
+	var f64 float64
+	f64 = ParseFloat(s)
+	if f64 != 123.456 {
+		t.Errorf("解析float64到int64失败")
 	}
 }
 
 func TestParseUint(t *testing.T) {
-	type args struct {
-		s string
-	}
-	tests := []struct {
-		name string
-		args args
-		want uint64
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := ParseUint(tt.args.s); got != tt.want {
-				t.Errorf("ParseUint() = %v, want %v", got, tt.want)
-			}
-		})
+	s := "123.456"
+	var i64 uint64
+	i64 = ParseUint(s)
+	if i64 != 123 {
+		t.Errorf("解析float64到int64失败")
 	}
 }
 
 func TestParseint(t *testing.T) {
-	type args struct {
-		s string
-	}
-	tests := []struct {
-		name string
-		args args
-		want int64
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := ParseInt(tt.args.s); got != tt.want {
-				t.Errorf("ParseInt() = %v, want %v", got, tt.want)
-			}
-		})
+	s := "123.456"
+	var i64 int64
+	i64 = ParseInt(s)
+	if i64 != 123 {
+		t.Errorf("解析float64到int64失败")
 	}
 }
 
