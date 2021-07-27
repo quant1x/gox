@@ -5,41 +5,40 @@
 
 # fastjson - fast JSON parser and validator for Go
 
-
 ## Features
 
-  * Fast. As usual, up to 15x faster than the standard [encoding/json](https://golang.org/pkg/encoding/json/).
-    See [benchmarks](#benchmarks).
-  * Parses arbitrary JSON without schema, reflection, struct magic and code generation
-    contrary to [easyjson](https://github.com/mailru/easyjson).
-  * Provides simple [API](http://godoc.org/github.com/valyala/fastjson).
-  * Outperforms [jsonparser](https://github.com/buger/jsonparser) and [gjson](https://github.com/tidwall/gjson)
-    when accessing multiple unrelated fields, since `fastjson` parses the input JSON only once.
-  * Validates the parsed JSON unlike [jsonparser](https://github.com/buger/jsonparser)
-    and [gjson](https://github.com/tidwall/gjson).
-  * May quickly extract a part of the original JSON with `Value.Get(...).MarshalTo` and modify it
-    with [Del](https://godoc.org/github.com/valyala/fastjson#Value.Del)
-    and [Set](https://godoc.org/github.com/valyala/fastjson#Value.Set) functions.
-  * May parse array containing values with distinct types (aka non-homogenous types).
-    For instance, `fastjson` easily parses the following JSON array `[123, "foo", [456], {"k": "v"}, null]`.
-  * `fastjson` preserves the original order of object items when calling
-    [Object.Visit](https://godoc.org/github.com/valyala/fastjson#Object.Visit).
-
+* Fast. As usual, up to 15x faster than the standard [encoding/json](https://golang.org/pkg/encoding/json/).
+  See [benchmarks](#benchmarks).
+* Parses arbitrary JSON without schema, reflection, struct magic and code generation contrary
+  to [easyjson](https://github.com/mailru/easyjson).
+* Provides simple [API](http://godoc.org/github.com/valyala/fastjson).
+* Outperforms [jsonparser](https://github.com/buger/jsonparser) and [gjson](https://github.com/tidwall/gjson)
+  when accessing multiple unrelated fields, since `fastjson` parses the input JSON only once.
+* Validates the parsed JSON unlike [jsonparser](https://github.com/buger/jsonparser)
+  and [gjson](https://github.com/tidwall/gjson).
+* May quickly extract a part of the original JSON with `Value.Get(...).MarshalTo` and modify it
+  with [Del](https://godoc.org/github.com/valyala/fastjson#Value.Del)
+  and [Set](https://godoc.org/github.com/valyala/fastjson#Value.Set) functions.
+* May parse array containing values with distinct types (aka non-homogenous types). For instance, `fastjson` easily
+  parses the following JSON array `[123, "foo", [456], {"k": "v"}, null]`.
+* `fastjson` preserves the original order of object items when calling
+  [Object.Visit](https://godoc.org/github.com/valyala/fastjson#Object.Visit).
 
 ## Known limitations
 
-  * Requies extra care to work with - references to certain objects recursively
-    returned by [Parser](https://godoc.org/github.com/valyala/fastjson#Parser)
-    must be released before the next call to [Parse](https://godoc.org/github.com/valyala/fastjson#Parser.Parse).
-    Otherwise the program may work improperly. The same applies to objects returned by [Arena](https://godoc.org/github.com/valyala/fastjson#Arena).
-    Adhere recommendations from [docs](https://godoc.org/github.com/valyala/fastjson).
-  * Cannot parse JSON from `io.Reader`. There is [Scanner](https://godoc.org/github.com/valyala/fastjson#Scanner)
-    for parsing stream of JSON values from a string.
-
+* Requies extra care to work with - references to certain objects recursively returned
+  by [Parser](https://godoc.org/github.com/valyala/fastjson#Parser)
+  must be released before the next call to [Parse](https://godoc.org/github.com/valyala/fastjson#Parser.Parse).
+  Otherwise the program may work improperly. The same applies to objects returned
+  by [Arena](https://godoc.org/github.com/valyala/fastjson#Arena). Adhere recommendations
+  from [docs](https://godoc.org/github.com/valyala/fastjson).
+* Cannot parse JSON from `io.Reader`. There is [Scanner](https://godoc.org/github.com/valyala/fastjson#Scanner)
+  for parsing stream of JSON values from a string.
 
 ## Usage
 
 One-liner accessing a single field:
+
 ```go
 	s := []byte(`{"foo": [123, "bar"]}`)
 	fmt.Printf("foo.0=%d\n", fastjson.GetInt(s, "foo", "0"))
@@ -49,6 +48,7 @@ One-liner accessing a single field:
 ```
 
 Accessing multiple fields with error handling:
+
 ```go
         var p fastjson.Parser
         v, err := p.Parse(`{
@@ -77,31 +77,27 @@ Accessing multiple fields with error handling:
 
 See also [examples](https://godoc.org/github.com/valyala/fastjson#pkg-examples).
 
-
 ## Security
 
-  * `fastjson` shouldn't crash or panic when parsing input strings specially crafted
-    by an attacker. It must return error on invalid input JSON.
-  * `fastjson` requires up to `sizeof(Value) * len(inputJSON)` bytes of memory
-    for parsing `inputJSON` string. Limit the maximum size of the `inputJSON`
-    before parsing it in order to limit the maximum memory usage.
-
+* `fastjson` shouldn't crash or panic when parsing input strings specially crafted by an attacker. It must return error
+  on invalid input JSON.
+* `fastjson` requires up to `sizeof(Value) * len(inputJSON)` bytes of memory for parsing `inputJSON` string. Limit the
+  maximum size of the `inputJSON`
+  before parsing it in order to limit the maximum memory usage.
 
 ## Performance optimization tips
 
-  * Re-use [Parser](https://godoc.org/github.com/valyala/fastjson#Parser) and [Scanner](https://godoc.org/github.com/valyala/fastjson#Scanner)
-    for parsing many JSONs. This reduces memory allocations overhead.
-    [ParserPool](https://godoc.org/github.com/valyala/fastjson#ParserPool) may be useful in this case.
-  * Prefer calling `Value.Get*` on the value returned from [Parser](https://godoc.org/github.com/valyala/fastjson#Parser)
-    instead of calling `Get*` one-liners when multiple fields
-    must be obtained from JSON, since each `Get*` one-liner re-parses
-    the input JSON again.
-  * Prefer calling once [Value.Get](https://godoc.org/github.com/valyala/fastjson#Value.Get)
-    for common prefix paths and then calling `Value.Get*` on the returned value
-    for distinct suffix paths.
-  * Prefer iterating over array returned from [Value.GetArray](https://godoc.org/github.com/valyala/fastjson#Object.Visit)
-    with a range loop instead of calling `Value.Get*` for each array item.
-
+* Re-use [Parser](https://godoc.org/github.com/valyala/fastjson#Parser)
+  and [Scanner](https://godoc.org/github.com/valyala/fastjson#Scanner)
+  for parsing many JSONs. This reduces memory allocations overhead.
+  [ParserPool](https://godoc.org/github.com/valyala/fastjson#ParserPool) may be useful in this case.
+* Prefer calling `Value.Get*` on the value returned from [Parser](https://godoc.org/github.com/valyala/fastjson#Parser)
+  instead of calling `Get*` one-liners when multiple fields must be obtained from JSON, since each `Get*` one-liner
+  re-parses the input JSON again.
+* Prefer calling once [Value.Get](https://godoc.org/github.com/valyala/fastjson#Value.Get)
+  for common prefix paths and then calling `Value.Get*` on the returned value for distinct suffix paths.
+* Prefer iterating over array returned from [Value.GetArray](https://godoc.org/github.com/valyala/fastjson#Object.Visit)
+  with a range loop instead of calling `Value.Get*` for each array item.
 
 ## Benchmarks
 
@@ -109,21 +105,19 @@ Go 1.12 has been used for benchmarking.
 
 Legend:
 
-  * `small` - parse [small.json](testdata/small.json) (190 bytes).
-  * `medium` - parse [medium.json](testdata/medium.json) (2.3KB).
-  * `large` - parse [large.json](testdata/large.json) (28KB).
-  * `canada` - parse [canada.json](testdata/canada.json) (2.2MB).
-  * `citm` - parse [citm_catalog.json](testdata/citm_catalog.json) (1.7MB).
-  * `twitter` - parse [twitter.json](testdata/twitter.json) (617KB).
+* `small` - parse [small.json](testdata/small.json) (190 bytes).
+* `medium` - parse [medium.json](testdata/medium.json) (2.3KB).
+* `large` - parse [large.json](testdata/large.json) (28KB).
+* `canada` - parse [canada.json](testdata/canada.json) (2.2MB).
+* `citm` - parse [citm_catalog.json](testdata/citm_catalog.json) (1.7MB).
+* `twitter` - parse [twitter.json](testdata/twitter.json) (617KB).
 
-  * `stdjson-map` - parse into a `map[string]interface{}` using `encoding/json`.
-  * `stdjson-struct` - parse into a struct containing
-    a subset of fields of the parsed JSON, using `encoding/json`.
-  * `stdjson-empty-struct` - parse into an empty struct using `encoding/json`.
-    This is the fastest possible solution for `encoding/json`, may be used
-    for json validation. See also benchmark results for json validation.
-  * `fastjson` - parse using `fastjson` without fields access.
-  * `fastjson-get` - parse using `fastjson` with fields access similar to `stdjson-struct`.
+* `stdjson-map` - parse into a `map[string]interface{}` using `encoding/json`.
+* `stdjson-struct` - parse into a struct containing a subset of fields of the parsed JSON, using `encoding/json`.
+* `stdjson-empty-struct` - parse into an empty struct using `encoding/json`. This is the fastest possible solution
+  for `encoding/json`, may be used for json validation. See also benchmark results for json validation.
+* `fastjson` - parse using `fastjson` without fields access.
+* `fastjson-get` - parse using `fastjson` with fields access similar to `stdjson-struct`.
 
 ```
 $ GOMAXPROCS=1 go test github.com/valyala/fastjson -bench='Parse$'
@@ -185,28 +179,30 @@ BenchmarkValidate/twitter/fastjson       	    2000	   1036796 ns/op	 609.10 MB/s
 
 ## FAQ
 
-  * Q: _There are a ton of other high-perf packages for JSON parsing in Go. Why creating yet another package?_
-    A: Because other packages require either rigid JSON schema via struct magic
-       and code generation or perform poorly when multiple unrelated fields
-       must be obtained from the parsed JSON.
-       Additionally, `fastjson` provides nicer [API](http://godoc.org/github.com/valyala/fastjson).
+* Q: _There are a ton of other high-perf packages for JSON parsing in Go. Why creating yet another package?_
+  A: Because other packages require either rigid JSON schema via struct magic and code generation or perform poorly when
+  multiple unrelated fields must be obtained from the parsed JSON. Additionally, `fastjson` provides
+  nicer [API](http://godoc.org/github.com/valyala/fastjson).
 
-  * Q: _What is the main purpose for `fastjson`?_
-    A: High-perf JSON parsing for [RTB](https://www.iab.com/wp-content/uploads/2015/05/OpenRTB_API_Specification_Version_2_3_1.pdf)
-       and other [JSON-RPC](https://en.wikipedia.org/wiki/JSON-RPC) services.
+* Q: _What is the main purpose for `fastjson`?_
+  A: High-perf JSON parsing
+  for [RTB](https://www.iab.com/wp-content/uploads/2015/05/OpenRTB_API_Specification_Version_2_3_1.pdf)
+  and other [JSON-RPC](https://en.wikipedia.org/wiki/JSON-RPC) services.
 
-  * Q: _Why fastjson doesn't provide fast marshaling (serialization)?_
-    A: Actually it provides some sort of marshaling - see [Value.MarshalTo](https://godoc.org/github.com/valyala/fastjson#Value.MarshalTo).
-       But I'd recommend using [quicktemplate](https://github.com/valyala/quicktemplate#use-cases)
-       for high-performance JSON marshaling :)
+* Q: _Why fastjson doesn't provide fast marshaling (serialization)?_
+  A: Actually it provides some sort of marshaling -
+  see [Value.MarshalTo](https://godoc.org/github.com/valyala/fastjson#Value.MarshalTo). But I'd recommend
+  using [quicktemplate](https://github.com/valyala/quicktemplate#use-cases)
+  for high-performance JSON marshaling :)
 
-  * Q: _`fastjson` crashes my program!_
-    A: There is high probability of improper use.
-       * Make sure you don't hold references to objects recursively returned by `Parser` / `Scanner`
-         beyond the next `Parser.Parse` / `Scanner.Next` call
-         if such restriction is mentioned in [docs](https://github.com/valyala/fastjson/issues/new).
-       * Make sure you don't access `fastjson` objects from concurrently running goroutines
-         if such restriction is mentioned in [docs](https://github.com/valyala/fastjson/issues/new).
-       * Build and run your program with [-race](https://golang.org/doc/articles/race_detector.html) flag.
-         Make sure the race detector detects zero races.
-       * If your program continue crashing after fixing issues mentioned above, [file a bug](https://github.com/valyala/fastjson/issues/new).
+* Q: _`fastjson` crashes my program!_
+  A: There is high probability of improper use.
+    * Make sure you don't hold references to objects recursively returned by `Parser` / `Scanner`
+      beyond the next `Parser.Parse` / `Scanner.Next` call if such restriction is mentioned
+      in [docs](https://github.com/valyala/fastjson/issues/new).
+    * Make sure you don't access `fastjson` objects from concurrently running goroutines if such restriction is
+      mentioned in [docs](https://github.com/valyala/fastjson/issues/new).
+    * Build and run your program with [-race](https://golang.org/doc/articles/race_detector.html) flag. Make sure the
+      race detector detects zero races.
+    * If your program continue crashing after fixing issues mentioned
+      above, [file a bug](https://github.com/valyala/fastjson/issues/new).

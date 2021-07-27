@@ -4,9 +4,11 @@
 
 A golang library for generating QR codes in the terminal.
 
-Originally this was a port of the [NodeJS version](https://github.com/gtanner/qrcode-terminal). Recently it's been updated to allow for smaller code generation using ASCII 'half blocks'
+Originally this was a port of the [NodeJS version](https://github.com/gtanner/qrcode-terminal). Recently it's been
+updated to allow for smaller code generation using ASCII 'half blocks'
 
 ## Example
+
 Full size ASCII block QR Code:  
 <img src="https://user-images.githubusercontent.com/2868/37992336-0ba06b56-31d1-11e8-9d32-5c6bb008dc74.png" alt="alt text" width="225" height="225">
 
@@ -34,6 +36,7 @@ func main() {
 ### More complicated
 
 Large Inverted barcode with medium redundancy and a 1 pixel border
+
 ```go
 import (
     "github.com/mdp/qrterminal"
@@ -53,6 +56,7 @@ func main() {
 ```
 
 HalfBlock barcode with medium redundancy
+
 ```go
 import (
     "github.com/mdp/qrterminal"

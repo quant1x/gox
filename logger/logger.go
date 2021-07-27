@@ -249,7 +249,7 @@ func (l *Logger) Fatalf(format string, v ...interface{}) {
 	os.Exit(-1)
 }
 
-func getTraceId() (string)  {
+func getTraceId() string {
 	traceId := mdc.Get(__logger_traceId)
 	t := reflect.ValueOf(traceId)
 	if t.Kind() == reflect.String {
@@ -267,7 +267,7 @@ func (l *Logger) writef(skip int, level LogLevel, format string, v []interface{}
 	//ms := (t.UnixNano() / int64(time.Millisecond)) % 1000
 	buf := bytes.NewBuffer(nil)
 	if l.writer.NeedPrefix() {
-		traceId := getTraceId();
+		traceId := getTraceId()
 		fmt.Fprintf(buf, "%s|%s|", t.Format(Timestamp), traceId)
 		if logLevel == DEBUG {
 			_, file, line, ok := runtime.Caller(skip)

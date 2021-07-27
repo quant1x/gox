@@ -5,45 +5,44 @@ Implementation of various data structures and algorithms in Go.
 ## Data Structures
 
 - [Containers](#containers)
-  - [Lists](#lists)
-    - [ArrayList](#arraylist)
-    - [SinglyLinkedList](#singlylinkedlist)
-    - [DoublyLinkedList](#doublylinkedlist)
-  - [Sets](#sets)
-    - [HashSet](#hashset)
-    - [TreeSet](#treeset)
-    - [LinkedHashSet](#linkedhashset)
-  - [Stacks](#stacks)
-    - [LinkedListStack](#linkedliststack)
-    - [ArrayStack](#arraystack)
-  - [Maps](#maps)
-    - [HashMap](#hashmap)
-    - [TreeMap](#treemap)
-    - [LinkedHashMap](#linkedhashmap)
-    - [HashBidiMap](#hashbidimap)
-    - [TreeBidiMap](#treebidimap)
-  - [Trees](#trees)
-    - [RedBlackTree](#redblacktree)
-    - [AVLTree](#avltree)
-    - [BTree](#btree)
-    - [BinaryHeap](#binaryheap)
+    - [Lists](#lists)
+        - [ArrayList](#arraylist)
+        - [SinglyLinkedList](#singlylinkedlist)
+        - [DoublyLinkedList](#doublylinkedlist)
+    - [Sets](#sets)
+        - [HashSet](#hashset)
+        - [TreeSet](#treeset)
+        - [LinkedHashSet](#linkedhashset)
+    - [Stacks](#stacks)
+        - [LinkedListStack](#linkedliststack)
+        - [ArrayStack](#arraystack)
+    - [Maps](#maps)
+        - [HashMap](#hashmap)
+        - [TreeMap](#treemap)
+        - [LinkedHashMap](#linkedhashmap)
+        - [HashBidiMap](#hashbidimap)
+        - [TreeBidiMap](#treebidimap)
+    - [Trees](#trees)
+        - [RedBlackTree](#redblacktree)
+        - [AVLTree](#avltree)
+        - [BTree](#btree)
+        - [BinaryHeap](#binaryheap)
 - [Functions](#functions)
     - [Comparator](#comparator)
     - [Iterator](#iterator)
-      - [IteratorWithIndex](#iteratorwithindex)
-      - [IteratorWithKey](#iteratorwithkey)
-      - [ReverseIteratorWithIndex](#reverseiteratorwithindex)
-      - [ReverseIteratorWithKey](#reverseiteratorwithkey)
+        - [IteratorWithIndex](#iteratorwithindex)
+        - [IteratorWithKey](#iteratorwithkey)
+        - [ReverseIteratorWithIndex](#reverseiteratorwithindex)
+        - [ReverseIteratorWithKey](#reverseiteratorwithkey)
     - [Enumerable](#enumerable)
-      - [EnumerableWithIndex](#enumerablewithindex)
-      - [EnumerableWithKey](#enumerablewithkey)
+        - [EnumerableWithIndex](#enumerablewithindex)
+        - [EnumerableWithKey](#enumerablewithkey)
     - [Serialization](#serialization)
-      - [JSONSerializer](#jsonserializer)
-      - [JSONDeserializer](#jsondeserializer)
+        - [JSONSerializer](#jsonserializer)
+        - [JSONDeserializer](#jsondeserializer)
     - [Sort](#sort)
     - [Container](#container)
 - [Appendix](#appendix)
-
 
 ## Containers
 
@@ -58,9 +57,11 @@ type Container interface {
 }
 ```
 
-Containers are either ordered or unordered. All ordered containers provide [stateful iterators](#iterator) and some of them allow [enumerable functions](#enumerable).
+Containers are either ordered or unordered. All ordered containers provide [stateful iterators](#iterator) and some of
+them allow [enumerable functions](#enumerable).
 
-| **Data** | **Structure** | **Ordered** | **[Iterator](#iterator)** | **[Enumerable](#enumerable)** | **Referenced by** |
+| **Data** | **Structure** | **Ordered** | **[Iterator](#iterator)** | **[Enumerable](#enumerable)** | **Referenced
+by** |
 | :--- | :--- | :---: | :---: | :---: | :---: |
 | [Lists](#lists) |
 |   | [ArrayList](#arraylist) | yes | yes* | yes | index |
@@ -115,7 +116,8 @@ type List interface {
 
 A [list](#lists) backed by a dynamic array that grows and shrinks implicitly.
 
-Implements [List](#lists), [IteratorWithIndex](#iteratorwithindex), [EnumerableWithIndex](#enumerablewithindex), [JSONSerializer](#jsonserializer) and [JSONDeserializer](#jsondeserializer) interfaces.
+Implements [List](#lists), [IteratorWithIndex](#iteratorwithindex), [EnumerableWithIndex](#enumerablewithindex)
+, [JSONSerializer](#jsonserializer) and [JSONDeserializer](#jsondeserializer) interfaces.
 
 ```go
 package main
@@ -152,7 +154,8 @@ func main() {
 
 A [list](#lists) where each element points to the next element in the list.
 
-Implements [List](#lists), [IteratorWithIndex](#iteratorwithindex), [EnumerableWithIndex](#enumerablewithindex), [JSONSerializer](#jsonserializer) and [JSONDeserializer](#jsondeserializer) interfaces.
+Implements [List](#lists), [IteratorWithIndex](#iteratorwithindex), [EnumerableWithIndex](#enumerablewithindex)
+, [JSONSerializer](#jsonserializer) and [JSONDeserializer](#jsondeserializer) interfaces.
 
 ```go
 package main
@@ -189,7 +192,8 @@ func main() {
 
 A [list](#lists) where each element points to the next and previous elements in the list.
 
-Implements [List](#lists), [IteratorWithIndex](#iteratorwithindex), [EnumerableWithIndex](#enumerablewithindex), [JSONSerializer](#jsonserializer) and [JSONDeserializer](#jsondeserializer) interfaces.
+Implements [List](#lists), [IteratorWithIndex](#iteratorwithindex), [EnumerableWithIndex](#enumerablewithindex)
+, [JSONSerializer](#jsonserializer) and [JSONDeserializer](#jsondeserializer) interfaces.
 
 ```go
 package main
@@ -224,7 +228,10 @@ func main() {
 
 ### Sets
 
-A set is a data structure that can store elements and has no repeated values. It is a computer implementation of the mathematical concept of a finite set. Unlike most other collection types, rather than retrieving a specific element from a set, one typically tests an element for membership in a set. This structure is often used to ensure that no duplicates are present in a container.
+A set is a data structure that can store elements and has no repeated values. It is a computer implementation of the
+mathematical concept of a finite set. Unlike most other collection types, rather than retrieving a specific element from
+a set, one typically tests an element for membership in a set. This structure is often used to ensure that no duplicates
+are present in a container.
 
 Implements [Container](#containers) interface.
 
@@ -244,7 +251,8 @@ type Set interface {
 
 #### HashSet
 
-A [set](#sets) backed by a hash table (actually a Go's map). It makes no guarantees as to the iteration order of the set.
+A [set](#sets) backed by a hash table (actually a Go's map). It makes no guarantees as to the iteration order of the
+set.
 
 Implements [Set](#sets), [JSONSerializer](#jsonserializer) and [JSONDeserializer](#jsondeserializer) interfaces.
 
@@ -271,9 +279,11 @@ func main() {
 
 #### TreeSet
 
-A [set](#sets) backed by a [red-black tree](#redblacktree) to keep the elements ordered with respect to the [comparator](#comparator).
+A [set](#sets) backed by a [red-black tree](#redblacktree) to keep the elements ordered with respect to
+the [comparator](#comparator).
 
-Implements [Set](#sets), [IteratorWithIndex](#iteratorwithindex), [EnumerableWithIndex](#enumerablewithindex), [JSONSerializer](#jsonserializer) and [JSONDeserializer](#jsondeserializer) interfaces.
+Implements [Set](#sets), [IteratorWithIndex](#iteratorwithindex), [EnumerableWithIndex](#enumerablewithindex)
+, [JSONSerializer](#jsonserializer) and [JSONDeserializer](#jsondeserializer) interfaces.
 
 ```go
 package main
@@ -298,9 +308,11 @@ func main() {
 
 #### LinkedHashSet
 
-A [set](#sets) that preserves insertion-order. Data structure is backed by a hash table to store values and [doubly-linked list](#doublylinkedlist) to store insertion ordering.
+A [set](#sets) that preserves insertion-order. Data structure is backed by a hash table to store values
+and [doubly-linked list](#doublylinkedlist) to store insertion ordering.
 
-Implements [Set](#sets), [IteratorWithIndex](#iteratorwithindex), [EnumerableWithIndex](#enumerablewithindex), [JSONSerializer](#jsonserializer) and [JSONDeserializer](#jsondeserializer) interfaces.
+Implements [Set](#sets), [IteratorWithIndex](#iteratorwithindex), [EnumerableWithIndex](#enumerablewithindex)
+, [JSONSerializer](#jsonserializer) and [JSONDeserializer](#jsondeserializer) interfaces.
 
 ```go
 package main
@@ -326,7 +338,8 @@ func main() {
 
 ### Stacks
 
-A stack that represents a last-in-first-out (LIFO) data structure. The usual push and pop operations are provided, as well as a method to peek at the top item on the stack.
+A stack that represents a last-in-first-out (LIFO) data structure. The usual push and pop operations are provided, as
+well as a method to peek at the top item on the stack.
 
 Implements [Container](#containers) interface.
 
@@ -348,7 +361,8 @@ type Stack interface {
 
 A [stack](#stacks) based on a [linked list](#singlylinkedlist).
 
-Implements [Stack](#stacks), [IteratorWithIndex](#iteratorwithindex), [JSONSerializer](#jsonserializer) and [JSONDeserializer](#jsondeserializer) interfaces.
+Implements [Stack](#stacks), [IteratorWithIndex](#iteratorwithindex), [JSONSerializer](#jsonserializer)
+and [JSONDeserializer](#jsondeserializer) interfaces.
 
 ```go
 package main
@@ -375,7 +389,8 @@ func main() {
 
 A [stack](#stacks) based on a [array list](#arraylist).
 
-Implements [Stack](#stacks), [IteratorWithIndex](#iteratorwithindex), [JSONSerializer](#jsonserializer) and [JSONDeserializer](#jsondeserializer) interfaces.
+Implements [Stack](#stacks), [IteratorWithIndex](#iteratorwithindex), [JSONSerializer](#jsonserializer)
+and [JSONDeserializer](#jsondeserializer) interfaces.
 
 ```go
 package main
@@ -400,7 +415,8 @@ func main() {
 
 ### Maps
 
-A Map is a data structure that maps keys to values. A map cannot contain duplicate keys and each key can map to at most one value.
+A Map is a data structure that maps keys to values. A map cannot contain duplicate keys and each key can map to at most
+one value.
 
 Implements [Container](#containers) interface.
 
@@ -419,7 +435,10 @@ type Map interface {
 }
 ```
 
-A BidiMap is an extension to the Map. A bidirectional map (BidiMap), also called a hash bag, is an associative data structure in which the key-value pairs form a one-to-one relation. This relation works in both directions by allow the value to also act as a key to key, e.g. a pair (a,b) thus provides a coupling between 'a' and 'b' so that 'b' can be found when 'a' is used as a key and 'a' can be found when 'b' is used as a key.
+A BidiMap is an extension to the Map. A bidirectional map (BidiMap), also called a hash bag, is an associative data
+structure in which the key-value pairs form a one-to-one relation. This relation works in both directions by allow the
+value to also act as a key to key, e.g. a pair (a,b) thus provides a coupling between 'a' and 'b' so that 'b' can be
+found when 'a' is used as a key and 'a' can be found when 'b' is used as a key.
 
 ```go
 type BidiMap interface {
@@ -458,9 +477,11 @@ func main() {
 
 #### TreeMap
 
-A [map](#maps) based on [red-black tree](#redblacktree). Keys are ordered  ordered with respect to the [comparator](#comparator).
+A [map](#maps) based on [red-black tree](#redblacktree). Keys are ordered ordered with respect to
+the [comparator](#comparator).
 
-Implements [Map](#maps), [IteratorWithKey](#iteratorwithkey), [EnumerableWithKey](#enumerablewithkey), [JSONSerializer](#jsonserializer) and [JSONDeserializer](#jsondeserializer) interfaces.
+Implements [Map](#maps), [IteratorWithKey](#iteratorwithkey), [EnumerableWithKey](#enumerablewithkey)
+, [JSONSerializer](#jsonserializer) and [JSONDeserializer](#jsondeserializer) interfaces.
 
 ```go
 package main
@@ -489,9 +510,11 @@ func main() {
 
 #### LinkedHashMap
 
-A [map](#maps) that preserves insertion-order. It is backed by a hash table to store values and [doubly-linked list](doublylinkedlist) to store ordering.
+A [map](#maps) that preserves insertion-order. It is backed by a hash table to store values
+and [doubly-linked list](doublylinkedlist) to store ordering.
 
-Implements [Map](#maps), [IteratorWithKey](#iteratorwithkey), [EnumerableWithKey](#enumerablewithkey), [JSONSerializer](#jsonserializer) and [JSONDeserializer](#jsondeserializer) interfaces.
+Implements [Map](#maps), [IteratorWithKey](#iteratorwithkey), [EnumerableWithKey](#enumerablewithkey)
+, [JSONSerializer](#jsonserializer) and [JSONDeserializer](#jsondeserializer) interfaces.
 
 ```go
 package main
@@ -546,9 +569,12 @@ func main() {
 
 #### TreeBidiMap
 
-A [map](#maps) based on red-black tree. This map guarantees that the map will be in both ascending key and value order.  Other than key and value ordering, the goal with this structure is to avoid duplication of elements (unlike in [HashBidiMap](#hashbidimap)), which can be significant if contained elements are large.
+A [map](#maps) based on red-black tree. This map guarantees that the map will be in both ascending key and value order.
+Other than key and value ordering, the goal with this structure is to avoid duplication of elements (unlike
+in [HashBidiMap](#hashbidimap)), which can be significant if contained elements are large.
 
-Implements [BidiMap](#maps), [IteratorWithKey](#iteratorwithkey), [EnumerableWithKey](#enumerablewithkey), [JSONSerializer](#jsonserializer) and [JSONDeserializer](#jsondeserializer) interfaces.
+Implements [BidiMap](#maps), [IteratorWithKey](#iteratorwithkey), [EnumerableWithKey](#enumerablewithkey)
+, [JSONSerializer](#jsonserializer) and [JSONDeserializer](#jsondeserializer) interfaces.
 
 ```go
 package main
@@ -578,7 +604,8 @@ func main() {
 
 ### Trees
 
-A tree is a widely used data data structure that simulates a hierarchical tree structure, with a root value and subtrees of children, represented as a set of linked nodes; thus no cyclic links.
+A tree is a widely used data data structure that simulates a hierarchical tree structure, with a root value and subtrees
+of children, represented as a set of linked nodes; thus no cyclic links.
 
 Implements [Container](#containers) interface.
 
@@ -594,11 +621,17 @@ type Tree interface {
 
 #### RedBlackTree
 
-A red–black [tree](#trees) is a binary search tree with an extra bit of data per node, its color, which can be either red or black. The extra bit of storage ensures an approximately balanced tree by constraining how nodes are colored from any path from the root to the leaf. Thus, it is a data structure which is a type of self-balancing binary search tree.
+A red–black [tree](#trees) is a binary search tree with an extra bit of data per node, its color, which can be either
+red or black. The extra bit of storage ensures an approximately balanced tree by constraining how nodes are colored from
+any path from the root to the leaf. Thus, it is a data structure which is a type of self-balancing binary search tree.
 
-The balancing of the tree is not perfect but it is good enough to allow it to guarantee searching in O(log n) time, where n is the total number of elements in the tree. The insertion and deletion operations, along with the tree rearrangement and recoloring, are also performed in O(log n) time. <sub><sup>[Wikipedia](http://en.wikipedia.org/wiki/Red%E2%80%93black_tree)</sup></sub>
+The balancing of the tree is not perfect but it is good enough to allow it to guarantee searching in O(log n) time,
+where n is the total number of elements in the tree. The insertion and deletion operations, along with the tree
+rearrangement and recoloring, are also performed in O(log n)
+time. <sub><sup>[Wikipedia](http://en.wikipedia.org/wiki/Red%E2%80%93black_tree)</sup></sub>
 
-Implements [Tree](#trees), [ReverseIteratorWithKey](#reverseiteratorwithkey), [JSONSerializer](#jsonserializer) and [JSONDeserializer](#jsondeserializer) interfaces.
+Implements [Tree](#trees), [ReverseIteratorWithKey](#reverseiteratorwithkey), [JSONSerializer](#jsonserializer)
+and [JSONDeserializer](#jsondeserializer) interfaces.
 
 <p align="center"><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Red-black_tree_example.svg/500px-Red-black_tree_example.svg.png" width="400px" height="200px" /></p>
 
@@ -656,15 +689,24 @@ func main() {
 }
 ```
 
-Extending the red-black tree's functionality  has been demonstrated in the following [example](https://github.com/mymmsc/gox/util/blob/master/examples/redblacktreeextended/redblacktreeextended.go).
+Extending the red-black tree's functionality has been demonstrated in the
+following [example](https://github.com/mymmsc/gox/util/blob/master/examples/redblacktreeextended/redblacktreeextended.go)
+.
 
 #### AVLTree
 
-AVL [tree](#trees) is a self-balancing binary search tree. In an AVL tree, the heights of the two child subtrees of any node differ by at most one; if at any time they differ by more than one, rebalancing is done to restore this property. Lookup, insertion, and deletion all take O(log n) time in both the average and worst cases, where n is the number of nodes in the tree prior to the operation. Insertions and deletions may require the tree to be rebalanced by one or more tree rotations.
+AVL [tree](#trees) is a self-balancing binary search tree. In an AVL tree, the heights of the two child subtrees of any
+node differ by at most one; if at any time they differ by more than one, rebalancing is done to restore this property.
+Lookup, insertion, and deletion all take O(log n) time in both the average and worst cases, where n is the number of
+nodes in the tree prior to the operation. Insertions and deletions may require the tree to be rebalanced by one or more
+tree rotations.
 
-AVL trees are often compared with red–black trees because both support the same set of operations and take O(log n) time for the basic operations. For lookup-intensive applications, AVL trees are faster than red–black trees because they are more strictly balanced. <sub><sup>[Wikipedia](https://en.wikipedia.org/wiki/AVL_tree)</sup></sub>
+AVL trees are often compared with red–black trees because both support the same set of operations and take O(log n) time
+for the basic operations. For lookup-intensive applications, AVL trees are faster than red–black trees because they are
+more strictly balanced. <sub><sup>[Wikipedia](https://en.wikipedia.org/wiki/AVL_tree)</sup></sub>
 
-Implements [Tree](#trees), [ReverseIteratorWithKey](#reverseiteratorwithkey), [JSONSerializer](#jsonserializer) and [JSONDeserializer](#jsondeserializer) interfaces.
+Implements [Tree](#trees), [ReverseIteratorWithKey](#reverseiteratorwithkey), [JSONSerializer](#jsonserializer)
+and [JSONDeserializer](#jsondeserializer) interfaces.
 
 <p align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/AVL-tree-wBalance_K.svg/262px-AVL-tree-wBalance_K.svg.png" width="300px" height="180px" /><br/><sub>AVL tree with balance factors (green)</sub></p>
 
@@ -719,7 +761,9 @@ func main() {
 
 #### BTree
 
-B-tree is a self-balancing tree data structure that keeps data sorted and allows searches, sequential access, insertions, and deletions in logarithmic time. The B-tree is a generalization of a binary search tree in that a node can have more than two children.
+B-tree is a self-balancing tree data structure that keeps data sorted and allows searches, sequential access,
+insertions, and deletions in logarithmic time. The B-tree is a generalization of a binary search tree in that a node can
+have more than two children.
 
 According to Knuth's definition, a B-tree of order m is a tree which satisfies the following properties:
 
@@ -729,9 +773,13 @@ According to Knuth's definition, a B-tree of order m is a tree which satisfies t
 - A non-leaf node with k children contains k−1 keys.
 - All leaves appear in the same level
 
-Each internal node’s keys act as separation values which divide its subtrees. For example, if an internal node has 3 child nodes (or subtrees) then it must have 2 keys: a1 and a2. All values in the leftmost subtree will be less than a1, all values in the middle subtree will be between a1 and a2, and all values in the rightmost subtree will be greater than a2.<sub><sup>[Wikipedia](http://en.wikipedia.org/wiki/Red%E2%80%93black_tree)</sub></sup>
+Each internal node’s keys act as separation values which divide its subtrees. For example, if an internal node has 3
+child nodes (or subtrees) then it must have 2 keys: a1 and a2. All values in the leftmost subtree will be less than a1,
+all values in the middle subtree will be between a1 and a2, and all values in the rightmost subtree will be greater than
+a2.<sub><sup>[Wikipedia](http://en.wikipedia.org/wiki/Red%E2%80%93black_tree)</sub></sup>
 
-Implements [Tree](#trees), [ReverseIteratorWithKey](#reverseiteratorwithkey), [JSONSerializer](#jsonserializer) and [JSONDeserializer](#jsondeserializer) interfaces.
+Implements [Tree](#trees), [ReverseIteratorWithKey](#reverseiteratorwithkey), [JSONSerializer](#jsonserializer)
+and [JSONDeserializer](#jsondeserializer) interfaces.
 
 <p align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/B-tree.svg/831px-B-tree.svg.png" width="400px" height="111px" /></p>
 
@@ -794,16 +842,21 @@ func main() {
 
 #### BinaryHeap
 
-A binary heap is a [tree](#trees) created using a binary tree. It can be seen as a binary tree with two additional constraints:
+A binary heap is a [tree](#trees) created using a binary tree. It can be seen as a binary tree with two additional
+constraints:
 
 - Shape property:
 
-  A binary heap is a complete binary tree; that is, all levels of the tree, except possibly the last one (deepest) are fully filled, and, if the last level of the tree is not complete, the nodes of that level are filled from left to right.
+  A binary heap is a complete binary tree; that is, all levels of the tree, except possibly the last one (deepest) are
+  fully filled, and, if the last level of the tree is not complete, the nodes of that level are filled from left to
+  right.
 - Heap property:
 
-  All nodes are either greater than or equal to or less than or equal to each of its children, according to a comparison predicate defined for the heap. <sub><sup>[Wikipedia](http://en.wikipedia.org/wiki/Binary_heap)</sub></sup>
+  All nodes are either greater than or equal to or less than or equal to each of its children, according to a comparison
+  predicate defined for the heap. <sub><sup>[Wikipedia](http://en.wikipedia.org/wiki/Binary_heap)</sub></sup>
 
-Implements [Tree](#trees), [ReverseIteratorWithIndex](#reverseiteratorwithindex), [JSONSerializer](#jsonserializer) and [JSONDeserializer](#jsondeserializer) interfaces.
+Implements [Tree](#trees), [ReverseIteratorWithIndex](#reverseiteratorwithindex), [JSONSerializer](#jsonserializer)
+and [JSONDeserializer](#jsondeserializer) interfaces.
 
 <p align="center"><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Max-Heap.svg/501px-Max-Heap.svg.png" width="300px" height="200px" /></p>
 
@@ -849,7 +902,8 @@ Various helper functions used throughout the library.
 
 ### Comparator
 
-Some data structures (e.g. TreeMap, TreeSet) require a comparator function to automatically keep their elements sorted upon insertion. This comparator is necessary during the initalization.
+Some data structures (e.g. TreeMap, TreeSet) require a comparator function to automatically keep their elements sorted
+upon insertion. This comparator is necessary during the initalization.
 
 Comparator is defined as:
 
@@ -949,7 +1003,12 @@ func main() {
 
 ### Iterator
 
-All ordered containers have stateful iterators. Typically an iterator is obtained by _Iterator()_ function of an ordered container. Once obtained, iterator's _Next()_ function moves the iterator to the next element and returns true if there was a next element. If there was an element, then element's can be obtained by iterator's _Value()_ function. Depending on the ordering type, it's position can be obtained by iterator's _Index()_ or _Key()_ functions. Some containers even provide reversible iterators, essentially the same, but provide another extra _Prev()_ function that moves the iterator to the previous element and returns true if there was a previous element.
+All ordered containers have stateful iterators. Typically an iterator is obtained by _Iterator()_ function of an ordered
+container. Once obtained, iterator's _Next()_ function moves the iterator to the next element and returns true if there
+was a next element. If there was an element, then element's can be obtained by iterator's _Value()_ function. Depending
+on the ordering type, it's position can be obtained by iterator's _Index()_ or _Key()_ functions. Some containers even
+provide reversible iterators, essentially the same, but provide another extra _Prev()_ function that moves the iterator
+to the previous element and returns true if there was a previous element.
 
 Note: it is unsafe to remove elements from container while iterating.
 
@@ -958,6 +1017,7 @@ Note: it is unsafe to remove elements from container while iterating.
 An [iterator](#iterator) whose elements are referenced by an index.
 
 Typical usage:
+
 ```go
 it := list.Iterator()
 for it.Next() {
@@ -967,6 +1027,7 @@ for it.Next() {
 ```
 
 Other usages:
+
 ```go
 if it.First() {
 	firstIndex, firstValue := it.Index(), it.Value()
@@ -985,6 +1046,7 @@ for it.Begin(); it.Next(); {
 An [iterator](#iterator) whose elements are referenced by a key.
 
 Typical usage:
+
 ```go
 it := tree.Iterator()
 for it.Next() {
@@ -994,6 +1056,7 @@ for it.Next() {
 ```
 
 Other usages:
+
 ```go
 if it.First() {
 	firstKey, firstValue := it.Key(), it.Value()
@@ -1009,9 +1072,11 @@ for it.Begin(); it.Next(); {
 
 #### ReverseIteratorWithIndex
 
-An [iterator](#iterator) whose elements are referenced by an index. Provides all functions as [IteratorWithIndex](#iteratorwithindex), but can also be used for reverse iteration.
+An [iterator](#iterator) whose elements are referenced by an index. Provides all functions
+as [IteratorWithIndex](#iteratorwithindex), but can also be used for reverse iteration.
 
 Typical usage of iteration in reverse:
+
 ```go
 it := list.Iterator()
 for it.End(); it.Prev(); {
@@ -1021,6 +1086,7 @@ for it.End(); it.Prev(); {
 ```
 
 Other usages:
+
 ```go
 if it.Last() {
 	lastIndex, lastValue := it.Index(), it.Value()
@@ -1030,9 +1096,11 @@ if it.Last() {
 
 #### ReverseIteratorWithKey
 
-An [iterator](#iterator) whose elements are referenced by a key. Provides all functions as [IteratorWithKey](#iteratorwithkey), but can also be used for reverse iteration.
+An [iterator](#iterator) whose elements are referenced by a key. Provides all functions
+as [IteratorWithKey](#iteratorwithkey), but can also be used for reverse iteration.
 
 Typical usage of iteration in reverse:
+
 ```go
 it := tree.Iterator()
 for it.End(); it.Prev(); {
@@ -1042,6 +1110,7 @@ for it.End(); it.Prev(); {
 ```
 
 Other usages:
+
 ```go
 if it.Last() {
 	lastKey, lastValue := it.Key(), it.Value()
@@ -1051,7 +1120,8 @@ if it.Last() {
 
 ### Enumerable
 
-Enumerable functions for ordered containers that implement [EnumerableWithIndex](#enumerablewithindex) or [EnumerableWithKey](#enumerablewithkey) interfaces.
+Enumerable functions for ordered containers that implement [EnumerableWithIndex](#enumerablewithindex)
+or [EnumerableWithKey](#enumerablewithkey) interfaces.
 
 #### EnumerableWithIndex
 
@@ -1067,7 +1137,8 @@ Each(func(index int, value interface{}))
 
 **Map**
 
-Invokes the given function once for each element and returns a container containing the values returned by the given function.
+Invokes the given function once for each element and returns a container containing the values returned by the given
+function.
 
 ```go
 Map(func(index int, value interface{}) interface{}) Container
@@ -1083,7 +1154,8 @@ Select(func(index int, value interface{}) bool) Container
 
 **Any**
 
-Passes each element of the container to the given function and returns true if the function ever returns true for any element.
+Passes each element of the container to the given function and returns true if the function ever returns true for any
+element.
 
 ```go
 Any(func(index int, value interface{}) bool) bool
@@ -1091,7 +1163,8 @@ Any(func(index int, value interface{}) bool) bool
 
 **All**
 
-Passes each element of the container to the given function and returns true if the function returns true for all elements.
+Passes each element of the container to the given function and returns true if the function returns true for all
+elements.
 
 ```go
 All(func(index int, value interface{}) bool) bool
@@ -1099,7 +1172,8 @@ All(func(index int, value interface{}) bool) bool
 
 **Find**
 
-Passes each element of the container to the given function and returns the first (index,value) for which the function is true or -1,nil otherwise if no element matches the criteria.
+Passes each element of the container to the given function and returns the first (index,value) for which the function is
+true or -1,nil otherwise if no element matches the criteria.
 
 ```go
 Find(func(index int, value interface{}) bool) (int, interface{})}
@@ -1178,7 +1252,8 @@ Each(func(key interface{}, value interface{}))
 
 **Map**
 
-Invokes the given function once for each element and returns a container containing the values returned by the given function as key/value pairs.
+Invokes the given function once for each element and returns a container containing the values returned by the given
+function as key/value pairs.
 
 ```go
 Map(func(key interface{}, value interface{}) (interface{}, interface{})) Container
@@ -1194,7 +1269,8 @@ Select(func(key interface{}, value interface{}) bool) Container
 
 **Any**
 
-Passes each element of the container to the given function and returns true if the function ever returns true for any element.
+Passes each element of the container to the given function and returns true if the function ever returns true for any
+element.
 
 ```go
 Any(func(key interface{}, value interface{}) bool) bool
@@ -1202,7 +1278,8 @@ Any(func(key interface{}, value interface{}) bool) bool
 
 **All**
 
-Passes each element of the container to the given function and returns true if the function returns true for all elements.
+Passes each element of the container to the given function and returns true if the function returns true for all
+elements.
 
 ```go
 All(func(key interface{}, value interface{}) bool) bool
@@ -1210,7 +1287,8 @@ All(func(key interface{}, value interface{}) bool) bool
 
 **Find**
 
-Passes each element of the container to the given function and returns the first (key,value) for which the function is true or nil,nil otherwise if no element matches the criteria.
+Passes each element of the container to the given function and returns the first (key,value) for which the function is
+true or nil,nil otherwise if no element matches the criteria.
 
 ```go
 Find(func(key interface{}, value interface{}) bool) (interface{}, interface{})
@@ -1283,13 +1361,15 @@ func main() {
 
 ### Serialization
 
-All data structures can be serialized (marshalled) and deserialized (unmarshalled). Currently only JSON support is available.
+All data structures can be serialized (marshalled) and deserialized (unmarshalled). Currently only JSON support is
+available.
 
 #### JSONSerializer
 
 Outputs the container into its JSON representation.
 
 Typical usage for key-value structures:
+
 ```go
 package main
 
@@ -1312,6 +1392,7 @@ func main() {
 ```
 
 Typical usage for value-only structures:
+
 ```go
 package main
 
@@ -1337,6 +1418,7 @@ func main() {
 Populates the container with elements from the input JSON representation.
 
 Typical usage for key-value structures:
+
 ```go
 package main
 
@@ -1358,6 +1440,7 @@ func main() {
 ```
 
 Typical usage for value-only structures:
+
 ```go
 package main
 
@@ -1382,7 +1465,8 @@ func main() {
 
 Sort is a general purpose sort function.
 
-Lists have an in-place _Sort()_ function and all containers can return their sorted elements via _containers.GetSortedValues()_ function.
+Lists have an in-place _Sort()_ function and all containers can return their sorted elements via _
+containers.GetSortedValues()_ function.
 
 Internally these all use the _utils.Sort()_ method:
 
@@ -1432,39 +1516,42 @@ func main() {
 
 ### Motivation
 
-Collections and data structures found in other languages: Java Collections, C++ Standard Template Library (STL) containers, Qt Containers, Ruby Enumerable etc.
+Collections and data structures found in other languages: Java Collections, C++ Standard Template Library (STL)
+containers, Qt Containers, Ruby Enumerable etc.
 
 ### Goals
 
 **Fast algorithms**:
 
-  - Based on decades of knowledge and experiences of other libraries mentioned above.
+- Based on decades of knowledge and experiences of other libraries mentioned above.
 
 **Memory efficient algorithms**:
 
-  - Avoiding to consume memory by using optimal algorithms and data structures for the given set of problems, e.g. red-black tree in case of TreeMap to avoid keeping redundant sorted array of keys in memory.
+- Avoiding to consume memory by using optimal algorithms and data structures for the given set of problems, e.g.
+  red-black tree in case of TreeMap to avoid keeping redundant sorted array of keys in memory.
 
 **Easy to use library**:
 
-  - Well-structured library with minimalistic set of atomic operations from which more complex operations can be crafted.
+- Well-structured library with minimalistic set of atomic operations from which more complex operations can be crafted.
 
 **Stable library**:
 
-  - Only additions are permitted keeping the library backward compatible.
+- Only additions are permitted keeping the library backward compatible.
 
 **Solid documentation and examples**:
 
-  - Learning by example.
+- Learning by example.
 
 **Production ready**:
 
-  - Used in production.
+- Used in production.
 
 **No dependencies**:
 
-  - No external imports.
+- No external imports.
 
-There is often a tug of war between speed and memory when crafting algorithms. We choose to optimize for speed in most cases within reasonable limits on memory consumption.
+There is often a tug of war between speed and memory when crafting algorithms. We choose to optimize for speed in most
+cases within reasonable limits on memory consumption.
 
 Thread safety is not a concern of this project, this should be handled at a higher level.
 
@@ -1472,7 +1559,7 @@ Thread safety is not a concern of this project, this should be handled at a high
 
 This takes a while, so test within sub-packages:
 
-`go test -run=NO_TEST -bench . -benchmem  -benchtime 1s ./...`
+`go test -run=NO_TEST -bench . -benchmem -benchtime 1s ./...`
 
 <p align="center"><img src="https://cloud.githubusercontent.com/assets/3115942/16892979/5e698d46-4b27-11e6-864b-cb2b865327b6.png" /></p>
 
@@ -1497,9 +1584,13 @@ go fmt ./... && gofmt -s -w . && go vet ./... && go get ./... && go test ./... &
 
 ### License
 
-This library is distributed under the BSD-style license found in the [LICENSE](https://github.com/mymmsc/gox/util/blob/master/LICENSE) file.
+This library is distributed under the BSD-style license found in
+the [LICENSE](https://github.com/mymmsc/gox/util/blob/master/LICENSE) file.
 
 ### Sponsors
 
 ## <a href="https://www.browserstack.com/?ref=gods"><img src="http://www.hajdarevic.net/browserstack.svg" alt="BrowserStack" width="250"/></a>
-[BrowserStack](https://www.browserstack.com/?ref=webhook) is a cloud-based cross-browser testing tool that enables developers to test their websites across various browsers on different operating systems and mobile devices, without requiring users to install virtual machines, devices or emulators.
+
+[BrowserStack](https://www.browserstack.com/?ref=webhook) is a cloud-based cross-browser testing tool that enables
+developers to test their websites across various browsers on different operating systems and mobile devices, without
+requiring users to install virtual machines, devices or emulators.

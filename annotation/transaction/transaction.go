@@ -1,7 +1,7 @@
 package transaction
 
 import (
-	"github.com/mymmsc/gox/aspect/aop"
+	"github.com/mymmsc/gox/aspect"
 	"reflect"
 	"xorm.io/xorm"
 )
@@ -19,7 +19,7 @@ type Transactional struct {
 	Timeout                 int
 }
 
-func (t *Transactional) Before(point *aop.JoinPoint, methodLocation string) bool {
+func (t *Transactional) Before(point *aspect.JoinPoint, methodLocation string) bool {
 	if methodSessionMap[methodLocation] != nil {
 		t.doSessionBegin(point.Params[methodSessionMap[methodLocation].ParamSessionPosition].Interface())
 	} else {
@@ -36,7 +36,7 @@ func (t *Transactional) Before(point *aop.JoinPoint, methodLocation string) bool
 	return true
 }
 
-func (t *Transactional) After(point *aop.JoinPoint, methodLocation string) {
+func (t *Transactional) After(point *aspect.JoinPoint, methodLocation string) {
 	if methodSessionMap[methodLocation] != nil {
 		// TODO 规约：返回值第一个参数为处理结果，类型为布尔型。由此确认是提交还是回滚
 		for i, v := range point.Result {
@@ -56,7 +56,7 @@ func (t *Transactional) After(point *aop.JoinPoint, methodLocation string) {
 	}
 }
 
-func (t *Transactional) Finally(point *aop.JoinPoint, methodLocation string) {
+func (t *Transactional) Finally(point *aspect.JoinPoint, methodLocation string) {
 	if methodSessionMap[methodLocation] != nil {
 		t.doSessionClose(point.Params[methodSessionMap[methodLocation].ParamSessionPosition])
 	} else {

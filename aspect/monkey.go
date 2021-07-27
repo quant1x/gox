@@ -1,4 +1,4 @@
-package monkey // import "bou.ke/monkey"
+package aspect // import "bou.ke/monkey"
 
 import (
 	"fmt"

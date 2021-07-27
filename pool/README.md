@@ -1,6 +1,6 @@
 # pool
-Golang 实现的连接池
 
+Golang 实现的连接池
 
 ## 功能：
 
@@ -55,7 +55,7 @@ current := p.Len()
 
 ```
 
-
 #### 注:
+
 - https://github.com/silenceper/pool
 - 该连接池参考 [https://github.com/fatih/pool](https://github.com/fatih/pool) 实现，改变以及增加原有的一些功能。

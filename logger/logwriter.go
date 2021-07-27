@@ -171,7 +171,7 @@ func (w *DateWriter) Write(v []byte) {
 		destFile := filepath.Join(w.logpath, w.name+".log."+w.currDate)
 		// 删除已有的目标文件
 		w.currFile.Close()
-		w.currFile = nil;
+		w.currFile = nil
 		err := os.Remove(destFile)
 		err = os.Rename(sourceFile, destFile)
 		if err != nil {

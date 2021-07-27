@@ -1,4 +1,4 @@
-package monkey
+package aspect
 
 // Assembles a jump to a function value
 func jmpToFunctionValue(to uintptr) []byte {

@@ -6,12 +6,12 @@ import (
 	"net/http"
 	"reflect"
 
-	monkey "github.com/mymmsc/gox/aop"
+	"github.com/mymmsc/gox/aspect"
 )
 
 func main() {
 	var d *net.Dialer
-	monkey.PatchInstanceMethod(reflect.TypeOf(d), "Dial", func(_ *net.Dialer, _, _ string) (net.Conn, error) {
+	aspect.PatchInstanceMethod(reflect.TypeOf(d), "Dial", func(_ *net.Dialer, _, _ string) (net.Conn, error) {
 		return nil, fmt.Errorf("no dialing allowed")
 	})
 	_, err := http.Get("http://google.com")

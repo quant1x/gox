@@ -1,5 +1,5 @@
 package traceid
 
-func GenTraceId() (string) {
+func GenTraceId() string {
 	return "abcd"
 }

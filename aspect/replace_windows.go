@@ -1,4 +1,4 @@
-package monkey
+package aspect
 
 import (
 	"syscall"

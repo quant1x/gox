@@ -6,12 +6,12 @@ import (
 	"reflect"
 	"strings"
 
-	monkey "github.com/mymmsc/gox/aop"
+	"github.com/mymmsc/gox/aspect"
 )
 
 func main() {
-	var guard *monkey.PatchGuard
-	guard = monkey.PatchInstanceMethod(reflect.TypeOf(http.DefaultClient), "Get", func(c *http.Client, url string) (*http.Response, error) {
+	var guard *aspect.PatchGuard
+	guard = aspect.PatchInstanceMethod(reflect.TypeOf(http.DefaultClient), "Get", func(c *http.Client, url string) (*http.Response, error) {
 		guard.Unpatch()
 		defer guard.Restore()
 

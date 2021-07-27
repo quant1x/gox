@@ -1,6 +1,8 @@
-package monkey_test
+package aspect_test
 
 import (
+	"fmt"
+	"github.com/mymmsc/gox/api"
 	"reflect"
 	"runtime"
 	"testing"
@@ -12,13 +14,29 @@ import (
 func no() bool  { return false }
 func yes() bool { return true }
 
+type Float64 float64
+
+func (this Float64) GoString() string {
+	return api.ToString(this)
+}
+
+func TestFloat64(t *testing.T) {
+	var f Float64
+	f = 123
+	aspect.PatchInstanceMethod(reflect.TypeOf(f), "GoString", func(v Float64) string {
+		return fmt.Sprintf("%.2f", float64(v))
+	})
+	fmt.Printf("%.2f\n", f)
+	fmt.Printf("%#v\n", f)
+}
+
 func TestTimePatch(t *testing.T) {
 	before := time.Now()
-	monkey.Patch(time.Now, func() time.Time {
+	aspect.Patch(time.Now, func() time.Time {
 		return time.Date(2000, time.January, 1, 0, 0, 0, 0, time.UTC)
 	})
 	during := time.Now()
-	assert(t, monkey.Unpatch(time.Now))
+	assert(t, aspect.Unpatch(time.Now))
 	after := time.Now()
 
 	assert(t, time.Date(2000, time.January, 1, 0, 0, 0, 0, time.UTC) == during)
@@ -28,26 +46,26 @@ func TestTimePatch(t *testing.T) {
 
 func TestGC(t *testing.T) {
 	value := true
-	monkey.Patch(no, func() bool {
+	aspect.Patch(no, func() bool {
 		return value
 	})
-	defer monkey.UnpatchAll()
+	defer aspect.UnpatchAll()
 	runtime.GC()
 	assert(t, no())
 }
 
 func TestSimple(t *testing.T) {
 	assert(t, !no())
-	monkey.Patch(no, yes)
+	aspect.Patch(no, yes)
 	assert(t, no())
-	assert(t, monkey.Unpatch(no))
+	assert(t, aspect.Unpatch(no))
 	assert(t, !no())
-	assert(t, !monkey.Unpatch(no))
+	assert(t, !aspect.Unpatch(no))
 }
 
 func TestGuard(t *testing.T) {
-	var guard *monkey.PatchGuard
-	guard = monkey.Patch(no, func() bool {
+	var guard *aspect.PatchGuard
+	guard = aspect.Patch(no, func() bool {
 		guard.Unpatch()
 		defer guard.Restore()
 		return !no()
@@ -55,14 +73,14 @@ func TestGuard(t *testing.T) {
 	for i := 0; i < 100; i++ {
 		assert(t, no())
 	}
-	monkey.Unpatch(no)
+	aspect.Unpatch(no)
 }
 
 func TestUnpatchAll(t *testing.T) {
 	assert(t, !no())
-	monkey.Patch(no, yes)
+	aspect.Patch(no, yes)
 	assert(t, no())
-	monkey.UnpatchAll()
+	aspect.UnpatchAll()
 	assert(t, !no())
 }
 
@@ -74,9 +92,9 @@ func TestWithInstanceMethod(t *testing.T) {
 	i := &s{}
 
 	assert(t, !no())
-	monkey.Patch(no, i.yes)
+	aspect.Patch(no, i.yes)
 	assert(t, no())
-	monkey.Unpatch(no)
+	aspect.Unpatch(no)
 	assert(t, !no())
 }
 
@@ -87,24 +105,24 @@ func (f *f) No() bool { return false }
 func TestOnInstanceMethod(t *testing.T) {
 	i := &f{}
 	assert(t, !i.No())
-	monkey.PatchInstanceMethod(reflect.TypeOf(i), "No", func(_ *f) bool { return true })
+	aspect.PatchInstanceMethod(reflect.TypeOf(i), "No", func(_ *f) bool { return true })
 	assert(t, i.No())
-	assert(t, monkey.UnpatchInstanceMethod(reflect.TypeOf(i), "No"))
+	assert(t, aspect.UnpatchInstanceMethod(reflect.TypeOf(i), "No"))
 	assert(t, !i.No())
 }
 
 func TestNotFunction(t *testing.T) {
 	panics(t, func() {
-		monkey.Patch(no, 1)
+		aspect.Patch(no, 1)
 	})
 	panics(t, func() {
-		monkey.Patch(1, yes)
+		aspect.Patch(1, yes)
 	})
 }
 
 func TestNotCompatible(t *testing.T) {
 	panics(t, func() {
-		monkey.Patch(no, func() {})
+		aspect.Patch(no, func() {})
 	})
 }
 

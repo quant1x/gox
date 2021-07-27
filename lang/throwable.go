@@ -7,7 +7,7 @@ type Throwable interface {
 
 type Exception struct {
 	Throwable
-	code int
+	code    int
 	message string
 }
 

@@ -117,7 +117,8 @@ copier.CopyWithOption(&to, &from, copier.Option{IgnoreEmpty: true, DeepCopy: tru
 
 ## Contributing
 
-You can help to make the project better, check out [http://gorm.io/contribute.html](http://gorm.io/contribute.html) for things you can do.
+You can help to make the project better, check out [http://gorm.io/contribute.html](http://gorm.io/contribute.html) for
+things you can do.
 
 # Author
 

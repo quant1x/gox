@@ -28,7 +28,7 @@ Add default client for convience.
 
 Fix gzip.
 
-Improve constructor: support both default options and headers. 
+Improve constructor: support both default options and headers.
 
 ### v0.3.3 (2014-05-25)
 

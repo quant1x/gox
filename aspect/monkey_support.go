@@ -1,9 +1,7 @@
-package aop
+package aspect
 
 import (
 	"fmt"
-	//monkey "bou.ke/monkey"
-	monkey "github.com/mymmsc/gox/aspect"
 	"reflect"
 	"strings"
 )
@@ -53,7 +51,7 @@ func RegisterPoint(pointType reflect.Type) {
 		method := pointType.Method(i)
 		pkgList := strings.Split(pkgPth, "/")
 		methodLocation := fmt.Sprintf("%s.%s.%s", pkgList[len(pkgList)-1], receiverName, method.Name)
-		var guard *monkey.PatchGuard
+		var guard *PatchGuard
 		var proxy = func(in []reflect.Value) []reflect.Value {
 			guard.Unpatch()
 			defer guard.Restore()
@@ -68,7 +66,7 @@ func RegisterPoint(pointType reflect.Type) {
 			return point.Result
 		}
 		proxyFn := reflect.MakeFunc(method.Func.Type(), proxy)
-		guard = monkey.PatchInstanceMethod(pointType, method.Name, proxyFn.Interface())
+		guard = PatchInstanceMethod(pointType, method.Name, proxyFn.Interface())
 	}
 }
 

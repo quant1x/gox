@@ -27,7 +27,7 @@ const (
 )
 
 type (
-	LogType int64
+	LogType  int64
 	LogLevel int64
 )
 

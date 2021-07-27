@@ -14,7 +14,7 @@ func init() {
 	GenTraceId()
 }
 
-func GenTraceId()  {
+func GenTraceId() {
 	u1 := uuid.NewV4()
 	Set(APP_TRACEID, u1.String())
 }
@@ -27,7 +27,7 @@ func Set(key string, value interface{}) {
 	gls.Set(key, value)
 }
 
-func Get(key string) (interface{}) {
+func Get(key string) interface{} {
 	return gls.Get(key)
 }
 

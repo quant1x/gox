@@ -5,11 +5,11 @@ import (
 	"os"
 	"strings"
 
-	monkey "github.com/mymmsc/gox/aop"
+	"github.com/mymmsc/gox/aspect"
 )
 
 func main() {
-	monkey.Patch(fmt.Println, func(a ...interface{}) (n int, err error) {
+	aspect.Patch(fmt.Println, func(a ...interface{}) (n int, err error) {
 		s := make([]interface{}, len(a))
 		for i, v := range a {
 			s[i] = strings.Replace(fmt.Sprint(v), "hell", "*bleep*", -1)

@@ -2,8 +2,8 @@ package transaction
 
 import (
 	"fmt"
-	"github.com/mymmsc/gox/aspect/aop"
-	"github.com/mymmsc/gox/aspect/ast"
+	"github.com/mymmsc/gox/annotation/ast"
+	"github.com/mymmsc/gox/aspect"
 	"io/ioutil"
 	"os"
 	"path"
@@ -32,7 +32,7 @@ func NewTransactionManager(cfg TransactionConfig) *transactionManager {
 	}
 	config = cfg
 	scanGoFile()
-	aop.RegisterAspect(new(Transactional))
+	aspect.RegisterAspect(new(Transactional))
 	return new(transactionManager)
 }
 
@@ -49,7 +49,7 @@ func (c *TransactionConfig) Reload() error {
 func (t *transactionManager) RegisterDao(daoLs ...interface{}) (tm *transactionManager) {
 	tm = t
 	for _, v := range daoLs {
-		aop.RegisterPoint(reflect.TypeOf(v))
+		aspect.RegisterPoint(reflect.TypeOf(v))
 	}
 	return
 }

@@ -9,6 +9,12 @@ func TestParseFloat(t *testing.T) {
 	if f64 != 123.456 {
 		t.Errorf("解析float64到int64失败")
 	}
+
+	s = "123.00"
+	f64 = ParseFloat(s)
+	if f64 != 123.00 {
+		t.Errorf("解析float64到int64失败")
+	}
 }
 
 func TestParseUint(t *testing.T) {

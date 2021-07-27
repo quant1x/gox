@@ -1183,10 +1183,9 @@ type KLine struct {
 	Day [][]string `json:"day"`
 }
 
-
 type ActionStatus struct {
-	Code int `json:"code,status"`
-	Msg string `json:"msg"`
+	Code int    `json:"code,status"`
+	Msg  string `json:"msg"`
 }
 
 type klineData struct {
@@ -1201,5 +1200,5 @@ func TestParseKLine(t *testing.T) {
 	if err != nil {
 		t.Fatalf("解析json失败: %s", err)
 	}
-	t.Logf("kline: %+v", kline);
+	t.Logf("kline: %+v", kline)
 }
