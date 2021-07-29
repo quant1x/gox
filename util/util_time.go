@@ -1,4 +1,4 @@
-package category
+package util
 
 const (
 	// DateFormat  日期格式 yyyy-MM-dd
