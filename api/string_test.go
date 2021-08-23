@@ -102,3 +102,14 @@ func TestToStringOther(t *testing.T) {
 		t.Errorf("Got %v expected %v", actualValue, expectedValue)
 	}
 }
+
+func TestToCamelCase(t *testing.T) {
+	kebabString := "border_left_color"
+	t.Log(kebabString)
+	camel := ToCamelCase(kebabString)
+	if camel != "borderLeftColor" {
+		t.Error(camel)
+		return
+	}
+	t.Log(camel)
+}

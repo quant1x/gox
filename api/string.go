@@ -7,11 +7,13 @@
 // Provided functionalities:
 // - sorting
 // - comparators
+
 package api
 
 import (
 	"fmt"
 	"strconv"
+	"strings"
 )
 
 // ToString converts a value to string.
@@ -44,4 +46,22 @@ func ToString(value interface{}) string {
 	default:
 		return fmt.Sprintf("%+v", value)
 	}
+}
+
+// ToCamelCase 转驼峰
+func ToCamelCase(kebab string) (camelCase string) {
+	isToUpper := false
+	for _, runeValue := range kebab {
+		if isToUpper {
+			camelCase += strings.ToUpper(string(runeValue))
+			isToUpper = false
+		} else {
+			if runeValue == '-' || runeValue == '_' {
+				isToUpper = true
+			} else {
+				camelCase += string(runeValue)
+			}
+		}
+	}
+	return
 }
