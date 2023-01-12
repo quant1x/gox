@@ -8,7 +8,7 @@ func (d Decoder) Translate(data []byte, eof bool) (n int, cdata []byte, err erro
 	destPos := 0
 
 	for n < len(data) {
-		rune, size, status := d(data[n:])
+		_rune, size, status := d(data[n:])
 
 		switch status {
 		case STATE_ONLY:
@@ -19,24 +19,24 @@ func (d Decoder) Translate(data []byte, eof bool) (n int, cdata []byte, err erro
 			if !eof {
 				return n, cdata[:destPos], nil
 			}
-			rune = 0xfffd
+			_rune = 0xfffd
 			n = len(data)
 
 		default:
 			n += size
 		}
 
-		if rune < 128 {
+		if _rune < 128 {
 			if destPos >= len(cdata) {
 				cdata = doubleLength(cdata)
 			}
-			cdata[destPos] = byte(rune)
+			cdata[destPos] = byte(_rune)
 			destPos++
 		} else {
-			if destPos+utf8.RuneLen(rune) > len(cdata) {
+			if destPos+utf8.RuneLen(_rune) > len(cdata) {
 				cdata = doubleLength(cdata)
 			}
-			destPos += utf8.EncodeRune(cdata[destPos:], rune)
+			destPos += utf8.EncodeRune(cdata[destPos:], _rune)
 		}
 	}
 
