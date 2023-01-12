@@ -5,9 +5,9 @@ func (e Encoder) ConvertString(s string) string {
 	dest := make([]byte, len(s)+10)
 	destPos := 0
 
-	for _, rune := range s {
+	for _, _rune := range s {
 	retry:
-		size, status := e(dest[destPos:], rune)
+		size, status := e(dest[destPos:], _rune)
 
 		if status == NO_ROOM {
 			newDest := make([]byte, len(dest)*2)
