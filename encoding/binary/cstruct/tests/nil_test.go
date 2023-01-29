@@ -2,7 +2,7 @@ package tests
 
 import (
 	"fmt"
-	"github.com/mymmsc/gox/util/cstruct"
+	cstruct2 "github.com/mymmsc/gox/encoding/binary/cstruct"
 	"testing"
 )
 
@@ -28,9 +28,9 @@ type mystruct11 struct {
 
 func Test_NIL1(t *testing.T) {
 	a := &mystruct11{}
-	buf_l, _ := cstruct.Pack(a)
+	buf_l, _ := cstruct2.Pack(a)
 	b := &mystruct11{}
-	if err := cstruct.Unpack(buf_l, b); err != nil {
+	if err := cstruct2.Unpack(buf_l, b); err != nil {
 		fmt.Println(err)
 		t.Error("出错啦！#0")
 		return
@@ -46,9 +46,9 @@ func Test_NIL2(t *testing.T) {
 	a.F30 = []*mystruct4{&mystruct4{}, nil, &mystruct4{}}
 	a.F31 = [][]byte{[]byte("hello1"), []byte{}, nil, nil, []byte{}, []byte("world2")}
 
-	buf_l, _ := cstruct.Pack(a)
+	buf_l, _ := cstruct2.Pack(a)
 	b := &mystruct11{}
-	if err := cstruct.Unpack(buf_l, b); err != nil {
+	if err := cstruct2.Unpack(buf_l, b); err != nil {
 		fmt.Println(err)
 		t.Error("出错啦！#0")
 		return

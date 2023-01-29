@@ -1,7 +1,7 @@
 package tests
 
 import (
-	"github.com/mymmsc/gox/util/cstruct"
+	cstruct2 "github.com/mymmsc/gox/encoding/binary/cstruct"
 	"testing"
 )
 
@@ -20,7 +20,7 @@ type mystruct_sint9 struct {
 }
 
 func Test_LE_sint9(t *testing.T) {
-	cstruct.OptionSliceIgnoreNil = true
+	cstruct2.OptionSliceIgnoreNil = true
 	b1 := []*mystruct_sint12{&mystruct_sint12{1}, &mystruct_sint12{2}, &mystruct_sint12{3}, &mystruct_sint12{4}}
 	b2 := []*mystruct_sint12{}
 	b3 := []*mystruct_sint12{&mystruct_sint12{1}, &mystruct_sint12{2}}
@@ -59,10 +59,10 @@ func Test_LE_sint9(t *testing.T) {
 }
 
 func test7(t *testing.T, a *mystruct_sint9) {
-	buf_l, _ := cstruct.Pack(a)
+	buf_l, _ := cstruct2.Pack(a)
 	b := &mystruct_sint9{}
 	t.Log(buf_l)
-	if err := cstruct.Unpack(buf_l, b); err != nil {
+	if err := cstruct2.Unpack(buf_l, b); err != nil {
 		t.Log(err)
 		t.Error("出错啦！")
 		return
