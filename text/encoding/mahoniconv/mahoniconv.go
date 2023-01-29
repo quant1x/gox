@@ -2,7 +2,7 @@ package main
 
 import (
 	"flag"
-	"github.com/mymmsc/gox/encoding"
+	"github.com/mymmsc/gox/text/encoding"
 	"io"
 	"log"
 	"os"
