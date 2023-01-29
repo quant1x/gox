@@ -3,7 +3,6 @@ package mdc
 import (
 	"github.com/mymmsc/gox/gls"
 	"github.com/mymmsc/gox/util/uuid"
-	//uuid "github.com/satori/go.uuid"
 )
 
 const (

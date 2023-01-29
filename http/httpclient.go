@@ -19,14 +19,14 @@ func HttpGet0(url string) ([]byte, error) {
 	logger.Debugf("url=[%s]\n", url)
 	res, err := http.Get(url)
 	if err != nil {
-		logger.Errorf("url=[%s], err=[%+v]\n",  url, err)
+		logger.Errorf("url=[%s], err=[%+v]\n", url, err)
 		return nil, err
 	}
 	//defer res.Body.Close()
 	defer api.CloseQuietly(res.Body)
 	data, err := ioutil.ReadAll(transform.NewReader(res.Body, simplifiedchinese.GBK.NewDecoder()))
 	if err != nil {
-		logger.Errorf("url=[%s], err=[%+v]\n",  url, err)
+		logger.Errorf("url=[%s], err=[%+v]\n", url, err)
 		return nil, err
 	}
 	//sret, err := json.Marshal(res)
