@@ -551,7 +551,7 @@ func (o *Buffer) size_slice_substruct(p *Properties, base structPointer) int {
 	var ln = sliceHeader.Len
 	itemsize := int(p.stype.Size())
 	for i := 0; i < ln; i++ {
-		sv := (structPointer)(unsafe.Pointer(sliceHeader.Data + uintptr(i*itemsize)))
+		sv := (structPointer)(sliceHeader.Data + uintptr(i*itemsize))
 		ret += o.size_struct(p.sprop, sv)
 	}
 	return ret
