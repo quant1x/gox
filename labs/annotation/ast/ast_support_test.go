@@ -10,7 +10,7 @@ import (
 type Transact struct {
 }
 
-//@Transactional
+// @Transactional
 func (*Transact) Before() {
 }
 

@@ -1,7 +1,7 @@
 package transaction
 
 import (
-	"github.com/mymmsc/gox/aspect"
+	"github.com/mymmsc/gox/labs/aspect"
 	"reflect"
 	"xorm.io/xorm"
 )

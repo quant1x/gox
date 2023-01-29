@@ -2,11 +2,10 @@ package main
 
 import (
 	"fmt"
+	"github.com/mymmsc/gox/labs/aspect"
 	"net/http"
 	"reflect"
 	"strings"
-
-	"github.com/mymmsc/gox/aspect"
 )
 
 func main() {

@@ -2,10 +2,9 @@ package main
 
 import (
 	"fmt"
+	"github.com/mymmsc/gox/labs/aspect"
 	"os"
 	"strings"
-
-	"github.com/mymmsc/gox/aspect"
 )
 
 func main() {

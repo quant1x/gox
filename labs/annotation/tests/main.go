@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/mymmsc/gox/annotation/example"
-	"github.com/mymmsc/gox/annotation/transaction"
+	"github.com/mymmsc/gox/labs/annotation/example"
+	"github.com/mymmsc/gox/labs/annotation/transaction"
 	"xorm.io/xorm"
 )
 

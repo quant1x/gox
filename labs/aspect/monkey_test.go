@@ -3,12 +3,11 @@ package aspect_test
 import (
 	"fmt"
 	"github.com/mymmsc/gox/api"
+	"github.com/mymmsc/gox/labs/aspect"
 	"reflect"
 	"runtime"
 	"testing"
 	"time"
-
-	"github.com/mymmsc/gox/aspect"
 )
 
 func no() bool  { return false }

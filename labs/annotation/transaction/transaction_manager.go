@@ -2,8 +2,8 @@ package transaction
 
 import (
 	"fmt"
-	"github.com/mymmsc/gox/annotation/ast"
-	"github.com/mymmsc/gox/aspect"
+	"github.com/mymmsc/gox/labs/annotation/ast"
+	"github.com/mymmsc/gox/labs/aspect"
 	"io/ioutil"
 	"os"
 	"path"
