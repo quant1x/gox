@@ -1,4 +1,5 @@
-# gox - Golang 工具集
+gox - Golang 工具集
+===
 
 [![Sourcegraph](https://sourcegraph.com/github.com/mymmsc/gox/-/badge.svg)](https://sourcegraph.com/github.com/mymmsc/gox?badge)
 [![Build Status](https://api.travis-ci.com/repos/mymmsc/gox.png)](https://travis-ci.com/mymmsc/gox)
@@ -7,4 +8,9 @@
 ![tag](https://img.shields.io/github/tag/mymmsc/gox.svg?style=flat)
 ![license](https://img.shields.io/github/license/mymmsc/gox.svg)
 
-###
+
+**从gox移除的类库的备忘录, 这些类库都在1.2.x分支可以找到,1.3.x以后不在维护**
+
+|库名              |功能        |git仓库地址 |
+|:----------------|:----------|:--------|
+| QRCode Terminal | 控制台二维码    |github.com/mdp/qrterminal|

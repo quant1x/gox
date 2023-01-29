@@ -18,6 +18,7 @@ func init() {
 }
 
 // GoID returns the goroutine id of current goroutine
+//
 //go:nocheckptr
 func GoID() int64 {
 	g := getg()
