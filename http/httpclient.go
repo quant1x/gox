@@ -9,9 +9,8 @@ import (
 	"golang.org/x/text/encoding/simplifiedchinese"
 	"golang.org/x/text/transform"
 	"io"
-	"io/ioutil"
 	"net/http"
-	urlpkg "net/url"
+	URL "net/url"
 	"strings"
 )
 
@@ -19,14 +18,13 @@ func HttpGet0(url string) ([]byte, error) {
 	logger.Debugf("url=[%s]\n", url)
 	res, err := http.Get(url)
 	if err != nil {
-		logger.Errorf("url=[%s], err=[%+v]\n",  url, err)
+		logger.Errorf("url=[%s], err=[%+v]\n", url, err)
 		return nil, err
 	}
-	//defer res.Body.Close()
 	defer api.CloseQuietly(res.Body)
-	data, err := ioutil.ReadAll(transform.NewReader(res.Body, simplifiedchinese.GBK.NewDecoder()))
+	data, err := io.ReadAll(transform.NewReader(res.Body, simplifiedchinese.GBK.NewDecoder()))
 	if err != nil {
-		logger.Errorf("url=[%s], err=[%+v]\n",  url, err)
+		logger.Errorf("url=[%s], err=[%+v]\n", url, err)
 		return nil, err
 	}
 	//sret, err := json.Marshal(res)
@@ -38,7 +36,7 @@ func HttpGet0(url string) ([]byte, error) {
 }
 
 func HttpRequest(url string, method string) ([]byte, error) {
-	u, err := urlpkg.Parse(url)
+	u, err := URL.Parse(url)
 	if err != nil {
 		return nil, err
 	}
@@ -66,8 +64,8 @@ func HttpRequest(url string, method string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer response.Body.Close()
-	body, err := ioutil.ReadAll(response.Body)
+	defer api.CloseQuietly(response.Body)
+	body, err := io.ReadAll(response.Body)
 	if err != nil {
 		return nil, err
 	}
@@ -88,8 +86,8 @@ func HttpRequest(url string, method string) ([]byte, error) {
 		}
 	}
 	if reader != nil {
-		defer reader.Close()
-		body, err = ioutil.ReadAll(reader)
+		defer api.CloseQuietly(reader)
+		body, err = io.ReadAll(reader)
 		if err != nil {
 			return nil, err
 		}
