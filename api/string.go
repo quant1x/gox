@@ -65,3 +65,29 @@ func ToCamelCase(kebab string) (camelCase string) {
 	}
 	return
 }
+
+// StartsWith 字符串前缀判断
+func StartsWith(str string, prefixes []string) bool {
+	if len(str) == 0 || len(prefixes) == 0 {
+		return false
+	}
+	for _, prefix := range prefixes {
+		if strings.HasPrefix(str, prefix) {
+			return true
+		}
+	}
+	return false
+}
+
+// EndsWith 字符串前缀判断
+func EndsWith(str string, suffixes []string) bool {
+	if len(str) == 0 || len(suffixes) == 0 {
+		return false
+	}
+	for _, prefix := range suffixes {
+		if strings.HasSuffix(str, prefix) {
+			return true
+		}
+	}
+	return false
+}
