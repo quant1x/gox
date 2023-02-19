@@ -10,7 +10,6 @@ import (
 	"path/filepath"
 	"reflect"
 	"runtime"
-	"syscall"
 	"time"
 )
 
@@ -92,13 +91,6 @@ func init() {
 	//创建监听退出chan
 	sigs := make(chan os.Signal)
 	//监听指定信号 ctrl+c kill
-	var stopSignals []os.Signal
-	sysType := runtime.GOOS
-	if sysType != "windows" {
-		stopSignals = []os.Signal{syscall.SIGHUP, syscall.SIGINT, syscall.SIGTERM, syscall.SIGQUIT, syscall.SIGSTOP}
-	} else {
-		stopSignals = []os.Signal{syscall.SIGHUP, syscall.SIGINT, syscall.SIGTERM, syscall.SIGQUIT}
-	}
 	signal.Notify(sigs, stopSignals...)
 
 	_, cancel := context.WithCancel(context.Background())
