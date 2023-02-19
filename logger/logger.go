@@ -89,8 +89,18 @@ func init() {
 	}()
 	go flushLog(true)
 
+	//创建监听退出chan
 	sigs := make(chan os.Signal)
-	signal.Notify(sigs, syscall.SIGHUP, syscall.SIGINT, syscall.SIGTERM, syscall.SIGQUIT, syscall.SIGSTOP)
+	//监听指定信号 ctrl+c kill
+	var stopSignals []os.Signal
+	sysType := runtime.GOOS
+	if sysType != "windows" {
+		stopSignals = []os.Signal{syscall.SIGHUP, syscall.SIGINT, syscall.SIGTERM, syscall.SIGQUIT, syscall.SIGSTOP}
+	} else {
+		stopSignals = []os.Signal{syscall.SIGHUP, syscall.SIGINT, syscall.SIGTERM, syscall.SIGQUIT}
+	}
+	signal.Notify(sigs, stopSignals...)
+
 	_, cancel := context.WithCancel(context.Background())
 
 	go func() {
