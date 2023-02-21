@@ -2,6 +2,7 @@ package progressbar
 
 import (
 	"fmt"
+	"github.com/mymmsc/gox/logger"
 	"sync"
 	"time"
 )
@@ -149,6 +150,12 @@ func (b *Bar) count() {
 }
 
 func (b *Bar) updateCost() {
+	defer func() {
+		// 解析失败以后输出日志, 以备检查
+		if err := recover(); err != nil {
+			logger.Errorf("updateCost.done error=%+v\n", err)
+		}
+	}()
 	for {
 		select {
 		case <-time.After(time.Second):
@@ -164,6 +171,12 @@ func (b *Bar) updateCost() {
 }
 
 func (b *Bar) run() {
+	defer func() {
+		// 解析失败以后输出日志, 以备检查
+		if err := recover(); err != nil {
+			logger.Errorf("run.advance error=%+v\n", err)
+		}
+	}()
 	for range b.advance {
 		printf(b.line, "\r%s", b.barMsg())
 	}
