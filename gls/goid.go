@@ -1,7 +1,7 @@
 package gls
 
 import (
-	reflect "github.com/modern-go/reflect2"
+	reflect "github.com/mymmsc/gox/util/reflect2"
 	"unsafe"
 )
 
