@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/mymmsc/gox/api"
 	"github.com/mymmsc/gox/exception"
 	"github.com/mymmsc/gox/mdc"
 	"os"
@@ -124,9 +125,24 @@ func (lv *LogLevel) String() string {
 	}
 }
 
+// SetLogPath 设置日志路径, 默认是INFO级别日志
 func SetLogPath(path string) {
-	__logger_path = path
-	SetLevel(DEBUG)
+	InitLogger(path, INFO)
+}
+
+// InitLogger 初始化
+func InitLogger(path string, level ...LogLevel) {
+	// 日志路径非空, 赋值
+	if !api.IsEmpty(path) {
+		__logger_path = path
+	}
+
+	// 日志级别默认是INFO
+	__opt_level := INFO
+	if len(level) > 0 {
+		__opt_level = level[0]
+	}
+	SetLevel(__opt_level)
 }
 
 // GetLogger return an logger instance
