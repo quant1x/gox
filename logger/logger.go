@@ -147,6 +147,14 @@ func SetLevel(level LogLevel) {
 	logLevel = level
 }
 
+// IsDebug 是否DEBUG模式
+func IsDebug() bool {
+	if DEBUG < logLevel {
+		return false
+	}
+	return true
+}
+
 func StringToLevel(level string) LogLevel {
 	switch level {
 	case "DEBUG":
