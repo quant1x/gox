@@ -62,7 +62,7 @@ func reOpenFile(path string, currFile **os.File, openTime *int64) {
 }
 
 func (w *ConsoleWriter) Write(v []byte) {
-	os.Stdout.Write(v)
+	_, _ = os.Stdout.Write(v)
 }
 
 func (w *ConsoleWriter) NeedPrefix() bool {
@@ -90,7 +90,7 @@ func (w *RollFileWriter) Write(v []byte) {
 			p1 := filepath.Join(w.logpath, w.name+n1+".log")
 			p2 := filepath.Join(w.logpath, w.name+n2+".log")
 			if _, err := os.Stat(p1); !os.IsNotExist(err) {
-				os.Rename(p1, p2)
+				_ = os.Rename(p1, p2)
 			}
 		}
 		fullPath := filepath.Join(w.logpath, w.name+".log")
@@ -117,7 +117,7 @@ func (w *RollFileWriter) NeedPrefix() bool {
 	return true
 }
 
-//压缩 使用gzip压缩成tar.gz
+// 压缩 使用gzip压缩成tar.gz
 func gzipFile(source string) error {
 	dest := source + ".gz"
 	os.Remove(dest)

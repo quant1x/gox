@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/mymmsc/gox/exception"
 	"github.com/mymmsc/gox/mdc"
 	"os"
 	"os/signal"
@@ -137,7 +138,7 @@ func GetLogger(name string) *Logger {
 		name:   name,
 		writer: &ConsoleWriter{},
 	}
-	lg.SetDayRoller(__logger_path, __logger_roller_days)
+	_ = lg.SetDayRoller(__logger_path, __logger_roller_days)
 	loggerMap[name] = lg
 	return lg
 }
@@ -270,7 +271,7 @@ func (l *Logger) writef(skip int, level LogLevel, format string, v []interface{}
 	buf := bytes.NewBuffer(nil)
 	if l.writer.NeedPrefix() {
 		traceId := getTraceId()
-		fmt.Fprintf(buf, "%s|%s|", t.Format(Timestamp), traceId)
+		_, _ = fmt.Fprintf(buf, "%s|%s|", t.Format(Timestamp), traceId)
 		if logLevel == DEBUG {
 			_, file, line, ok := runtime.Caller(skip)
 			if !ok {
@@ -279,16 +280,16 @@ func (l *Logger) writef(skip int, level LogLevel, format string, v []interface{}
 			} else {
 				file = filepath.Base(file)
 			}
-			fmt.Fprintf(buf, "%s:%d|", file, line)
+			_, _ = fmt.Fprintf(buf, "%s:%d|", file, line)
 		}
 	}
 	buf.WriteString(level.String())
 	buf.WriteByte('|')
 
 	if format == "" {
-		fmt.Fprint(buf, v...)
+		_, _ = fmt.Fprint(buf, v...)
 	} else {
-		fmt.Fprintf(buf, format, v...)
+		_, _ = fmt.Fprintf(buf, format, v...)
 	}
 	if l.writer.NeedPrefix() {
 		buf.WriteByte('\n')
@@ -301,6 +302,7 @@ func FlushLogger() {
 }
 
 func flushLog(sync bool) {
+	defer exception.PanicIgnore()
 	if sync {
 		for v := range logQueue {
 			v.writer.Write(v.value)
