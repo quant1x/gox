@@ -126,6 +126,8 @@ func (lv *LogLevel) String() string {
 }
 
 // SetLogPath 设置日志路径, 默认是INFO级别日志
+//
+//	Deprecated: 推荐使用 InitLogger
 func SetLogPath(path string) {
 	InitLogger(path, INFO)
 }
