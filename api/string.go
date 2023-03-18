@@ -91,3 +91,12 @@ func EndsWith(str string, suffixes []string) bool {
 	}
 	return false
 }
+
+// IsEmpty Code to test if string is empty
+func IsEmpty(s string) bool {
+	if strings.TrimSpace(s) == "" {
+		return true
+	} else {
+		return false
+	}
+}
