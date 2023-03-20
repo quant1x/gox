@@ -61,6 +61,7 @@ func Request(url string, method string, header ...map[string]any) (data []byte, 
 		for k, v := range mapHeader {
 			switch val := v.(type) {
 			case time.Time:
+				val = val.UTC()
 				reqHeader[k] = val.Format(time.RFC1123)
 			}
 		}
