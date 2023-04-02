@@ -7,8 +7,8 @@ import (
 	"github.com/mymmsc/gox/api"
 	"github.com/mymmsc/gox/exception"
 	"github.com/mymmsc/gox/mdc"
+	"github.com/mymmsc/gox/signal"
 	"os"
-	"os/signal"
 	"path/filepath"
 	"reflect"
 	"runtime"
@@ -91,9 +91,7 @@ func init() {
 	go flushLog(true)
 
 	//创建监听退出chan
-	sigs := make(chan os.Signal)
-	//监听指定信号 ctrl+c kill
-	signal.Notify(sigs, stopSignals...)
+	sigs := signal.Notify()
 
 	_, cancel := context.WithCancel(context.Background())
 
