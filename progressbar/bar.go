@@ -109,14 +109,14 @@ func (b *Bar) Add(n ...int) {
 
 	b.current += step
 
-	lastRate := b.rate
-	lastSpeed := b.speed
+	//lastRate := b.rate
+	//lastSpeed := b.speed
 
 	b.count()
 
-	if lastRate != b.rate || lastSpeed != b.speed {
-		b.advance <- true
-	}
+	//if lastRate != b.rate || lastSpeed != b.speed {
+	b.advance <- true
+	//}
 
 	if b.rate >= 100 && !b.closed {
 		b.closed = true
