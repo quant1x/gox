@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.3.20] - 2023-04-23
+### Changed
+- 修复计时的bug.
+- 提升bar更新速度.
+
 ## [1.3.19] - 2023-04-23
 ### Changed
 - Update changelog.
@@ -415,7 +420,8 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://github.com/mymmsc/gox/compare/v1.3.19...HEAD
+[Unreleased]: https://github.com/mymmsc/gox/compare/v1.3.20...HEAD
+[1.3.20]: https://github.com/mymmsc/gox/compare/v1.3.19...v1.3.20
 [1.3.19]: https://github.com/mymmsc/gox/compare/v1.3.18...v1.3.19
 [1.3.18]: https://github.com/mymmsc/gox/compare/v1.3.17...v1.3.18
 [1.3.17]: https://github.com/mymmsc/gox/compare/v1.3.16...v1.3.17
