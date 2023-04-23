@@ -7,7 +7,7 @@ import (
 
 func TestReverse0(t *testing.T) {
 	x := []string{"1", "2", "3"}
-	fmt.Printf("%v\n",x)
+	fmt.Printf("%v\n", x)
 	count := len(x)
 	for i, j := 0, count-1; i < j; i, j = i+1, j-1 {
 		x[i], x[j] = x[j], x[i]
@@ -19,25 +19,15 @@ func TestReverse(t *testing.T) {
 	x := []string{"1", "2", "3", "4"}
 	fmt.Printf("%v\n", x)
 	xk := Reverse(x)
-	x1, ok := xk.([]string)
-	if ok {
-		x = x1
-	}
-	fmt.Printf("%v\n", x)
+	fmt.Printf("%v\n", xk)
 }
 
 func TestReverse1(t *testing.T) {
 	x := [5]string{"1", "2", "3", "4", "6"}
 	fmt.Printf("%v\n", x)
 	xk := Reverse(x[:])
-	// x 已经改变了
-	x1, ok := xk.([5]string)
-	if ok {
-		x = x1
-	}
-	fmt.Printf("%v\n", x)
+	fmt.Printf("%v\n", xk)
 }
-
 
 func Remove1(slice []interface{}, start, end int) []interface{} {
 	result := make([]interface{}, len(slice)-(end-start))
@@ -45,7 +35,8 @@ func Remove1(slice []interface{}, start, end int) []interface{} {
 	copy(result[at:], slice[end:])
 	return result
 }
-//--------------------另一种更为简便的写法-----------------------
+
+// --------------------另一种更为简便的写法-----------------------
 func Remove2(slice []interface{}, start, end int) []interface{} {
 	return append(slice[:start], slice[end:]...)
 }
