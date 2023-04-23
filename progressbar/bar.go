@@ -28,6 +28,7 @@ type Bar struct {
 	dstUnit  string
 	change   int
 	closed   bool
+	start    time.Time
 }
 
 var (
@@ -71,6 +72,7 @@ func NewBar(line int, prefix string, total int) *Bar {
 		done:     make(chan bool),
 		currents: make(map[string]int),
 		change:   1,
+		start:    time.Now(),
 	}
 
 	initBar(bar.width)
@@ -159,7 +161,8 @@ func (b *Bar) updateCost() {
 	for {
 		select {
 		case <-time.After(time.Second):
-			b.cost++
+			//b.cost++
+			b.cost = int(time.Since(b.start) / time.Second)
 			b.mu.Lock()
 			b.count()
 			b.mu.Unlock()
