@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.3.22] - 2023-04-23
+### Changed
+- 调整bar代码.
+- 调整切片反转函数测试代码.
+
 ## [1.3.21] - 2023-04-23
 ### Changed
 - 增加切片反转函数.
@@ -424,7 +429,8 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://github.com/mymmsc/gox/compare/v1.3.21...HEAD
+[Unreleased]: https://github.com/mymmsc/gox/compare/v1.3.22...HEAD
+[1.3.22]: https://github.com/mymmsc/gox/compare/v1.3.21...v1.3.22
 [1.3.21]: https://github.com/mymmsc/gox/compare/v1.3.20...v1.3.21
 [1.3.20]: https://github.com/mymmsc/gox/compare/v1.3.19...v1.3.20
 [1.3.19]: https://github.com/mymmsc/gox/compare/v1.3.18...v1.3.19
