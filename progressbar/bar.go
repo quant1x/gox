@@ -138,6 +138,7 @@ func (b *Bar) count() {
 	delete(b.currents, befKey)
 
 	b.rate = b.current * 100 / b.total
+	b.cost = int(time.Since(b.start) / time.Second)
 	if b.cost == 0 {
 		b.speed = b.current * 100
 	} else if b.before == 0 {
@@ -162,7 +163,6 @@ func (b *Bar) updateCost() {
 		select {
 		case <-time.After(time.Second):
 			//b.cost++
-			b.cost = int(time.Since(b.start) / time.Second)
 			b.mu.Lock()
 			b.count()
 			b.mu.Unlock()
