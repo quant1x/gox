@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.3.21] - 2023-04-23
+### Changed
+- 增加切片反转函数.
+
 ## [1.3.20] - 2023-04-23
 ### Changed
 - 修复计时的bug.
@@ -420,7 +424,8 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://github.com/mymmsc/gox/compare/v1.3.20...HEAD
+[Unreleased]: https://github.com/mymmsc/gox/compare/v1.3.21...HEAD
+[1.3.21]: https://github.com/mymmsc/gox/compare/v1.3.20...v1.3.21
 [1.3.20]: https://github.com/mymmsc/gox/compare/v1.3.19...v1.3.20
 [1.3.19]: https://github.com/mymmsc/gox/compare/v1.3.18...v1.3.19
 [1.3.18]: https://github.com/mymmsc/gox/compare/v1.3.17...v1.3.18
