@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.3.23] - 2023-04-24
+### Changed
+- Treemap加锁.
+
 ## [1.3.22] - 2023-04-23
 ### Changed
 - 调整bar代码.
@@ -429,7 +433,8 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://github.com/mymmsc/gox/compare/v1.3.22...HEAD
+[Unreleased]: https://github.com/mymmsc/gox/compare/v1.3.23...HEAD
+[1.3.23]: https://github.com/mymmsc/gox/compare/v1.3.22...v1.3.23
 [1.3.22]: https://github.com/mymmsc/gox/compare/v1.3.21...v1.3.22
 [1.3.21]: https://github.com/mymmsc/gox/compare/v1.3.20...v1.3.21
 [1.3.20]: https://github.com/mymmsc/gox/compare/v1.3.19...v1.3.20
