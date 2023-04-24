@@ -14,6 +14,7 @@ package redblacktree
 import (
 	"fmt"
 	"github.com/mymmsc/gox/util"
+	"sync"
 )
 
 func assertTreeImplementation() {
@@ -31,6 +32,7 @@ type Tree struct {
 	Root       *Node
 	size       int
 	Comparator util.Comparator
+	mutex      sync.Mutex
 }
 
 // Node is a single element within the tree
@@ -61,6 +63,8 @@ func NewWithStringComparator() *Tree {
 // Put inserts node into the tree.
 // Key should adhere to the comparator's type assertion, otherwise method panics.
 func (tree *Tree) Put(key interface{}, value interface{}) {
+	defer tree.mutex.Unlock()
+	tree.mutex.Lock()
 	var insertedNode *Node
 	if tree.Root == nil {
 		// Assert key is of comparator's type for initial tree
@@ -115,6 +119,8 @@ func (tree *Tree) Get(key interface{}) (value interface{}, found bool) {
 // Remove remove the node from the tree by key.
 // Key should adhere to the comparator's type assertion, otherwise method panics.
 func (tree *Tree) Remove(key interface{}) {
+	defer tree.mutex.Unlock()
+	tree.mutex.Lock()
 	var child *Node
 	node := tree.lookup(key)
 	if node == nil {
