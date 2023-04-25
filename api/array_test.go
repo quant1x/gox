@@ -40,3 +40,12 @@ func Remove1(slice []interface{}, start, end int) []interface{} {
 func Remove2(slice []interface{}, start, end int) []interface{} {
 	return append(slice[:start], slice[end:]...)
 }
+
+func TestFilter(t *testing.T) {
+	x := []string{"9", "1", "2", "3", "4", "6"}
+	fmt.Printf("%v\n", x)
+	xk := Filter(x[:], func(s string) bool {
+		return s > "3"
+	})
+	fmt.Printf("%v\n", xk)
+}
