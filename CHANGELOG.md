@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.3.26] - 2023-05-06
+### Changed
+- 增加切片唯一性排序.
+
 ## [1.3.25] - 2023-04-26
 ### Changed
 - 调整源文件名.
@@ -442,7 +446,8 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://github.com/mymmsc/gox/compare/v1.3.25...HEAD
+[Unreleased]: https://github.com/mymmsc/gox/compare/v1.3.26...HEAD
+[1.3.26]: https://github.com/mymmsc/gox/compare/v1.3.25...v1.3.26
 [1.3.25]: https://github.com/mymmsc/gox/compare/v1.3.24...v1.3.25
 [1.3.24]: https://github.com/mymmsc/gox/compare/v1.3.23...v1.3.24
 [1.3.23]: https://github.com/mymmsc/gox/compare/v1.3.22...v1.3.23
