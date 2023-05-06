@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.3.27] - 2023-05-07
+### Changed
+- 调整git仓库同步脚本.
+
 ## [1.3.26] - 2023-05-06
 ### Changed
 - 增加切片唯一性排序.
@@ -446,7 +450,8 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://github.com/mymmsc/gox/compare/v1.3.26...HEAD
+[Unreleased]: https://github.com/mymmsc/gox/compare/v1.3.27...HEAD
+[1.3.27]: https://gitee.com/quant1x/gox/compare/v1.3.26...v1.3.27
 [1.3.26]: https://github.com/mymmsc/gox/compare/v1.3.25...v1.3.26
 [1.3.25]: https://github.com/mymmsc/gox/compare/v1.3.24...v1.3.25
 [1.3.24]: https://github.com/mymmsc/gox/compare/v1.3.23...v1.3.24
