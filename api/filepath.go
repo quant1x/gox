@@ -23,10 +23,10 @@ const (
 // CheckFilepath
 //
 //	检查filename 文件路径, 如果不存在就创建
-func CheckFilepath(filename string, argv ...bool) error {
+func CheckFilepath(filename string, notExistToCreate ...bool) error {
 	filename, _ = homedir.Expand(filename)
 	path := filepath.Dir(filename)
-	dir, err := os.Stat(path)
+	dir, err := os.Lstat(path)
 	if err == nil {
 		// 已存在
 		return nil
@@ -36,8 +36,8 @@ func CheckFilepath(filename string, argv ...bool) error {
 		return nil
 	}
 	__create := false
-	if len(argv) > 0 {
-		__create = argv[0]
+	if len(notExistToCreate) > 0 {
+		__create = notExistToCreate[0]
 	}
 	if !__create {
 		return os.ErrNotExist
