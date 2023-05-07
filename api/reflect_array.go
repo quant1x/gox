@@ -7,15 +7,16 @@ import (
 )
 
 var (
-	mapTag map[reflect.Type]map[int]reflect.StructField = nil
+	// 结构体 tag array的反射的字段缓存
+	__mapTagArray map[reflect.Type]map[int]reflect.StructField = nil
 )
 
 func init() {
-	mapTag = make(map[reflect.Type]map[int]reflect.StructField)
+	__mapTagArray = make(map[reflect.Type]map[int]reflect.StructField)
 }
 
 func initTag(t reflect.Type) map[int]reflect.StructField {
-	ma, mok := mapTag[t]
+	ma, mok := __mapTagArray[t]
 	if mok {
 		return ma
 	}
@@ -31,7 +32,7 @@ func initTag(t reflect.Type) map[int]reflect.StructField {
 				if err == nil {
 					if ma == nil {
 						ma = make(map[int]reflect.StructField)
-						mapTag[t] = ma
+						__mapTagArray[t] = ma
 					}
 					ma[index] = field
 				}
