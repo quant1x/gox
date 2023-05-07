@@ -11,9 +11,7 @@ var (
 )
 
 func init() {
-	//fmt.Println("reflect_array init...")
 	mapTag = make(map[reflect.Type]map[int]reflect.StructField)
-	//fmt.Println("reflect_array init...OK")
 }
 
 func initTag(t reflect.Type) map[int]reflect.StructField {
