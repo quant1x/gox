@@ -2,6 +2,7 @@ package progressbar
 
 import (
 	"fmt"
+	"github.com/mymmsc/gox/api"
 	"github.com/mymmsc/gox/logger"
 	"sync"
 	"time"
@@ -161,12 +162,14 @@ func (b *Bar) updateCost() {
 	}()
 	for {
 		select {
-		case <-time.After(time.Second):
+		case <-time.After(time.Millisecond):
 			//b.cost++
 			b.mu.Lock()
 			b.count()
 			b.mu.Unlock()
-			b.advance <- true
+			if !api.ChanIsClosed(b.advance) {
+				b.advance <- true
+			}
 		case <-b.done:
 			return
 		}
