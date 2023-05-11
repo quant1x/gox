@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"compress/flate"
 	"compress/gzip"
+	"fmt"
 	"github.com/mymmsc/gox/api"
 	"github.com/mymmsc/gox/logger"
 	"io"
@@ -14,6 +15,16 @@ import (
 )
 
 const (
+	GET     = http.MethodGet
+	POST    = http.MethodPost
+	HEAD    = http.MethodHead
+	PUT     = http.MethodPut
+	PATCH   = http.MethodPatch // RFC 5789
+	DELETE  = http.MethodDelete
+	CONNECT = http.MethodConnect
+	OPTIONS = http.MethodOptions
+	TRACE   = http.MethodTrace
+
 	ContentEncoding = "Content-Encoding"
 	LastModified    = "Last-Modified"
 	IfModifiedSince = "If-Modified-Since"
@@ -47,7 +58,8 @@ func Request(url string, method string, header ...map[string]any) (data []byte, 
 		return nil, TimeZero, err
 	}
 	reqHeader := make(map[string]string)
-	reqHeader["Accept"] = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8"
+	//reqHeader["Accept"] = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8"
+	reqHeader["Accept"] = "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
 	reqHeader["Accept-Encoding"] = "gzip, deflate"
 	reqHeader["Accept-Language"] = "zh-CN,zh;q=0.9,en;q=0.8"
 	reqHeader["Cache-Control"] = "no-cache"
@@ -55,7 +67,7 @@ func Request(url string, method string, header ...map[string]any) (data []byte, 
 	reqHeader["Host"] = u.Host
 	reqHeader["Pragma"] = "no-cache"
 	reqHeader["Upgrade-Insecure-Requests"] = "1"
-	reqHeader["User-Agent"] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"
+	reqHeader["User-Agent"] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36 Edg/113.0.1774.35"
 	if len(header) > 0 {
 		mapHeader := header[0]
 		for k, v := range mapHeader {
@@ -63,6 +75,16 @@ func Request(url string, method string, header ...map[string]any) (data []byte, 
 			case time.Time:
 				val = val.UTC()
 				reqHeader[k] = val.Format(time.RFC1123)
+			case float32, float64:
+				reqHeader[k] = fmt.Sprintf("%f", val)
+			case int8, int16, int32, int64:
+				reqHeader[k] = fmt.Sprintf("%d", val)
+			case uint8, uint16, uint32, uint64:
+				reqHeader[k] = fmt.Sprintf("%d", val)
+			case string:
+				reqHeader[k] = val
+			default:
+				reqHeader[k] = fmt.Sprintf("%v", val)
 			}
 		}
 	}
