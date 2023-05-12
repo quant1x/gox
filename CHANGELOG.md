@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.5.0] - 2023-05-13
+### Changed
+- 迁移代码仓库到gitee.
+
 ## [1.3.33] - 2023-05-12
 ### Changed
 - 更新依赖库版本号.
@@ -476,8 +480,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.3.33...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.5.0...HEAD
 
+[1.5.0]: https://gitee.com/quant1x/gox/compare/v1.3.33...v1.5.0
 [1.3.33]: https://gitee.com/quant1x/gox/compare/v1.3.32...v1.3.33
 
 [1.3.32]: https://gitee.com/quant1x/gox/compare/v1.3.31...v1.3.32
