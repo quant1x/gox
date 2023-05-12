@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/stretchr/testify v1.8.2
-	golang.org/x/exp v0.0.0-20230425010034-47ecfdc1ba53
+	golang.org/x/exp v0.0.0-20230510235704-dd950f8aeaea
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c
 	rsc.io/qr v0.2.0
 )
