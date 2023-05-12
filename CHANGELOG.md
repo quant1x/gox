@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.3.33] - 2023-05-12
+### Changed
+- 更新依赖库版本号.
+
 ## [1.3.32] - 2023-05-12
 ### Changed
 - 修订http客户端header中accept字段错误的bug.
@@ -471,7 +475,8 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://github.com/mymmsc/gox/compare/v1.3.32...HEAD
+[Unreleased]: https://github.com/mymmsc/gox/compare/v1.3.33...HEAD
+[1.3.33]: https://gitee.com/quant1x/gox/compare/v1.3.32...v1.3.33
 [1.3.32]: https://gitee.com/quant1x/gox/compare/v1.3.31...v1.3.32
 [1.3.31]: https://gitee.com/quant1x/gox/compare/v1.3.30...v1.3.31
 [1.3.30]: https://gitee.com/quant1x/gox/compare/v1.3.29...v1.3.30
