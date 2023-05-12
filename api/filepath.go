@@ -1,7 +1,7 @@
 package api
 
 import (
-	"github.com/mymmsc/gox/util/homedir"
+	"gitee.com/quant1x/gox/util/homedir"
 	"os"
 	"path/filepath"
 )

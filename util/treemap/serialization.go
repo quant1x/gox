@@ -4,7 +4,7 @@
 
 package treemap
 
-import "github.com/mymmsc/gox/util"
+import "gitee.com/quant1x/gox/util"
 
 func assertSerializationImplementation() {
 	var _ util.JSONSerializer = (*Map)(nil)

@@ -4,7 +4,7 @@
 
 package main
 
-import "github.com/mymmsc/gox/util/hashmap"
+import "gitee.com/quant1x/gox/util/hashmap"
 
 // HashMapExample to demonstrate basic usage of HashMap
 func main() {

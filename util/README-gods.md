@@ -123,8 +123,8 @@ Implements [List](#lists), [IteratorWithIndex](#iteratorwithindex), [EnumerableW
 package main
 
 import (
-	"github.com/mymmsc/gox/util/lists/arraylist"
-	"github.com/mymmsc/gox/util/utils"
+	"gitee.com/quant1x/gox/util/lists/arraylist"
+	"gitee.com/quant1x/gox/util/utils"
 )
 
 func main() {
@@ -161,8 +161,8 @@ Implements [List](#lists), [IteratorWithIndex](#iteratorwithindex), [EnumerableW
 package main
 
 import (
-	sll "github.com/mymmsc/gox/util/lists/singlylinkedlist"
-	"github.com/mymmsc/gox/util/utils"
+	sll "gitee.com/quant1x/gox/util/lists/singlylinkedlist"
+	"gitee.com/quant1x/gox/util/utils"
 )
 
 func main() {
@@ -199,8 +199,8 @@ Implements [List](#lists), [IteratorWithIndex](#iteratorwithindex), [EnumerableW
 package main
 
 import (
-	dll "github.com/mymmsc/gox/util/lists/doublylinkedlist"
-	"github.com/mymmsc/gox/util/utils"
+	dll "gitee.com/quant1x/gox/util/lists/doublylinkedlist"
+	"gitee.com/quant1x/gox/util/utils"
 )
 
 func main() {
@@ -259,7 +259,7 @@ Implements [Set](#sets), [JSONSerializer](#jsonserializer) and [JSONDeserializer
 ```go
 package main
 
-import "github.com/mymmsc/gox/util/sets/hashset"
+import "gitee.com/quant1x/gox/util/sets/hashset"
 
 func main() {
 	set := hashset.New()   // empty
@@ -288,7 +288,7 @@ Implements [Set](#sets), [IteratorWithIndex](#iteratorwithindex), [EnumerableWit
 ```go
 package main
 
-import "github.com/mymmsc/gox/util/sets/treeset"
+import "gitee.com/quant1x/gox/util/sets/treeset"
 
 func main() {
 	set := treeset.NewWithIntComparator() // empty (keys are of type int)
@@ -317,7 +317,7 @@ Implements [Set](#sets), [IteratorWithIndex](#iteratorwithindex), [EnumerableWit
 ```go
 package main
 
-import "github.com/mymmsc/gox/util/sets/linkedhashset"
+import "gitee.com/quant1x/gox/util/sets/linkedhashset"
 
 func main() {
 	set := linkedhashset.New() // empty
@@ -367,7 +367,7 @@ and [JSONDeserializer](#jsondeserializer) interfaces.
 ```go
 package main
 
-import lls "github.com/mymmsc/gox/util/stacks/linkedliststack"
+import lls "gitee.com/quant1x/gox/util/stacks/linkedliststack"
 
 func main() {
 	stack := lls.New()  // empty
@@ -395,7 +395,7 @@ and [JSONDeserializer](#jsondeserializer) interfaces.
 ```go
 package main
 
-import "github.com/mymmsc/gox/util/stacks/arraystack"
+import "gitee.com/quant1x/gox/util/stacks/arraystack"
 
 func main() {
 	stack := arraystack.New() // empty
@@ -457,7 +457,7 @@ Implements [Map](#maps), [JSONSerializer](#jsonserializer) and [JSONDeserializer
 ```go
 package main
 
-import "github.com/mymmsc/gox/util/maps/hashmap"
+import "gitee.com/quant1x/gox/util/maps/hashmap"
 
 func main() {
 	m := hashmap.New() // empty
@@ -486,7 +486,7 @@ Implements [Map](#maps), [IteratorWithKey](#iteratorwithkey), [EnumerableWithKey
 ```go
 package main
 
-import "github.com/mymmsc/gox/util/maps/treemap"
+import "gitee.com/quant1x/gox/util/maps/treemap"
 
 func main() {
 	m := treemap.NewWithIntComparator() // empty (keys are of type int)
@@ -519,7 +519,7 @@ Implements [Map](#maps), [IteratorWithKey](#iteratorwithkey), [EnumerableWithKey
 ```go
 package main
 
-import "github.com/mymmsc/gox/util/maps/linkedhashmap"
+import "gitee.com/quant1x/gox/util/maps/linkedhashmap"
 
 func main() {
 	m := linkedhashmap.New() // empty (keys are of type int)
@@ -547,7 +547,7 @@ Implements [BidiMap](#maps), [JSONSerializer](#jsonserializer) and [JSONDeserial
 ```go
 package main
 
-import "github.com/mymmsc/gox/util/maps/hashbidimap"
+import "gitee.com/quant1x/gox/util/maps/hashbidimap"
 
 func main() {
 	m := hashbidimap.New() // empty
@@ -580,8 +580,8 @@ Implements [BidiMap](#maps), [IteratorWithKey](#iteratorwithkey), [EnumerableWit
 package main
 
 import (
-	"github.com/mymmsc/gox/util/maps/treebidimap"
-	"github.com/mymmsc/gox/util/utils"
+	"gitee.com/quant1x/gox/util/maps/treebidimap"
+	"gitee.com/quant1x/gox/util/utils"
 )
 
 func main() {
@@ -640,7 +640,7 @@ package main
 
 import (
 	"fmt"
-	rbt "github.com/mymmsc/gox/util/trees/redblacktree"
+	rbt "gitee.com/quant1x/gox/util/trees/redblacktree"
 )
 
 func main() {
@@ -690,7 +690,7 @@ func main() {
 ```
 
 Extending the red-black tree's functionality has been demonstrated in the
-following [example](https://github.com/mymmsc/gox/util/blob/master/examples/redblacktreeextended/redblacktreeextended.go)
+following [example](https://gitee.com/quant1x/gox/util/blob/master/examples/redblacktreeextended/redblacktreeextended.go)
 .
 
 #### AVLTree
@@ -715,7 +715,7 @@ package main
 
 import (
 	"fmt"
-	avl "github.com/mymmsc/gox/util/trees/avltree"
+	avl "gitee.com/quant1x/gox/util/trees/avltree"
 )
 
 func main() {
@@ -788,7 +788,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/mymmsc/gox/util/trees/btree"
+	"gitee.com/quant1x/gox/util/trees/btree"
 )
 
 func main() {
@@ -864,8 +864,8 @@ and [JSONDeserializer](#jsondeserializer) interfaces.
 package main
 
 import (
-	"github.com/mymmsc/gox/util/trees/binaryheap"
-	"github.com/mymmsc/gox/util/utils"
+	"gitee.com/quant1x/gox/util/trees/binaryheap"
+	"gitee.com/quant1x/gox/util/utils"
 )
 
 func main() {
@@ -964,7 +964,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/mymmsc/gox/util/sets/treeset"
+	"gitee.com/quant1x/gox/util/sets/treeset"
 )
 
 type User struct {
@@ -1186,7 +1186,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/mymmsc/gox/util/sets/treeset"
+	"gitee.com/quant1x/gox/util/sets/treeset"
 )
 
 func printSet(txt string, set *treeset.Set) {
@@ -1301,7 +1301,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/mymmsc/gox/util/maps/treemap"
+	"gitee.com/quant1x/gox/util/maps/treemap"
 )
 
 func printMap(txt string, m *treemap.Map) {
@@ -1375,7 +1375,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/mymmsc/gox/util/maps/hashmap"
+	"gitee.com/quant1x/gox/util/maps/hashmap"
 )
 
 func main() {
@@ -1398,7 +1398,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/mymmsc/gox/util/lists/arraylist"
+	"gitee.com/quant1x/gox/util/lists/arraylist"
 )
 
 func main() {
@@ -1424,7 +1424,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/mymmsc/gox/util/maps/hashmap"
+	"gitee.com/quant1x/gox/util/maps/hashmap"
 )
 
 func main() {
@@ -1446,7 +1446,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/mymmsc/gox/util/lists/arraylist"
+	"gitee.com/quant1x/gox/util/lists/arraylist"
 )
 
 func main() {
@@ -1473,7 +1473,7 @@ Internally these all use the _utils.Sort()_ method:
 ```go
 package main
 
-import "github.com/mymmsc/gox/util/utils"
+import "gitee.com/quant1x/gox/util/utils"
 
 func main() {
 	strings := []interface{}{}                  // []
@@ -1501,8 +1501,8 @@ Usage:
 package main
 
 import (
-	"github.com/mymmsc/gox/util/lists/arraylist"
-	"github.com/mymmsc/gox/util/utils"
+	"gitee.com/quant1x/gox/util/lists/arraylist"
+	"gitee.com/quant1x/gox/util/utils"
 )
 
 func main() {
@@ -1585,7 +1585,7 @@ go fmt ./... && gofmt -s -w . && go vet ./... && go get ./... && go test ./... &
 ### License
 
 This library is distributed under the BSD-style license found in
-the [LICENSE](https://github.com/mymmsc/gox/util/blob/master/LICENSE) file.
+the [LICENSE](https://gitee.com/quant1x/gox/util/blob/master/LICENSE) file.
 
 ### Sponsors
 

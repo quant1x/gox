@@ -6,7 +6,7 @@ import (
 )
 
 func TestGenerate(t *testing.T) {
-	Generate("https://github.com/mymmsc/gox/qrterminal", L, os.Stdout)
+	Generate("https://gitee.com/quant1x/gox/qrterminal", L, os.Stdout)
 }
 
 func TestGenerateWithConfig(t *testing.T) {
@@ -17,11 +17,11 @@ func TestGenerateWithConfig(t *testing.T) {
 		WhiteChar: BLACK,
 		QuietZone: QUIET_ZONE,
 	}
-	GenerateWithConfig("https://github.com/mymmsc/gox/qrterminal", config)
+	GenerateWithConfig("https://gitee.com/quant1x/gox/qrterminal", config)
 }
 
 func TestGenerateHalfBlock(t *testing.T) {
-	GenerateHalfBlock("https://github.com/mymmsc/gox/qrterminal", L, os.Stdout)
+	GenerateHalfBlock("https://gitee.com/quant1x/gox/qrterminal", L, os.Stdout)
 }
 
 func TestGenerateWithHalfBlockConfig(t *testing.T) {
@@ -35,5 +35,5 @@ func TestGenerateWithHalfBlockConfig(t *testing.T) {
 		BlackWhiteChar: BLACK_WHITE,
 		QuietZone:      3,
 	}
-	GenerateWithConfig("https://github.com/mymmsc/gox/qrterminal", config)
+	GenerateWithConfig("https://gitee.com/quant1x/gox/qrterminal", config)
 }

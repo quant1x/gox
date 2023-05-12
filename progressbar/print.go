@@ -2,7 +2,7 @@ package progressbar
 
 import (
 	"fmt"
-	"github.com/mymmsc/gox/api"
+	"gitee.com/quant1x/gox/api"
 	"strings"
 	"sync"
 )

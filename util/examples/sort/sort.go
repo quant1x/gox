@@ -4,7 +4,7 @@
 
 package main
 
-import "github.com/mymmsc/gox/util"
+import "gitee.com/quant1x/gox/util"
 
 // SortExample to demonstrate basic usage of basic sort
 func main() {

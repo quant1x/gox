@@ -50,3 +50,8 @@ func stackTrace() string {
 	}
 	panic(n)
 }
+
+func TestGoID1(t *testing.T) {
+	gid := GoID()
+	fmt.Println(gid)
+}

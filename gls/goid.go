@@ -1,12 +1,13 @@
 package gls
 
 import (
-	reflect "github.com/mymmsc/gox/util/reflect2"
+	reflect "gitee.com/quant1x/gox/util/reflect2"
 	"unsafe"
 )
 
-// offset for go1.4
-var goidOffset uintptr = 128
+var (
+	goidOffset uintptr = 128 // offset for go1.4
+)
 
 func init() {
 	gType := reflect.TypeByName("runtime.g").(reflect.StructType)

@@ -2,12 +2,21 @@ package logger
 
 import (
 	"fmt"
-	"github.com/mymmsc/gox/gls"
-	"github.com/mymmsc/gox/mdc"
-	"github.com/mymmsc/gox/util/uuid"
+	"gitee.com/quant1x/gox/api"
+	"gitee.com/quant1x/gox/gls"
+	"gitee.com/quant1x/gox/mdc"
+	"gitee.com/quant1x/gox/util/uuid"
+	"runtime"
 	"testing"
 	"time"
 )
+
+func TestGoId(t *testing.T) {
+	buf := make([]byte, 1024)
+	runtime.Stack(buf, false)
+	text := api.Bytes2String(buf)
+	fmt.Println(text)
+}
 
 func TestLogger(t *testing.T) {
 	SetLogPath("/opt/logs/test")

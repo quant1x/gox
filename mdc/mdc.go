@@ -1,8 +1,8 @@
 package mdc
 
 import (
-	"github.com/mymmsc/gox/gls"
-	"github.com/mymmsc/gox/util/uuid"
+	"gitee.com/quant1x/gox/gls"
+	"gitee.com/quant1x/gox/util/uuid"
 	//uuid "github.com/satori/go.uuid"
 )
 

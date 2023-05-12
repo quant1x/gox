@@ -1,7 +1,7 @@
 gox - Golang 工具集
 ===
 
-[![Sourcegraph](https://sourcegraph.com/github.com/mymmsc/gox/-/badge.svg)](https://sourcegraph.com/github.com/mymmsc/gox?badge)
+[![Sourcegraph](https://sourcegraph.com/gitee.com/quant1x/gox/-/badge.svg)](https://sourcegraph.com/gitee.com/quant1x/gox?badge)
 [![Build Status](https://api.travis-ci.com/repos/mymmsc/gox.png)](https://travis-ci.com/mymmsc/gox)
 [![codecov](https://codecov.io/gh/mymmsc/gox/branch/master/graph/badge.svg)](https://codecov.io/gh/mymmsc/gox)
 ![Golang 1.11.4+](https://img.shields.io/badge/Golang-1.20+-orange.svg?style=flat)

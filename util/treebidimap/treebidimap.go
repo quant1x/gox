@@ -19,8 +19,8 @@ package treebidimap
 
 import (
 	"fmt"
-	"github.com/mymmsc/gox/util"
-	"github.com/mymmsc/gox/util/redblacktree"
+	"gitee.com/quant1x/gox/util"
+	"gitee.com/quant1x/gox/util/redblacktree"
 	"strings"
 )
 

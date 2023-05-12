@@ -5,7 +5,7 @@
 package arraylist
 
 import (
-	"github.com/mymmsc/gox/util"
+	"gitee.com/quant1x/gox/util"
 )
 
 func assertEnumerableImplementation() {

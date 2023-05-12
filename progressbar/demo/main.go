@@ -4,7 +4,7 @@ import (
 	"sync"
 	"time"
 
-	pgbar "github.com/mymmsc/gox/progressbar"
+	pgbar "gitee.com/quant1x/gox/progressbar"
 )
 
 func main() {

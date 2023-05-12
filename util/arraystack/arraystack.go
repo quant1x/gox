@@ -11,8 +11,8 @@ package arraystack
 
 import (
 	"fmt"
-	"github.com/mymmsc/gox/util"
-	"github.com/mymmsc/gox/util/arraylist"
+	"gitee.com/quant1x/gox/util"
+	"gitee.com/quant1x/gox/util/arraylist"
 	"strings"
 )
 

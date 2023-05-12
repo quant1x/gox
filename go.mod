@@ -1,4 +1,4 @@
-module github.com/mymmsc/gox
+module gitee.com/quant1x/gox
 
 go 1.20
 

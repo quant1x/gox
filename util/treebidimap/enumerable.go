@@ -4,7 +4,7 @@
 
 package treebidimap
 
-import "github.com/mymmsc/gox/util"
+import "gitee.com/quant1x/gox/util"
 
 func assertEnumerableImplementation() {
 	var _ util.EnumerableWithKey = (*Map)(nil)

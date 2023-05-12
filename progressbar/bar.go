@@ -2,8 +2,8 @@ package progressbar
 
 import (
 	"fmt"
-	"github.com/mymmsc/gox/api"
-	"github.com/mymmsc/gox/logger"
+	"gitee.com/quant1x/gox/api"
+	"gitee.com/quant1x/gox/logger"
 	"sync"
 	"time"
 )

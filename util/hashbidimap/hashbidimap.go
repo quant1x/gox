@@ -17,8 +17,8 @@ package hashbidimap
 
 import (
 	"fmt"
-	"github.com/mymmsc/gox/util"
-	"github.com/mymmsc/gox/util/hashmap"
+	"gitee.com/quant1x/gox/util"
+	"gitee.com/quant1x/gox/util/hashmap"
 )
 
 func assertMapImplementation() {

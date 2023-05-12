@@ -1,7 +1,7 @@
 package api
 
 import (
-	"github.com/mymmsc/gox/errors"
+	"gitee.com/quant1x/gox/errors"
 	"reflect"
 	"strconv"
 )

@@ -6,7 +6,7 @@ package doublylinkedlist
 
 import (
 	"fmt"
-	"github.com/mymmsc/gox/util"
+	"gitee.com/quant1x/gox/util"
 	"testing"
 )
 

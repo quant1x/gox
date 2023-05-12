@@ -11,7 +11,7 @@ package arraylist
 
 import (
 	"fmt"
-	"github.com/mymmsc/gox/util"
+	"gitee.com/quant1x/gox/util"
 	"strings"
 )
 
@@ -101,7 +101,7 @@ func (list *List) Values() []interface{} {
 	return newElements
 }
 
-//IndexOf returns index of provided element
+// IndexOf returns index of provided element
 func (list *List) IndexOf(value interface{}) int {
 	if list.size == 0 {
 		return -1

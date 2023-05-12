@@ -1,7 +1,7 @@
 package tests
 
 import (
-	cstruct2 "github.com/mymmsc/gox/encoding/binary/cstruct"
+	"gitee.com/quant1x/gox/encoding/binary/cstruct"
 	"testing"
 )
 
@@ -58,10 +58,10 @@ func Test_LE9(t *testing.T) {
 }
 
 func test9(t *testing.T, a *mystruct9) {
-	buf_l, _ := cstruct2.Pack(a)
+	buf_l, _ := cstruct.Pack(a)
 	b := &mystruct9{}
 	t.Log(buf_l)
-	if err := cstruct2.Unpack(buf_l, b); err != nil {
+	if err := cstruct.Unpack(buf_l, b); err != nil {
 		t.Log(err)
 		t.Error("出错啦！")
 		return

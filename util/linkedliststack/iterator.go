@@ -4,7 +4,7 @@
 
 package linkedliststack
 
-import "github.com/mymmsc/gox/util"
+import "gitee.com/quant1x/gox/util"
 
 func assertIteratorImplementation() {
 	var _ util.IteratorWithIndex = (*Iterator)(nil)

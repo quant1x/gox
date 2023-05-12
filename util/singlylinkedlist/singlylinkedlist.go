@@ -13,7 +13,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/mymmsc/gox/util"
+	"gitee.com/quant1x/gox/util"
 )
 
 func assertListImplementation() {
@@ -158,7 +158,7 @@ func (list *List) Values() []interface{} {
 	return values
 }
 
-//IndexOf returns index of provided element
+// IndexOf returns index of provided element
 func (list *List) IndexOf(value interface{}) int {
 	if list.size == 0 {
 		return -1

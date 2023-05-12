@@ -2,7 +2,7 @@ package fastjson_test
 
 import (
 	"fmt"
-	"github.com/mymmsc/gox/fastjson"
+	"gitee.com/quant1x/gox/fastjson"
 	"log"
 )
 

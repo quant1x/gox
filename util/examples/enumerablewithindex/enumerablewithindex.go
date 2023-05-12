@@ -6,7 +6,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/mymmsc/gox/util/treeset"
+	"gitee.com/quant1x/gox/util/treeset"
 )
 
 func printSet(txt string, set *treeset.Set) {

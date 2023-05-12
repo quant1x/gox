@@ -5,8 +5,8 @@
 package main
 
 import (
-	"github.com/mymmsc/gox/util"
-	"github.com/mymmsc/gox/util/treebidimap"
+	"gitee.com/quant1x/gox/util"
+	"gitee.com/quant1x/gox/util/treebidimap"
 )
 
 // TreeBidiMapExample to demonstrate basic usage of TreeBidiMap

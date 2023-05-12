@@ -6,7 +6,7 @@ package main
 
 import (
 	"fmt"
-	avl "github.com/mymmsc/gox/util/avltree"
+	avl "gitee.com/quant1x/gox/util/avltree"
 )
 
 // AVLTreeExample to demonstrate basic usage of AVLTree
