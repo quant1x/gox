@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.5.1] - 2023-05-13
+### Changed
+- 收录vek汇编工具库.
+
 ## [1.5.0] - 2023-05-13
 ### Changed
 - 迁移代码仓库到gitee.
@@ -480,8 +484,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.5.0...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.5.1...HEAD
 
+[1.5.1]: https://gitee.com/quant1x/gox/compare/v1.5.0...v1.5.1
 [1.5.0]: https://gitee.com/quant1x/gox/compare/v1.3.33...v1.5.0
 [1.3.33]: https://gitee.com/quant1x/gox/compare/v1.3.32...v1.3.33
 
