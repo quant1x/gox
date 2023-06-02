@@ -1,4 +1,4 @@
-package vek
+package num
 
 import (
 	"github.com/stretchr/testify/require"

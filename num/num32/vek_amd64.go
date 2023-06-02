@@ -1,8 +1,8 @@
-package vek32
+package num32
 
 import (
-	"gitee.com/quant1x/gox/vek"
-	"gitee.com/quant1x/gox/vek/internal/functions"
+	"gitee.com/quant1x/gox/num"
+	"gitee.com/quant1x/gox/num/internal/functions"
 	"github.com/chewxy/math32"
 	"golang.org/x/exp/constraints"
 	"golang.org/x/exp/slices"
@@ -1641,13 +1641,13 @@ func ToFloat64_Into(dst []float64, x []float32) []float64 {
 // Misc
 
 // Info returns information about the current operating environment.
-func Info() vek.SystemInfo {
-	return vek.Info()
+func Info() num.SystemInfo {
+	return num.Info()
 }
 
 // SetAcceleration toggles simd acceleration. Not thread safe.
 func SetAcceleration(enabled bool) {
-	vek.SetAcceleration(enabled)
+	num.SetAcceleration(enabled)
 }
 
 // Validation

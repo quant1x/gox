@@ -1,4 +1,4 @@
-package vek32
+package num32
 
 import (
 	"github.com/chewxy/math32"

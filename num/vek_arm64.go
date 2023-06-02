@@ -1,8 +1,8 @@
-package vek
+package num
 
 import (
 	"fmt"
-	"gitee.com/quant1x/gox/vek/internal/functions"
+	"gitee.com/quant1x/gox/num/internal/functions"
 	"golang.org/x/exp/constraints"
 	"golang.org/x/exp/slices"
 	"golang.org/x/sys/cpu"

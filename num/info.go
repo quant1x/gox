@@ -1,7 +1,7 @@
-package vek
+package num
 
 import (
-	"gitee.com/quant1x/gox/vek/internal/functions"
+	"gitee.com/quant1x/gox/num/internal/functions"
 	"golang.org/x/sys/cpu"
 	"runtime"
 )
