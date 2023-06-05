@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.6.1] - 2023-06-06
+### Changed
+- 新增四舍五入, 日期时间等函数.
+
 ## [1.6.0] - 2023-06-03
 ### Changed
 - 调整vek目录为num.
@@ -488,8 +492,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.6.0...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.6.1...HEAD
 
+[1.6.1]: https://gitee.com/quant1x/gox/compare/v1.6.0...v1.6.1
 [1.6.0]: https://gitee.com/quant1x/gox/compare/v1.5.1...v1.6.0
 [1.5.1]: https://gitee.com/quant1x/gox/compare/v1.5.0...v1.5.1
 [1.5.0]: https://gitee.com/quant1x/gox/compare/v1.3.33...v1.5.0
