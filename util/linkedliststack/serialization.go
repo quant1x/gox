@@ -4,11 +4,13 @@
 
 package linkedliststack
 
-import "gitee.com/quant1x/gox/util"
+import (
+	"gitee.com/quant1x/gox/util/internal"
+)
 
 func assertSerializationImplementation() {
-	var _ util.JSONSerializer = (*Stack)(nil)
-	var _ util.JSONDeserializer = (*Stack)(nil)
+	var _ internal.JSONSerializer = (*Stack)(nil)
+	var _ internal.JSONDeserializer = (*Stack)(nil)
 }
 
 // ToJSON outputs the JSON representation of the stack.

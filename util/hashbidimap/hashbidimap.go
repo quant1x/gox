@@ -17,12 +17,12 @@ package hashbidimap
 
 import (
 	"fmt"
-	"gitee.com/quant1x/gox/util"
 	"gitee.com/quant1x/gox/util/hashmap"
+	"gitee.com/quant1x/gox/util/internal"
 )
 
 func assertMapImplementation() {
-	var _ util.BidiMap = (*Map)(nil)
+	var _ internal.BidiMap = (*Map)(nil)
 }
 
 // Map holds the elements in two hashmaps.

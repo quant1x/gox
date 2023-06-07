@@ -4,14 +4,16 @@
 
 package main
 
-import "gitee.com/quant1x/gox/util"
+import (
+	"gitee.com/quant1x/gox/util/internal"
+)
 
 // SortExample to demonstrate basic usage of basic sort
 func main() {
-	strings := []interface{}{}                // []
-	strings = append(strings, "d")            // ["d"]
-	strings = append(strings, "a")            // ["d","a"]
-	strings = append(strings, "b")            // ["d","a",b"
-	strings = append(strings, "c")            // ["d","a",b","c"]
-	util.Sort(strings, util.StringComparator) // ["a","b","c","d"]
+	strings := []interface{}{}                        // []
+	strings = append(strings, "d")                    // ["d"]
+	strings = append(strings, "a")                    // ["d","a"]
+	strings = append(strings, "b")                    // ["d","a",b"
+	strings = append(strings, "c")                    // ["d","a",b","c"]
+	internal.Sort(strings, internal.StringComparator) // ["a","b","c","d"]
 }

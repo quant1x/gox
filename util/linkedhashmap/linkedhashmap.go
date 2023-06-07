@@ -13,13 +13,13 @@ package linkedhashmap
 
 import (
 	"fmt"
-	"gitee.com/quant1x/gox/util"
 	"gitee.com/quant1x/gox/util/doublylinkedlist"
+	"gitee.com/quant1x/gox/util/internal"
 	"strings"
 )
 
 func assertMapImplementation() {
-	var _ util.Map = (*Map)(nil)
+	var _ internal.Map = (*Map)(nil)
 }
 
 // Map holds the elements in a red-black tree

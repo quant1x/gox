@@ -6,12 +6,12 @@ package doublylinkedlist
 
 import (
 	"encoding/json"
-	"gitee.com/quant1x/gox/util"
+	"gitee.com/quant1x/gox/util/internal"
 )
 
 func assertSerializationImplementation() {
-	var _ util.JSONSerializer = (*List)(nil)
-	var _ util.JSONDeserializer = (*List)(nil)
+	var _ internal.JSONSerializer = (*List)(nil)
+	var _ internal.JSONDeserializer = (*List)(nil)
 }
 
 // ToJSON outputs the JSON representation of list's elements.

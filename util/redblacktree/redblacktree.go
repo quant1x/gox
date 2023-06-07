@@ -13,12 +13,12 @@ package redblacktree
 
 import (
 	"fmt"
-	"gitee.com/quant1x/gox/util"
+	"gitee.com/quant1x/gox/util/internal"
 	"sync"
 )
 
 func assertTreeImplementation() {
-	var _ util.Tree = (*Tree)(nil)
+	var _ internal.Tree = (*Tree)(nil)
 }
 
 type color bool
@@ -31,8 +31,8 @@ const (
 type Tree struct {
 	Root       *Node
 	size       int
-	Comparator util.Comparator
-	mutex      sync.Mutex
+	Comparator internal.Comparator
+	mutex      sync.RWMutex
 }
 
 // Node is a single element within the tree
@@ -46,25 +46,25 @@ type Node struct {
 }
 
 // NewWith instantiates a red-black tree with the custom comparator.
-func NewWith(comparator util.Comparator) *Tree {
+func NewWith(comparator internal.Comparator) *Tree {
 	return &Tree{Comparator: comparator}
 }
 
 // NewWithIntComparator instantiates a red-black tree with the IntComparator, i.e. keys are of type int.
 func NewWithIntComparator() *Tree {
-	return &Tree{Comparator: util.IntComparator}
+	return &Tree{Comparator: internal.IntComparator}
 }
 
 // NewWithStringComparator instantiates a red-black tree with the StringComparator, i.e. keys are of type string.
 func NewWithStringComparator() *Tree {
-	return &Tree{Comparator: util.StringComparator}
+	return &Tree{Comparator: internal.StringComparator}
 }
 
 // Put inserts node into the tree.
 // Key should adhere to the comparator's type assertion, otherwise method panics.
 func (tree *Tree) Put(key interface{}, value interface{}) {
-	defer tree.mutex.Unlock()
 	tree.mutex.Lock()
+	defer tree.mutex.Unlock()
 	var insertedNode *Node
 	if tree.Root == nil {
 		// Assert key is of comparator's type for initial tree
@@ -109,6 +109,8 @@ func (tree *Tree) Put(key interface{}, value interface{}) {
 // Second return parameter is true if key was found, otherwise false.
 // Key should adhere to the comparator's type assertion, otherwise method panics.
 func (tree *Tree) Get(key interface{}) (value interface{}, found bool) {
+	tree.mutex.RLock()
+	defer tree.mutex.RUnlock()
 	node := tree.lookup(key)
 	if node != nil {
 		return node.Value, true
@@ -119,8 +121,8 @@ func (tree *Tree) Get(key interface{}) (value interface{}, found bool) {
 // Remove remove the node from the tree by key.
 // Key should adhere to the comparator's type assertion, otherwise method panics.
 func (tree *Tree) Remove(key interface{}) {
-	defer tree.mutex.Unlock()
 	tree.mutex.Lock()
+	defer tree.mutex.Unlock()
 	var child *Node
 	node := tree.lookup(key)
 	if node == nil {

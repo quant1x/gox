@@ -13,13 +13,13 @@ package treemap
 
 import (
 	"fmt"
-	"gitee.com/quant1x/gox/util"
+	"gitee.com/quant1x/gox/util/internal"
 	rbt "gitee.com/quant1x/gox/util/redblacktree"
 	"strings"
 )
 
 func assertMapImplementation() {
-	var _ util.Map = (*Map)(nil)
+	var _ internal.Map = (*Map)(nil)
 }
 
 // Map holds the elements in a red-black tree
@@ -28,7 +28,7 @@ type Map struct {
 }
 
 // NewWith instantiates a tree map with the custom comparator.
-func NewWith(comparator util.Comparator) *Map {
+func NewWith(comparator internal.Comparator) *Map {
 	return &Map{tree: rbt.NewWith(comparator)}
 }
 

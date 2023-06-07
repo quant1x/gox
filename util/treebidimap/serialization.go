@@ -6,12 +6,12 @@ package treebidimap
 
 import (
 	"encoding/json"
-	"gitee.com/quant1x/gox/util"
+	"gitee.com/quant1x/gox/util/internal"
 )
 
 func assertSerializationImplementation() {
-	var _ util.JSONSerializer = (*Map)(nil)
-	var _ util.JSONDeserializer = (*Map)(nil)
+	var _ internal.JSONSerializer = (*Map)(nil)
+	var _ internal.JSONDeserializer = (*Map)(nil)
 }
 
 // ToJSON outputs the JSON representation of the map.
@@ -19,7 +19,7 @@ func (m *Map) ToJSON() ([]byte, error) {
 	elements := make(map[string]interface{})
 	it := m.Iterator()
 	for it.Next() {
-		elements[util.ToString(it.Key())] = it.Value()
+		elements[internal.ToString(it.Key())] = it.Value()
 	}
 	return json.Marshal(&elements)
 }

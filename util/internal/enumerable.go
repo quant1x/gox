@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package util
+package internal
 
 // EnumerableWithIndex provides functions for ordered containers whose values can be fetched by an index.
 type EnumerableWithIndex interface {

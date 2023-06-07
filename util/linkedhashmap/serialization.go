@@ -7,12 +7,12 @@ package linkedhashmap
 import (
 	"bytes"
 	"encoding/json"
-	"gitee.com/quant1x/gox/util"
+	"gitee.com/quant1x/gox/util/internal"
 )
 
 func assertSerializationImplementation() {
-	var _ util.JSONSerializer = (*Map)(nil)
-	var _ util.JSONDeserializer = (*Map)(nil)
+	var _ internal.JSONSerializer = (*Map)(nil)
+	var _ internal.JSONDeserializer = (*Map)(nil)
 }
 
 // ToJSON outputs the JSON representation of map.
@@ -90,7 +90,7 @@ func (m *Map) FromJSON(data []byte) error {
 		return index1 - index2
 	}
 
-	util.Sort(keys, byIndex)
+	internal.Sort(keys, byIndex)
 
 	m.Clear()
 

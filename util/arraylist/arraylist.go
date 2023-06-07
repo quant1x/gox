@@ -11,12 +11,12 @@ package arraylist
 
 import (
 	"fmt"
-	"gitee.com/quant1x/gox/util"
+	"gitee.com/quant1x/gox/util/internal"
 	"strings"
 )
 
 func assertListImplementation() {
-	var _ util.List = (*List)(nil)
+	var _ internal.List = (*List)(nil)
 }
 
 // List holds the elements in a slice
@@ -131,11 +131,11 @@ func (list *List) Clear() {
 }
 
 // Sort sorts values (in-place) using.
-func (list *List) Sort(comparator util.Comparator) {
+func (list *List) Sort(comparator internal.Comparator) {
 	if len(list.elements) < 2 {
 		return
 	}
-	util.Sort(list.elements[:list.size], comparator)
+	internal.Sort(list.elements[:list.size], comparator)
 }
 
 // Swap swaps the two values at the specified positions.

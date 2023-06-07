@@ -19,20 +19,20 @@ package btree
 import (
 	"bytes"
 	"fmt"
-	"gitee.com/quant1x/gox/util"
+	"gitee.com/quant1x/gox/util/internal"
 	"strings"
 )
 
 func assertTreeImplementation() {
-	var _ util.Tree = (*Tree)(nil)
+	var _ internal.Tree = (*Tree)(nil)
 }
 
 // Tree holds elements of the B-tree
 type Tree struct {
-	Root       *Node           // Root node
-	Comparator util.Comparator // Key comparator
-	size       int             // Total number of keys in the tree
-	m          int             // order (maximum number of children)
+	Root       *Node               // Root node
+	Comparator internal.Comparator // Key comparator
+	size       int                 // Total number of keys in the tree
+	m          int                 // order (maximum number of children)
 }
 
 // Node is a single element within the tree
@@ -49,7 +49,7 @@ type Entry struct {
 }
 
 // NewWith instantiates a B-tree with the order (maximum number of children) and a custom key comparator.
-func NewWith(order int, comparator util.Comparator) *Tree {
+func NewWith(order int, comparator internal.Comparator) *Tree {
 	if order < 3 {
 		panic("Invalid order, should be at least 3")
 	}
@@ -58,12 +58,12 @@ func NewWith(order int, comparator util.Comparator) *Tree {
 
 // NewWithIntComparator instantiates a B-tree with the order (maximum number of children) and the IntComparator, i.e. keys are of type int.
 func NewWithIntComparator(order int) *Tree {
-	return NewWith(order, util.IntComparator)
+	return NewWith(order, internal.IntComparator)
 }
 
 // NewWithStringComparator instantiates a B-tree with the order (maximum number of children) and the StringComparator, i.e. keys are of type string.
 func NewWithStringComparator(order int) *Tree {
-	return NewWith(order, util.StringComparator)
+	return NewWith(order, internal.StringComparator)
 }
 
 // Put inserts key-value pair node into the tree.

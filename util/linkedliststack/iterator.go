@@ -4,10 +4,12 @@
 
 package linkedliststack
 
-import "gitee.com/quant1x/gox/util"
+import (
+	"gitee.com/quant1x/gox/util/internal"
+)
 
 func assertIteratorImplementation() {
-	var _ util.IteratorWithIndex = (*Iterator)(nil)
+	var _ internal.IteratorWithIndex = (*Iterator)(nil)
 }
 
 // Iterator returns a stateful iterator whose values can be fetched by an index.

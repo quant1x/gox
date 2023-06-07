@@ -11,13 +11,13 @@ package treeset
 
 import (
 	"fmt"
-	"gitee.com/quant1x/gox/util"
+	"gitee.com/quant1x/gox/util/internal"
 	rbt "gitee.com/quant1x/gox/util/redblacktree"
 	"strings"
 )
 
 func assertSetImplementation() {
-	var _ util.Set = (*Set)(nil)
+	var _ internal.Set = (*Set)(nil)
 }
 
 // Set holds elements in a red-black tree
@@ -28,7 +28,7 @@ type Set struct {
 var itemExists = struct{}{}
 
 // NewWith instantiates a new empty set with the custom comparator.
-func NewWith(comparator util.Comparator, values ...interface{}) *Set {
+func NewWith(comparator internal.Comparator, values ...interface{}) *Set {
 	set := &Set{tree: rbt.NewWith(comparator)}
 	if len(values) > 0 {
 		set.Add(values...)

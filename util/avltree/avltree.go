@@ -11,18 +11,18 @@ package avltree
 
 import (
 	"fmt"
-	"gitee.com/quant1x/gox/util"
+	"gitee.com/quant1x/gox/util/internal"
 )
 
 func assertTreeImplementation() {
-	var _ util.Tree = new(Tree)
+	var _ internal.Tree = new(Tree)
 }
 
 // Tree holds elements of the AVL tree.
 type Tree struct {
-	Root       *Node           // Root node
-	Comparator util.Comparator // Key comparator
-	size       int             // Total number of keys in the tree
+	Root       *Node               // Root node
+	Comparator internal.Comparator // Key comparator
+	size       int                 // Total number of keys in the tree
 }
 
 // Node is a single element within the tree
@@ -35,18 +35,18 @@ type Node struct {
 }
 
 // NewWith instantiates an AVL tree with the custom comparator.
-func NewWith(comparator util.Comparator) *Tree {
+func NewWith(comparator internal.Comparator) *Tree {
 	return &Tree{Comparator: comparator}
 }
 
 // NewWithIntComparator instantiates an AVL tree with the IntComparator, i.e. keys are of type int.
 func NewWithIntComparator() *Tree {
-	return &Tree{Comparator: util.IntComparator}
+	return &Tree{Comparator: internal.IntComparator}
 }
 
 // NewWithStringComparator instantiates an AVL tree with the StringComparator, i.e. keys are of type string.
 func NewWithStringComparator() *Tree {
-	return &Tree{Comparator: util.StringComparator}
+	return &Tree{Comparator: internal.StringComparator}
 }
 
 // Put inserts node into the tree.

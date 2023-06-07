@@ -11,12 +11,12 @@ package hashset
 
 import (
 	"fmt"
-	"gitee.com/quant1x/gox/util"
+	"gitee.com/quant1x/gox/util/internal"
 	"strings"
 )
 
 func assertSetImplementation() {
-	var _ util.Set = (*Set)(nil)
+	var _ internal.Set = (*Set)(nil)
 }
 
 // Set holds elements in go's native map

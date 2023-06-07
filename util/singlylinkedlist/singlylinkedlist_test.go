@@ -6,9 +6,8 @@ package singlylinkedlist
 
 import (
 	"fmt"
+	"gitee.com/quant1x/gox/util/internal"
 	"testing"
-
-	"gitee.com/quant1x/gox/util"
 )
 
 func TestListNew(t *testing.T) {
@@ -105,9 +104,9 @@ func TestListSwap(t *testing.T) {
 
 func TestListSort(t *testing.T) {
 	list := New()
-	list.Sort(util.StringComparator)
+	list.Sort(internal.StringComparator)
 	list.Add("e", "f", "g", "a", "b", "c", "d")
-	list.Sort(util.StringComparator)
+	list.Sort(internal.StringComparator)
 	for i := 1; i < list.Size(); i++ {
 		a, _ := list.Get(i - 1)
 		b, _ := list.Get(i)

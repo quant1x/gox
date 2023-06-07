@@ -5,13 +5,13 @@
 package main
 
 import (
-	"gitee.com/quant1x/gox/util"
+	"gitee.com/quant1x/gox/util/internal"
 	"gitee.com/quant1x/gox/util/treebidimap"
 )
 
 // TreeBidiMapExample to demonstrate basic usage of TreeBidiMap
 func main() {
-	m := treebidimap.NewWith(util.IntComparator, util.StringComparator)
+	m := treebidimap.NewWith(internal.IntComparator, internal.StringComparator)
 	m.Put(1, "x")        // 1->x
 	m.Put(3, "b")        // 1->x, 3->b (ordered)
 	m.Put(1, "a")        // 1->a, 3->b (ordered)

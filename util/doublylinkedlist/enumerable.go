@@ -5,11 +5,11 @@
 package doublylinkedlist
 
 import (
-	"gitee.com/quant1x/gox/util"
+	"gitee.com/quant1x/gox/util/internal"
 )
 
 func assertEnumerableImplementation() {
-	var _ util.EnumerableWithIndex = (*List)(nil)
+	var _ internal.EnumerableWithIndex = (*List)(nil)
 }
 
 // Each calls the given function once for each element, passing that element's index and value.

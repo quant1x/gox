@@ -6,12 +6,12 @@ package treeset
 
 import (
 	"encoding/json"
-	"gitee.com/quant1x/gox/util"
+	"gitee.com/quant1x/gox/util/internal"
 )
 
 func assertSerializationImplementation() {
-	var _ util.JSONSerializer = (*Set)(nil)
-	var _ util.JSONDeserializer = (*Set)(nil)
+	var _ internal.JSONSerializer = (*Set)(nil)
+	var _ internal.JSONDeserializer = (*Set)(nil)
 }
 
 // ToJSON outputs the JSON representation of the set.

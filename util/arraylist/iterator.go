@@ -5,11 +5,11 @@
 package arraylist
 
 import (
-	"gitee.com/quant1x/gox/util"
+	"gitee.com/quant1x/gox/util/internal"
 )
 
 func assertIteratorImplementation() {
-	var _ util.ReverseIteratorWithIndex = (*Iterator)(nil)
+	var _ internal.ReverseIteratorWithIndex = (*Iterator)(nil)
 }
 
 // Iterator holding the iterator's state

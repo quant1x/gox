@@ -5,12 +5,12 @@
 package treebidimap
 
 import (
-	"gitee.com/quant1x/gox/util"
+	"gitee.com/quant1x/gox/util/internal"
 	rbt "gitee.com/quant1x/gox/util/redblacktree"
 )
 
 func assertIteratorImplementation() {
-	var _ util.ReverseIteratorWithKey = (*Iterator)(nil)
+	var _ internal.ReverseIteratorWithKey = (*Iterator)(nil)
 }
 
 // Iterator holding the iterator's state

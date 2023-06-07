@@ -11,13 +11,13 @@ package linkedliststack
 
 import (
 	"fmt"
-	"gitee.com/quant1x/gox/util"
+	"gitee.com/quant1x/gox/util/internal"
 	"gitee.com/quant1x/gox/util/singlylinkedlist"
 	"strings"
 )
 
 func assertStackImplementation() {
-	var _ util.Stack = (*Stack)(nil)
+	var _ internal.Stack = (*Stack)(nil)
 }
 
 // Stack holds elements in a singly-linked-list

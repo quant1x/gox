@@ -5,11 +5,11 @@
 package btree
 
 import (
-	"gitee.com/quant1x/gox/util"
+	"gitee.com/quant1x/gox/util/internal"
 )
 
 func assertIteratorImplementation() {
-	var _ util.ReverseIteratorWithKey = (*Iterator)(nil)
+	var _ internal.ReverseIteratorWithKey = (*Iterator)(nil)
 }
 
 // Iterator holding the iterator's state

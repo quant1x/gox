@@ -6,12 +6,12 @@ package redblacktree
 
 import (
 	"encoding/json"
-	"gitee.com/quant1x/gox/util"
+	"gitee.com/quant1x/gox/util/internal"
 )
 
 func assertSerializationImplementation() {
-	var _ util.JSONSerializer = (*Tree)(nil)
-	var _ util.JSONDeserializer = (*Tree)(nil)
+	var _ internal.JSONSerializer = (*Tree)(nil)
+	var _ internal.JSONDeserializer = (*Tree)(nil)
 }
 
 // ToJSON outputs the JSON representation of the tree.
@@ -19,7 +19,7 @@ func (tree *Tree) ToJSON() ([]byte, error) {
 	elements := make(map[string]interface{})
 	it := tree.Iterator()
 	for it.Next() {
-		elements[util.ToString(it.Key())] = it.Value()
+		elements[internal.ToString(it.Key())] = it.Value()
 	}
 	return json.Marshal(&elements)
 }

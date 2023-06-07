@@ -11,7 +11,7 @@
 // Enumerable provides Ruby inspired (each, select, map, find, any?, etc.) container functions.
 //
 // Serialization provides serializers (marshalers) and deserializers (unmarshalers).
-package util
+package internal
 
 // Container is base interface that all data structures implement.
 type Container interface {

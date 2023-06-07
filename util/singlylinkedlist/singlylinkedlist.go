@@ -11,13 +11,12 @@ package singlylinkedlist
 
 import (
 	"fmt"
+	"gitee.com/quant1x/gox/util/internal"
 	"strings"
-
-	"gitee.com/quant1x/gox/util"
 )
 
 func assertListImplementation() {
-	var _ util.List = (*List)(nil)
+	var _ internal.List = (*List)(nil)
 }
 
 // List holds the elements, where each element points to the next element
@@ -189,14 +188,14 @@ func (list *List) Clear() {
 }
 
 // Sort sort values (in-place) using.
-func (list *List) Sort(comparator util.Comparator) {
+func (list *List) Sort(comparator internal.Comparator) {
 
 	if list.size < 2 {
 		return
 	}
 
 	values := list.Values()
-	util.Sort(values, comparator)
+	internal.Sort(values, comparator)
 
 	list.Clear()
 

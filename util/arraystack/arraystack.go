@@ -11,13 +11,13 @@ package arraystack
 
 import (
 	"fmt"
-	"gitee.com/quant1x/gox/util"
 	"gitee.com/quant1x/gox/util/arraylist"
+	"gitee.com/quant1x/gox/util/internal"
 	"strings"
 )
 
 func assertStackImplementation() {
-	var _ util.Stack = (*Stack)(nil)
+	var _ internal.Stack = (*Stack)(nil)
 }
 
 // Stack holds elements in an array-list

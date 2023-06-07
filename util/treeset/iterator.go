@@ -5,12 +5,12 @@
 package treeset
 
 import (
-	"gitee.com/quant1x/gox/util"
+	"gitee.com/quant1x/gox/util/internal"
 	rbt "gitee.com/quant1x/gox/util/redblacktree"
 )
 
 func assertIteratorImplementation() {
-	var _ util.ReverseIteratorWithIndex = (*Iterator)(nil)
+	var _ internal.ReverseIteratorWithIndex = (*Iterator)(nil)
 }
 
 // Iterator returns a stateful iterator whose values can be fetched by an index.

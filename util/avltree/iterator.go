@@ -5,11 +5,11 @@
 package avltree
 
 import (
-	"gitee.com/quant1x/gox/util"
+	"gitee.com/quant1x/gox/util/internal"
 )
 
 func assertIteratorImplementation() {
-	var _ util.ReverseIteratorWithKey = (*Iterator)(nil)
+	var _ internal.ReverseIteratorWithKey = (*Iterator)(nil)
 }
 
 // Iterator holding the iterator's state
@@ -26,7 +26,7 @@ const (
 )
 
 // Iterator returns a stateful iterator whose elements are key/value pairs.
-func (tree *Tree) Iterator() util.ReverseIteratorWithKey {
+func (tree *Tree) Iterator() internal.ReverseIteratorWithKey {
 	return &Iterator{tree: tree, node: nil, position: begin}
 }
 

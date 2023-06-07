@@ -4,7 +4,7 @@
 
 // All data structures must implement the container structure
 
-package util
+package internal
 
 import (
 	"testing"

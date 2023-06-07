@@ -13,7 +13,7 @@
 // - the lookup of a value associated with a particular key
 //
 // Reference: https://en.wikipedia.org/wiki/Associative_array
-package util
+package internal
 
 // Map interface that all maps implement
 type Map interface {

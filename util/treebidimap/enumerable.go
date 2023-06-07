@@ -4,10 +4,12 @@
 
 package treebidimap
 
-import "gitee.com/quant1x/gox/util"
+import (
+	"gitee.com/quant1x/gox/util/internal"
+)
 
 func assertEnumerableImplementation() {
-	var _ util.EnumerableWithKey = (*Map)(nil)
+	var _ internal.EnumerableWithKey = (*Map)(nil)
 }
 
 // Each calls the given function once for each element, passing that element's key and value.

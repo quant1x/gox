@@ -4,11 +4,13 @@
 
 package treemap
 
-import "gitee.com/quant1x/gox/util"
+import (
+	"gitee.com/quant1x/gox/util/internal"
+)
 
 func assertSerializationImplementation() {
-	var _ util.JSONSerializer = (*Map)(nil)
-	var _ util.JSONDeserializer = (*Map)(nil)
+	var _ internal.JSONSerializer = (*Map)(nil)
+	var _ internal.JSONDeserializer = (*Map)(nil)
 }
 
 // ToJSON outputs the JSON representation of the map.

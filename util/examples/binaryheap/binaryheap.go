@@ -5,8 +5,8 @@
 package main
 
 import (
-	"gitee.com/quant1x/gox/util"
 	"gitee.com/quant1x/gox/util/binaryheap"
+	"gitee.com/quant1x/gox/util/internal"
 )
 
 // BinaryHeapExample to demonstrate basic usage of BinaryHeap
@@ -30,7 +30,7 @@ func main() {
 
 	// Max-heap
 	inverseIntComparator := func(a, b interface{}) int {
-		return -util.IntComparator(a, b)
+		return -internal.IntComparator(a, b)
 	}
 	heap = binaryheap.NewWith(inverseIntComparator) // empty (min-heap)
 	heap.Push(2)                                    // 2

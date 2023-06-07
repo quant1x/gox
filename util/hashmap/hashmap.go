@@ -13,11 +13,11 @@ package hashmap
 
 import (
 	"fmt"
-	"gitee.com/quant1x/gox/util"
+	"gitee.com/quant1x/gox/util/internal"
 )
 
 func assertMapImplementation() {
-	var _ util.Map = (*Map)(nil)
+	var _ internal.Map = (*Map)(nil)
 }
 
 // Map holds the elements in go's native map

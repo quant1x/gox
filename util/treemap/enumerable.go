@@ -5,12 +5,12 @@
 package treemap
 
 import (
-	"gitee.com/quant1x/gox/util"
+	"gitee.com/quant1x/gox/util/internal"
 	rbt "gitee.com/quant1x/gox/util/redblacktree"
 )
 
 func assertEnumerableImplementation() {
-	var _ util.EnumerableWithKey = (*Map)(nil)
+	var _ internal.EnumerableWithKey = (*Map)(nil)
 }
 
 // Each calls the given function once for each element, passing that element's key and value.

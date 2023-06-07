@@ -5,12 +5,12 @@
 package binaryheap
 
 import (
-	"gitee.com/quant1x/gox/util"
+	"gitee.com/quant1x/gox/util/internal"
 )
 
 func assertSerializationImplementation() {
-	var _ util.JSONSerializer = (*Heap)(nil)
-	var _ util.JSONDeserializer = (*Heap)(nil)
+	var _ internal.JSONSerializer = (*Heap)(nil)
+	var _ internal.JSONDeserializer = (*Heap)(nil)
 }
 
 // ToJSON outputs the JSON representation of the heap.
