@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.6.2] - 2023-06-07
+### Changed
+- 修订部分util工具库.
+
 ## [1.6.1] - 2023-06-06
 ### Changed
 - 新增四舍五入, 日期时间等函数.
@@ -492,8 +496,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.6.1...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.6.2...HEAD
 
+[1.6.2]: https://gitee.com/quant1x/gox/compare/v1.6.1...v1.6.2
 [1.6.1]: https://gitee.com/quant1x/gox/compare/v1.6.0...v1.6.1
 [1.6.0]: https://gitee.com/quant1x/gox/compare/v1.5.1...v1.6.0
 [1.5.1]: https://gitee.com/quant1x/gox/compare/v1.5.0...v1.5.1
