@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.6.3] - 2023-06-11
+### Changed
+- 修订Copy的两个入参, 限制必须是指针.
+
 ## [1.6.2] - 2023-06-07
 ### Changed
 - 修订部分util工具库.
@@ -496,8 +500,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.6.2...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.6.3...HEAD
 
+[1.6.3]: https://gitee.com/quant1x/gox/compare/v1.6.2...v1.6.3
 [1.6.2]: https://gitee.com/quant1x/gox/compare/v1.6.1...v1.6.2
 [1.6.1]: https://gitee.com/quant1x/gox/compare/v1.6.0...v1.6.1
 [1.6.0]: https://gitee.com/quant1x/gox/compare/v1.5.1...v1.6.0
