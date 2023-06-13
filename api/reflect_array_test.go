@@ -21,7 +21,7 @@ type T2 struct {
 }
 
 func Test_main(t *testing.T) {
-	t0 := T1{f1:"1", f2:"2", f3:"3", f4:4, f5:5}
+	t0 := T1{f1: "1", f2: "2", f3: "3", f4: 4, f5: 5}
 	t1 := reflect.TypeOf(t0)
 	f1, _ := t1.FieldByName("f1")
 	fmt.Println(f1.Tag) // f one
@@ -48,5 +48,6 @@ func TestConvert(t *testing.T) {
 	str := "a0,a1,a2,a3,a4,a5"
 	sa := strings.Split(str, ",")
 	var t2 T2
-	Convert(sa, &t2)
+	_ = Convert(sa, &t2)
+	fmt.Println(t2)
 }

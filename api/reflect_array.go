@@ -42,7 +42,8 @@ func initTag(t reflect.Type) map[int]reflect.StructField {
 	return ma
 }
 
-func Convert(data []string, v interface{}) error {
+// Convert 将字符串数组按照下标的序号反射给一个结构体
+func Convert[T any](data []string, v *T) error {
 	val := reflect.ValueOf(v)
 	//t := reflect.TypeOf(v)
 	//fieldNum := val.NumField()
