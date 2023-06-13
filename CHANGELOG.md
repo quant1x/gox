@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.6.5] - 2023-06-13
+### Changed
+- 新增排序和去重两个新函数.
+
 ## [1.6.4] - 2023-06-13
 ### Changed
 - 微调字符串数组转结构体的函数.
@@ -505,8 +509,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.6.4...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.6.5...HEAD
 
+[1.6.5]: https://gitee.com/quant1x/gox/compare/v1.6.4...v1.6.5
 [1.6.4]: https://gitee.com/quant1x/gox/compare/v1.6.3...v1.6.4
 [1.6.3]: https://gitee.com/quant1x/gox/compare/v1.6.2...v1.6.3
 [1.6.2]: https://gitee.com/quant1x/gox/compare/v1.6.1...v1.6.2
