@@ -184,7 +184,7 @@ func (b *Bar) run() {
 		}
 	}()
 	for range b.advance {
-		printf(b.line, "\r%s", b.barMsg())
+		barPrintf(b.line, "\r%s", b.barMsg())
 	}
 }
 

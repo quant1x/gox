@@ -14,43 +14,43 @@ var (
 	gMaxLine     = 0 //最大行
 )
 
-func move(line int) {
+func barMove(line int) {
 	//fmt.Println("\n\n\n\n", gCurrentLine, line)
 	fmt.Printf("\033[%dA\033[%dB", gCurrentLine, line)
 	gCurrentLine = line
 }
 
-func print(line int, args ...interface{}) {
+func barPrint(line int, args ...interface{}) {
 	mu.Lock()
 	defer mu.Unlock()
 
-	move(line)
+	barMove(line)
 	var realArgs []interface{}
 	realArgs = append(realArgs, "\r")
 	realArgs = append(realArgs, args...)
 	fmt.Print(realArgs...)
-	move(gMaxLine)
+	barMove(gMaxLine)
 }
 
-func printf(line int, format string, args ...interface{}) {
+func barPrintf(line int, format string, args ...interface{}) {
 	mu.Lock()
 	defer mu.Unlock()
 
-	move(line)
+	barMove(line)
 	fmt.Printf("\r"+format, args...)
-	move(gMaxLine)
+	barMove(gMaxLine)
 }
 
-func println(line int, args ...interface{}) {
+func barPrintln(line int, args ...interface{}) {
 	mu.Lock()
 	defer mu.Unlock()
 
-	move(line)
+	barMove(line)
 	var realArgs []interface{}
 	realArgs = append(realArgs, "\r")
 	realArgs = append(realArgs, args...)
 	fmt.Print(realArgs...)
-	move(gMaxLine)
+	barMove(gMaxLine)
 }
 
 func Print(args ...interface{}) {
@@ -63,7 +63,7 @@ func Print(args ...interface{}) {
 	}
 	mu.Unlock()
 
-	print(gMaxLine, args...)
+	barPrint(gMaxLine, args...)
 }
 
 func Printf(format string, args ...interface{}) {
@@ -77,7 +77,7 @@ func Printf(format string, args ...interface{}) {
 	}
 	mu.Unlock()
 
-	printf(gMaxLine, format, args...)
+	barPrintf(gMaxLine, format, args...)
 }
 
 func Println(args ...interface{}) {
@@ -92,7 +92,7 @@ func Println(args ...interface{}) {
 	}
 	mu.Unlock()
 
-	println(gMaxLine, args...)
+	barPrintln(gMaxLine, args...)
 }
 
 func countLF(format string, args ...interface{}) int {
