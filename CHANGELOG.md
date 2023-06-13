@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.6.4] - 2023-06-13
+### Changed
+- 微调字符串数组转结构体的函数.
+- 修订部分警告信息.
+
 ## [1.6.3] - 2023-06-11
 ### Changed
 - 修订Copy的两个入参, 限制必须是指针.
@@ -500,8 +505,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.6.3...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.6.4...HEAD
 
+[1.6.4]: https://gitee.com/quant1x/gox/compare/v1.6.3...v1.6.4
 [1.6.3]: https://gitee.com/quant1x/gox/compare/v1.6.2...v1.6.3
 [1.6.2]: https://gitee.com/quant1x/gox/compare/v1.6.1...v1.6.2
 [1.6.1]: https://gitee.com/quant1x/gox/compare/v1.6.0...v1.6.1
