@@ -4,6 +4,7 @@ go 1.20
 
 require (
 	github.com/chewxy/math32 v1.10.1
+	github.com/gocarina/gocsv v0.0.0-20230513223533-9ddd7fd60602
 	github.com/mmcloughlin/avo v0.5.0
 	github.com/stretchr/testify v1.8.4
 	github.com/viterin/partial v1.0.0
