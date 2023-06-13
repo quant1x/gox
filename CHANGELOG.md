@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.6.7] - 2023-06-14
+### Changed
+- 新增slice和csv文件互转的函数.
+
 ## [1.6.6] - 2023-06-14
 ### Changed
 - 新增MultiOnce组件, 可以重置的Sync.Once.
@@ -513,8 +517,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.6.6...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.6.7...HEAD
 
+[1.6.7]: https://gitee.com/quant1x/gox/compare/v1.6.6...v1.6.7
 [1.6.6]: https://gitee.com/quant1x/gox/compare/v1.6.5...v1.6.6
 [1.6.5]: https://gitee.com/quant1x/gox/compare/v1.6.4...v1.6.5
 [1.6.4]: https://gitee.com/quant1x/gox/compare/v1.6.3...v1.6.4
