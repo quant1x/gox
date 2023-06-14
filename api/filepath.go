@@ -56,3 +56,22 @@ func CheckFilepath(filename string, notExistToCreate ...bool) error {
 	}
 	return os.ErrNotExist
 }
+
+// FileExist 路径是否存在
+func FileExist(path string) bool {
+	_, err := os.Lstat(path)
+	return !os.IsNotExist(err)
+}
+
+// FileIsValid 检查文件是否有效
+func FileIsValid(path string) bool {
+	finfo, err := os.Lstat(path)
+	found := !os.IsNotExist(err)
+	if !found {
+		return false
+	}
+	if finfo.Size() > 2 {
+		return true
+	}
+	return false
+}
