@@ -17,7 +17,7 @@ func SliceSort[S ~[]E, E any](slice S, less func(a, b E) bool) {
 // SliceUnique sorts the slice pointed by the provided pointer given the provided
 // less function and removes repeated elements.
 // The function panics if the provided interface is not a pointer to a slice.
-func SliceUnique(slicePtr interface{}, less func(i, j int) bool) {
+func SliceUnique[S ~[]E, E any](slicePtr *S, less func(i, j int) bool) {
 	v := reflect.ValueOf(slicePtr).Elem()
 	if v.Len() <= 1 {
 		return
