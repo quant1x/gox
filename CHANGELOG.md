@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.6.9] - 2023-06-14
+### Changed
+- SliceUnique函数第一个参数约束为指针.
+
 ## [1.6.8] - 2023-06-14
 ### Changed
 - 新增文件系统相关的检测函数.
@@ -521,8 +525,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.6.8...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.6.9...HEAD
 
+[1.6.9]: https://gitee.com/quant1x/gox/compare/v1.6.8...v1.6.9
 [1.6.8]: https://gitee.com/quant1x/gox/compare/v1.6.7...v1.6.8
 [1.6.7]: https://gitee.com/quant1x/gox/compare/v1.6.6...v1.6.7
 [1.6.6]: https://gitee.com/quant1x/gox/compare/v1.6.5...v1.6.6
