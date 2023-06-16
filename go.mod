@@ -4,12 +4,12 @@ go 1.20
 
 require (
 	github.com/chewxy/math32 v1.10.1
-	github.com/gocarina/gocsv v0.0.0-20230513223533-9ddd7fd60602
+	github.com/gocarina/gocsv v0.0.0-20230614100527-2696de6cd848
 	github.com/mmcloughlin/avo v0.5.0
 	github.com/stretchr/testify v1.8.4
 	github.com/viterin/partial v1.0.0
 	golang.org/x/exp v0.0.0-20230522175609-2e198f4a06a1
-	golang.org/x/sys v0.8.0
+	golang.org/x/sys v0.9.0
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c
 	rsc.io/qr v0.2.0
 )
