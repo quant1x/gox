@@ -44,13 +44,9 @@ func initTag(t reflect.Type) map[int]reflect.StructField {
 
 // Convert 将字符串数组按照下标的序号反射给一个结构体
 func Convert[T any](data []string, v *T) error {
-	val := reflect.ValueOf(v)
-	//t := reflect.TypeOf(v)
-	//fieldNum := val.NumField()
-	//_ = fieldNum
 	obj := reflect.ValueOf(v)
-	t := val.Type()
-	if val.Kind() == reflect.Ptr {
+	t := obj.Type()
+	if obj.Kind() == reflect.Ptr {
 		t = t.Elem()
 		obj = obj.Elem()
 	}
@@ -58,8 +54,9 @@ func Convert[T any](data []string, v *T) error {
 	if ma == nil {
 		return errors.New("can not Convert")
 	}
-	dl := len(data)
-	for i := 0; i < dl; i++ {
+	//fieldNum := t.NumField()
+	fieldNum := len(data)
+	for i := 0; i < fieldNum; i++ {
 		field, ok := ma[i]
 		if ok {
 			dv := data[i]
@@ -68,7 +65,7 @@ func Convert[T any](data []string, v *T) error {
 				var value interface{}
 				switch ov.Interface().(type) {
 				case string:
-					value = string(dv)
+					value = dv
 				case int8:
 					t := ParseInt(dv)
 					value = int8(t)
