@@ -118,3 +118,34 @@ func GetQuarterDay(months ...int) (string, string) {
 	}
 	return firstOfQuarter, lastOfQuarter
 }
+
+// GetQuarterDayByDate 通过给定的日期 获得日期所在上一个季度的初始和结束日期
+//
+//	diffQuarters 季度偏移数, 大于0前移diffQuarters个季度, 小于0后移diffQuarters个季度, 默认为当前季度
+func GetQuarterDayByDate(date string, diffQuarters ...int) (string, string) {
+	diff := 1
+	if len(diffQuarters) > 0 {
+		diff = diffQuarters[0]
+	}
+	now, _ := ParseTime(date)
+	now = now.AddDate(0, -3*diff, 0)
+	year := now.Format(YearOnly)
+	month := int(now.Month())
+	var firstOfQuarter string
+	var lastOfQuarter string
+	if month >= 1 && month <= 3 {
+		//1月1号
+		firstOfQuarter = year + "-01-01 00:00:00"
+		lastOfQuarter = year + "-03-31 23:59:59"
+	} else if month >= 4 && month <= 6 {
+		firstOfQuarter = year + "-04-01 00:00:00"
+		lastOfQuarter = year + "-06-30 23:59:59"
+	} else if month >= 7 && month <= 9 {
+		firstOfQuarter = year + "-07-01 00:00:00"
+		lastOfQuarter = year + "-09-30 23:59:59"
+	} else {
+		firstOfQuarter = year + "-10-01 00:00:00"
+		lastOfQuarter = year + "-12-31 23:59:59"
+	}
+	return firstOfQuarter, lastOfQuarter
+}

@@ -103,4 +103,17 @@ func TestParseTime(t *testing.T) {
 func TestGetQuarterDay(t *testing.T) {
 	s, e := GetQuarterDay(4)
 	fmt.Println(s, e)
+	fmt.Println("------------------------------------------------------------")
+	date := "2023-04-01"
+	fmt.Print(date, " => ")
+	s, e = GetQuarterDayByDate(date)
+	fmt.Println(s, e)
+	date = "2023-03-31"
+	fmt.Print(date, " => ")
+	s, e = GetQuarterDayByDate(date)
+	fmt.Println(s, e)
+	date = "2023-06-30"
+	fmt.Print(date, " => ")
+	s, e = GetQuarterDayByDate(date)
+	fmt.Println(s, e)
 }
