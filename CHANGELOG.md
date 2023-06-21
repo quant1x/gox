@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.7.4] - 2023-06-21
+### Changed
+- 增加计算指定日期的季度开始和结束时间函数.
+
 ## [1.7.3] - 2023-06-17
 ### Changed
 - 修复字符串数据反射结构体存在数组长度和字段数量不匹配导致数据缺失的bug.
@@ -541,8 +545,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.7.3...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.7.4...HEAD
 
+[1.7.4]: https://gitee.com/quant1x/gox/compare/v1.7.3...v1.7.4
 [1.7.3]: https://gitee.com/quant1x/gox/compare/v1.7.2...v1.7.3
 [1.7.2]: https://gitee.com/quant1x/gox/compare/v1.7.1...v1.7.2
 [1.7.1]: https://gitee.com/quant1x/gox/compare/v1.7.0...v1.7.1
