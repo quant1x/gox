@@ -122,8 +122,20 @@ func GetQuarterDay(months ...int) (string, string) {
 // GetQuarterDayByDate 通过给定的日期 获得日期所在上一个季度的初始和结束日期
 //
 //	diffQuarters 季度偏移数, 大于0前移diffQuarters个季度, 小于0后移diffQuarters个季度, 默认为当前季度
-func GetQuarterDayByDate(date string, diffQuarters ...int) (string, string) {
+func GetQuarterDayByDate(date string, diffQuarters ...int) (firstOfQuarter, lastOfQuarter string) {
 	diff := 1
+	if len(diffQuarters) > 0 {
+		diff = diffQuarters[0]
+	}
+	_, firstOfQuarter, lastOfQuarter = GetQuarterByDate(date, diff)
+	return firstOfQuarter, lastOfQuarter
+}
+
+// GetQuarterByDate 通过给定的日期 获得日期所在财报的季度、初始以及结束日期
+//
+//	diffQuarters 季度偏移数, 大于0前移diffQuarters个季度, 小于0后移diffQuarters个季度, 默认为当前季度
+func GetQuarterByDate(date string, diffQuarters ...int) (quarter, first, last string) {
+	diff := 0
 	if len(diffQuarters) > 0 {
 		diff = diffQuarters[0]
 	}
@@ -137,15 +149,19 @@ func GetQuarterDayByDate(date string, diffQuarters ...int) (string, string) {
 		//1月1号
 		firstOfQuarter = year + "-01-01 00:00:00"
 		lastOfQuarter = year + "-03-31 23:59:59"
+		quarter = year + "Q1"
 	} else if month >= 4 && month <= 6 {
 		firstOfQuarter = year + "-04-01 00:00:00"
 		lastOfQuarter = year + "-06-30 23:59:59"
+		quarter = year + "Q2"
 	} else if month >= 7 && month <= 9 {
 		firstOfQuarter = year + "-07-01 00:00:00"
 		lastOfQuarter = year + "-09-30 23:59:59"
+		quarter = year + "Q4"
 	} else {
 		firstOfQuarter = year + "-10-01 00:00:00"
 		lastOfQuarter = year + "-12-31 23:59:59"
+		quarter = year + "Q4"
 	}
-	return firstOfQuarter, lastOfQuarter
+	return quarter, firstOfQuarter, lastOfQuarter
 }
