@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.7.6] - 2023-06-24
+### Changed
+- 季度函数增加财报季的返回值.
+
 ## [1.7.5] - 2023-06-21
 ### Changed
 - 新增一个定时调度任务, 回调函数不会并发执行.
@@ -549,8 +553,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.7.5...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.7.6...HEAD
 
+[1.7.6]: https://gitee.com/quant1x/gox/compare/v1.7.5...v1.7.6
 [1.7.5]: https://gitee.com/quant1x/gox/compare/v1.7.4...v1.7.5
 [1.7.4]: https://gitee.com/quant1x/gox/compare/v1.7.3...v1.7.4
 [1.7.3]: https://gitee.com/quant1x/gox/compare/v1.7.2...v1.7.3
