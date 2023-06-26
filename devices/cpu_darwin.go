@@ -1,6 +1,6 @@
 //go:build !windows
 
-package licenses
+package devices
 
 import (
 	"gitee.com/quant1x/gox/api"

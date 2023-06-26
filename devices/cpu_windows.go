@@ -1,6 +1,6 @@
 //go:build windows
 
-package licenses
+package devices
 
 import (
 	"os/exec"
