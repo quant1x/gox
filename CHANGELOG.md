@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.7.8] - 2023-06-27
+### Changed
+- 增加CPU序列号的获取函数.
+
 ## [1.7.7] - 2023-06-26
 ### Changed
 - 新增项目内的消息队列.
@@ -557,8 +561,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.7.7...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.7.8...HEAD
 
+[1.7.8]: https://gitee.com/quant1x/gox/compare/v1.7.7...v1.7.8
 [1.7.7]: https://gitee.com/quant1x/gox/compare/v1.7.6...v1.7.7
 [1.7.6]: https://gitee.com/quant1x/gox/compare/v1.7.5...v1.7.6
 [1.7.5]: https://gitee.com/quant1x/gox/compare/v1.7.4...v1.7.5
