@@ -249,7 +249,7 @@ func (c *channelPool) CloseAll() {
 	}
 
 	for wrapConn := range c.conns {
-		_ = c.Close(wrapConn.conn)
+		_ = c.close(wrapConn.conn)
 		c.openingConns--
 	}
 }
