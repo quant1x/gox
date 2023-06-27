@@ -235,8 +235,22 @@ func (c *channelPool) Release() {
 
 	close(conns)
 	for wrapConn := range conns {
-		//log.Printf("Type %v\n",reflect.TypeOf(wrapConn.conn))
 		_ = closeFun(wrapConn.conn)
+	}
+}
+
+// CloseAll 仅关闭连接池中所有连接
+func (c *channelPool) CloseAll() {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+
+	if c.conns == nil || c.close == nil {
+		return
+	}
+
+	for wrapConn := range c.conns {
+		_ = c.Close(wrapConn.conn)
+		c.openingConns--
 	}
 }
 
