@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.8.3] - 2023-06-27
+### Changed
+- 修复chanel阻塞的bug.
+
 ## [1.8.2] - 2023-06-27
 ### Changed
 - 修复死锁的bug.
@@ -577,8 +581,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.8.2...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.8.3...HEAD
 
+[1.8.3]: https://gitee.com/quant1x/gox/compare/v1.8.2...v1.8.3
 [1.8.2]: https://gitee.com/quant1x/gox/compare/v1.8.1...v1.8.2
 [1.8.1]: https://gitee.com/quant1x/gox/compare/v1.8.0...v1.8.1
 [1.8.0]: https://gitee.com/quant1x/gox/compare/v1.7.9...v1.8.0
