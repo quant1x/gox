@@ -243,14 +243,15 @@ func (c *channelPool) Release() {
 func (c *channelPool) CloseAll() {
 	c.mu.Lock()
 	defer c.mu.Unlock()
-
 	if c.conns == nil || c.close == nil {
 		return
 	}
-
-	for wrapConn := range c.conns {
+	select {
+	case wrapConn := <-c.conns:
 		_ = c.close(wrapConn.conn)
 		c.openingConns--
+	default:
+		break
 	}
 }
 
