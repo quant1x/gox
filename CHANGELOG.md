@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.8.1] - 2023-06-27
+### Changed
+- 连接池增加关闭所有链接的方法.
+
 ## [1.8.0] - 2023-06-27
 ### Changed
 - 增加base64算法.
@@ -569,8 +573,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.8.0...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.8.1...HEAD
 
+[1.8.1]: https://gitee.com/quant1x/gox/compare/v1.8.0...v1.8.1
 [1.8.0]: https://gitee.com/quant1x/gox/compare/v1.7.9...v1.8.0
 [1.7.9]: https://gitee.com/quant1x/gox/compare/v1.7.8...v1.7.9
 [1.7.8]: https://gitee.com/quant1x/gox/compare/v1.7.7...v1.7.8
