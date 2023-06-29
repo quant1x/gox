@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.8.6] - 2023-06-30
+### Changed
+- 增加日期切换功能, 默认不开启.
+
 ## [1.8.5] - 2023-06-29
 ### Changed
 - 没必要加锁, 加锁是个多余的操作.
@@ -589,8 +593,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.8.5...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.8.6...HEAD
 
+[1.8.6]: https://gitee.com/quant1x/gox/compare/v1.8.5...v1.8.6
 [1.8.5]: https://gitee.com/quant1x/gox/compare/v1.8.4...v1.8.5
 [1.8.4]: https://gitee.com/quant1x/gox/compare/v1.8.3...v1.8.4
 [1.8.3]: https://gitee.com/quant1x/gox/compare/v1.8.2...v1.8.3
