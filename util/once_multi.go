@@ -47,8 +47,6 @@ func (o *MultiOnce) doReset(currentDate string) {
 	o.m.Lock()
 	defer o.m.Unlock()
 	if o.done == 1 && currentDate > o.date {
-		o.m.Lock()
-		defer o.m.Unlock()
 		atomic.StoreUint32(&o.done, 0)
 		o.date = currentDate
 	}
