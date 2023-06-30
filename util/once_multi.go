@@ -3,6 +3,12 @@ package util
 import (
 	"sync"
 	"sync/atomic"
+	"time"
+)
+
+const (
+	onceInitTime    = "09:00:00"
+	onceDefaultDate = "1970-01-01"
 )
 
 type MultiOnce struct {
@@ -11,8 +17,18 @@ type MultiOnce struct {
 	date string
 }
 
+// 校对当前日期
+func proofreadCurrentDate() (currentDate string) {
+	now := time.Now()
+	timestamp := now.Format(time.TimeOnly)
+	if timestamp >= onceInitTime {
+		currentDate = now.Format(time.DateOnly)
+	}
+	return onceDefaultDate
+}
+
 func (o *MultiOnce) Do(f func(), today ...func() (newDate string)) {
-	var getToday func() (newDate string)
+	getToday := proofreadCurrentDate
 	if len(today) > 0 {
 		getToday = today[0]
 	}
