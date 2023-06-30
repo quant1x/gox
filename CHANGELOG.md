@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.8.7] - 2023-06-30
+### Changed
+- 增加默认初始化日期函数.
+
 ## [1.8.6] - 2023-06-30
 ### Changed
 - 增加日期切换功能, 默认不开启.
@@ -593,8 +597,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.8.6...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.8.7...HEAD
 
+[1.8.7]: https://gitee.com/quant1x/gox/compare/v1.8.6...v1.8.7
 [1.8.6]: https://gitee.com/quant1x/gox/compare/v1.8.5...v1.8.6
 [1.8.5]: https://gitee.com/quant1x/gox/compare/v1.8.4...v1.8.5
 [1.8.4]: https://gitee.com/quant1x/gox/compare/v1.8.3...v1.8.4
