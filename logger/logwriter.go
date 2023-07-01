@@ -3,6 +3,7 @@ package logger
 import (
 	"compress/gzip"
 	"fmt"
+	"gitee.com/quant1x/gox/api"
 	"io"
 	"os"
 	"path/filepath"
@@ -51,7 +52,7 @@ type DateType uint8
 func reOpenFile(path string, currFile **os.File, openTime *int64) {
 	*openTime = currUnixTime
 	if *currFile != nil {
-		(*currFile).Close()
+		_ = (*currFile).Close()
 	}
 	of, err := os.OpenFile(path, os.O_WRONLY|os.O_APPEND|os.O_CREATE, 0666)
 	if err == nil {
@@ -120,12 +121,12 @@ func (w *RollFileWriter) NeedPrefix() bool {
 // 压缩 使用gzip压缩成tar.gz
 func gzipFile(source string) error {
 	dest := source + ".gz"
-	os.Remove(dest)
+	_ = os.Remove(dest)
 	newfile, err := os.Create(dest)
 	if err != nil {
 		return err
 	}
-	defer newfile.Close()
+	defer api.CloseQuietly(newfile)
 
 	file, err := os.Open(source)
 	if err != nil {
@@ -146,7 +147,7 @@ func gzipFile(source string) error {
 		return nil
 	}
 
-	zw.Flush()
+	_ = zw.Flush()
 	if err := zw.Close(); err != nil {
 		return nil
 	}
@@ -181,13 +182,13 @@ func (w *DateWriter) Write(v []byte) {
 		}
 		w.currDate = currDate
 
-		gzipFile(destFile)
+		_ = gzipFile(destFile)
 		w.cleanOldLogs()
 		reOpenFile(fullPath, &w.currFile, &w.openTime)
 		// 清理旧文件 [wangfeng on 2018/12/25 12:39]
-		os.Remove(destFile)
+		_ = os.Remove(destFile)
 	}
-	w.currFile.Write(v)
+	_, _ = w.currFile.Write(v)
 }
 
 func (w *DateWriter) NeedPrefix() bool {
@@ -228,7 +229,7 @@ func (w *DateWriter) cleanOldLogs() {
 		k := t.Format(format)
 		fullPath := filepath.Join(w.logpath, w.name+".log."+k+".gz")
 		if _, err := os.Stat(fullPath); !os.IsNotExist(err) {
-			os.Remove(fullPath)
+			_ = os.Remove(fullPath)
 		}
 	}
 	return
