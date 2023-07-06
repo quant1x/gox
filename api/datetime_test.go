@@ -117,3 +117,11 @@ func TestGetQuarterDay(t *testing.T) {
 	s, e = GetQuarterDayByDate(date)
 	fmt.Println(s, e)
 }
+
+func TestGetWeekDay(t *testing.T) {
+	s, e := GetWeekDay()
+	fmt.Println(s, e)
+
+	s, e = GetWeekDay("20230630")
+	fmt.Println(s, e)
+}

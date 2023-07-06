@@ -57,8 +57,14 @@ func IsWorkday(t time.Time) bool {
 }
 
 // GetMonthDay 获得当前月的初始和结束日期
-func GetMonthDay() (string, string) {
+func GetMonthDay(date ...string) (string, string) {
 	now := time.Now()
+	if len(date) > 0 {
+		day, err := ParseTime(date[0])
+		if err == nil {
+			now = day
+		}
+	}
 	currentYear, currentMonth, _ := now.Date()
 	currentLocation := now.Location()
 
@@ -70,8 +76,14 @@ func GetMonthDay() (string, string) {
 }
 
 // GetWeekDay 获得当前周的初始和结束日期
-func GetWeekDay() (string, string) {
+func GetWeekDay(date ...string) (string, string) {
 	now := time.Now()
+	if len(date) > 0 {
+		day, err := ParseTime(date[0])
+		if err == nil {
+			now = day
+		}
+	}
 	offset := int(time.Monday - now.Weekday())
 	//周日做特殊判断 因为time.Monday = 0
 	if offset > 0 {
