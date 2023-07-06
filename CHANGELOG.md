@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.9.0] - 2023-07-06
+### Changed
+- 优化slice去重函数.
+- 调整获取周、月开始和结束时间的函数.
+
 ## [1.8.9] - 2023-07-02
 ### Changed
 - 修复文件句柄未关闭的bug.
@@ -606,8 +611,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.8.9...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.9.0...HEAD
 
+[1.9.0]: https://gitee.com/quant1x/gox/compare/v1.8.9...v1.9.0
 [1.8.9]: https://gitee.com/quant1x/gox/compare/v1.8.8...v1.8.9
 [1.8.8]: https://gitee.com/quant1x/gox/compare/v1.8.7...v1.8.8
 [1.8.7]: https://gitee.com/quant1x/gox/compare/v1.8.6...v1.8.7
