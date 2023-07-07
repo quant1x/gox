@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.9.1] - 2023-07-07
+### Changed
+- 判断float是否NaN.
+
 ## [1.9.0] - 2023-07-06
 ### Changed
 - 优化slice去重函数.
@@ -611,8 +615,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.9.0...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.9.1...HEAD
 
+[1.9.1]: https://gitee.com/quant1x/gox/compare/v1.9.0...v1.9.1
 [1.9.0]: https://gitee.com/quant1x/gox/compare/v1.8.9...v1.9.0
 [1.8.9]: https://gitee.com/quant1x/gox/compare/v1.8.8...v1.8.9
 [1.8.8]: https://gitee.com/quant1x/gox/compare/v1.8.7...v1.8.8
