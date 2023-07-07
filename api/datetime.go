@@ -169,7 +169,7 @@ func GetQuarterByDate(date string, diffQuarters ...int) (quarter, first, last st
 	} else if month >= 7 && month <= 9 {
 		firstOfQuarter = year + "-07-01 00:00:00"
 		lastOfQuarter = year + "-09-30 23:59:59"
-		quarter = year + "Q4"
+		quarter = year + "Q3"
 	} else {
 		firstOfQuarter = year + "-10-01 00:00:00"
 		lastOfQuarter = year + "-12-31 23:59:59"
