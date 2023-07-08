@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.9.3] - 2023-07-08
+### Changed
+- 更新依赖库版本.
+
 ## [1.9.2] - 2023-07-08
 ### Changed
 - 修复季度编码的bug.
@@ -619,8 +623,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.9.2...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.9.3...HEAD
 
+[1.9.3]: https://gitee.com/quant1x/gox/compare/v1.9.2...v1.9.3
 [1.9.2]: https://gitee.com/quant1x/gox/compare/v1.9.1...v1.9.2
 [1.9.1]: https://gitee.com/quant1x/gox/compare/v1.9.0...v1.9.1
 [1.9.0]: https://gitee.com/quant1x/gox/compare/v1.8.9...v1.9.0
