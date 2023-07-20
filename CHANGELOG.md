@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.9.5] - 2023-07-21
+### Changed
+- 恢复daemon的demo.
+- 删除daemon的demo.
+
 ## [1.9.4] - 2023-07-20
 ### Changed
 - 新增daemon工具库.
@@ -627,8 +632,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.9.4...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.9.5...HEAD
 
+[1.9.5]: https://gitee.com/quant1x/gox/compare/v1.9.4...v1.9.5
 [1.9.4]: https://gitee.com/quant1x/gox/compare/v1.9.3...v1.9.4
 [1.9.3]: https://gitee.com/quant1x/gox/compare/v1.9.2...v1.9.3
 [1.9.2]: https://gitee.com/quant1x/gox/compare/v1.9.1...v1.9.2
