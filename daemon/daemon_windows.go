@@ -8,7 +8,6 @@ package daemon
 import (
 	"errors"
 	"fmt"
-	"gitee.com/quant1x/gox/logger"
 	"golang.org/x/sys/windows"
 	"golang.org/x/sys/windows/registry"
 	"golang.org/x/sys/windows/svc"
@@ -27,10 +26,6 @@ type windowsRecord struct {
 	description  string
 	kind         Kind
 	dependencies []string
-}
-
-func init() {
-	logger.InitLogger("C:/Users/wangfeng/.quant1x/logs", logger.INFO)
 }
 
 func newDaemon(name, description string, kind Kind, dependencies []string) (Daemon, error) {
@@ -303,17 +298,12 @@ type serviceHandler struct {
 
 func (sh *serviceHandler) Execute(args []string, r <-chan svc.ChangeRequest, changes chan<- svc.Status) (ssec bool, errno uint32) {
 	const cmdsAccepted = svc.AcceptStop | svc.AcceptShutdown | svc.AcceptPauseAndContinue
-	logger.Infof("1...")
 	changes <- svc.Status{State: svc.StartPending}
-	logger.Infof("2...")
 	fasttick := time.Tick(500 * time.Millisecond)
 	slowtick := time.Tick(2 * time.Second)
 	tick := fasttick
-	logger.Infof("3...")
 	sh.executable.Start()
-	logger.Infof("4...")
 	changes <- svc.Status{State: svc.Running, Accepts: cmdsAccepted}
-	logger.Infof("5...")
 loop:
 	for {
 		select {
@@ -341,7 +331,6 @@ loop:
 			}
 		}
 	}
-	logger.Infof("6...")
 	return
 }
 
