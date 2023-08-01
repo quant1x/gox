@@ -348,9 +348,10 @@ func (windows *windowsRecord) Run(e Executable) (string, error) {
 	if !interactive {
 		// service called from windows service manager
 		// use API provided by golang.org/x/sys/windows
-		err = svc.Run(windows.name, &serviceHandler{
-			executable: e,
-		})
+		//err = svc.Run(windows.name, &serviceHandler{
+		//	executable: e,
+		//})
+		err = svc.Run(windows.name, e)
 		if err != nil {
 			return runAction + failed, getWindowsError(err)
 		}
