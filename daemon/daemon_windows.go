@@ -29,6 +29,10 @@ type windowsRecord struct {
 	dependencies []string
 }
 
+func init() {
+	logger.InitLogger("C:/Users/wangfeng/.quant1x/logs", logger.INFO)
+}
+
 func newDaemon(name, description string, kind Kind, dependencies []string) (Daemon, error) {
 	return &windowsRecord{name, description, kind, dependencies}, nil
 }
