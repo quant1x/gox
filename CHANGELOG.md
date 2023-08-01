@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.9.7] - 2023-08-01
+### Changed
+- 增加日志.
+
 ## [1.9.6] - 2023-08-01
 ### Changed
 - 调整windows服务的运行方式.
@@ -636,8 +640,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.9.6...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.9.7...HEAD
 
+[1.9.7]: https://gitee.com/quant1x/gox/compare/v1.9.6...v1.9.7
 [1.9.6]: https://gitee.com/quant1x/gox/compare/v1.9.5...v1.9.6
 [1.9.5]: https://gitee.com/quant1x/gox/compare/v1.9.4...v1.9.5
 [1.9.4]: https://gitee.com/quant1x/gox/compare/v1.9.3...v1.9.4
