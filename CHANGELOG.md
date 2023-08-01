@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.9.8] - 2023-08-01
+### Changed
+- 增加日志初始化.
+
 ## [1.9.7] - 2023-08-01
 ### Changed
 - 增加日志.
@@ -640,8 +644,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.9.7...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.9.8...HEAD
 
+[1.9.8]: https://gitee.com/quant1x/gox/compare/v1.9.7...v1.9.8
 [1.9.7]: https://gitee.com/quant1x/gox/compare/v1.9.6...v1.9.7
 [1.9.6]: https://gitee.com/quant1x/gox/compare/v1.9.5...v1.9.6
 [1.9.5]: https://gitee.com/quant1x/gox/compare/v1.9.4...v1.9.5
