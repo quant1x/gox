@@ -208,6 +208,7 @@ func (darwin *darwinRecord) Status() (string, error) {
 // Run - Run service
 func (darwin *darwinRecord) Run(e Executable) (string, error) {
 	runAction := "Running " + darwin.description + ":"
+	e.Start()
 	e.Run()
 	return runAction + " completed.", nil
 }

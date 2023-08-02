@@ -303,6 +303,7 @@ func (sh *serviceHandler) Execute(args []string, r <-chan svc.ChangeRequest, cha
 	slowtick := time.Tick(2 * time.Second)
 	tick := fasttick
 	sh.executable.Start()
+	go sh.executable.Run()
 	changes <- svc.Status{State: svc.Running, Accepts: cmdsAccepted}
 loop:
 	for {
