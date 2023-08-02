@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.10.0] - 2023-08-02
+### Changed
+- 调整服务的运行顺序.
+
 ## [1.9.9] - 2023-08-01
 ### Changed
 - 服务组件去掉日志.
@@ -648,8 +652,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.9.9...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.10.0...HEAD
 
+[1.10.0]: https://gitee.com/quant1x/gox/compare/v1.9.9...v1.10.0
 [1.9.9]: https://gitee.com/quant1x/gox/compare/v1.9.8...v1.9.9
 [1.9.8]: https://gitee.com/quant1x/gox/compare/v1.9.7...v1.9.8
 [1.9.7]: https://gitee.com/quant1x/gox/compare/v1.9.6...v1.9.7
