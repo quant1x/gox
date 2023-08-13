@@ -1,7 +1,7 @@
 package num32
 
 import (
-	"github.com/chewxy/math32"
+	"gitee.com/quant1x/gox/num/math32"
 	"github.com/stretchr/testify/require"
 	"testing"
 )

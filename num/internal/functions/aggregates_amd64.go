@@ -1,7 +1,7 @@
 package functions
 
 import (
-	"github.com/viterin/partial"
+	"gitee.com/quant1x/gox/num/partial"
 	"golang.org/x/exp/slices"
 	"math"
 )

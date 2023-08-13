@@ -1,7 +1,7 @@
 package functions
 
 import (
-	"github.com/chewxy/math32"
+	"gitee.com/quant1x/gox/num/math32"
 	"golang.org/x/exp/constraints"
 	"math"
 )

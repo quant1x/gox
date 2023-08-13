@@ -1,8 +1,8 @@
 package api
 
 import (
-	"golang.org/x/exp/slices"
 	"reflect"
+	"slices"
 	"sort"
 )
 
@@ -40,9 +40,7 @@ func v1SliceUnique[S ~[]E, E any](slicePtr *S, less func(i, j int) bool) {
 func SliceUnique[S ~[]E, E any](slice S, compare func(a E, b E) int) S {
 	//v := reflect.ValueOf(&slice).Elem()
 	//slices.SortFunc()
-	slices.SortFunc(slice, func(a, b E) bool {
-		return compare(a, b) < 0
-	})
+	slices.SortFunc(slice, compare)
 	s := slices.CompactFunc(slice, func(a E, b E) bool {
 		return compare(a, b) == 0
 	})
