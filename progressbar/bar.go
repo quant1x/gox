@@ -123,8 +123,9 @@ func (b *Bar) Add(n ...int) {
 
 	if b.rate >= 100 && !b.closed {
 		b.closed = true
-		close(b.done)
 		close(b.advance)
+		time.Sleep(time.Millisecond)
+		close(b.done)
 	}
 }
 
