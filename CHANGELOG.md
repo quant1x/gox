@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.10.2] - 2023-08-16
+### Changed
+- 修订进度条结束逻辑, 先复写进度条, 再结束.
+
 ## [1.10.1] - 2023-08-13
 ### Changed
 - 升级go版本到1.21.0.
@@ -656,8 +660,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.10.1...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.10.2...HEAD
 
+[1.10.2]: https://gitee.com/quant1x/gox/compare/v1.10.1...v1.10.2
 [1.10.1]: https://gitee.com/quant1x/gox/compare/v1.10.0...v1.10.1
 [1.10.0]: https://gitee.com/quant1x/gox/compare/v1.9.9...v1.10.0
 [1.9.9]: https://gitee.com/quant1x/gox/compare/v1.9.8...v1.9.9
