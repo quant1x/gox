@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.10.3] - 2023-08-24
+### Changed
+- 增加linux cpu 序列号获取方式, 用第一块网卡的mac地址代替.
+
 ## [1.10.2] - 2023-08-16
 ### Changed
 - 修订进度条结束逻辑, 先复写进度条, 再结束.
@@ -660,8 +664,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.10.2...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.10.3...HEAD
 
+[1.10.3]: https://gitee.com/quant1x/gox/compare/v1.10.2...v1.10.3
 [1.10.2]: https://gitee.com/quant1x/gox/compare/v1.10.1...v1.10.2
 [1.10.1]: https://gitee.com/quant1x/gox/compare/v1.10.0...v1.10.1
 [1.10.0]: https://gitee.com/quant1x/gox/compare/v1.9.9...v1.10.0
