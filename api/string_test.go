@@ -5,6 +5,7 @@
 package api
 
 import (
+	"fmt"
 	"strings"
 	"testing"
 )
@@ -112,4 +113,11 @@ func TestToCamelCase(t *testing.T) {
 		return
 	}
 	t.Log(camel)
+}
+
+func TestStringToBytes(t *testing.T) {
+	str := "12345哈哈abc"
+	bytes := String2Bytes(str)
+	fmt.Println(bytes)
+	fmt.Println(Bytes2String(bytes))
 }
