@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.10.4] - 2023-09-10
+### Changed
+- 升级string和bytes转换函数.
+
 ## [1.10.3] - 2023-08-24
 ### Changed
 - 增加linux cpu 序列号获取方式, 用第一块网卡的mac地址代替.
@@ -664,8 +668,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.10.3...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.10.4...HEAD
 
+[1.10.4]: https://gitee.com/quant1x/gox/compare/v1.10.3...v1.10.4
 [1.10.3]: https://gitee.com/quant1x/gox/compare/v1.10.2...v1.10.3
 [1.10.2]: https://gitee.com/quant1x/gox/compare/v1.10.1...v1.10.2
 [1.10.1]: https://gitee.com/quant1x/gox/compare/v1.10.0...v1.10.1
