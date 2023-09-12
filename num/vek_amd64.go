@@ -3,9 +3,9 @@ package num
 import (
 	"gitee.com/quant1x/gox/num/internal/functions"
 	"golang.org/x/exp/constraints"
-	"golang.org/x/exp/slices"
 	"golang.org/x/sys/cpu"
 	"math"
+	"slices"
 	"unsafe"
 )
 

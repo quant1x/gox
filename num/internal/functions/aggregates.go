@@ -3,8 +3,8 @@ package functions
 import (
 	"gitee.com/quant1x/gox/num/partial"
 	"golang.org/x/exp/constraints"
-	"golang.org/x/exp/slices"
 	"math"
+	"slices"
 )
 
 func Sum_Go[T constraints.Float](x []T) T {

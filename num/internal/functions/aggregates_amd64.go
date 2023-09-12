@@ -2,8 +2,8 @@ package functions
 
 import (
 	"gitee.com/quant1x/gox/num/partial"
-	"golang.org/x/exp/slices"
 	"math"
+	"slices"
 )
 
 func Mean_AVX2_F64(x []float64) float64 {

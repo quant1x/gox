@@ -3,8 +3,8 @@ package base64
 import (
 	"encoding/base64"
 	"gitee.com/quant1x/gox/api"
-	"golang.org/x/exp/slices"
 	"math/rand"
+	"slices"
 	"time"
 )
 

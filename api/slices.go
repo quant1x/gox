@@ -1,6 +1,6 @@
 package api
 
-import "golang.org/x/exp/slices"
+import "slices"
 
 // Reverse 反转切片
 func Reverse[S ~[]E, E any](s S) S {

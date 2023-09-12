@@ -2,8 +2,8 @@ package num
 
 import (
 	"github.com/stretchr/testify/require"
-	"golang.org/x/exp/slices"
 	"math"
+	"slices"
 	"testing"
 )
 

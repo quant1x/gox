@@ -3,7 +3,7 @@ package functions
 import (
 	"github.com/stretchr/testify/require"
 	"golang.org/x/exp/rand"
-	"golang.org/x/exp/slices"
+	"slices"
 	"testing"
 )
 

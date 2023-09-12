@@ -5,7 +5,7 @@ import (
 	"gitee.com/quant1x/gox/num/internal/functions"
 	"gitee.com/quant1x/gox/num/math32"
 	"golang.org/x/exp/constraints"
-	"golang.org/x/exp/slices"
+	"slices"
 	"unsafe"
 )
 
