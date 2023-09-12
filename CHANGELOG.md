@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.10.6] - 2023-09-12
+### Changed
+- 更换golang.org/x/exp/slices为系统标准库.
+
 ## [1.10.5] - 2023-09-10
 ### Changed
 - 升级依赖库版本.
@@ -673,8 +677,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.10.5...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.10.6...HEAD
 
+[1.10.6]: https://gitee.com/quant1x/gox/compare/v1.10.5...v1.10.6
 [1.10.5]: https://gitee.com/quant1x/gox/compare/v1.10.4...v1.10.5
 [1.10.4]: https://gitee.com/quant1x/gox/compare/v1.10.3...v1.10.4
 [1.10.3]: https://gitee.com/quant1x/gox/compare/v1.10.2...v1.10.3
