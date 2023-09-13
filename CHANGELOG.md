@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.10.7] - 2023-09-13
+### Changed
+- 获取连接增加告警日志.
+
 ## [1.10.6] - 2023-09-12
 ### Changed
 - 更换golang.org/x/exp/slices为系统标准库.
@@ -677,8 +681,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.10.6...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.10.7...HEAD
 
+[1.10.7]: https://gitee.com/quant1x/gox/compare/v1.10.6...v1.10.7
 [1.10.6]: https://gitee.com/quant1x/gox/compare/v1.10.5...v1.10.6
 [1.10.5]: https://gitee.com/quant1x/gox/compare/v1.10.4...v1.10.5
 [1.10.4]: https://gitee.com/quant1x/gox/compare/v1.10.3...v1.10.4
