@@ -3,6 +3,7 @@ package pool
 import (
 	"errors"
 	"fmt"
+	"gitee.com/quant1x/gox/logger"
 	"sync"
 	"time"
 )
@@ -127,7 +128,7 @@ func (c *channelPool) Get() (interface{}, error) {
 			return wrapConn.conn, nil
 		default:
 			c.mu.Lock()
-			//log.Debugf("openConn %v %v", c.openingConns, c.maxActive)
+			logger.Warnf("openConn %v %v", c.openingConns, c.maxActive)
 			if c.openingConns >= c.maxActive {
 				req := make(chan connReq, 1)
 				c.connReqs = append(c.connReqs, req)
