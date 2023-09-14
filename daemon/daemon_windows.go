@@ -8,16 +8,18 @@ package daemon
 import (
 	"errors"
 	"fmt"
-	"golang.org/x/sys/windows"
-	"golang.org/x/sys/windows/registry"
-	"golang.org/x/sys/windows/svc"
-	"golang.org/x/sys/windows/svc/mgr"
 	"os/exec"
+	"os/user"
 	"strconv"
 	"syscall"
 	"time"
 	"unicode/utf16"
 	"unsafe"
+
+	"golang.org/x/sys/windows"
+	"golang.org/x/sys/windows/registry"
+	"golang.org/x/sys/windows/svc"
+	"golang.org/x/sys/windows/svc/mgr"
 )
 
 // windowsRecord - standard record (struct) for windows version of daemon package
@@ -55,7 +57,6 @@ func (windows *windowsRecord) Install(args ...string) (string, error) {
 	installAction := "Install " + windows.description + ":"
 
 	execp, err := execPath()
-
 	if err != nil {
 		return installAction + failed, err
 	}
@@ -72,11 +73,18 @@ func (windows *windowsRecord) Install(args ...string) (string, error) {
 		return installAction + failed, ErrAlreadyRunning
 	}
 
+	u, err := user.Current()
+	if err != nil {
+		return installAction + failed, err
+	}
+
 	s, err = m.CreateService(windows.name, execp, mgr.Config{
-		DisplayName:  windows.name,
-		Description:  windows.description,
-		StartType:    mgr.StartAutomatic,
-		Dependencies: windows.dependencies,
+		DisplayName:      windows.name,
+		Description:      windows.description,
+		StartType:        mgr.StartAutomatic,
+		Dependencies:     windows.dependencies,
+		ServiceStartName: u.Username,
+		Password:         "",
 	}, args...)
 	if err != nil {
 		return installAction + failed, err
