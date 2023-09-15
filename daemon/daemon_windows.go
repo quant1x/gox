@@ -9,7 +9,6 @@ import (
 	"errors"
 	"fmt"
 	"os/exec"
-	"os/user"
 	"strconv"
 	"syscall"
 	"time"
