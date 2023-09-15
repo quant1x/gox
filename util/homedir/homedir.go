@@ -146,6 +146,10 @@ func dirUnix() (string, error) {
 }
 
 func dirWindows() (string, error) {
+	// 启用环境变量GOX_HOME是为了Windows服务以系统账户运行时无法获取登录用户的宿主目录而预备的
+	if home := os.Getenv("GOX_HOME"); home != "" {
+		return home, nil
+	}
 	// First prefer the HOME environmental variable
 	if home := os.Getenv("HOME"); home != "" {
 		return home, nil
