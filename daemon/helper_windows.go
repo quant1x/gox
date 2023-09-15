@@ -142,14 +142,14 @@ func initWindows() {
 		fmt.Println(err)
 		return
 	}
-	homePath, _, err := key.GetStringValue(homedir.WindowsEnvGoxHome)
+	homePath, _, err := key.GetStringValue(homedir.EnvGoxHome)
 	if err == nil {
-		fmt.Println(homedir.WindowsEnvGoxHome, "=", homePath)
+		fmt.Println(homedir.EnvGoxHome, "=", homePath)
 		return
 	}
 	homePath, _ = homedir.Dir()
-	fmt.Printf("set Windows Environment...%s=%s, ", homedir.WindowsEnvGoxHome, homePath)
-	err = key.SetStringValue(homedir.WindowsEnvGoxHome, homePath)
+	fmt.Printf("set Windows Environment...%s=%s, ", homedir.EnvGoxHome, homePath)
+	err = key.SetStringValue(homedir.EnvGoxHome, homePath)
 	if err != nil {
 		fmt.Println(err)
 	}

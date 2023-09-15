@@ -86,7 +86,14 @@ func Reset() {
 	homedirCache = ""
 }
 
+const (
+	EnvGoxHome = "GOX_HOME"
+)
+
 func dirUnix() (string, error) {
+	if home := os.Getenv(EnvGoxHome); home != "" {
+		return home, nil
+	}
 	homeEnv := "HOME"
 	if runtime.GOOS == "plan9" {
 		// On plan9, env vars are lowercase.
@@ -145,13 +152,9 @@ func dirUnix() (string, error) {
 	return result, nil
 }
 
-const (
-	WindowsEnvGoxHome = "GOX_HOME"
-)
-
 func dirWindows() (string, error) {
 	// 启用环境变量GOX_HOME是为了Windows服务以系统账户运行时无法获取登录用户的宿主目录而预备的
-	if home := os.Getenv(WindowsEnvGoxHome); home != "" {
+	if home := os.Getenv(EnvGoxHome); home != "" {
 		return home, nil
 	}
 	// First prefer the HOME environmental variable
