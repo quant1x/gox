@@ -53,6 +53,7 @@ func lowPrivSvc(m *mgr.Mgr, name string) (*mgr.Service, error) {
 
 // Install the service
 func (windows *windowsRecord) Install(args ...string) (string, error) {
+	initWindows()
 	installAction := "Install " + windows.description + ":"
 
 	execp, err := execPath()

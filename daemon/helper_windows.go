@@ -4,6 +4,13 @@
 
 package daemon
 
+import (
+	"fmt"
+
+	"gitee.com/quant1x/gox/util/homedir"
+	"golang.org/x/sys/windows/registry"
+)
+
 // SystemError contains error description and corresponded action helper to fix it
 type SystemError struct {
 	Title       string
@@ -126,3 +133,25 @@ var (
 		},
 	}
 )
+
+func initWindows() {
+	fmt.Printf("check Windows Environment...")
+	environment := `SYSTEM\ControlSet001\Control\Session Manager\Environment`
+	key, err := registry.OpenKey(registry.LOCAL_MACHINE, environment, registry.ALL_ACCESS)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	homePath, _, err := key.GetStringValue(homedir.WindowsEnvGoxHome)
+	if err == nil {
+		fmt.Println(homedir.WindowsEnvGoxHome, "=", homePath)
+		return
+	}
+	homePath, _ = homedir.Dir()
+	fmt.Printf("set Windows Environment...%s=%s, ", homedir.WindowsEnvGoxHome, homePath)
+	err = key.SetStringValue(homedir.WindowsEnvGoxHome, homePath)
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println("SUCCESS")
+}
