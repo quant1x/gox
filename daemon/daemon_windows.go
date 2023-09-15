@@ -73,18 +73,18 @@ func (windows *windowsRecord) Install(args ...string) (string, error) {
 		return installAction + failed, ErrAlreadyRunning
 	}
 
-	u, err := user.Current()
-	if err != nil {
-		return installAction + failed, err
-	}
+	// u, err := user.Current()
+	// if err != nil {
+	// 	return installAction + failed, err
+	// }
 
 	s, err = m.CreateService(windows.name, execp, mgr.Config{
-		DisplayName:      windows.name,
-		Description:      windows.description,
-		StartType:        mgr.StartAutomatic,
-		Dependencies:     windows.dependencies,
-		ServiceStartName: u.Username,
-		Password:         "",
+		DisplayName:  windows.name,
+		Description:  windows.description,
+		StartType:    mgr.StartAutomatic,
+		Dependencies: windows.dependencies,
+		// ServiceStartName: u.Username,
+		// Password:         "",
 	}, args...)
 	if err != nil {
 		return installAction + failed, err
