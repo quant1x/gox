@@ -3,6 +3,31 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.11.3] - 2023-09-15
+### Changed
+- 调整homedir, 所有操作系统设置了GOX_HOME都会优先返回.
+
+## [1.11.2] - 2023-09-15
+### Changed
+- Windows服务安装时创建系统环境变量GOX_HOME.
+
+## [1.11.1] - 2023-09-15
+### Changed
+-  启用环境变量GOX_HOME是为了Windows服务以系统账户运行时无法获取登录用户的宿主目录而预备的.
+
+## [1.11.0] - 2023-09-15
+### Changed
+- 去掉多余的import.
+
+## [1.10.9] - 2023-09-15
+### Changed
+- 屏蔽检测连接池已打开数量的日志.
+- Windows服务屏蔽使用本地用户登录, 本地用户登录有一个问题, 密码更换后会造成服务运行不正常.
+
+## [1.10.8] - 2023-09-15
+### Changed
+- Windows 服务属性增加本地用户名.
+
 ## [1.10.7] - 2023-09-13
 ### Changed
 - 获取连接增加告警日志.
@@ -681,8 +706,14 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.10.7...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.11.3...HEAD
 
+[1.11.3]: https://gitee.com/quant1x/gox/compare/v1.11.2...v1.11.3
+[1.11.2]: https://gitee.com/quant1x/gox/compare/v1.11.1...v1.11.2
+[1.11.1]: https://gitee.com/quant1x/gox/compare/v1.11.0...v1.11.1
+[1.11.0]: https://gitee.com/quant1x/gox/compare/v1.10.9...v1.11.0
+[1.10.9]: https://gitee.com/quant1x/gox/compare/v1.10.8...v1.10.9
+[1.10.8]: https://gitee.com/quant1x/gox/compare/v1.10.7...v1.10.8
 [1.10.7]: https://gitee.com/quant1x/gox/compare/v1.10.6...v1.10.7
 [1.10.6]: https://gitee.com/quant1x/gox/compare/v1.10.5...v1.10.6
 [1.10.5]: https://gitee.com/quant1x/gox/compare/v1.10.4...v1.10.5
