@@ -13,7 +13,7 @@ const (
 
 // MultiOnce 多次同步锁
 //
-//	deprecated, 推荐使用 coroutine.RollingMutex
+// Deprecated: 从1.12将剔除MultiOnce coroutine.RollingMutex.
 type MultiOnce struct {
 	done uint32
 	m    sync.Mutex
