@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.11.4] - 2023-09-29
+### Changed
+- 增加滑动窗口式的加载锁.
+
 ## [1.11.3] - 2023-09-15
 ### Changed
 - 调整homedir, 所有操作系统设置了GOX_HOME都会优先返回.
@@ -706,8 +710,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.11.3...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.11.4...HEAD
 
+[1.11.4]: https://gitee.com/quant1x/gox/compare/v1.11.3...v1.11.4
 [1.11.3]: https://gitee.com/quant1x/gox/compare/v1.11.2...v1.11.3
 [1.11.2]: https://gitee.com/quant1x/gox/compare/v1.11.1...v1.11.2
 [1.11.1]: https://gitee.com/quant1x/gox/compare/v1.11.0...v1.11.1
