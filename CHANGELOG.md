@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.11.5] - 2023-09-29
+### Changed
+- 优化滑动窗口锁, 窗口期内只初始化一次.
+- 增加context.Context的封装.
+- 增加注释, 从1.12版本开始将移除MultiOnce.
+
 ## [1.11.4] - 2023-09-29
 ### Changed
 - 增加滑动窗口式的加载锁.
@@ -710,8 +716,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.11.4...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.11.5...HEAD
 
+[1.11.5]: https://gitee.com/quant1x/gox/compare/v1.11.4...v1.11.5
 [1.11.4]: https://gitee.com/quant1x/gox/compare/v1.11.3...v1.11.4
 [1.11.3]: https://gitee.com/quant1x/gox/compare/v1.11.2...v1.11.3
 [1.11.2]: https://gitee.com/quant1x/gox/compare/v1.11.1...v1.11.2
