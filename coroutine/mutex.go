@@ -1,4 +1,4 @@
-package util
+package coroutine
 
 import (
 	"sync"
@@ -11,13 +11,11 @@ const (
 	onceDefaultDate = "1970-01-01"
 )
 
-// MultiOnce 多次同步锁
-//
-//	deprecated, 推荐使用 coroutine.RollingMutex
-type MultiOnce struct {
-	done uint32
+// RollingMutex 按指定rolling策略加锁, 指定周期内只加载一次
+type RollingMutex struct {
 	m    sync.Mutex
 	date string
+	done uint32
 }
 
 // 校对当前日期
@@ -30,7 +28,7 @@ func proofreadCurrentDate() (currentDate string) {
 	return onceDefaultDate
 }
 
-func (o *MultiOnce) Do(f func(), today ...func() (newDate string)) {
+func (o *RollingMutex) Do(f func(), today ...func() (newDate string)) {
 	getToday := proofreadCurrentDate
 	if len(today) > 0 {
 		getToday = today[0]
@@ -46,7 +44,7 @@ func (o *MultiOnce) Do(f func(), today ...func() (newDate string)) {
 	}
 }
 
-func (o *MultiOnce) doReset(currentDate string) {
+func (o *RollingMutex) doReset(currentDate string) {
 	o.m.Lock()
 	defer o.m.Unlock()
 	if o.done == 1 && currentDate > o.date {
@@ -55,7 +53,7 @@ func (o *MultiOnce) doReset(currentDate string) {
 	}
 }
 
-func (o *MultiOnce) doSlow(f func()) {
+func (o *RollingMutex) doSlow(f func()) {
 	o.m.Lock()
 	defer o.m.Unlock()
 	if o.done == 0 {
@@ -64,10 +62,10 @@ func (o *MultiOnce) doSlow(f func()) {
 	}
 }
 
-func (o *MultiOnce) Reset() {
+func (o *RollingMutex) Reset() {
 	atomic.StoreUint32(&o.done, 0)
 }
 
-func (o *MultiOnce) Date() string {
+func (o *RollingMutex) Date() string {
 	return o.date
 }
