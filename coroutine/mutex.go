@@ -12,6 +12,8 @@ const (
 )
 
 // RollingMutex 按指定rolling策略加锁, 指定周期内只加载一次
+//
+//	滑动窗口锁, 窗口期内只初始化一次, 目前只支持1天切换
 type RollingMutex struct {
 	m    sync.Mutex
 	date string
@@ -19,17 +21,21 @@ type RollingMutex struct {
 }
 
 // 校对当前日期
-func proofreadCurrentDate() (currentDate string) {
+func (o *RollingMutex) proofreadCurrentDate() (currentDate string) {
+	currentDate = o.date
+	if currentDate < onceDefaultDate {
+		currentDate = onceDefaultDate
+	}
 	now := time.Now()
 	timestamp := now.Format(time.TimeOnly)
 	if timestamp >= onceInitTime {
 		currentDate = now.Format(time.DateOnly)
 	}
-	return onceDefaultDate
+	return currentDate
 }
 
 func (o *RollingMutex) Do(f func(), today ...func() (newDate string)) {
-	getToday := proofreadCurrentDate
+	getToday := o.proofreadCurrentDate
 	if len(today) > 0 {
 		getToday = today[0]
 	}
