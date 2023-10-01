@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.11.7] - 2023-10-01
+### Changed
+- 删除废弃的代码.
+
 ## [1.11.6] - 2023-10-01
 ### Changed
 - 优化fastqueue的push为异步方式.
@@ -720,8 +724,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.11.6...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.11.7...HEAD
 
+[1.11.7]: https://gitee.com/quant1x/gox/compare/v1.11.6...v1.11.7
 [1.11.6]: https://gitee.com/quant1x/gox/compare/v1.11.5...v1.11.6
 [1.11.5]: https://gitee.com/quant1x/gox/compare/v1.11.4...v1.11.5
 [1.11.4]: https://gitee.com/quant1x/gox/compare/v1.11.3...v1.11.4
