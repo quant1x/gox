@@ -27,18 +27,6 @@ type Queue[T any] struct {
 	//done       chan bool
 }
 
-//// math/bits.OnesCount64
-//func bitCount(x int64) int {
-//	// HD, Figure 5-2
-//	x = x - ((x >> 1) & 0x55555555)
-//	x = (x & 0x33333333) + ((x >> 2) & 0x33333333)
-//	x = (x + (x >> 4)) & 0x0f0f0f0f
-//	x = x + (x >> 8)
-//	x = x + (x >> 16)
-//	x = x & 0x3f
-//	return int(x)
-//}
-
 func highestOneBit(x uint64) uint64 {
 	origin := x
 	isPower2 := ((origin & (origin - 1)) == 0) && (origin != 0)
