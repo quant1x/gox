@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.11.6] - 2023-10-01
+### Changed
+- 优化fastqueue的push为异步方式.
+
 ## [1.11.5] - 2023-09-29
 ### Changed
 - 优化滑动窗口锁, 窗口期内只初始化一次.
@@ -716,8 +720,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.11.5...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.11.6...HEAD
 
+[1.11.6]: https://gitee.com/quant1x/gox/compare/v1.11.5...v1.11.6
 [1.11.5]: https://gitee.com/quant1x/gox/compare/v1.11.4...v1.11.5
 [1.11.4]: https://gitee.com/quant1x/gox/compare/v1.11.3...v1.11.4
 [1.11.3]: https://gitee.com/quant1x/gox/compare/v1.11.2...v1.11.3
