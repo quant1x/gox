@@ -34,13 +34,6 @@ var (
 	TimeZero = time.Unix(0, 0)
 )
 
-type Response struct {
-	StatusCode    int
-	ContentLength int
-	LastModified  time.Time
-	Body          []byte
-}
-
 func HttpRequest(url string, method string) ([]byte, error) {
 	data, lastModified, err := Request(url, method)
 	_ = lastModified
@@ -48,7 +41,7 @@ func HttpRequest(url string, method string) ([]byte, error) {
 }
 
 func HttpGet(url string) ([]byte, error) {
-	return HttpRequest(url, "get")
+	return HttpRequest(url, GET)
 }
 
 // Request http request, 支持传入header
@@ -58,7 +51,6 @@ func Request(url string, method string, header ...map[string]any) (data []byte, 
 		return nil, TimeZero, err
 	}
 	reqHeader := make(map[string]string)
-	//reqHeader["Accept"] = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8"
 	reqHeader["Accept"] = "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
 	reqHeader["Accept-Encoding"] = "gzip, deflate"
 	reqHeader["Accept-Language"] = "zh-CN,zh;q=0.9,en;q=0.8"
@@ -89,7 +81,7 @@ func Request(url string, method string, header ...map[string]any) (data []byte, 
 		}
 	}
 
-	client := &http.Client{}
+	client := defaultClient()
 	request, err := http.NewRequest(strings.ToUpper(method), url, nil)
 	if err != nil {
 		return nil, TimeZero, err
