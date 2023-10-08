@@ -6,6 +6,7 @@ import (
 	"compress/gzip"
 	"fmt"
 	"gitee.com/quant1x/gox/api"
+	"gitee.com/quant1x/gox/exception"
 	"gitee.com/quant1x/gox/logger"
 	"io"
 	"net/http"
@@ -32,6 +33,7 @@ const (
 
 var (
 	TimeZero = time.Unix(0, 0)
+	NotFound = exception.New(http.StatusNotFound, http.StatusText(http.StatusNotFound))
 )
 
 func HttpRequest(url string, method string) ([]byte, error) {
@@ -93,6 +95,9 @@ func Request(url string, method string, header ...map[string]any) (data []byte, 
 	response, err := client.Do(request)
 	if err != nil {
 		return nil, TimeZero, err
+	}
+	if response.StatusCode == http.StatusNotFound {
+		return nil, TimeZero, NotFound
 	}
 	lm := response.Header.Get(LastModified)
 	if response.StatusCode == http.StatusNotModified && !api.IsEmpty(lm) {
