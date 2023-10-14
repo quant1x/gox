@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.12.2] - 2023-10-15
+### Changed
+- 增加协程安全的hashmap.
+
 ## [1.12.1] - 2023-10-10
 ### Changed
 - 收录go-runewidth组件.
@@ -742,8 +746,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.12.1...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.12.2...HEAD
 
+[1.12.2]: https://gitee.com/quant1x/gox/compare/v1.12.1...v1.12.2
 [1.12.1]: https://gitee.com/quant1x/gox/compare/v1.12.0...v1.12.1
 [1.12.0]: https://gitee.com/quant1x/gox/compare/v1.11.9...v1.12.0
 [1.11.9]: https://gitee.com/quant1x/gox/compare/v1.11.8...v1.11.9
