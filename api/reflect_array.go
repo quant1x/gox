@@ -4,19 +4,23 @@ import (
 	"gitee.com/quant1x/gox/errors"
 	"reflect"
 	"strconv"
+	"sync"
 )
 
 var (
+	__tagArrayMutex sync.RWMutex
 	// 结构体 tag array的反射的字段缓存
-	__mapTagArray map[reflect.Type]map[int]reflect.StructField = nil
+	__mapTagArray = map[reflect.Type]map[int]reflect.StructField{}
 )
 
-func init() {
-	__mapTagArray = make(map[reflect.Type]map[int]reflect.StructField)
-}
+//func init() {
+//	__mapTagArray = make(map[reflect.Type]map[int]reflect.StructField)
+//}
 
 func initTag(t reflect.Type) map[int]reflect.StructField {
+	__tagArrayMutex.RLock()
 	ma, mok := __mapTagArray[t]
+	__tagArrayMutex.RUnlock()
 	if mok {
 		return ma
 	}
@@ -34,7 +38,10 @@ func initTag(t reflect.Type) map[int]reflect.StructField {
 						ma = make(map[int]reflect.StructField)
 						__mapTagArray[t] = ma
 					}
+					__tagArrayMutex.Lock()
 					ma[index] = field
+					__tagArrayMutex.Unlock()
+
 				}
 			}
 		}
