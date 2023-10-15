@@ -39,17 +39,17 @@ func create[K comparable, V any](sharding func(key K) uint32) ConcurrentHashMap[
 	return m
 }
 
-//// New Creates a new concurrent map.
-//func New[V any]() ConcurrentHashMap[string, V] {
-//	return create[string, V](fnv32)
-//}
+// NewStringMap Creates a new concurrent map.
+func NewStringMap[V any]() ConcurrentHashMap[string, V] {
+	return create[string, V](fnv32)
+}
 
 func comparableSharding[K comparable](key K) uint32 {
 	s := fmt.Sprintf("%v", key)
 	return fnv32(s)
 }
 
-func NewHashmap[K comparable, V any]() ConcurrentHashMap[K, V] {
+func NewHashMap[K comparable, V any]() ConcurrentHashMap[K, V] {
 	return create[K, V](comparableSharding[K])
 }
 
@@ -237,7 +237,7 @@ func (m *ConcurrentHashMap[K, V]) Clear() {
 func snapshot[K comparable, V any](m *ConcurrentHashMap[K, V]) (chans []chan Tuple[K, V]) {
 	//When you access map items before initializing.
 	if len(m.shards) == 0 {
-		panic(`cmap.ConcurrentHashMap is not initialized. Should run New() before usage.`)
+		panic(`cmap.ConcurrentHashMap is not initialized. Should run NewStringMap() before usage.`)
 	}
 	chans = make([]chan Tuple[K, V], __SHARD_COUNT)
 	wg := sync.WaitGroup{}

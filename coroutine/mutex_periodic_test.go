@@ -11,8 +11,8 @@ import (
 var (
 	once PeriodicOnce
 	//cache = map[string]int{}
-	//cache = cmap.New[int]()
-	cache = concurrent.NewHashmap[string, int]()
+	//cache = cmap.NewStringMap[int]()
+	cache = concurrent.NewHashMap[string, int]()
 )
 
 func lazyInit() {
