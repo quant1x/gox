@@ -13,10 +13,6 @@ var (
 	__mapTagArray = map[reflect.Type]map[int]reflect.StructField{}
 )
 
-//func init() {
-//	__mapTagArray = make(map[reflect.Type]map[int]reflect.StructField)
-//}
-
 func initTag(t reflect.Type) map[int]reflect.StructField {
 	__tagArrayMutex.RLock()
 	ma, mok := __mapTagArray[t]
