@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.12.3] - 2023-10-15
+### Changed
+- 更新依赖版本.
+- 调整hashmap的代码, 引入github.com/orcaman/concurrent-map/v2.
+- 删除废弃的代码.
+
 ## [1.12.2] - 2023-10-15
 ### Changed
 - 增加协程安全的hashmap.
@@ -746,8 +752,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.12.2...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.12.3...HEAD
 
+[1.12.3]: https://gitee.com/quant1x/gox/compare/v1.12.2...v1.12.3
 [1.12.2]: https://gitee.com/quant1x/gox/compare/v1.12.1...v1.12.2
 [1.12.1]: https://gitee.com/quant1x/gox/compare/v1.12.0...v1.12.1
 [1.12.0]: https://gitee.com/quant1x/gox/compare/v1.11.9...v1.12.0
