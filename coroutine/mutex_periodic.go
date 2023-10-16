@@ -11,7 +11,7 @@ import (
 const (
 	cronPreMinute    = "*/1 * * * *"
 	cronPreSecond    = "0/1 * * * * ?"
-	periodicInitTime = "10:36:10"
+	periodicInitTime = "09:00:00"
 )
 
 // PeriodicOnce 周期性懒加载机制
