@@ -20,6 +20,7 @@ func lazyInit() {
 		k := strconv.Itoa(i)
 		//cache[k] = i
 		cache.Set(k, i)
+		fmt.Println("reset", k, "=>", i)
 	}
 }
 
@@ -41,6 +42,7 @@ func TestPeriodicOnce(t *testing.T) {
 		for i := 0; i < rwCount; i++ {
 			k := strconv.Itoa(i % 5)
 			setInt(k, i)
+			fmt.Println(k, "=>", i)
 			time.Sleep(time.Millisecond * 10)
 		}
 	}
@@ -48,18 +50,18 @@ func TestPeriodicOnce(t *testing.T) {
 		for i := 0; i < rwCount; i++ {
 			k := strconv.Itoa(i % 5)
 			v, ok := getInt(k)
-			fmt.Println(v, ok)
+			fmt.Println(v, "<=", i, ":", ok)
 			_ = v
 			_ = ok
 			time.Sleep(time.Millisecond * 10)
 		}
 	}
 
-	go producer()
+	producer()
 	go reader()
-	count := 30
+	count := 60
 	for i := 0; i < count; i++ {
-		once.Reset()
+		//once.Reset()
 		fmt.Println("--------------------")
 		time.Sleep(time.Second)
 	}
