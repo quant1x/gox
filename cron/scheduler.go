@@ -9,11 +9,11 @@ import (
 const (
 	crontabInterval  = 10
 	crontabSnapshot  = "0/1 * * * * ?"
-	sleepMillisecond = 1
+	sleepMillisecond = int64(100)
 )
 
 type Scheduler struct {
-	crontabInterval float64 // 单位是秒
+	crontabInterval int64 // 单位是秒
 	crontabSequence int64
 	m               sync.Mutex
 	cron            *Cron
@@ -23,7 +23,7 @@ type Scheduler struct {
 // NewScheduler 创建一个业务定时器
 func NewScheduler(interval int, service func()) *Scheduler {
 	crontab := Scheduler{
-		crontabInterval: float64(interval),
+		crontabInterval: int64(interval) * 1000,
 		crontabSequence: 0,
 		service:         service,
 	}
@@ -46,13 +46,12 @@ func (this *Scheduler) Run() error {
 		// 执行业务
 		this.service()
 		atomic.StoreInt64(&this.crontabSequence, 0)
-		diffDuration := float64(sleepMillisecond) / 1000.00
+		elapsedTime := sleepMillisecond
 		for {
-			elapsedTime := time.Since(now).Seconds()
-			if elapsedTime+diffDuration < this.crontabInterval {
-				sleepStart := time.Now()
-				time.Sleep(time.Millisecond * sleepMillisecond)
-				diffDuration = float64(time.Since(sleepStart).Milliseconds()) / 1000
+			elapsedTime = time.Since(now).Milliseconds()
+			sleepTimes := this.crontabInterval - elapsedTime
+			if sleepTimes > 0 {
+				time.Sleep(time.Millisecond * time.Duration(sleepTimes))
 			} else {
 				break
 			}
