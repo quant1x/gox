@@ -35,7 +35,6 @@ func (o *PeriodicOnce) doSlow(f func()) {
 	defer o.m.Unlock()
 	if o.done == 0 {
 		defer atomic.StoreUint32(&o.done, 1)
-		o.date = onceDefaultDate
 		f()
 	}
 }
@@ -83,5 +82,8 @@ func (o *PeriodicOnce) resetSlow() {
 	defer o.m.Unlock()
 	if o.done == 1 {
 		atomic.StoreUint32(&o.done, 0)
+		// 重置日期
+		now := time.Now()
+		o.date = now.Format(time.DateOnly)
 	}
 }
