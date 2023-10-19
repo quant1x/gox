@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.12.7] - 2023-10-19
+### Changed
+- 修订日期重置错乱的bug.
+
 ## [1.12.6] - 2023-10-16
 ### Changed
 - 修正周期初始化时间为9点整.
@@ -764,8 +768,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.12.6...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.12.7...HEAD
 
+[1.12.7]: https://gitee.com/quant1x/gox/compare/v1.12.6...v1.12.7
 [1.12.6]: https://gitee.com/quant1x/gox/compare/v1.12.5...v1.12.6
 [1.12.5]: https://gitee.com/quant1x/gox/compare/v1.12.4...v1.12.5
 [1.12.4]: https://gitee.com/quant1x/gox/compare/v1.12.3...v1.12.4
