@@ -102,7 +102,7 @@ func TestChainDelayIfStillRunning(t *testing.T) {
 
 	t.Run("runs immediately", func(t *testing.T) {
 		var j countJob
-		wrappedJob := NewChain(DelayIfStillRunning(DiscardLogger)).Then(&j)
+		wrappedJob := NewChain(DelayIfStillRunningWithLogger(DiscardLogger)).Then(&j)
 		go wrappedJob.Run()
 		time.Sleep(2 * time.Millisecond) // Give the job 2ms to complete.
 		if c := j.Done(); c != 1 {
@@ -112,7 +112,7 @@ func TestChainDelayIfStillRunning(t *testing.T) {
 
 	t.Run("second run immediate if first done", func(t *testing.T) {
 		var j countJob
-		wrappedJob := NewChain(DelayIfStillRunning(DiscardLogger)).Then(&j)
+		wrappedJob := NewChain(DelayIfStillRunningWithLogger(DiscardLogger)).Then(&j)
 		go func() {
 			go wrappedJob.Run()
 			time.Sleep(time.Millisecond)
@@ -127,7 +127,7 @@ func TestChainDelayIfStillRunning(t *testing.T) {
 	t.Run("second run delayed if first not done", func(t *testing.T) {
 		var j countJob
 		j.delay = 10 * time.Millisecond
-		wrappedJob := NewChain(DelayIfStillRunning(DiscardLogger)).Then(&j)
+		wrappedJob := NewChain(DelayIfStillRunningWithLogger(DiscardLogger)).Then(&j)
 		go func() {
 			go wrappedJob.Run()
 			time.Sleep(time.Millisecond)
@@ -156,7 +156,7 @@ func TestChainSkipIfStillRunning(t *testing.T) {
 
 	t.Run("runs immediately", func(t *testing.T) {
 		var j countJob
-		wrappedJob := NewChain(SkipIfStillRunning(DiscardLogger)).Then(&j)
+		wrappedJob := NewChain(SkipIfStillRunningWithLogger(DiscardLogger)).Then(&j)
 		go wrappedJob.Run()
 		time.Sleep(2 * time.Millisecond) // Give the job 2ms to complete.
 		if c := j.Done(); c != 1 {
@@ -166,7 +166,7 @@ func TestChainSkipIfStillRunning(t *testing.T) {
 
 	t.Run("second run immediate if first done", func(t *testing.T) {
 		var j countJob
-		wrappedJob := NewChain(SkipIfStillRunning(DiscardLogger)).Then(&j)
+		wrappedJob := NewChain(SkipIfStillRunningWithLogger(DiscardLogger)).Then(&j)
 		go func() {
 			go wrappedJob.Run()
 			time.Sleep(time.Millisecond)
@@ -181,7 +181,7 @@ func TestChainSkipIfStillRunning(t *testing.T) {
 	t.Run("second run skipped if first not done", func(t *testing.T) {
 		var j countJob
 		j.delay = 10 * time.Millisecond
-		wrappedJob := NewChain(SkipIfStillRunning(DiscardLogger)).Then(&j)
+		wrappedJob := NewChain(SkipIfStillRunningWithLogger(DiscardLogger)).Then(&j)
 		go func() {
 			go wrappedJob.Run()
 			time.Sleep(time.Millisecond)
@@ -207,7 +207,7 @@ func TestChainSkipIfStillRunning(t *testing.T) {
 	t.Run("skip 10 jobs on rapid fire", func(t *testing.T) {
 		var j countJob
 		j.delay = 10 * time.Millisecond
-		wrappedJob := NewChain(SkipIfStillRunning(DiscardLogger)).Then(&j)
+		wrappedJob := NewChain(SkipIfStillRunningWithLogger(DiscardLogger)).Then(&j)
 		for i := 0; i < 11; i++ {
 			go wrappedJob.Run()
 		}
@@ -222,7 +222,7 @@ func TestChainSkipIfStillRunning(t *testing.T) {
 		var j1, j2 countJob
 		j1.delay = 10 * time.Millisecond
 		j2.delay = 10 * time.Millisecond
-		chain := NewChain(SkipIfStillRunning(DiscardLogger))
+		chain := NewChain(SkipIfStillRunningWithLogger(DiscardLogger))
 		wrappedJob1 := chain.Then(&j1)
 		wrappedJob2 := chain.Then(&j2)
 		for i := 0; i < 11; i++ {
