@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.13.0] - 2023-10-20
+### Changed
+- 调整任务未执行完成跳过的函数封装.
+
 ## [1.12.9] - 2023-10-20
 ### Changed
 - 调整任务未执行完成跳过的函数封装.
@@ -776,8 +780,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.12.9...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.13.0...HEAD
 
+[1.13.0]: https://gitee.com/quant1x/gox/compare/v1.12.9...v1.13.0
 [1.12.9]: https://gitee.com/quant1x/gox/compare/v1.12.8...v1.12.9
 [1.12.8]: https://gitee.com/quant1x/gox/compare/v1.12.7...v1.12.8
 [1.12.7]: https://gitee.com/quant1x/gox/compare/v1.12.6...v1.12.7
