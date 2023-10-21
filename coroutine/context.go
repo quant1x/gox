@@ -2,6 +2,8 @@ package coroutine
 
 import (
 	"context"
+	"gitee.com/quant1x/gox/logger"
+	"gitee.com/quant1x/gox/signal"
 	"sync"
 )
 
@@ -33,4 +35,20 @@ func GetContextWithCancel() (context.Context, context.CancelFunc) {
 	globalOnce.Do(initContext)
 	ctx, cancel := context.WithCancel(globalContext)
 	return ctx, cancel
+}
+
+// WaitForShutdown 阻塞等待关闭信号
+func WaitForShutdown() {
+	globalOnce.Do(initContext)
+	interrupt := signal.Notify()
+	select {
+	case <-globalContext.Done():
+		logger.Infof("application shutdown...")
+		globalCancel()
+		break
+	case sig := <-interrupt:
+		logger.Infof("interrupt: %s", sig.String())
+		globalCancel()
+		break
+	}
 }
