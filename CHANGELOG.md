@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.13.2] - 2023-10-22
+### Changed
+- 调整skip调度任务策略.
+- 增加获取func信息的函数.
+- 新增runtime包.
+- 增加获取当前代码的函数名, 文件名以及行号的函数.
+
 ## [1.13.1] - 2023-10-21
 ### Changed
 - 增加应用退出等待机制.
@@ -784,8 +791,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.13.1...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.13.2...HEAD
 
+[1.13.2]: https://gitee.com/quant1x/gox/compare/v1.13.1...v1.13.2
 [1.13.1]: https://gitee.com/quant1x/gox/compare/v1.13.0...v1.13.1
 [1.13.0]: https://gitee.com/quant1x/gox/compare/v1.12.9...v1.13.0
 [1.12.9]: https://gitee.com/quant1x/gox/compare/v1.12.8...v1.12.9
