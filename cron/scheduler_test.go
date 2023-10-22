@@ -10,7 +10,7 @@ func TestScheduler(t *testing.T) {
 	c := New()
 	//c := New(WithSeconds())
 	c.Start()
-	_, err := c.AddFuncWithSkipIfStillRunning("@every 1s", func() {
+	_, err := c.AddJobWithSkipIfStillRunning("@every 1s", func() {
 		time.Sleep(time.Second * 3)
 		fmt.Printf("SkipIfStillRunningWithLogger: %v\n", time.Now())
 	})

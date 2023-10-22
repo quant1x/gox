@@ -2,6 +2,8 @@ package cron
 
 import (
 	"context"
+	"gitee.com/quant1x/gox/logger"
+	"gitee.com/quant1x/gox/runtime"
 	"sort"
 	"sync"
 	"time"
@@ -156,6 +158,23 @@ func (c *Cron) AddJob(spec string, cmd Job) (EntryID, error) {
 func (c *Cron) AddFuncWithSkipIfStillRunning(spec string, cmd func()) (EntryID, error) {
 	job := SkipIfStillRunning()(FuncJob(cmd))
 	return c.AddJob(spec, job)
+}
+
+func (c *Cron) AddJobWithSkipIfStillRunning(spec string, cmd func()) (EntryID, error) {
+	var ch = make(chan struct{}, 1)
+	ch <- struct{}{}
+	funcName := runtime.FuncName(cmd)
+	jobFunc := func() {
+		select {
+		case v := <-ch:
+			defer func() { ch <- v }()
+			cmd()
+		default:
+			logger.Infof("func:%s, skip", funcName)
+		}
+	}
+
+	return c.AddJob(spec, FuncJob(jobFunc))
 }
 
 // Schedule adds a Job to the Cron to be run on the given schedule.
