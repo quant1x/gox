@@ -168,9 +168,12 @@ func (c *Cron) AddJobWithSkipIfStillRunning(spec string, cmd func()) (EntryID, e
 		select {
 		case v := <-ch:
 			defer func() { ch <- v }()
+			tmStart := time.Now()
 			cmd()
+			elapsedTime := time.Since(tmStart) / time.Millisecond
+			logger.Infof("func: %s, 总耗时: %.3fs", funcName, float64(elapsedTime)/1000)
 		default:
-			logger.Infof("func:%s, skip", funcName)
+			logger.Infof("func: %s, skip", funcName)
 		}
 	}
 
