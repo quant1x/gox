@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.13.4] - 2023-10-26
+### Changed
+- 定时任务增加重置日志.
+
 ## [1.13.3] - 2023-10-22
 ### Changed
 - 调整调度任务, 增加计时.
@@ -795,8 +799,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.13.3...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.13.4...HEAD
 
+[1.13.4]: https://gitee.com/quant1x/gox/compare/v1.13.3...v1.13.4
 [1.13.3]: https://gitee.com/quant1x/gox/compare/v1.13.2...v1.13.3
 [1.13.2]: https://gitee.com/quant1x/gox/compare/v1.13.1...v1.13.2
 [1.13.1]: https://gitee.com/quant1x/gox/compare/v1.13.0...v1.13.1
