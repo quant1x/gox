@@ -2,7 +2,6 @@ package cron
 
 import (
 	"fmt"
-	"gitee.com/quant1x/gox/logger"
 	"runtime"
 	"sync"
 	"time"
@@ -107,7 +106,7 @@ func SkipIfStillRunning() JobWrapper {
 				defer func() { ch <- v }()
 				j.Run()
 			default:
-				logger.Info("skip")
+				//
 			}
 		})
 	}

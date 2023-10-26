@@ -3,27 +3,33 @@ package coroutine
 import (
 	"gitee.com/quant1x/gox/cron"
 	"gitee.com/quant1x/gox/logger"
+	"gitee.com/quant1x/gox/runtime"
 	"sync"
 	"sync/atomic"
 	"time"
 )
 
 const (
-	cronPreMinute    = "*/1 * * * *"
-	cronPreSecond    = "0/1 * * * * ?"
-	periodicInitTime = "09:00:00"
+	cronPreMinute       = "*/1 * * * *"
+	cronPreSecond       = "*/1 * * * * ?"
+	cronDefaultInterval = "@every 1s"
+	periodicInitTime    = "09:00:00"
 )
 
 // PeriodicOnce 周期性懒加载机制
 type PeriodicOnce struct {
-	done  uint32
-	m     sync.Mutex
-	once  sync.Once
-	timer *cron.Cron
-	date  string
+	done     uint32
+	m        sync.Mutex
+	once     sync.Once
+	timer    *cron.Cron
+	date     string
+	lazyFunc func()
 }
 
 func (o *PeriodicOnce) Do(f func()) {
+	if o.lazyFunc == nil {
+		o.lazyFunc = f
+	}
 	o.once.Do(o.initTimer)
 	if atomic.LoadUint32(&o.done) == 0 {
 		o.doSlow(f)
@@ -57,13 +63,16 @@ func (o *PeriodicOnce) isExpired() bool {
 
 func (o *PeriodicOnce) initTimer() {
 	if o.timer == nil {
+		funcName := runtime.FuncName(o.lazyFunc)
 		o.timer = cron.New(cron.WithSeconds())
-		id, err := o.timer.AddFunc(cronPreSecond, func() {
+		_, err := o.timer.AddFuncWithSkipIfStillRunning(cronDefaultInterval, func() {
 			if o.isExpired() {
+				logger.Infof("PeriodicOnce[%s]: reset begin", funcName)
 				o.Reset()
+				logger.Infof("PeriodicOnce[%s]: reset end", funcName)
 			}
 		})
-		logger.Info(id, err)
+		//logger.Info(id, err)
 		if err == nil {
 			o.timer.Start()
 		}

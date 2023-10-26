@@ -57,7 +57,7 @@ func TestPeriodicOnce(t *testing.T) {
 		}
 	}
 
-	producer()
+	go producer()
 	go reader()
 	count := 60
 	for i := 0; i < count; i++ {
