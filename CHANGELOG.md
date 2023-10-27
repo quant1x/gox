@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.13.6] - 2023-10-28
+### Changed
+- Treemap的clear方法增加互斥锁.
+
 ## [1.13.5] - 2023-10-27
 ### Changed
 - 调整csv文件的关闭方式.
@@ -803,8 +807,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.13.5...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.13.6...HEAD
 
+[1.13.6]: https://gitee.com/quant1x/gox/compare/v1.13.5...v1.13.6
 [1.13.5]: https://gitee.com/quant1x/gox/compare/v1.13.4...v1.13.5
 [1.13.4]: https://gitee.com/quant1x/gox/compare/v1.13.3...v1.13.4
 [1.13.3]: https://gitee.com/quant1x/gox/compare/v1.13.2...v1.13.3
