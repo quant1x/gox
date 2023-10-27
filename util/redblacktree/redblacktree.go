@@ -264,6 +264,8 @@ func (tree *Tree) Ceiling(key interface{}) (ceiling *Node, found bool) {
 
 // Clear removes all nodes from the tree.
 func (tree *Tree) Clear() {
+	tree.mutex.Lock()
+	defer tree.mutex.Unlock()
 	tree.Root = nil
 	tree.size = 0
 }

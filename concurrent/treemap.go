@@ -19,6 +19,10 @@ func NewTreeMap[K cmp.Ordered, V any]() *TreeMap[K, V] {
 	return &TreeMap[K, V]{tree: &tree}
 }
 
+func (m *TreeMap[K, V]) Size() int {
+	return m.tree.Size()
+}
+
 func (m *TreeMap[K, V]) Put(k K, v V) {
 	m.tree.Put(k, v)
 }
@@ -36,4 +40,8 @@ func (m *TreeMap[K, V]) Each(f func(key K, value V)) {
 	for iterator.Next() {
 		f(iterator.Key().(K), iterator.Value().(V))
 	}
+}
+
+func (m *TreeMap[K, V]) Clear() {
+	m.tree.Clear()
 }
