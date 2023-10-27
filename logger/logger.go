@@ -12,6 +12,7 @@ import (
 	"path/filepath"
 	"reflect"
 	"runtime"
+	"sync"
 	"time"
 )
 
@@ -44,7 +45,7 @@ var (
 	logLevel LogLevel = DEBUG
 
 	logQueue  = make(chan *logValue, 10000)
-	loggerMap = make(map[string]*Logger)
+	loggerMap sync.Map
 	writeDone = make(chan bool)
 
 	currUnixTime int64
@@ -147,15 +148,16 @@ func InitLogger(path string, level ...LogLevel) {
 
 // GetLogger return an logger instance
 func GetLogger(name string) *Logger {
-	if lg, ok := loggerMap[name]; ok {
-		return lg
+	v, found := loggerMap.Load(name)
+	if found {
+		return v.(*Logger)
 	}
 	lg := &Logger{
 		name:   name,
 		writer: &ConsoleWriter{},
 	}
 	_ = lg.SetDayRoller(__logger_path, __logger_roller_days)
-	loggerMap[name] = lg
+	loggerMap.Store(name, lg)
 	return lg
 }
 
