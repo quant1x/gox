@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.13.7] - 2023-10-28
+### Changed
+- Logger缓存map改为sync.map.
+
 ## [1.13.6] - 2023-10-28
 ### Changed
 - Treemap的clear方法增加互斥锁.
@@ -807,8 +811,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.13.6...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.13.7...HEAD
 
+[1.13.7]: https://gitee.com/quant1x/gox/compare/v1.13.6...v1.13.7
 [1.13.6]: https://gitee.com/quant1x/gox/compare/v1.13.5...v1.13.6
 [1.13.5]: https://gitee.com/quant1x/gox/compare/v1.13.4...v1.13.5
 [1.13.4]: https://gitee.com/quant1x/gox/compare/v1.13.3...v1.13.4
