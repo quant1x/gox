@@ -24,8 +24,8 @@ func CsvToSlices[S ~[]E, E any](filename string, pointer *S) error {
 	if err != nil {
 		return err
 	}
-	defer CloseQuietly(csvFile)
 	err = gocsv.Unmarshal(csvFile, pointer)
+	CloseQuietly(csvFile)
 	return err
 }
 
@@ -41,7 +41,7 @@ func SlicesToCsv[S ~[]E, E any](filename string, s S) error {
 	if err != nil {
 		return err
 	}
-	defer CloseQuietly(csvFile)
 	err = gocsv.MarshalFile(s, csvFile)
+	CloseQuietly(csvFile)
 	return err
 }
