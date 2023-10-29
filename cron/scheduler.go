@@ -8,7 +8,7 @@ import (
 
 const (
 	crontabInterval  = 10
-	crontabSnapshot  = "0/1 * * * * ?"
+	crontabSnapshot  = "*/1 * * * * ?"
 	sleepMillisecond = int64(100)
 )
 

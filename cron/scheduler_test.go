@@ -7,10 +7,12 @@ import (
 )
 
 func TestScheduler(t *testing.T) {
-	c := New()
-	//c := New(WithSeconds())
+	intervalSnapshot := "@every 1s"
+	intervalSnapshot = "* 15-59 8 * * *"
+	//c := New()
+	c := New(WithSeconds())
 	c.Start()
-	_, err := c.AddJobWithSkipIfStillRunning("@every 1s", func() {
+	_, err := c.AddJobWithSkipIfStillRunning(intervalSnapshot, func() {
 		time.Sleep(time.Second * 3)
 		fmt.Printf("SkipIfStillRunningWithLogger: %v\n", time.Now())
 	})
