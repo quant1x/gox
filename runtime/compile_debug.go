@@ -4,6 +4,6 @@
 package runtime
 
 const (
-	// Debug 调试开关
-	Debug = true
+	// 调试开关
+	tagDebug = true
 )
