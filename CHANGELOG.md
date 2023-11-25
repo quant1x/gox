@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.13.9] - 2023-11-26
+### Changed
+- 更新依赖库版本.
+
 ## [1.13.8] - 2023-11-23
 ### Changed
 - 增加编译选项中调试开关.
@@ -816,8 +820,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.13.8...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.13.9...HEAD
 
+[1.13.9]: https://gitee.com/quant1x/gox/compare/v1.13.8...v1.13.9
 [1.13.8]: https://gitee.com/quant1x/gox/compare/v1.13.7...v1.13.8
 [1.13.7]: https://gitee.com/quant1x/gox/compare/v1.13.6...v1.13.7
 [1.13.6]: https://gitee.com/quant1x/gox/compare/v1.13.5...v1.13.6
