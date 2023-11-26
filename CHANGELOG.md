@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.14.0] - 2023-11-27
+### Changed
+- 移除终端二维码工具库到pkg.
+
 ## [1.13.9] - 2023-11-26
 ### Changed
 - 更新依赖库版本.
@@ -820,8 +824,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.13.9...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.14.0...HEAD
 
+[1.14.0]: https://gitee.com/quant1x/gox/compare/v1.13.9...v1.14.0
 [1.13.9]: https://gitee.com/quant1x/gox/compare/v1.13.8...v1.13.9
 [1.13.8]: https://gitee.com/quant1x/gox/compare/v1.13.7...v1.13.8
 [1.13.7]: https://gitee.com/quant1x/gox/compare/v1.13.6...v1.13.7
