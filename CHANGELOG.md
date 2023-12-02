@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.14.1] - 2023-12-03
+### Changed
+- 迁移gocsv从github.com/gocarina/gocsv到gitee.com/quant1x/pkg/gocsv.
+
 ## [1.14.0] - 2023-11-27
 ### Changed
 - 移除终端二维码工具库到pkg.
@@ -824,8 +828,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.14.0...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.14.1...HEAD
 
+[1.14.1]: https://gitee.com/quant1x/gox/compare/v1.14.0...v1.14.1
 [1.14.0]: https://gitee.com/quant1x/gox/compare/v1.13.9...v1.14.0
 [1.13.9]: https://gitee.com/quant1x/gox/compare/v1.13.8...v1.13.9
 [1.13.8]: https://gitee.com/quant1x/gox/compare/v1.13.7...v1.13.8
