@@ -2,7 +2,7 @@ package api
 
 import (
 	"gitee.com/quant1x/gox/util/homedir"
-	"github.com/gocarina/gocsv"
+	"gitee.com/quant1x/pkg/gocsv"
 	"os"
 )
 
