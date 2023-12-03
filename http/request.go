@@ -46,6 +46,11 @@ func HttpRequest(url string, method string) ([]byte, error) {
 	return data, err
 }
 
+func Get(url string, header ...map[string]any) ([]byte, error) {
+	data, _, err := Request(url, GET, "", header...)
+	return data, err
+}
+
 // HttpGet Get请求
 func HttpGet(url string) ([]byte, error) {
 	return HttpRequest(url, GET)
