@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.14.4] - 2023-12-04
+### Changed
+- 运行时允许重置debug状态.
+
 ## [1.14.3] - 2023-12-03
 ### Changed
 - 增加自旋锁.
@@ -836,8 +840,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.14.3...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.14.4...HEAD
 
+[1.14.4]: https://gitee.com/quant1x/gox/compare/v1.14.3...v1.14.4
 [1.14.3]: https://gitee.com/quant1x/gox/compare/v1.14.2...v1.14.3
 [1.14.2]: https://gitee.com/quant1x/gox/compare/v1.14.1...v1.14.2
 [1.14.1]: https://gitee.com/quant1x/gox/compare/v1.14.0...v1.14.1
