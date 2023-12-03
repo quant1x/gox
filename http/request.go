@@ -27,8 +27,12 @@ const (
 	TRACE   = http.MethodTrace
 
 	ContentEncoding = "Content-Encoding"
+	ContextType     = "Content-Type"
 	LastModified    = "Last-Modified"
 	IfModifiedSince = "If-Modified-Since"
+	charsetUtf8     = "charset=UTF-8"
+	ApplicationJson = "application/json" + ";" + charsetUtf8
+	ApplicationForm = "application/x-www-form-urlencoded" + ";" + charsetUtf8
 )
 
 var (
@@ -37,17 +41,39 @@ var (
 )
 
 func HttpRequest(url string, method string) ([]byte, error) {
-	data, lastModified, err := Request(url, method)
+	data, lastModified, err := Request(url, method, "")
 	_ = lastModified
 	return data, err
 }
 
+// HttpGet Get请求
 func HttpGet(url string) ([]byte, error) {
 	return HttpRequest(url, GET)
 }
 
+// HttpPost POST 请求
+func HttpPost(url string, content string, header ...map[string]any) (data []byte, lastModified time.Time, err error) {
+	content = strings.TrimSpace(content)
+	length := len(content)
+	start := content[0]
+	end := content[length-1]
+	var requestHeader map[string]any
+	if len(header) == 0 {
+		requestHeader = make(map[string]any, 0)
+	} else {
+		requestHeader = header[0]
+	}
+	if (start == '{' && end == '}') || (start == '[' && end == ']') {
+		// 这是json
+		requestHeader[ContextType] = ApplicationJson
+	} else {
+		requestHeader[ContextType] = ApplicationForm
+	}
+	return Request(url, POST, content, requestHeader)
+}
+
 // Request http request, 支持传入header
-func Request(url string, method string, header ...map[string]any) (data []byte, lastModified time.Time, err error) {
+func Request(url string, method string, content string, header ...map[string]any) (data []byte, lastModified time.Time, err error) {
 	u, err := URL.Parse(url)
 	if err != nil {
 		return nil, TimeZero, err
@@ -84,7 +110,11 @@ func Request(url string, method string, header ...map[string]any) (data []byte, 
 	}
 
 	client := defaultClient()
-	request, err := http.NewRequest(strings.ToUpper(method), url, nil)
+	var requestBody io.Reader = nil
+	if len(content) > 0 {
+		requestBody = strings.NewReader(content)
+	}
+	request, err := http.NewRequest(strings.ToUpper(method), url, requestBody)
 	if err != nil {
 		return nil, TimeZero, err
 	}
