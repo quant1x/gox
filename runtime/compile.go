@@ -6,3 +6,8 @@ package runtime
 func Debug() bool {
 	return tagDebug
 }
+
+// SetDebug 重置debug状态
+func SetDebug(enable bool) {
+	tagDebug = enable
+}

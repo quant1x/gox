@@ -3,7 +3,7 @@
 
 package runtime
 
-const (
+var (
 	// 调试开关
 	tagDebug = true
 )
