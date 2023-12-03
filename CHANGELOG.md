@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.14.5] - 2023-12-04
+### Changed
+- Http工具包增加post方法.
+
 ## [1.14.4] - 2023-12-04
 ### Changed
 - 运行时允许重置debug状态.
@@ -840,8 +844,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.14.4...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.14.5...HEAD
 
+[1.14.5]: https://gitee.com/quant1x/gox/compare/v1.14.4...v1.14.5
 [1.14.4]: https://gitee.com/quant1x/gox/compare/v1.14.3...v1.14.4
 [1.14.3]: https://gitee.com/quant1x/gox/compare/v1.14.2...v1.14.3
 [1.14.2]: https://gitee.com/quant1x/gox/compare/v1.14.1...v1.14.2
