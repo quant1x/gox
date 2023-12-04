@@ -40,12 +40,14 @@ var (
 	NotFound = exception.New(http.StatusNotFound, http.StatusText(http.StatusNotFound))
 )
 
-func HttpRequest(url string, method string) ([]byte, error) {
-	data, lastModified, err := Request(url, method, "")
+// HttpRequest HTTP 请求
+func HttpRequest(url string, method string, header ...map[string]any) ([]byte, error) {
+	data, lastModified, err := Request(url, method, "", header...)
 	_ = lastModified
 	return data, err
 }
 
+// Get http get请求
 func Get(url string, header ...map[string]any) ([]byte, error) {
 	data, _, err := Request(url, GET, "", header...)
 	return data, err
