@@ -47,19 +47,21 @@ func HttpRequest(url string, method string, header ...map[string]any) ([]byte, e
 	return data, err
 }
 
-// Get http get请求
+// Get HTTP协议GET请求
 func Get(url string, header ...map[string]any) ([]byte, error) {
 	data, _, err := Request(url, GET, "", header...)
 	return data, err
 }
 
-// HttpGet Get请求
+// HttpGet HTTP协议GET请求
+//
+// Deprecated: 推荐使用 http.Get
 func HttpGet(url string) ([]byte, error) {
 	return HttpRequest(url, GET)
 }
 
-// HttpPost POST 请求
-func HttpPost(url string, content string, header ...map[string]any) (data []byte, lastModified time.Time, err error) {
+// Post HTTP协议POST请求
+func Post(url string, content string, header ...map[string]any) (data []byte, lastModified time.Time, err error) {
 	content = strings.TrimSpace(content)
 	length := len(content)
 	start := content[0]
