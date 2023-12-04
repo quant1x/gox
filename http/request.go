@@ -68,7 +68,7 @@ func HttpPost(url string) ([]byte, error) {
 }
 
 // Post HTTP协议POST请求
-func Post(url string, content string, header ...map[string]any) (data []byte, lastModified time.Time, err error) {
+func Post(url string, content string, header ...map[string]any) (data []byte, err error) {
 	var requestHeader map[string]any
 	if len(header) == 0 {
 		requestHeader = make(map[string]any, 0)
@@ -87,7 +87,8 @@ func Post(url string, content string, header ...map[string]any) (data []byte, la
 			requestHeader[ContextType] = ApplicationJson
 		}
 	}
-	return Request(url, POST, content, requestHeader)
+	data, _, err = Request(url, POST, content, requestHeader)
+	return data, err
 }
 
 // Request http request, 支持传入header
