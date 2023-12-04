@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.15.0] - 2023-12-04
+### Changed
+- Post方法去掉返回值中的lastModified.
+
 ## [1.14.9] - 2023-12-04
 ### Changed
 - 修复json判断失败的bug.
@@ -861,8 +865,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.14.9...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.15.0...HEAD
 
+[1.15.0]: https://gitee.com/quant1x/gox/compare/v1.14.9...v1.15.0
 [1.14.9]: https://gitee.com/quant1x/gox/compare/v1.14.8...v1.14.9
 [1.14.8]: https://gitee.com/quant1x/gox/compare/v1.14.7...v1.14.8
 [1.14.7]: https://gitee.com/quant1x/gox/compare/v1.14.6...v1.14.7
