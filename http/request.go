@@ -60,6 +60,13 @@ func HttpGet(url string) ([]byte, error) {
 	return HttpRequest(url, GET)
 }
 
+// HttpPost HTTP协议Post请求
+//
+// Deprecated: 推荐使用 http.Post
+func HttpPost(url string) ([]byte, error) {
+	return HttpRequest(url, POST)
+}
+
 // Post HTTP协议POST请求
 func Post(url string, content string, header ...map[string]any) (data []byte, lastModified time.Time, err error) {
 	content = strings.TrimSpace(content)
