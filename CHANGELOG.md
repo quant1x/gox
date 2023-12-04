@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.14.8] - 2023-12-04
+### Changed
+- 增加一个容错机制的HttpPost函数.
+
 ## [1.14.7] - 2023-12-04
 ### Changed
 - 优化部分功能函数.
@@ -853,8 +857,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.14.7...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.14.8...HEAD
 
+[1.14.8]: https://gitee.com/quant1x/gox/compare/v1.14.7...v1.14.8
 [1.14.7]: https://gitee.com/quant1x/gox/compare/v1.14.6...v1.14.7
 [1.14.6]: https://gitee.com/quant1x/gox/compare/v1.14.5...v1.14.6
 [1.14.5]: https://gitee.com/quant1x/gox/compare/v1.14.4...v1.14.5
