@@ -69,21 +69,23 @@ func HttpPost(url string) ([]byte, error) {
 
 // Post HTTP协议POST请求
 func Post(url string, content string, header ...map[string]any) (data []byte, lastModified time.Time, err error) {
-	content = strings.TrimSpace(content)
-	length := len(content)
-	start := content[0]
-	end := content[length-1]
 	var requestHeader map[string]any
 	if len(header) == 0 {
 		requestHeader = make(map[string]any, 0)
 	} else {
 		requestHeader = header[0]
 	}
-	if (start == '{' && end == '}') || (start == '[' && end == ']') {
-		// 这是json
-		requestHeader[ContextType] = ApplicationJson
-	} else {
-		requestHeader[ContextType] = ApplicationForm
+	requestHeader[ContextType] = ApplicationForm
+	content = strings.TrimSpace(content)
+	length := len(content)
+	if length >= 2 {
+		// json 最短长度为2
+		start := content[0]
+		end := content[length-1]
+		if (start == '{' && end == '}') || (start == '[' && end == ']') {
+			// 这是json
+			requestHeader[ContextType] = ApplicationJson
+		}
 	}
 	return Request(url, POST, content, requestHeader)
 }
