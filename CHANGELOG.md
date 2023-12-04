@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.14.6] - 2023-12-04
+### Changed
+- HttpRequest函数增加可以传入header.
+- Http新增一个独立的Get方法, 允许传入header.
+
 ## [1.14.5] - 2023-12-04
 ### Changed
 - Http工具包增加post方法.
@@ -844,8 +849,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.14.5...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.14.6...HEAD
 
+[1.14.6]: https://gitee.com/quant1x/gox/compare/v1.14.5...v1.14.6
 [1.14.5]: https://gitee.com/quant1x/gox/compare/v1.14.4...v1.14.5
 [1.14.4]: https://gitee.com/quant1x/gox/compare/v1.14.3...v1.14.4
 [1.14.3]: https://gitee.com/quant1x/gox/compare/v1.14.2...v1.14.3
