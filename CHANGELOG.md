@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.15.2] - 2023-12-07
+### Changed
+- 更新依赖库pkg版本.
+
 ## [1.15.1] - 2023-12-05
 ### Changed
 - 更新依赖库版本.
@@ -869,8 +873,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.15.1...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.15.2...HEAD
 
+[1.15.2]: https://gitee.com/quant1x/gox/compare/v1.15.1...v1.15.2
 [1.15.1]: https://gitee.com/quant1x/gox/compare/v1.15.0...v1.15.1
 [1.15.0]: https://gitee.com/quant1x/gox/compare/v1.14.9...v1.15.0
 [1.14.9]: https://gitee.com/quant1x/gox/compare/v1.14.8...v1.14.9
