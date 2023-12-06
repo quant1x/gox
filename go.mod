@@ -3,15 +3,13 @@ module gitee.com/quant1x/gox
 go 1.21.1
 
 require (
-	gitee.com/quant1x/pkg v0.1.2
+	gitee.com/quant1x/pkg v0.1.4
 	github.com/mmcloughlin/avo v0.5.0
 	github.com/stretchr/testify v1.8.4
-	golang.org/x/exp v0.0.0-20231127185646-65229373498e
+	golang.org/x/exp v0.0.0-20231206192017-f3f8817b8deb
 	golang.org/x/sys v0.15.0
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c
 )
-
-//replace gopkg.in/yaml.v3 v3.0.1 => gitee.com/quant1x/pkg v0.1.2
 
 require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
