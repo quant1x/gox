@@ -3,7 +3,7 @@ module gitee.com/quant1x/gox
 go 1.21.5
 
 require (
-	gitee.com/quant1x/pkg v0.1.4
+	gitee.com/quant1x/pkg v0.1.5
 	github.com/mmcloughlin/avo v0.5.0
 	github.com/stretchr/testify v1.8.4
 	golang.org/x/exp v0.0.0-20231206192017-f3f8817b8deb
