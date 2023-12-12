@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.15.4] - 2023-12-12
+### Changed
+- 更新pkg版本同步go版本.
+
 ## [1.15.3] - 2023-12-12
 ### Changed
 - 更新go1.21.5.
@@ -877,8 +881,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.15.3...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.15.4...HEAD
 
+[1.15.4]: https://gitee.com/quant1x/gox/compare/v1.15.3...v1.15.4
 [1.15.3]: https://gitee.com/quant1x/gox/compare/v1.15.2...v1.15.3
 [1.15.2]: https://gitee.com/quant1x/gox/compare/v1.15.1...v1.15.2
 [1.15.1]: https://gitee.com/quant1x/gox/compare/v1.15.0...v1.15.1
