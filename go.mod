@@ -1,6 +1,6 @@
 module gitee.com/quant1x/gox
 
-go 1.21.1
+go 1.21.5
 
 require (
 	gitee.com/quant1x/pkg v0.1.4
