@@ -15,4 +15,7 @@ const (
 
 	// Timestamp 时间戳 - 毫秒 时间格式 yyyy-MM-dd HH:mm:ss.SSS
 	Timestamp = "2006-01-02 15:04:05.000"
+
+	PathDate = "20060102"   // 路径中的日期格式
+	TextDate = "2006-01-02" // 数据中的日期格式
 )
