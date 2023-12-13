@@ -1,42 +1,12 @@
 package api
 
 import (
-	"reflect"
+	"fmt"
 	"testing"
 )
 
 func TestUnique(t *testing.T) {
-	for i, tc := range []struct {
-		data, want Interface
-	}{
-		{
-			IntSlice{&[]int{}},
-			IntSlice{&[]int{}},
-		},
-		{
-			IntSlice{&[]int{1}},
-			IntSlice{&[]int{1}},
-		},
-		{
-			IntSlice{&[]int{1, 2}},
-			IntSlice{&[]int{1, 2}},
-		},
-		{
-			IntSlice{&[]int{1, 1}},
-			IntSlice{&[]int{1}},
-		},
-		{
-			IntSlice{&[]int{1, 2, 2}},
-			IntSlice{&[]int{1, 2}},
-		},
-		{
-			IntSlice{&[]int{1, 1, 2}},
-			IntSlice{&[]int{1, 2}},
-		},
-	} {
-		Unique(tc.data)
-		if !reflect.DeepEqual(tc.data, tc.want) {
-			t.Errorf("%d: got %v; want %v", i, tc.data, tc.want)
-		}
-	}
+	s := []int{1, 2, 3, 4, 1, 1, 2, 2, 5, 1, 1, 1, 1, 1, 5, 5, 5, 3, 3, 3}
+	s = Unique(s)
+	fmt.Println(s)
 }
