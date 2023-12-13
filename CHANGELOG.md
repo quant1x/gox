@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.15.6] - 2023-12-14
+### Changed
+- 优化去重处理方式.
+- 给获取应用程序文件名的函数增加注释.
+
 ## [1.15.5] - 2023-12-12
 ### Changed
 - 增加文件路径中的日期格式, 数据中的日期格式.
@@ -886,8 +891,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.15.5...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.15.6...HEAD
 
+[1.15.6]: https://gitee.com/quant1x/gox/compare/v1.15.5...v1.15.6
 [1.15.5]: https://gitee.com/quant1x/gox/compare/v1.15.4...v1.15.5
 [1.15.4]: https://gitee.com/quant1x/gox/compare/v1.15.3...v1.15.4
 [1.15.3]: https://gitee.com/quant1x/gox/compare/v1.15.2...v1.15.3
