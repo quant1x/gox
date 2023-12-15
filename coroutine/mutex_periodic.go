@@ -67,12 +67,15 @@ func (o *PeriodicOnce) initTimer() {
 		o.timer = cron.New(cron.WithSeconds())
 		_, err := o.timer.AddFuncWithSkipIfStillRunning(cronDefaultInterval, func() {
 			if o.isExpired() {
-				logger.Infof("PeriodicOnce[%s]: reset begin", funcName)
+				if runtime.Debug() {
+					logger.Infof("PeriodicOnce[%s]: reset begin", funcName)
+				}
 				o.Reset()
-				logger.Infof("PeriodicOnce[%s]: reset end", funcName)
+				if runtime.Debug() {
+					logger.Infof("PeriodicOnce[%s]: reset end", funcName)
+				}
 			}
 		})
-		//logger.Info(id, err)
 		if err == nil {
 			o.timer.Start()
 		}
