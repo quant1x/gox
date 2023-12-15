@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.15.8] - 2023-12-16
+### Changed
+- PeriodOnce默认在非runtime的debug模式下不输出日志.
+
 ## [1.15.7] - 2023-12-15
 ### Changed
 - 定时任务默认在非runtime的debug模式下不输出日志.
@@ -895,8 +899,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.15.7...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.15.8...HEAD
 
+[1.15.8]: https://gitee.com/quant1x/gox/compare/v1.15.7...v1.15.8
 [1.15.7]: https://gitee.com/quant1x/gox/compare/v1.15.6...v1.15.7
 [1.15.6]: https://gitee.com/quant1x/gox/compare/v1.15.5...v1.15.6
 [1.15.5]: https://gitee.com/quant1x/gox/compare/v1.15.4...v1.15.5
