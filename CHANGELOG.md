@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.15.9] - 2023-12-22
+### Changed
+- 修复windows缺少error返回值的bug.
+- 新增获取文件状态(时间)的函数.
+- 增加windows操作系统的文件时间戳的获取方法.
+
 ## [1.15.8] - 2023-12-16
 ### Changed
 - PeriodOnce默认在非runtime的debug模式下不输出日志.
@@ -899,8 +905,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.15.8...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.15.9...HEAD
 
+[1.15.9]: https://gitee.com/quant1x/gox/compare/v1.15.8...v1.15.9
 [1.15.8]: https://gitee.com/quant1x/gox/compare/v1.15.7...v1.15.8
 [1.15.7]: https://gitee.com/quant1x/gox/compare/v1.15.6...v1.15.7
 [1.15.6]: https://gitee.com/quant1x/gox/compare/v1.15.5...v1.15.6
