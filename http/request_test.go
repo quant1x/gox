@@ -8,7 +8,7 @@ import (
 )
 
 func TestHttpGet(t *testing.T) {
-	HttpGet("http://money.finance.sina.com.cn/quotes_service/api/json_v2.php/CN_MarketData.getKLineData?symbol=sh000001&scale=60&datalen=1000000")
+	Get("http://money.finance.sina.com.cn/quotes_service/api/json_v2.php/CN_MarketData.getKLineData?symbol=sh000001&scale=60&datalen=1000000")
 }
 
 func TestHttpHead(t *testing.T) {
@@ -18,7 +18,7 @@ func TestHttpHead(t *testing.T) {
 	header := map[string]any{
 		IfModifiedSince: lastModified,
 	}
-	Request(url, "get", header)
+	Request(url, "get", "", header)
 }
 
 func TestHttpHead2(t *testing.T) {
@@ -42,7 +42,7 @@ func TestHttpHead2(t *testing.T) {
 		"Upgrade-Insecure-Requests": "1",
 		"User-Agent":                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36",
 	}
-	data, _, err := Request(url, GET, header)
+	data, _, err := Request(url, MethodGet, "", header)
 	if err != nil {
 		fmt.Println(err)
 	}

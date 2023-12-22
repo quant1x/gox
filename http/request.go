@@ -9,6 +9,7 @@ import (
 	"gitee.com/quant1x/gox/exception"
 	"gitee.com/quant1x/gox/logger"
 	"io"
+	"maps"
 	"net/http"
 	URL "net/url"
 	"strings"
@@ -16,15 +17,15 @@ import (
 )
 
 const (
-	GET     = http.MethodGet
-	POST    = http.MethodPost
-	HEAD    = http.MethodHead
-	PUT     = http.MethodPut
-	PATCH   = http.MethodPatch // RFC 5789
-	DELETE  = http.MethodDelete
-	CONNECT = http.MethodConnect
-	OPTIONS = http.MethodOptions
-	TRACE   = http.MethodTrace
+	MethodGet     = http.MethodGet
+	MethodPost    = http.MethodPost
+	MethodHead    = http.MethodHead
+	MethodPut     = http.MethodPut
+	MethodPatch   = http.MethodPatch // RFC 5789
+	MethodDelete  = http.MethodDelete
+	MethodConnect = http.MethodConnect
+	MethodOptions = http.MethodOptions
+	MethodTrace   = http.MethodTrace
 
 	ContentEncoding = "Content-Encoding"
 	ContextType     = "Content-Type"
@@ -40,6 +41,19 @@ var (
 	NotFound = exception.New(http.StatusNotFound, http.StatusText(http.StatusNotFound))
 )
 
+var (
+	defaultHeaders = map[string]string{
+		"Accept":                    "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+		"Accept-Encoding":           "gzip, deflate",
+		"Accept-Language":           "zh-CN,zh;q=0.9,en;q=0.8",
+		"Cache-Control":             "no-cache",
+		"Connection":                "keep-alive",
+		"Pragma":                    "no-cache",
+		"Upgrade-Insecure-Requests": "1",
+		"User-Agent":                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36 Edg/113.0.1774.35",
+	}
+)
+
 // HttpRequest HTTP 请求
 func HttpRequest(url string, method string, header ...map[string]any) ([]byte, error) {
 	data, lastModified, err := Request(url, method, "", header...)
@@ -49,22 +63,8 @@ func HttpRequest(url string, method string, header ...map[string]any) ([]byte, e
 
 // Get HTTP协议GET请求
 func Get(url string, header ...map[string]any) ([]byte, error) {
-	data, _, err := Request(url, GET, "", header...)
+	data, _, err := Request(url, MethodGet, "", header...)
 	return data, err
-}
-
-// HttpGet HTTP协议GET请求
-//
-// Deprecated: 推荐使用 http.Get
-func HttpGet(url string) ([]byte, error) {
-	return HttpRequest(url, GET)
-}
-
-// HttpPost HTTP协议Post请求
-//
-// Deprecated: 推荐使用 http.Post
-func HttpPost(url string) ([]byte, error) {
-	return HttpRequest(url, POST)
 }
 
 // Post HTTP协议POST请求
@@ -87,7 +87,7 @@ func Post(url string, content string, header ...map[string]any) (data []byte, er
 			requestHeader[ContextType] = ApplicationJson
 		}
 	}
-	data, _, err = Request(url, POST, content, requestHeader)
+	data, _, err = Request(url, MethodPost, content, requestHeader)
 	return data, err
 }
 
@@ -97,16 +97,8 @@ func Request(url string, method string, content string, header ...map[string]any
 	if err != nil {
 		return nil, TimeZero, err
 	}
-	reqHeader := make(map[string]string)
-	reqHeader["Accept"] = "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
-	reqHeader["Accept-Encoding"] = "gzip, deflate"
-	reqHeader["Accept-Language"] = "zh-CN,zh;q=0.9,en;q=0.8"
-	reqHeader["Cache-Control"] = "no-cache"
-	reqHeader["Connection"] = "keep-alive"
+	reqHeader := maps.Clone(defaultHeaders)
 	reqHeader["Host"] = u.Host
-	reqHeader["Pragma"] = "no-cache"
-	reqHeader["Upgrade-Insecure-Requests"] = "1"
-	reqHeader["User-Agent"] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36 Edg/113.0.1774.35"
 	if len(header) > 0 {
 		mapHeader := header[0]
 		for k, v := range mapHeader {

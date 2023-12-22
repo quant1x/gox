@@ -15,13 +15,15 @@ type Exception struct {
 	message string
 }
 
-func New(code int, message string) *Exception {
+// New 创建一个新的错误信息, 包含一个状态码和信息
+func New(code int, message string, a ...any) *Exception {
 	return &Exception{
 		code:    code,
-		message: message,
+		message: fmt.Sprintf(message, a...),
 	}
 }
 
+// 格式化输出错误信息
 func (this Exception) Error() string {
 	return fmt.Sprintf("#%d, message=%s", this.code, this.message)
 }
