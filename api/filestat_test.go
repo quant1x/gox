@@ -6,6 +6,6 @@ import (
 )
 
 func TestCreateTime(t *testing.T) {
-	ft := GetFileStat("./filestat.go")
-	fmt.Println(ft)
+	ft, err := GetFileStat("./filestat.go")
+	fmt.Println(ft, err)
 }
