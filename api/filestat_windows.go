@@ -19,5 +19,5 @@ func GetFileStat(name string) (*FileStat, error) {
 		CreationTime:   NanosecondToTime(winFileAttr.CreationTime.Nanoseconds()),
 		LastAccessTime: NanosecondToTime(winFileAttr.LastAccessTime.Nanoseconds()),
 		LastWriteTime:  NanosecondToTime(winFileAttr.LastWriteTime.Nanoseconds()),
-	}
+	}, nil
 }
