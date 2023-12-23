@@ -3,10 +3,10 @@ module gitee.com/quant1x/gox
 go 1.21.5
 
 require (
-	gitee.com/quant1x/pkg v0.1.5
+	gitee.com/quant1x/pkg v0.1.6
 	github.com/mmcloughlin/avo v0.5.0
 	github.com/stretchr/testify v1.8.4
-	golang.org/x/exp v0.0.0-20231206192017-f3f8817b8deb
+	golang.org/x/exp v0.0.0-20231219180239-dc181d75b848
 	golang.org/x/sys v0.15.0
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c
 )
