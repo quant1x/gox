@@ -5,7 +5,6 @@ package api
 import (
 	"os"
 	"syscall"
-	"time"
 )
 
 // GetFileStat 获取文件状态(创建,修改和访问时间)
@@ -15,10 +14,13 @@ func GetFileStat(name string) (*FileStat, error) {
 		return nil, err
 	}
 	// linux环境下代码如下
-	stat, _ := finfo.Sys().(*syscall.Stat_t)
+	stat, ok := finfo.Sys().(*syscall.Stat_t)
+	if !ok || stat == nil {
+		return nil, ErrInvaildFileStat
+	}
 	return &FileStat{
-		CreationTime:   time.Unix(stat.Ctim.Sec, stat.Ctim.Nsec),
-		LastAccessTime: time.Unix(stat.Atim.Sec, stat.Atim.Nsec),
-		LastWriteTime:  time.Unix(stat.Mtim.Sec, stat.Mtim.Nsec),
+		CreationTime:   timespecToTime(stat.Ctim),
+		LastAccessTime: timespecToTime(stat.Atim),
+		LastWriteTime:  timespecToTime(stat.Mtim),
 	}, nil
 }

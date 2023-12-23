@@ -1,7 +1,12 @@
 package api
 
 import (
+	"errors"
 	"time"
+)
+
+var (
+	ErrInvaildFileStat = errors.New("invalid file stat")
 )
 
 type FileStat struct {
@@ -10,8 +15,8 @@ type FileStat struct {
 	LastWriteTime  time.Time
 }
 
-// 把秒级的时间戳转为time格式
-func secondToTime(sec int64) time.Time {
+// SecondToTime 把秒级的时间戳转为time格式
+func SecondToTime(sec int64) time.Time {
 	return time.Unix(sec, 0)
 }
 

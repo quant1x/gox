@@ -14,10 +14,13 @@ func GetFileStat(name string) (*FileStat, error) {
 		return nil, err
 	}
 	// windows下代码如下
-	winFileAttr, _ := finfo.Sys().(*syscall.Win32FileAttributeData)
+	fileAttr, ok := finfo.Sys().(*syscall.Win32FileAttributeData)
+	if !ok || stat == nil {
+		return nil, ErrInvaildFileStat
+	}
 	return &FileStat{
-		CreationTime:   NanosecondToTime(winFileAttr.CreationTime.Nanoseconds()),
-		LastAccessTime: NanosecondToTime(winFileAttr.LastAccessTime.Nanoseconds()),
-		LastWriteTime:  NanosecondToTime(winFileAttr.LastWriteTime.Nanoseconds()),
+		CreationTime:   NanosecondToTime(fileAttr.CreationTime.Nanoseconds()),
+		LastAccessTime: NanosecondToTime(fileAttr.LastAccessTime.Nanoseconds()),
+		LastWriteTime:  NanosecondToTime(fileAttr.LastWriteTime.Nanoseconds()),
 	}, nil
 }
