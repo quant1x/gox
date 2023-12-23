@@ -1,7 +1,7 @@
 package num
 
 import (
-	"github.com/stretchr/testify/require"
+	"gitee.com/quant1x/pkg/testify/require"
 	"math"
 	"slices"
 	"testing"

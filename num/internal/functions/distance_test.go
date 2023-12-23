@@ -2,7 +2,7 @@ package functions
 
 import (
 	"fmt"
-	"github.com/stretchr/testify/require"
+	"gitee.com/quant1x/pkg/testify/require"
 	"golang.org/x/exp/rand"
 	"testing"
 )

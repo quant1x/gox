@@ -1,7 +1,7 @@
 package functions
 
 import (
-	"github.com/stretchr/testify/require"
+	"gitee.com/quant1x/pkg/testify/require"
 	"golang.org/x/exp/rand"
 	"slices"
 	"testing"

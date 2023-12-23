@@ -3,7 +3,7 @@ package functions
 import (
 	"bytes"
 	"fmt"
-	"github.com/stretchr/testify/require"
+	"gitee.com/quant1x/pkg/testify/require"
 	"golang.org/x/exp/rand"
 	"math"
 	"testing"
