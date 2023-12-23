@@ -15,7 +15,7 @@ func GetFileStat(name string) (*FileStat, error) {
 	}
 	// windows下代码如下
 	fileAttr, ok := finfo.Sys().(*syscall.Win32FileAttributeData)
-	if !ok || stat == nil {
+	if !ok || fileAttr == nil {
 		return nil, ErrInvaildFileStat
 	}
 	return &FileStat{
