@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.16.1] - 2023-12-23
+### Changed
+- 修复windows变量引用的错误.
+- 优化filestat中时间的处理方法.
+- 从exp包中复制maps的Keys和Values函数, 意在移除对exp的依赖.
+
 ## [1.16.0] - 2023-12-23
 ### Changed
 - 优化部分代码.
@@ -909,8 +915,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.16.0...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.16.1...HEAD
 
+[1.16.1]: https://gitee.com/quant1x/gox/compare/v1.16.0...v1.16.1
 [1.16.0]: https://gitee.com/quant1x/gox/compare/v1.15.9...v1.16.0
 [1.15.9]: https://gitee.com/quant1x/gox/compare/v1.15.8...v1.15.9
 [1.15.8]: https://gitee.com/quant1x/gox/compare/v1.15.7...v1.15.8
