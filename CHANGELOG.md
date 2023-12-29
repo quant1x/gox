@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.16.4] - 2023-12-30
+### Changed
+- 调整文件名, 字面意义和功能保持一致.
+
 ## [1.16.3] - 2023-12-30
 ### Changed
 - 修复num.Decimals函数负浮点四舍五入错误的bug.
@@ -925,8 +929,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.16.3...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.16.4...HEAD
 
+[1.16.4]: https://gitee.com/quant1x/gox/compare/v1.16.3...v1.16.4
 [1.16.3]: https://gitee.com/quant1x/gox/compare/v1.16.2...v1.16.3
 [1.16.2]: https://gitee.com/quant1x/gox/compare/v1.16.1...v1.16.2
 [1.16.1]: https://gitee.com/quant1x/gox/compare/v1.16.0...v1.16.1
