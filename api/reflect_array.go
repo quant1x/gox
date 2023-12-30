@@ -1,10 +1,14 @@
 package api
 
 import (
-	"gitee.com/quant1x/gox/errors"
+	"errors"
 	"reflect"
 	"strconv"
 	"sync"
+)
+
+var (
+	ErrNotConvert = errors.New("can not Convert")
 )
 
 var (
@@ -55,7 +59,7 @@ func Convert[T any](data []string, v *T) error {
 	}
 	ma := initTag(t)
 	if ma == nil {
-		return errors.New("can not Convert")
+		return ErrNotConvert
 	}
 	//fieldNum := t.NumField()
 	fieldNum := len(data)
