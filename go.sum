@@ -1,5 +1,5 @@
-gitee.com/quant1x/pkg v0.1.8 h1:UMaXAzVRn73nwOX6w8wjbhaiQRhHYFlqUg7NfjiBNgI=
-gitee.com/quant1x/pkg v0.1.8/go.mod h1:9Ge9oWXtdBQaygEaPYacTGUus5PZzmjSVXmnO42NxyY=
+gitee.com/quant1x/pkg v0.2.0 h1:9V69CM5P1fqQLIKw2nX81gSIOAacl+wBuyYU2DkzyO0=
+gitee.com/quant1x/pkg v0.2.0/go.mod h1:fkw9XQBtjWtOPZAl1L0ogHUalR1O1azZaUGAneaYchY=
 github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
