@@ -31,6 +31,9 @@ func CsvToSlices[S ~[]E, E any](filename string, pointer *S) error {
 
 // SlicesToCsv struct切片转csv文件
 func SlicesToCsv[S ~[]E, E any](filename string, s S) error {
+	if len(s) == 0 {
+		return nil
+	}
 	filepath, err := homedir.Expand(filename)
 	if err != nil {
 		return err
