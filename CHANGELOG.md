@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.16.5] - 2023-12-30
+### Changed
+- 调整缓存csv逻辑, 如果切片为空, 直接返回.
+
 ## [1.16.4] - 2023-12-30
 ### Changed
 - 调整文件名, 字面意义和功能保持一致.
@@ -929,8 +933,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.16.4...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.16.5...HEAD
 
+[1.16.5]: https://gitee.com/quant1x/gox/compare/v1.16.4...v1.16.5
 [1.16.4]: https://gitee.com/quant1x/gox/compare/v1.16.3...v1.16.4
 [1.16.3]: https://gitee.com/quant1x/gox/compare/v1.16.2...v1.16.3
 [1.16.2]: https://gitee.com/quant1x/gox/compare/v1.16.1...v1.16.2
