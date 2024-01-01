@@ -2,7 +2,6 @@ package api
 
 import (
 	"errors"
-	"gitee.com/quant1x/gox/util"
 	"strings"
 	"time"
 )
@@ -11,24 +10,28 @@ const (
 	YearOnly = "2006" // 日期格式仅输出"年"
 )
 
+var (
+	ErrDateFormat = errors.New("日期格式无法确定")
+)
+
 // ParseTime 解析时间差
 func ParseTime(timestr string) (time.Time, error) {
 	s := strings.TrimSpace(timestr)
 	switch len(s) {
-	case len(util.DateFormat):
-		return time.ParseInLocation(util.DateFormat, s, time.Local)
-	case len(util.DateFormat2):
-		return time.ParseInLocation(util.DateFormat2, s, time.Local)
-	case len(util.DateFormat3):
-		return time.ParseInLocation(util.DateFormat3, s, time.Local)
-	case len(util.TimeFormat2):
-		return time.ParseInLocation(util.TimeFormat2, s, time.Local)
-	case len(util.TimeFormat):
-		return time.ParseInLocation(util.TimeFormat, s, time.Local)
-	case len(util.Timestamp):
-		return time.ParseInLocation(util.Timestamp, s, time.Local)
+	case len(DateFormat):
+		return time.ParseInLocation(DateFormat, s, time.Local)
+	case len(DateFormat2):
+		return time.ParseInLocation(DateFormat2, s, time.Local)
+	case len(DateFormat3):
+		return time.ParseInLocation(DateFormat3, s, time.Local)
+	case len(TimeFormat2):
+		return time.ParseInLocation(TimeFormat2, s, time.Local)
+	case len(TimeFormat):
+		return time.ParseInLocation(TimeFormat, s, time.Local)
+	case len(Timestamp):
+		return time.ParseInLocation(Timestamp, s, time.Local)
 	default:
-		return time.Time{}, errors.New("日期格式无法确定")
+		return time.Time{}, ErrDateFormat
 	}
 }
 
