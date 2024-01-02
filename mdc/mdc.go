@@ -2,8 +2,7 @@ package mdc
 
 import (
 	"gitee.com/quant1x/gox/gls"
-	"gitee.com/quant1x/gox/util/uuid"
-	//uuid "github.com/satori/go.uuid"
+	"gitee.com/quant1x/pkg/uuid"
 )
 
 const (

@@ -5,7 +5,7 @@ import (
 	"gitee.com/quant1x/gox/api"
 	"gitee.com/quant1x/gox/gls"
 	"gitee.com/quant1x/gox/mdc"
-	"gitee.com/quant1x/gox/util/uuid"
+	"gitee.com/quant1x/pkg/uuid"
 	"runtime"
 	"testing"
 	"time"
