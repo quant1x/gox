@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.16.7] - 2024-01-02
+### Changed
+- 调整util包中的uuid能到pkg.
+- 调整util包中的时间格式功能到api包.
+- 增加功能性函数, 捕获panic, 忽略异常, 继续执行.
+- 优化应用程序名的获取方式, 改成懒加载.
+
 ## [1.16.6] - 2023-12-31
 ### Changed
 - 更新依赖库pkg版本.
@@ -943,8 +950,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.16.6...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.16.7...HEAD
 
+[1.16.7]: https://gitee.com/quant1x/gox/compare/v1.16.6...v1.16.7
 [1.16.6]: https://gitee.com/quant1x/gox/compare/v1.16.5...v1.16.6
 [1.16.5]: https://gitee.com/quant1x/gox/compare/v1.16.4...v1.16.5
 [1.16.4]: https://gitee.com/quant1x/gox/compare/v1.16.3...v1.16.4
