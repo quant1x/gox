@@ -14,7 +14,7 @@ var (
 	ErrDateFormat = errors.New("日期格式无法确定")
 )
 
-// ParseTime 解析时间差
+// ParseTime 解析时间字符串
 func ParseTime(timestr string) (time.Time, error) {
 	s := strings.TrimSpace(timestr)
 	switch len(s) {
