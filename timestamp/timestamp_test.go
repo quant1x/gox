@@ -3,17 +3,20 @@ package timestamp
 import (
 	"fmt"
 	"gitee.com/quant1x/gox/api"
+	//"github.com/golang-module/carbon/v2"
 	"testing"
 	"time"
 )
 
 func TestNow(t *testing.T) {
 	now := Now()
-	fmt.Println("today", now-now%millisecondsPerDay)
-	fmt.Println((now % millisecondsPerDay) / millisecondsPerHour)
-	fmt.Println((now % millisecondsPerHour) / millisecondsPerMinute)
-	fmt.Println((now % millisecondsPerMinute) / millisecondsPerSecond)
-	fmt.Println(now % millisecondsPerSecond)
+	fmt.Println("today1 :", now-now%millisecondsPerDay)
+	fmt.Println("today2 :", ZeroHour(now))
+	fmt.Println("today3 :", Today())
+	fmt.Println("  h :", (now%millisecondsPerDay)/millisecondsPerHour)
+	fmt.Println("  m :", (now%millisecondsPerHour)/millisecondsPerMinute)
+	fmt.Println("  s :", (now%millisecondsPerMinute)/MillisecondsPerSecond)
+	fmt.Println("sss :", now%MillisecondsPerSecond)
 
 	fmt.Println(now % millisecondsPerDay)
 
@@ -25,7 +28,7 @@ func TestNow(t *testing.T) {
 	ts = tm.UnixMilli()
 	fmt.Println("today1 :", ts)
 	ts = tm.Local().UnixMilli()
-	fmt.Println("today2 :", ts+int64(offsetInSecondsEastOfUTC*millisecondsPerSecond))
+	fmt.Println("today2 :", ts+int64(offsetInSecondsEastOfUTC*MillisecondsPerSecond))
 	t1 := time.Unix(ts/1000, 0)
 	fmt.Println("t1 =>", t1)
 	t3 := Timestamp(tm)
@@ -50,3 +53,12 @@ func TestTime1(t *testing.T) {
 //	// 今天此刻
 //	fmt.Printf("%s", carbon.Now()) // 2020-08-05 13:14:15
 //}
+
+func TestTime3(t *testing.T) {
+	t1 := zeroTime.UnixMilli()
+	fmt.Println(t1)
+	t2 := time.Now()
+	fmt.Println(t2)
+	t3 := time.Since(t2)
+	fmt.Println(t3.Seconds())
+}

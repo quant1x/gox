@@ -8,13 +8,13 @@ import (
 )
 
 const (
-	secondsPerMinute      = 60
-	secondsPerHour        = 60 * secondsPerMinute
-	secondsPerDay         = 24 * secondsPerHour
-	millisecondsPerSecond = 1000
-	millisecondsPerMinute = secondsPerMinute * millisecondsPerSecond
-	millisecondsPerHour   = secondsPerHour * millisecondsPerSecond
-	millisecondsPerDay    = secondsPerDay * millisecondsPerSecond
+	SecondsPerMinute      = 60
+	SecondsPerHour        = 60 * SecondsPerMinute
+	SecondsPerDay         = 24 * SecondsPerHour
+	MillisecondsPerSecond = 1000
+	millisecondsPerMinute = SecondsPerMinute * MillisecondsPerSecond
+	millisecondsPerHour   = SecondsPerHour * MillisecondsPerSecond
+	millisecondsPerDay    = SecondsPerDay * MillisecondsPerSecond
 )
 
 //go:linkname now time.now
@@ -29,12 +29,14 @@ var (
 	// 获取偏移的秒数
 	zoneName, offsetInSecondsEastOfUTC = time.Now().Zone()
 	_                                  = zoneName
+	// 本地0秒
+	zeroTime = time.Date(1970, 1, 1, 0, 0, 0, 0, time.Local)
 	// UTC到本地的偏移秒数
 	utcToLocal = int64(offsetInSecondsEastOfUTC)
 	// 本地到UTC的偏移秒数
 	localToUTC = -utcToLocal
 	// 偏移的毫秒数
-	//offsetMilliseconds = offsetInSecondsEastOfUTC * millisecondsPerSecond
+	//offsetMilliseconds = offsetInSecondsEastOfUTC * MillisecondsPerSecond
 )
 
 // Now 获取本地当前的时间戳, 毫秒数
@@ -43,17 +45,8 @@ var (
 func Now() int64 {
 	sec, nsec, _ := now()
 	sec += int64(offsetInSecondsEastOfUTC)
-	milli := sec*millisecondsPerSecond + int64(nsec)/1e6%millisecondsPerSecond
+	milli := sec*MillisecondsPerSecond + int64(nsec)/1e6%MillisecondsPerSecond
 	return milli
-}
-
-// Today 获取当日0点整的时间戳, 毫秒数
-//
-//	UTC 转 local
-func Today() int64 {
-	now := Now()
-	millisecondsOfToday := now - now%millisecondsPerDay
-	return millisecondsOfToday
 }
 
 // Timestamp 获取time.Time的本地毫秒数
@@ -61,7 +54,7 @@ func Today() int64 {
 //	UTC 转 local
 func Timestamp(t time.Time) int64 {
 	utcMilliseconds := t.UnixMilli()
-	milliseconds := utcMilliseconds + utcToLocal*millisecondsPerSecond
+	milliseconds := utcMilliseconds + utcToLocal*MillisecondsPerSecond
 	return milliseconds
 }
 
@@ -69,6 +62,38 @@ func Timestamp(t time.Time) int64 {
 //
 //	local 转 UTC
 func Time(milliseconds int64) time.Time {
-	utcMilliseconds := milliseconds + localToUTC*millisecondsPerSecond
+	utcMilliseconds := milliseconds + localToUTC*MillisecondsPerSecond
 	return time.UnixMilli(utcMilliseconds)
+}
+
+// SinceZero 从0点到milliseconds过去的毫秒数
+func SinceZero(milliseconds int64) int64 {
+	elapsed := milliseconds % millisecondsPerDay
+	if elapsed < 0 {
+		elapsed += millisecondsPerDay
+	}
+	return elapsed
+}
+
+// ZeroHour 零点整的毫秒数
+func ZeroHour(milliseconds int64) int64 {
+	elapsed := SinceZero(milliseconds)
+	diff := milliseconds - elapsed
+	return diff
+}
+
+func Since(t time.Time) int64 {
+	milliseconds := Timestamp(t)
+	elapsed := SinceZero(milliseconds)
+	return elapsed
+}
+
+// Today 获取当日0点整的时间戳, 毫秒数
+//
+//	UTC 转 local
+func Today() int64 {
+	milliseconds := Now()
+	//elapsed := milliseconds - milliseconds%millisecondsPerDay
+	elapsed := ZeroHour(milliseconds)
+	return elapsed
 }
