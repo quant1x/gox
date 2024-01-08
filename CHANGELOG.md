@@ -3,6 +3,17 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.16.8] - 2024-01-08
+### Changed
+- 优化部分代码.
+- 修订注释.
+- 新增RollingOnce, 相对于PeriodicOnce优化了时间戳的处理方式.
+- 优化timestamp时间戳.
+- 调整部分代码.
+- 新增时间戳(毫秒数)的功能函数.
+- 更新依赖库golang.org/x/exp版本.
+- 修订ParseTime的函数注释.
+
 ## [1.16.7] - 2024-01-02
 ### Changed
 - 调整util包中的uuid能到pkg.
@@ -950,8 +961,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.16.7...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.16.8...HEAD
 
+[1.16.8]: https://gitee.com/quant1x/gox/compare/v1.16.7...v1.16.8
 [1.16.7]: https://gitee.com/quant1x/gox/compare/v1.16.6...v1.16.7
 [1.16.6]: https://gitee.com/quant1x/gox/compare/v1.16.5...v1.16.6
 [1.16.5]: https://gitee.com/quant1x/gox/compare/v1.16.4...v1.16.5
