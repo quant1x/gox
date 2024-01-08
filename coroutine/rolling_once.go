@@ -12,7 +12,7 @@ import (
 const (
 	rollingAnchorPoint = 0
 	rollingWindow      = timestamp.MillisecondsPerDay
-	offsetWindow       = timestamp.MillisecondsPerHour * 9
+	offsetWindow       = timestamp.MillisecondsPerHour * 9 // 每天9点整
 )
 
 // 默认的时间窗口
@@ -27,7 +27,7 @@ func defaultTimeWindow(observer, rollingWindow int64) (next, current int64, canS
 	return
 }
 
-// 当前观察点
+// 获取当前观察点
 func currentObserver() int64 {
 	zero := timestamp.Today()
 	return zero + offsetWindow
@@ -65,9 +65,29 @@ func (o *RollingOnce) doSlow(f func()) {
 }
 
 func (o *RollingOnce) isExpired() bool {
-	next, _, canSwitch := defaultTimeWindow(o.observer, rollingWindow)
-	o.observer = next
+	_, _, canSwitch := defaultTimeWindow(o.observer, rollingWindow)
+	//o.observer = next
 	return canSwitch
+}
+
+func (o *RollingOnce) runTicker() {
+	funcName := runtime.FuncName(o.lazyFunc)
+	o.ticker = time.NewTicker(100 * time.Millisecond)
+	defer o.ticker.Stop()
+	for {
+		select {
+		case <-o.ticker.C:
+			if o.isExpired() {
+				if runtime.Debug() {
+					logger.Infof("RollingOnce[%s]: reset begin", funcName)
+				}
+				o.Reset()
+				if runtime.Debug() {
+					logger.Infof("RollingOnce[%s]: reset end", funcName)
+				}
+			}
+		}
+	}
 }
 
 func (o *RollingOnce) initTicker() {
@@ -75,25 +95,7 @@ func (o *RollingOnce) initTicker() {
 		o.observer = currentObserver()
 	}
 	if o.ticker == nil {
-		funcName := runtime.FuncName(o.lazyFunc)
-		o.ticker = time.NewTicker(100 * time.Millisecond)
-		defer o.ticker.Stop()
-		go func() {
-			for {
-				select {
-				case <-o.ticker.C:
-					if o.isExpired() {
-						if runtime.Debug() {
-							logger.Infof("RollingOnce[%s]: reset begin", funcName)
-						}
-						o.Reset()
-						if runtime.Debug() {
-							logger.Infof("RollingOnce[%s]: reset end", funcName)
-						}
-					}
-				}
-			}
-		}()
+		go o.runTicker()
 	}
 }
 
