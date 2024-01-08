@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.16.9] - 2024-01-09
+### Changed
+- 优化部分代码, 删除非必要的import.
+
 ## [1.16.8] - 2024-01-08
 ### Changed
 - 优化部分代码.
@@ -961,8 +965,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.16.8...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.16.9...HEAD
 
+[1.16.9]: https://gitee.com/quant1x/gox/compare/v1.16.8...v1.16.9
 [1.16.8]: https://gitee.com/quant1x/gox/compare/v1.16.7...v1.16.8
 [1.16.7]: https://gitee.com/quant1x/gox/compare/v1.16.6...v1.16.7
 [1.16.6]: https://gitee.com/quant1x/gox/compare/v1.16.5...v1.16.6
