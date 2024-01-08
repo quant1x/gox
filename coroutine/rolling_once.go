@@ -37,7 +37,7 @@ func currentObserver() int64 {
 type RollingOnce struct {
 	done     uint32
 	m        sync.Mutex
-	once     sync.Once // for timer
+	once     sync.Once // for ticker
 	ticker   *time.Ticker
 	window   int64 // 滑动窗口的毫秒数
 	offset   int64 // 距离0点整的偏移毫秒数
