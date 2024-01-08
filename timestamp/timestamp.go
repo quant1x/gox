@@ -2,7 +2,6 @@
 package timestamp
 
 import (
-	_ "runtime"
 	"time"
 	_ "unsafe" // for go:linkname
 )
@@ -38,6 +37,16 @@ var (
 	// 偏移的毫秒数
 	//offsetMilliseconds = offsetInSecondsEastOfUTC * MillisecondsPerSecond
 )
+
+//type TimeStamp time.Duration
+//
+//func (t TimeStamp) duration() time.Duration {
+//	return time.Duration(t)
+//}
+//
+//func (t TimeStamp) Hour() int {
+//	t.duration().Abs()
+//}
 
 // Now 获取本地当前的时间戳, 毫秒数
 //
