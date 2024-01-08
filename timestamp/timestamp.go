@@ -12,9 +12,9 @@ const (
 	SecondsPerHour        = 60 * SecondsPerMinute
 	SecondsPerDay         = 24 * SecondsPerHour
 	MillisecondsPerSecond = 1000
-	millisecondsPerMinute = SecondsPerMinute * MillisecondsPerSecond
-	millisecondsPerHour   = SecondsPerHour * MillisecondsPerSecond
-	millisecondsPerDay    = SecondsPerDay * MillisecondsPerSecond
+	MillisecondsPerMinute = SecondsPerMinute * MillisecondsPerSecond
+	MillisecondsPerHour   = SecondsPerHour * MillisecondsPerSecond
+	MillisecondsPerDay    = SecondsPerDay * MillisecondsPerSecond
 )
 
 //go:linkname now time.now
@@ -68,9 +68,9 @@ func Time(milliseconds int64) time.Time {
 
 // SinceZero 从0点到milliseconds过去的毫秒数
 func SinceZero(milliseconds int64) int64 {
-	elapsed := milliseconds % millisecondsPerDay
+	elapsed := milliseconds % MillisecondsPerDay
 	if elapsed < 0 {
-		elapsed += millisecondsPerDay
+		elapsed += MillisecondsPerDay
 	}
 	return elapsed
 }
@@ -82,6 +82,7 @@ func ZeroHour(milliseconds int64) int64 {
 	return diff
 }
 
+// Since t当日0点整到t的毫秒数
 func Since(t time.Time) int64 {
 	milliseconds := Timestamp(t)
 	elapsed := SinceZero(milliseconds)
@@ -93,7 +94,26 @@ func Since(t time.Time) int64 {
 //	UTC 转 local
 func Today() int64 {
 	milliseconds := Now()
-	//elapsed := milliseconds - milliseconds%millisecondsPerDay
+	//elapsed := milliseconds - milliseconds%MillisecondsPerDay
 	elapsed := ZeroHour(milliseconds)
 	return elapsed
+}
+
+// CurrentDateZero t日期的0点整
+func CurrentDateZero(t time.Time) time.Time {
+	y, m, d := t.Date()
+	return time.Date(y, m, d, 0, 0, 0, 0, time.Local)
+}
+
+// TodayZero 这也是一个当日0点的用法
+func TodayZero() time.Time {
+	now := time.Now()
+	y, m, d := now.Date()
+	return time.Date(y, m, d, 0, 0, 0, 0, time.Local)
+}
+
+// SinceZeroHour t当天0点开始到t时的毫秒数
+func SinceZeroHour(t time.Time) int64 {
+	zero := CurrentDateZero(t)
+	return t.Sub(zero).Milliseconds()
 }

@@ -10,15 +10,15 @@ import (
 
 func TestNow(t *testing.T) {
 	now := Now()
-	fmt.Println("today1 :", now-now%millisecondsPerDay)
+	fmt.Println("today1 :", now-now%MillisecondsPerDay)
 	fmt.Println("today2 :", ZeroHour(now))
 	fmt.Println("today3 :", Today())
-	fmt.Println("  h :", (now%millisecondsPerDay)/millisecondsPerHour)
-	fmt.Println("  m :", (now%millisecondsPerHour)/millisecondsPerMinute)
-	fmt.Println("  s :", (now%millisecondsPerMinute)/MillisecondsPerSecond)
+	fmt.Println("  h :", (now%MillisecondsPerDay)/MillisecondsPerHour)
+	fmt.Println("  m :", (now%MillisecondsPerHour)/MillisecondsPerMinute)
+	fmt.Println("  s :", (now%MillisecondsPerMinute)/MillisecondsPerSecond)
 	fmt.Println("sss :", now%MillisecondsPerSecond)
 
-	fmt.Println(now % millisecondsPerDay)
+	fmt.Println(now % MillisecondsPerDay)
 
 	date := "2024-01-07"
 	tm, err := api.ParseTime(date)
@@ -61,4 +61,12 @@ func TestTime3(t *testing.T) {
 	fmt.Println(t2)
 	t3 := time.Since(t2)
 	fmt.Println(t3.Seconds())
+}
+
+func TestSinceZeroHour(t *testing.T) {
+	now := time.Now()
+	t1 := SinceZeroHour(now)
+	fmt.Println(t1)
+	t2 := Since(now)
+	fmt.Println(t2)
 }
