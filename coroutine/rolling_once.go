@@ -66,7 +66,6 @@ func (o *RollingOnce) doSlow(f func()) {
 
 func (o *RollingOnce) isExpired() bool {
 	_, _, canSwitch := defaultTimeWindow(o.observer, rollingWindow)
-	//o.observer = next
 	return canSwitch
 }
 
