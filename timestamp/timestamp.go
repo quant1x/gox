@@ -38,16 +38,6 @@ var (
 	//offsetMilliseconds = offsetInSecondsEastOfUTC * MillisecondsPerSecond
 )
 
-//type TimeStamp time.Duration
-//
-//func (t TimeStamp) duration() time.Duration {
-//	return time.Duration(t)
-//}
-//
-//func (t TimeStamp) Hour() int {
-//	t.duration().Abs()
-//}
-
 // Now 获取本地当前的时间戳, 毫秒数
 //
 //	UTC 转 local
