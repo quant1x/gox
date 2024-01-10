@@ -965,8 +965,9 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.16.9...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.17.0...HEAD
 
+[1.17.0]: https://gitee.com/quant1x/gox/compare/v1.16.9...v1.17.0
 [1.16.9]: https://gitee.com/quant1x/gox/compare/v1.16.8...v1.16.9
 [1.16.8]: https://gitee.com/quant1x/gox/compare/v1.16.7...v1.16.8
 [1.16.7]: https://gitee.com/quant1x/gox/compare/v1.16.6...v1.16.7
