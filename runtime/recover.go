@@ -24,20 +24,27 @@ func sprintf(v ...any) string {
 	}
 }
 
-// CatchPanic 捕获panic
-func CatchPanic(v ...any) {
+// 捕获异常, 是否忽略异常
+func catchException(ignore bool, v ...any) {
 	if err := recover(); err != nil {
 		warning := sprintf(v...)
 		stack := string(debug.Stack())
-		fmt.Printf("\nerr=%v, stack=%s\n", err, stack)
-		logger.Fatalf("%s exception: warning=%s, error=%+v, stack=%s", ApplicationName(), warning, err, stack)
+		loggerFunc := logger.Fatalf
+		if ignore {
+			loggerFunc = logger.Errorf
+		} else {
+			fmt.Printf("\nerr=%v, stack=%s\n", err, stack)
+		}
+		loggerFunc("%s exception: warning=%s, error=%+v, stack=%s", ApplicationName(), warning, err, stack)
 	}
 }
 
+// CatchPanic 捕获panic
+func CatchPanic(v ...any) {
+	catchException(false, v...)
+}
+
 // IgnorePanic 通用捕获panic, 忽略异常, 继续执行
-func IgnorePanic() {
-	if err := recover(); err != nil {
-		stack := string(debug.Stack())
-		logger.Errorf("err=%v, stack=%s", err, stack)
-	}
+func IgnorePanic(v ...any) {
+	catchException(true, v...)
 }
