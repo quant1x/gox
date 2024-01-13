@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.17.4] - 2024-01-14
+### Changed
+- 调整解析参数的时机, 只在异常发生时解析.
+
 ## [1.17.3] - 2024-01-14
 ### Changed
 - 允许CatchPanic传入可变参数.
@@ -1105,7 +1109,8 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.17.3...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.17.4...HEAD
+[1.17.4]: https://gitee.com/quant1x/gox/compare/v1.17.3...v1.17.4
 [1.17.3]: https://gitee.com/quant1x/gox/compare/v1.17.2...v1.17.3
 [1.17.2]: https://gitee.com/quant1x/gox/compare/v1.17.1...v1.17.2
 [1.17.1]: https://gitee.com/quant1x/gox/compare/v1.17.0...v1.17.1
