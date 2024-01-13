@@ -1,5 +1,5 @@
-gitee.com/quant1x/pkg v0.2.5 h1:gNExxkU8Dzd55HCfOprsbRMktvCrKAVRa+hO93zXpFc=
-gitee.com/quant1x/pkg v0.2.5/go.mod h1:05VKrYtcEw+FZA6OYzIG6xWqU3imscy5D9vzubDPBEo=
+gitee.com/quant1x/pkg v0.2.6 h1:u5IXv7pBIAByU4QwBtct0zINeso89yG76iaSK+vQKHU=
+gitee.com/quant1x/pkg v0.2.6/go.mod h1:PxsmEZX9MfFtVYt5mn6lKd0SJ/dRVn39kElUOJo4dKs=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/kr/pretty v0.3.1 h1:flRD4NNwYAUpkphVc1HcthR4KEIFJ65n8Mw5qdRn3LE=
