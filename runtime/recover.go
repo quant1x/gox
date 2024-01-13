@@ -26,8 +26,8 @@ func sprintf(v ...any) string {
 
 // CatchPanic 捕获panic
 func CatchPanic(v ...any) {
-	warning := sprintf(v...)
 	if err := recover(); err != nil {
+		warning := sprintf(v...)
 		stack := string(debug.Stack())
 		fmt.Printf("\nerr=%v, stack=%s\n", err, stack)
 		logger.Fatalf("%s exception: warning=%s, error=%+v, stack=%s", ApplicationName(), warning, err, stack)
