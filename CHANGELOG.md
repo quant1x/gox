@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.17.2] - 2024-01-13
+### Changed
+- 更新依赖库版本.
+
 ## [1.17.1] - 2024-01-11
 ### Changed
 - 删除废弃的代码.
@@ -1097,7 +1101,8 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.17.1...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.17.2...HEAD
+[1.17.2]: https://gitee.com/quant1x/gox/compare/v1.17.1...v1.17.2
 [1.17.1]: https://gitee.com/quant1x/gox/compare/v1.17.0...v1.17.1
 [1.17.0]: https://gitee.com/quant1x/gox/compare/v1.16.9...v1.17.0
 [1.16.9]: https://gitee.com/quant1x/gox/compare/v1.16.8...v1.16.9
