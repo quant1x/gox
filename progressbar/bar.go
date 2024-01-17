@@ -8,6 +8,7 @@ import (
 	"time"
 )
 
+// Bar 进度条
 type Bar struct {
 	mu       sync.Mutex
 	line     int
@@ -16,7 +17,7 @@ type Bar struct {
 	width    int
 	advance  chan bool
 	done     chan bool
-	finished chan bool
+	finished chan bool // 等待结束信号
 	currents map[string]int
 	current  int
 	before   int
