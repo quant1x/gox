@@ -180,6 +180,7 @@ func (b *Bar) updateCost() {
 	}
 }
 
+// Wait 等待进度条刷新run协程结束
 func (b *Bar) Wait() {
 	<-b.finished
 }
@@ -197,6 +198,7 @@ func (b *Bar) run() {
 	}
 }
 
+// 重置进度条消息
 func (b *Bar) barMsg() string {
 	unit := ""
 	change := 1
