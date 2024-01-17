@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.17.9] - 2024-01-18
+### Changed
+- 增加Touch函数.
+
 ## [1.17.8] - 2024-01-17
 ### Changed
 - Bar公开方法增加注释.
@@ -1127,7 +1131,8 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.17.8...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.17.9...HEAD
+[1.17.9]: https://gitee.com/quant1x/gox/compare/v1.17.8...v1.17.9
 [1.17.8]: https://gitee.com/quant1x/gox/compare/v1.17.7...v1.17.8
 [1.17.7]: https://gitee.com/quant1x/gox/compare/v1.17.6...v1.17.7
 [1.17.6]: https://gitee.com/quant1x/gox/compare/v1.17.5...v1.17.6
