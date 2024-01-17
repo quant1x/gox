@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.17.6] - 2024-01-17
+### Changed
+- 进度条增加结束等待方法.
+
 ## [1.17.5] - 2024-01-14
 ### Changed
 - 优化可以忽略panic的异常捕获函数.
@@ -1113,7 +1117,8 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.17.5...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.17.6...HEAD
+[1.17.6]: https://gitee.com/quant1x/gox/compare/v1.17.5...v1.17.6
 [1.17.5]: https://gitee.com/quant1x/gox/compare/v1.17.4...v1.17.5
 [1.17.4]: https://gitee.com/quant1x/gox/compare/v1.17.3...v1.17.4
 [1.17.3]: https://gitee.com/quant1x/gox/compare/v1.17.2...v1.17.3
