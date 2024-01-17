@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.17.7] - 2024-01-17
+### Changed
+- 修复未初始化的bug.
+- 修复未初始化的bug.
+
 ## [1.17.6] - 2024-01-17
 ### Changed
 - 进度条增加结束等待方法.
@@ -1117,7 +1122,8 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.17.6...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.17.7...HEAD
+[1.17.7]: https://gitee.com/quant1x/gox/compare/v1.17.6...v1.17.7
 [1.17.6]: https://gitee.com/quant1x/gox/compare/v1.17.5...v1.17.6
 [1.17.5]: https://gitee.com/quant1x/gox/compare/v1.17.4...v1.17.5
 [1.17.4]: https://gitee.com/quant1x/gox/compare/v1.17.3...v1.17.4
