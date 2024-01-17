@@ -72,6 +72,7 @@ func NewBar(line int, prefix string, total int) *Bar {
 		width:    100,
 		advance:  make(chan bool),
 		done:     make(chan bool),
+		finished: make(chan bool),
 		currents: make(map[string]int),
 		change:   1,
 		start:    time.Now(),
