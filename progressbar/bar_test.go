@@ -47,6 +47,7 @@ func TestBar(t *testing.T) {
 			b4.Add(3)
 			time.Sleep(time.Second / 300)
 		}
+		b4.Wait()
 	}()
 	wg.Wait()
 }
