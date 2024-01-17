@@ -16,6 +16,7 @@ type Bar struct {
 	width    int
 	advance  chan bool
 	done     chan bool
+	finished chan bool
 	currents map[string]int
 	current  int
 	before   int
@@ -177,8 +178,13 @@ func (b *Bar) updateCost() {
 	}
 }
 
+func (b *Bar) Wait() {
+	<-b.finished
+}
+
 func (b *Bar) run() {
 	defer func() {
+		b.finished <- true
 		// 解析失败以后输出日志, 以备检查
 		if err := recover(); err != nil {
 			logger.Errorf("run.advance error=%+v\n", err)
