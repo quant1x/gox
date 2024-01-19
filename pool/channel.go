@@ -7,11 +7,6 @@ import (
 	"time"
 )
 
-var (
-	//ErrMaxActiveConnReached 连接池超限
-	ErrMaxActiveConnReached = errors.New("MaxActiveConnReached")
-)
-
 // Config 连接池相关配置
 type Config struct {
 	//连接池中拥有的最小连接数
@@ -21,11 +16,11 @@ type Config struct {
 	//最大空闲连接
 	MaxIdle int
 	//生成连接的方法
-	Factory func() (interface{}, error)
+	Factory func() (any, error)
 	//关闭连接的方法
-	Close func(interface{}) error
+	Close func(any) error
 	//检查连接是否有效的方法
-	Ping func(interface{}) error
+	Ping func(any) error
 	//连接最大空闲时间，超过该事件则将失效
 	IdleTimeout time.Duration
 }
@@ -36,19 +31,20 @@ type connReq struct {
 
 // channelPool 存放连接信息
 type channelPool struct {
-	mu                       sync.RWMutex
-	conns                    chan *idleConn
-	factory                  func() (interface{}, error)
-	close                    func(interface{}) error
-	ping                     func(interface{}) error
-	idleTimeout, waitTimeOut time.Duration
-	maxActive                int
-	openingConns             int
-	connReqs                 []chan connReq
+	mu           sync.RWMutex        // 读写锁
+	conns        chan *idleConn      // 空闲连接
+	idleTimeout  time.Duration       // 空闲时间
+	waitTimeOut  time.Duration       // 等待时间
+	maxActive    int                 // 最大活跃数
+	openingConns int                 // 打开连接数
+	connReqs     []chan connReq      // 池满后请求新连接的队列
+	factory      func() (any, error) // 新连接工厂
+	close        func(any) error     // 关闭
+	ping         func(any) error     // ping
 }
 
 type idleConn struct {
-	conn interface{}
+	conn any
 	t    time.Time
 }
 
@@ -98,7 +94,7 @@ func (c *channelPool) getConns() chan *idleConn {
 }
 
 // Get 从pool中取一个连接
-func (c *channelPool) Get() (interface{}, error) {
+func (c *channelPool) Get() (any, error) {
 	conns := c.getConns()
 	if conns == nil {
 		return nil, ErrClosed
@@ -127,7 +123,6 @@ func (c *channelPool) Get() (interface{}, error) {
 			return wrapConn.conn, nil
 		default:
 			c.mu.Lock()
-			//logger.Debugf("openConn %v %v", c.openingConns, c.maxActive)
 			if c.openingConns >= c.maxActive {
 				req := make(chan connReq, 1)
 				c.connReqs = append(c.connReqs, req)
@@ -162,9 +157,9 @@ func (c *channelPool) Get() (interface{}, error) {
 }
 
 // Put 将连接放回pool中
-func (c *channelPool) Put(conn interface{}) error {
+func (c *channelPool) Put(conn any) error {
 	if conn == nil {
-		return errors.New("connection is nil. rejecting")
+		return ErrIsNil
 	}
 
 	c.mu.Lock()
@@ -197,9 +192,9 @@ func (c *channelPool) Put(conn interface{}) error {
 }
 
 // Close 关闭单条连接
-func (c *channelPool) Close(conn interface{}) error {
+func (c *channelPool) Close(conn any) error {
 	if conn == nil {
-		return errors.New("connection is nil. rejecting")
+		return ErrIsNil
 	}
 	c.mu.Lock()
 	defer c.mu.Unlock()
@@ -211,9 +206,9 @@ func (c *channelPool) Close(conn interface{}) error {
 }
 
 // Ping 检查单条连接是否有效
-func (c *channelPool) Ping(conn interface{}) error {
+func (c *channelPool) Ping(conn any) error {
 	if conn == nil {
-		return errors.New("connection is nil. rejecting")
+		return ErrIsNil
 	}
 	return c.ping(conn)
 }
