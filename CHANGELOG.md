@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.18.0] - 2024-01-20
+### Changed
+- 删除部分废弃的代码.
+- 注释掉部分告警日志.
+- 补充Pool接口注释.
+- 优化连接池Pool部分代码.
+
 ## [1.17.9] - 2024-01-18
 ### Changed
 - 增加Touch函数.
@@ -1131,7 +1138,8 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.17.9...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.18.0...HEAD
+[1.18.0]: https://gitee.com/quant1x/gox/compare/v1.17.9...v1.18.0
 [1.17.9]: https://gitee.com/quant1x/gox/compare/v1.17.8...v1.17.9
 [1.17.8]: https://gitee.com/quant1x/gox/compare/v1.17.7...v1.17.8
 [1.17.7]: https://gitee.com/quant1x/gox/compare/v1.17.6...v1.17.7
