@@ -123,32 +123,45 @@ func (c *channelPool) Get() (any, error) {
 			return wrapConn.conn, nil
 		default:
 			c.mu.Lock()
+			//logger.Warnf("default-1")
 			if c.openingConns >= c.maxActive {
+				//logger.Warnf("default-1: 1")
 				req := make(chan connReq, 1)
 				c.connReqs = append(c.connReqs, req)
 				c.mu.Unlock()
 				ret, ok := <-req
 				if !ok {
+					//logger.Warnf("default-1: 1-1")
 					return nil, ErrMaxActiveConnReached
 				}
+				//logger.Warnf("default-1: 2")
 				if timeout := c.idleTimeout; timeout > 0 {
+					//logger.Warnf("default-1: 2-1")
 					if ret.idleConn.t.Add(timeout).Before(time.Now()) {
 						//丢弃并关闭该连接
+						//logger.Warnf("default-1: 2-1-1")
 						_ = c.Close(ret.idleConn.conn)
 						continue
 					}
+					//logger.Warnf("default-1: 2-2")
 				}
+				//logger.Warnf("default-1: 3")
 				return ret.idleConn.conn, nil
 			}
+			//logger.Warnf("default-2")
 			if c.factory == nil {
+				//logger.Warnf("default-2: 1")
 				c.mu.Unlock()
 				return nil, ErrClosed
 			}
+			//logger.Warnf("default-3")
 			conn, err := c.factory()
 			if err != nil {
+				//logger.Warnf("default-3: 1")
 				c.mu.Unlock()
 				return nil, err
 			}
+			//logger.Warnf("default-4")
 			c.openingConns++
 			c.mu.Unlock()
 			return conn, nil
