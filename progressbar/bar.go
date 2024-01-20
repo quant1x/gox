@@ -167,7 +167,6 @@ func (b *Bar) updateCost() {
 	for {
 		select {
 		case <-time.After(time.Millisecond):
-			//b.cost++
 			b.mu.Lock()
 			b.count()
 			b.mu.Unlock()
