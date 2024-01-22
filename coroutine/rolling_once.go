@@ -81,8 +81,8 @@ func (o *RollingOnce) SetOffsetTime(hour, minute int) {
 //
 //	为非默认9点整重置done预留的功能性方法
 func (o *RollingOnce) SetOffsetForZero(offsetMilliSeconds int64) {
-	o.m.Lock()
-	defer o.m.Unlock()
+	//o.m.Lock()
+	//defer o.m.Unlock()
 	o.offset = offsetMilliSeconds
 	o.observer = currentObserver(o.offset)
 }
