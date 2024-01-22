@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.18.2] - 2024-01-22
+### Changed
+- RollingOnce 新增按照小时和分钟设置偏移量.
+- Update changelog.
+
 ## [1.18.1] - 2024-01-22
 ### Changed
 - 这两都提示推荐使用RollingOnce.
@@ -1143,7 +1148,8 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.18.1...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.18.2...HEAD
+[1.18.2]: https://gitee.com/quant1x/gox/compare/v1.18.1...v1.18.2
 [1.18.1]: https://gitee.com/quant1x/gox/compare/v1.18.0...v1.18.1
 [1.18.0]: https://gitee.com/quant1x/gox/compare/v1.17.9...v1.18.0
 [1.17.9]: https://gitee.com/quant1x/gox/compare/v1.17.8...v1.17.9
