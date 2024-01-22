@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.18.1] - 2024-01-22
+### Changed
+- 这两都提示推荐使用RollingOnce.
+- 优化RollingOnce, 增加可重置偏移量的方法.
+
 ## [1.18.0] - 2024-01-20
 ### Changed
 - 删除部分废弃的代码.
@@ -1138,7 +1143,8 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.18.0...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.18.1...HEAD
+[1.18.1]: https://gitee.com/quant1x/gox/compare/v1.18.0...v1.18.1
 [1.18.0]: https://gitee.com/quant1x/gox/compare/v1.17.9...v1.18.0
 [1.17.9]: https://gitee.com/quant1x/gox/compare/v1.17.8...v1.17.9
 [1.17.8]: https://gitee.com/quant1x/gox/compare/v1.17.7...v1.17.8
