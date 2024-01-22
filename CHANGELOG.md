@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.18.4] - 2024-01-22
+### Changed
+- 增加部分关闭和初始化方面的告警类日志.
+
 ## [1.18.3] - 2024-01-22
 ### Changed
 - 修复设置偏移量死锁的bug.
@@ -1152,7 +1156,8 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.18.3...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.18.4...HEAD
+[1.18.4]: https://gitee.com/quant1x/gox/compare/v1.18.3...v1.18.4
 [1.18.3]: https://gitee.com/quant1x/gox/compare/v1.18.2...v1.18.3
 [1.18.2]: https://gitee.com/quant1x/gox/compare/v1.18.1...v1.18.2
 [1.18.1]: https://gitee.com/quant1x/gox/compare/v1.18.0...v1.18.1
