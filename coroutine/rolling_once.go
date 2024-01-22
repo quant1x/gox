@@ -70,6 +70,13 @@ func (o *RollingOnce) initTicker() {
 	}
 }
 
+// SetOffsetTime 用小时数,分钟数设置滑动窗口的偏移量
+func (o *RollingOnce) SetOffsetTime(hour, minute int) {
+	offset := timestamp.MillisecondsPerHour * hour
+	offset += timestamp.MillisecondsPerMinute * minute
+	o.SetOffsetForZero(int64(offset))
+}
+
 // SetOffsetForZero 设置时间窗口变化的偏移量
 //
 //	为非默认9点整重置done预留的功能性方法
