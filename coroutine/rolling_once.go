@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	rollingAnchorPoint = 0
+	rollingAnchorPoint = 0 // 滑动窗口的锚点毫秒数
 	rollingWindow      = timestamp.MillisecondsPerDay
 	offsetWindow       = timestamp.MillisecondsPerHour * 9 // 每天9点整
 )
@@ -28,21 +28,56 @@ func defaultTimeWindow(observer, rollingWindow int64) (next, current int64, canS
 }
 
 // 获取当前观察点
-func currentObserver() int64 {
+func currentObserver(offsetMilliSeconds int64) int64 {
 	zero := timestamp.Today()
-	return zero + offsetWindow
+	return zero + offsetMilliSeconds
 }
 
 // RollingOnce 周期性懒加载机制
 type RollingOnce struct {
 	done     uint32
 	m        sync.Mutex
-	once     sync.Once // for ticker
-	ticker   *time.Ticker
-	window   int64 // 滑动窗口的毫秒数
-	offset   int64 // 距离0点整的偏移毫秒数
-	observer int64
-	lazyFunc func()
+	once     sync.Once     // for ticker
+	ticker   *time.Ticker  // 定时器
+	window   int64         // TODO: 暂时未起作用, 滑动窗口的毫秒数, 这里是1天
+	offset   int64         // 距离0点整的偏移毫秒数
+	observer int64         // 当前窗口期的毫秒数
+	lazyFunc func()        // 懒加载函数指针
+	finished chan struct{} // 关闭ticker的信号
+}
+
+func (o *RollingOnce) Close() {
+	// 发送结束信号
+	o.finished <- struct{}{}
+	// TODO: 不确定实时性, 暂时屏蔽close操作
+	//close(o.finished)
+}
+
+func (o *RollingOnce) initTicker() {
+	// 1. 第一步初始化offset
+	if o.offset == 0 {
+		// 偏移默认是常量offsetWindows
+		o.offset = offsetWindow
+	}
+	// 2. 第二步初始化当前时间窗口
+	if o.observer == 0 {
+		// 首次设置当前时间窗口的观察时间戳
+		o.observer = currentObserver(o.offset)
+	}
+	o.finished = make(chan struct{})
+	if o.ticker == nil {
+		go o.runTicker()
+	}
+}
+
+// SetOffsetForZero 设置时间窗口变化的偏移量
+//
+//	为非默认9点整重置done预留的功能性方法
+func (o *RollingOnce) SetOffsetForZero(offsetMilliSeconds int64) {
+	o.m.Lock()
+	defer o.m.Unlock()
+	o.offset = offsetMilliSeconds
+	o.observer = currentObserver(o.offset)
 }
 
 func (o *RollingOnce) Do(f func()) {
@@ -64,8 +99,8 @@ func (o *RollingOnce) doSlow(f func()) {
 	}
 }
 
-func (o *RollingOnce) isExpired() bool {
-	_, _, canSwitch := defaultTimeWindow(o.observer, rollingWindow)
+func (o *RollingOnce) windowIsExpired() bool {
+	_, _, canSwitch := defaultTimeWindow(o.observer, o.offset)
 	return canSwitch
 }
 
@@ -76,7 +111,8 @@ func (o *RollingOnce) runTicker() {
 	for {
 		select {
 		case <-o.ticker.C:
-			if o.isExpired() {
+			// 检查滑动窗口期是否过时
+			if o.windowIsExpired() {
 				if runtime.Debug() {
 					logger.Infof("RollingOnce[%s]: reset begin", funcName)
 				}
@@ -85,16 +121,10 @@ func (o *RollingOnce) runTicker() {
 					logger.Infof("RollingOnce[%s]: reset end", funcName)
 				}
 			}
+		case <-o.finished:
+			// 收到结束信号, 退出循环
+			break
 		}
-	}
-}
-
-func (o *RollingOnce) initTicker() {
-	if o.observer == 0 {
-		o.observer = currentObserver()
-	}
-	if o.ticker == nil {
-		go o.runTicker()
 	}
 }
 
@@ -111,6 +141,6 @@ func (o *RollingOnce) resetSlow() {
 	if o.done == 1 {
 		atomic.StoreUint32(&o.done, 0)
 		// 重置观察点
-		o.observer = currentObserver()
+		o.observer = currentObserver(o.offset)
 	}
 }

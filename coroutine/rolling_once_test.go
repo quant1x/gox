@@ -9,7 +9,7 @@ import (
 )
 
 var (
-	rollineOnce RollingOnce
+	rollingOnce RollingOnce
 	cache1      = concurrent.NewHashMap[string, int]()
 )
 
@@ -23,17 +23,22 @@ func lazyCacheInit() {
 }
 
 func cacheGetInt(key string) (int, bool) {
-	rollineOnce.Do(lazyCacheInit)
+	rollingOnce.Do(lazyCacheInit)
 	v, ok := cache1.Get(key)
 	return v, ok
 }
 
 func cacheSetInt(key string, value int) {
-	rollineOnce.Do(lazyCacheInit)
+	rollingOnce.Do(lazyCacheInit)
 	cache1.Set(key, value)
 }
 
 func TestRollingOnce(t *testing.T) {
+	var o1 RollingOnce
+	o1.Do(func() {
+
+	})
+	o1.Close()
 	rwCount := 1000
 	producer := func() {
 		for i := 0; i < rwCount; i++ {
@@ -65,7 +70,7 @@ func TestRollingOnce(t *testing.T) {
 }
 
 func Test_defaultTimeWindow(t *testing.T) {
-	observer := currentObserver()
+	observer := currentObserver(offsetWindow)
 	fmt.Println(observer)
 	a, b, c := defaultTimeWindow(observer, rollingWindow)
 	fmt.Println(a, b, c)
