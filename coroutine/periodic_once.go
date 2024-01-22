@@ -17,6 +17,8 @@ const (
 )
 
 // PeriodicOnce 周期性懒加载机制
+//
+// Deprecated: 推荐 RollingOnce [wangfeng on 2024/1/22 10:33]
 type PeriodicOnce struct {
 	done     uint32
 	m        sync.Mutex

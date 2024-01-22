@@ -15,7 +15,7 @@ const (
 //
 //	滑动窗口锁, 窗口期内只初始化一次, 目前只支持1天切换
 //
-// Deprecated: 不推荐, 建议使用 PeriodicOnce
+// Deprecated: 不推荐, 建议使用 RollingOnce
 type RollingMutex struct {
 	m    sync.Mutex
 	date string
