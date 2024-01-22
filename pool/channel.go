@@ -3,6 +3,7 @@ package pool
 import (
 	"errors"
 	"fmt"
+	"gitee.com/quant1x/gox/logger"
 	"sync"
 	"time"
 )
@@ -53,6 +54,7 @@ func NewChannelPool(poolConfig *Config) (Pool, error) {
 	if !(poolConfig.InitialCap <= poolConfig.MaxIdle && poolConfig.MaxCap >= poolConfig.MaxIdle && poolConfig.InitialCap >= 0) {
 		return nil, errors.New("invalid capacity settings")
 	}
+	logger.Warnf("init connect pool: MaxCap=%d, InitialCap=%d, MaxIdle=%d", poolConfig.MaxCap, poolConfig.InitialCap, poolConfig.MaxIdle)
 	if poolConfig.Factory == nil {
 		return nil, errors.New("invalid factory func settings")
 	}
@@ -108,6 +110,7 @@ func (c *channelPool) Get() (any, error) {
 			//判断是否超时，超时则丢弃
 			if timeout := c.idleTimeout; timeout > 0 {
 				if wrapConn.t.Add(timeout).Before(time.Now()) {
+					logger.Warnf("空闲超时, 关闭连接.")
 					//丢弃并关闭该连接
 					_ = c.Close(wrapConn.conn)
 					continue
@@ -116,6 +119,7 @@ func (c *channelPool) Get() (any, error) {
 			//判断是否失效，失效则丢弃，如果用户没有设定 ping 方法，就不检查
 			if c.ping != nil {
 				if err := c.Ping(wrapConn.conn); err != nil {
+					logger.Warnf("ping失败, 关闭连接.")
 					_ = c.Close(wrapConn.conn)
 					continue
 				}
@@ -140,6 +144,7 @@ func (c *channelPool) Get() (any, error) {
 					if ret.idleConn.t.Add(timeout).Before(time.Now()) {
 						//丢弃并关闭该连接
 						//logger.Warnf("default-1: 2-1-1")
+						logger.Warnf("超时, 关闭连接.")
 						_ = c.Close(ret.idleConn.conn)
 						continue
 					}
@@ -179,6 +184,7 @@ func (c *channelPool) Put(conn any) error {
 
 	if c.conns == nil {
 		c.mu.Unlock()
+		logger.Warnf("队列无效, 关闭连接.")
 		return c.Close(conn)
 	}
 
@@ -199,6 +205,7 @@ func (c *channelPool) Put(conn any) error {
 		default:
 			c.mu.Unlock()
 			//连接池已满，直接关闭该连接
+			logger.Warnf("返还连接, 连接池已满, 关闭连接.")
 			return c.Close(conn)
 		}
 	}
