@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.18.3] - 2024-01-22
+### Changed
+- 修复设置偏移量死锁的bug.
+
 ## [1.18.2] - 2024-01-22
 ### Changed
 - RollingOnce 新增按照小时和分钟设置偏移量.
@@ -1148,7 +1152,8 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.18.2...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.18.3...HEAD
+[1.18.3]: https://gitee.com/quant1x/gox/compare/v1.18.2...v1.18.3
 [1.18.2]: https://gitee.com/quant1x/gox/compare/v1.18.1...v1.18.2
 [1.18.1]: https://gitee.com/quant1x/gox/compare/v1.18.0...v1.18.1
 [1.18.0]: https://gitee.com/quant1x/gox/compare/v1.17.9...v1.18.0
