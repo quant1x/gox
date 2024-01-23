@@ -171,7 +171,7 @@ func (w *DateWriter) Write(v []byte) {
 		sourceFile := fullPath
 		destFile := filepath.Join(w.logpath, w.name+".log."+w.currDate)
 		// 删除已有的目标文件
-		w.currFile.Close()
+		api.CloseQuietly(w.currFile)
 		w.currFile = nil
 		err := os.Remove(destFile)
 		err = os.Rename(sourceFile, destFile)
@@ -206,19 +206,19 @@ func NewDateWriter(logpath, name string, dateType DateType, num int) *DateWriter
 	return w
 }
 
-func (w *DateWriter) getFotmat() string {
-	format := "20060102"
+func (w *DateWriter) getFormat() string {
+	format := timeFmtDay
 	if w.dateType == HOUR {
-		format = "2006010215"
+		format = timeFmtHour
 	}
 	return format
 }
 
 func (w *DateWriter) cleanOldLogs() {
-	format := "20060102"
+	format := timeFmtDay
 	duration := -time.Hour * 24
 	if w.dateType == HOUR {
-		format = "2006010215"
+		format = timeFmtHour
 		duration = -time.Hour
 	}
 
@@ -245,7 +245,7 @@ func (w *DateWriter) getCurrDate() string {
 func (w *DateWriter) getFileDate() string {
 	fi, err := w.currFile.Stat()
 	if err == nil {
-		return fi.ModTime().Format(w.getFotmat())
+		return fi.ModTime().Format(w.getFormat())
 	} else {
 		return ""
 	}

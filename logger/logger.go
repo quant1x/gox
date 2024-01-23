@@ -5,6 +5,7 @@ import (
 	"context"
 	"fmt"
 	"gitee.com/quant1x/gox/api"
+	"gitee.com/quant1x/gox/cache"
 	"gitee.com/quant1x/gox/exception"
 	"gitee.com/quant1x/gox/mdc"
 	"gitee.com/quant1x/gox/signal"
@@ -25,33 +26,25 @@ const (
 	FATAL
 )
 
-// 日志默认以天为单位
 const (
-	// 保持7天 [wangfeng on 2018/12/25 12:38]
-	__logger_roller_days int = 7
-	//__logget_global_skip = 3
-	__logger_local_skip = 2
-	// 时间戳 - 毫秒
-	Timestamp = "2006-01-02T15:04:05.000"
-	//traceID
-	__logger_traceId = mdc.APP_TRACEID
+	loggerRollerDays int = 7 // 保持7天
+	loggerLocalSkip      = 2
+	timeFmtTimestamp     = "2006-01-02T15:04:05.000"
+	timeFmtHour          = "2006010215"
+	timeFmtDay           = "20060102"
+	loggerTraceid        = mdc.APP_TRACEID
 )
 
 var (
-	__logger_path string
-)
-
-var (
-	logLevel LogLevel = DEBUG
-
-	logQueue  = make(chan *logValue, 10000)
-	loggerMap sync.Map
-	writeDone = make(chan bool)
-
+	loggerPath   string
+	logLevel     = DEBUG
+	logQueue     = make(chan *logValue, 10000)
+	loggerMap    sync.Map
 	currUnixTime int64
-	currDateTime string
 	currDateHour string
 	currDateDay  string
+	finished     chan struct{}
+	pool         cache.Pool[logValue]
 )
 
 type Logger struct {
@@ -65,14 +58,15 @@ type logValue struct {
 	value  []byte
 	fileNo string
 	writer LogWriter
+	fatal  bool
 }
 
 func init() {
 	now := time.Now()
 	currUnixTime = now.Unix()
-	currDateTime = now.Format(Timestamp)
-	currDateHour = now.Format("2006010215")
-	currDateDay = now.Format("20060102")
+	currDateHour = now.Format(timeFmtHour)
+	currDateDay = now.Format(timeFmtDay)
+	finished = make(chan struct{})
 	go func() {
 		tm := time.NewTimer(time.Millisecond)
 		if err := recover(); err != nil { // avoid timer panic
@@ -84,14 +78,13 @@ func init() {
 			<-tm.C
 			now = time.Now()
 			currUnixTime = now.Unix()
-			currDateTime = now.Format(Timestamp)
-			currDateHour = now.Format("2006010215")
-			currDateDay = now.Format("20060102")
+			currDateHour = now.Format(timeFmtHour)
+			currDateDay = now.Format(timeFmtDay)
 		}
 	}()
 	go flushLog(true)
 
-	//创建监听退出chan
+	// 创建监听退出chan
 	sigs := signal.Notify()
 
 	_, cancel := context.WithCancel(context.Background())
@@ -135,15 +128,17 @@ func SetLogPath(path string) {
 func InitLogger(path string, level ...LogLevel) {
 	// 日志路径非空, 赋值
 	if !api.IsEmpty(path) {
-		__logger_path = path
+		loggerPath = path
 	}
+	name := ApplicationName()
+	loggerPath = filepath.Join(loggerPath, name)
 
 	// 日志级别默认是INFO
-	__opt_level := INFO
+	optLevel := INFO
 	if len(level) > 0 {
-		__opt_level = level[0]
+		optLevel = level[0]
 	}
-	SetLevel(__opt_level)
+	SetLevel(optLevel)
 }
 
 // GetLogger return an logger instance
@@ -156,7 +151,7 @@ func GetLogger(name string) *Logger {
 		name:   name,
 		writer: &ConsoleWriter{},
 	}
-	_ = lg.SetDayRoller(__logger_path, __logger_roller_days)
+	_ = lg.SetDayRoller(loggerPath, loggerRollerDays)
 	loggerMap.Store(name, lg)
 	return lg
 }
@@ -236,50 +231,50 @@ func (l *Logger) SetConsole() {
 	l.writer = &ConsoleWriter{}
 }
 
-func (l *Logger) Debug(v ...interface{}) {
-	l.writef(__logger_local_skip, DEBUG, "", v)
+func (l *Logger) Debug(v ...any) {
+	l.writef(loggerLocalSkip, DEBUG, "", v)
 }
 
-func (l *Logger) Info(v ...interface{}) {
-	l.writef(__logger_local_skip, INFO, "", v)
+func (l *Logger) Info(v ...any) {
+	l.writef(loggerLocalSkip, INFO, "", v)
 }
 
-func (l *Logger) Warn(v ...interface{}) {
-	l.writef(__logger_local_skip, WARN, "", v)
+func (l *Logger) Warn(v ...any) {
+	l.writef(loggerLocalSkip, WARN, "", v)
 }
 
-func (l *Logger) Error(v ...interface{}) {
-	l.writef(__logger_local_skip, ERROR, "", v)
+func (l *Logger) Error(v ...any) {
+	l.writef(loggerLocalSkip, ERROR, "", v)
 }
 
-func (l *Logger) Debugf(format string, v ...interface{}) {
-	l.writef(__logger_local_skip, DEBUG, format, v)
+func (l *Logger) Debugf(format string, v ...any) {
+	l.writef(loggerLocalSkip, DEBUG, format, v)
 }
 
-func (l *Logger) Infof(format string, v ...interface{}) {
-	l.writef(__logger_local_skip, INFO, format, v)
+func (l *Logger) Infof(format string, v ...any) {
+	l.writef(loggerLocalSkip, INFO, format, v)
 }
 
-func (l *Logger) Warnf(format string, v ...interface{}) {
-	l.writef(__logger_local_skip, WARN, format, v)
+func (l *Logger) Warnf(format string, v ...any) {
+	l.writef(loggerLocalSkip, WARN, format, v)
 }
 
-func (l *Logger) Errorf(format string, v ...interface{}) {
-	l.writef(__logger_local_skip, ERROR, format, v)
+func (l *Logger) Errorf(format string, v ...any) {
+	l.writef(loggerLocalSkip, ERROR, format, v)
 }
 
-func (l *Logger) Fatal(v ...interface{}) {
-	l.writef(__logger_local_skip, FATAL, "", v)
-	os.Exit(-1)
+func (l *Logger) Fatal(v ...any) {
+	l.writef(loggerLocalSkip, FATAL, "", v)
+	waitForExit()
 }
 
-func (l *Logger) Fatalf(format string, v ...interface{}) {
-	l.writef(__logger_local_skip, FATAL, format, v)
-	os.Exit(-1)
+func (l *Logger) Fatalf(format string, v ...any) {
+	l.writef(loggerLocalSkip, FATAL, format, v)
+	waitForExit()
 }
 
 func getTraceId() string {
-	traceId := mdc.Get(__logger_traceId)
+	traceId := mdc.Get(loggerTraceid)
 	t := reflect.ValueOf(traceId)
 	if t.Kind() == reflect.String {
 		return t.String()
@@ -287,17 +282,16 @@ func getTraceId() string {
 	return ""
 }
 
-func (l *Logger) writef(skip int, level LogLevel, format string, v []interface{}) {
+func (l *Logger) writef(skip int, level LogLevel, format string, v []any) {
 	if level < logLevel {
 		return
 	}
 
 	t := time.Now()
-	//ms := (t.UnixNano() / int64(time.Millisecond)) % 1000
 	buf := bytes.NewBuffer(nil)
 	if l.writer.NeedPrefix() {
 		traceId := getTraceId()
-		_, _ = fmt.Fprintf(buf, "%s|%s|", t.Format(Timestamp), traceId)
+		_, _ = fmt.Fprintf(buf, "%s|%s|", t.Format(timeFmtTimestamp), traceId)
 		if logLevel == DEBUG {
 			_, file, line, ok := runtime.Caller(skip)
 			if !ok {
@@ -320,24 +314,47 @@ func (l *Logger) writef(skip int, level LogLevel, format string, v []interface{}
 	if l.writer.NeedPrefix() {
 		buf.WriteByte('\n')
 	}
-	logQueue <- &logValue{value: buf.Bytes(), writer: l.writer}
+	lv := pool.Acquire()
+	lv.value = buf.Bytes()
+	lv.writer = l.writer
+	lv.fatal = level == FATAL
+	logQueue <- lv
 }
 
 func FlushLogger() {
 	flushLog(false)
 }
 
+// 等待结束信号并退出
+func waitForExit() {
+	<-finished
+	os.Exit(-1)
+}
+
+func refreshLogFile(v *logValue) {
+	if v == nil {
+		return
+	}
+	v.writer.Write(v.value)
+	defer pool.Release(v)
+	if v == nil || !v.fatal {
+		return
+	}
+	// 发送结束信号
+	finished <- struct{}{}
+}
+
 func flushLog(sync bool) {
 	defer exception.PanicIgnore()
 	if sync {
 		for v := range logQueue {
-			v.writer.Write(v.value)
+			refreshLogFile(v)
 		}
 	} else {
 		for {
 			select {
 			case v := <-logQueue:
-				v.writer.Write(v.value)
+				refreshLogFile(v)
 				continue
 			default:
 				return
@@ -346,54 +363,54 @@ func flushLog(sync bool) {
 	}
 }
 
-func Info(v ...interface{}) {
+func Info(v ...any) {
 	logger := GetLogger("runtime")
-	logger.writef(__logger_local_skip, INFO, "", v)
+	logger.writef(loggerLocalSkip, INFO, "", v)
 }
 
-func Infof(format string, v ...interface{}) {
+func Infof(format string, v ...any) {
 	logger := GetLogger("runtime")
-	logger.writef(__logger_local_skip, INFO, format, v)
+	logger.writef(loggerLocalSkip, INFO, format, v)
 }
 
-func Debug(v ...interface{}) {
+func Debug(v ...any) {
 	logger := GetLogger("debug")
-	logger.writef(__logger_local_skip, DEBUG, "", v)
+	logger.writef(loggerLocalSkip, DEBUG, "", v)
 }
 
-func Debugf(format string, v ...interface{}) {
+func Debugf(format string, v ...any) {
 	logger := GetLogger("debug")
-	logger.writef(__logger_local_skip, DEBUG, format, v)
+	logger.writef(loggerLocalSkip, DEBUG, format, v)
 }
 
-func Warn(v ...interface{}) {
+func Warn(v ...any) {
 	logger := GetLogger("warn")
-	logger.writef(__logger_local_skip, WARN, "", v)
+	logger.writef(loggerLocalSkip, WARN, "", v)
 }
 
-func Warnf(format string, v ...interface{}) {
+func Warnf(format string, v ...any) {
 	logger := GetLogger("warn")
-	logger.writef(__logger_local_skip, WARN, format, v)
+	logger.writef(loggerLocalSkip, WARN, format, v)
 }
 
-func Error(v ...interface{}) {
+func Error(v ...any) {
 	logger := GetLogger("error")
-	logger.writef(__logger_local_skip, ERROR, "", v)
+	logger.writef(loggerLocalSkip, ERROR, "", v)
 }
 
-func Errorf(format string, v ...interface{}) {
+func Errorf(format string, v ...any) {
 	logger := GetLogger("error")
-	logger.writef(__logger_local_skip, ERROR, format, v)
+	logger.writef(loggerLocalSkip, ERROR, format, v)
 }
 
-func Fatal(v ...interface{}) {
+func Fatal(v ...any) {
 	logger := GetLogger("error")
-	logger.writef(__logger_local_skip, FATAL, "", v)
-	os.Exit(-1)
+	logger.writef(loggerLocalSkip, FATAL, "", v)
+	waitForExit()
 }
 
-func Fatalf(format string, v ...interface{}) {
+func Fatalf(format string, v ...any) {
 	logger := GetLogger("error")
-	logger.writef(__logger_local_skip, FATAL, format, v)
-	os.Exit(-1)
+	logger.writef(loggerLocalSkip, FATAL, format, v)
+	waitForExit()
 }

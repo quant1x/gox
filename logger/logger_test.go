@@ -35,6 +35,7 @@ func TestLogger(t *testing.T) {
 	Warn("warn")
 	Info("测试中文")
 	fmt.Println("ok")
+	Fatal("xxx")
 	//logger.FlushLogger()
 	FlushLogger()
 	mdc.Remove(mdc.APP_TRACEID)
