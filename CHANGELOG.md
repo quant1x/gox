@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.18.7] - 2024-01-23
+### Changed
+- 屏蔽FastCache代码, syscall.Mmap不跨平台.
+
 ## [1.18.6] - 2024-01-23
 ### Changed
 - 致命的日志写入文件且输出到控制台.
@@ -1166,7 +1170,8 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.18.6...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.18.7...HEAD
+[1.18.7]: https://gitee.com/quant1x/gox/compare/v1.18.6...v1.18.7
 [1.18.6]: https://gitee.com/quant1x/gox/compare/v1.18.5...v1.18.6
 [1.18.5]: https://gitee.com/quant1x/gox/compare/v1.18.4...v1.18.5
 [1.18.4]: https://gitee.com/quant1x/gox/compare/v1.18.3...v1.18.4
