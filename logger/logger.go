@@ -340,6 +340,8 @@ func refreshLogFile(v *logValue) {
 	if v == nil || !v.fatal {
 		return
 	}
+	// 致命的日志, 同时输出到控制台
+	fmt.Println(api.Bytes2String(v.value))
 	// 发送结束信号
 	finished <- struct{}{}
 }
