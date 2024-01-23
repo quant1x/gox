@@ -15,13 +15,19 @@ type FastCache struct {
 
 func OpenCache(name string, size int64) (*FastCache, error) {
 	dir := filepath.Dir(name)
-	os.MkdirAll(dir, 0755)
+	err := os.MkdirAll(dir, 0755)
+	if err != nil {
+		return nil, err
+	}
 	filename := name
 	f, err := os.OpenFile(filename, os.O_RDWR|os.O_CREATE, 0644)
 	if nil != err {
 		return nil, err
 	}
-	f.Truncate(size)
+	err = f.Truncate(size)
+	if nil != err {
+		return nil, err
+	}
 	data, err := syscall.Mmap(int(f.Fd()), 0, int(size), syscall.PROT_READ|syscall.PROT_WRITE, syscall.MAP_SHARED)
 	if nil != err {
 		return nil, err
