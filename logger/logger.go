@@ -32,7 +32,7 @@ const (
 	timeFmtTimestamp     = "2006-01-02T15:04:05.000"
 	timeFmtHour          = "2006010215"
 	timeFmtDay           = "20060102"
-	loggerTraceid        = mdc.APP_TRACEID
+	loggerTraceId        = mdc.APP_TRACEID
 )
 
 var (
@@ -274,7 +274,7 @@ func (l *Logger) Fatalf(format string, v ...any) {
 }
 
 func getTraceId() string {
-	traceId := mdc.Get(loggerTraceid)
+	traceId := mdc.Get(loggerTraceId)
 	t := reflect.ValueOf(traceId)
 	if t.Kind() == reflect.String {
 		return t.String()
