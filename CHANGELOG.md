@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.18.5] - 2024-01-23
+### Changed
+- 调整变量名为驼峰格式.
+- 优化日志记录器: ①按照应用程序名进一步拆分日志目录, ②日志对象logValue的使用cache.Pool提升写入速度.
+- Cache增加泛型的map和pool.
+
 ## [1.18.4] - 2024-01-22
 ### Changed
 - 增加部分关闭和初始化方面的告警类日志.
@@ -1156,7 +1162,8 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.18.4...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.18.5...HEAD
+[1.18.5]: https://gitee.com/quant1x/gox/compare/v1.18.4...v1.18.5
 [1.18.4]: https://gitee.com/quant1x/gox/compare/v1.18.3...v1.18.4
 [1.18.3]: https://gitee.com/quant1x/gox/compare/v1.18.2...v1.18.3
 [1.18.2]: https://gitee.com/quant1x/gox/compare/v1.18.1...v1.18.2
