@@ -118,7 +118,7 @@ func (b *Bar) Add(n ...int) {
 
 	b.count()
 
-	if lastRate != b.rate || lastSpeed != b.speed {
+	if (lastRate != b.rate || lastSpeed != b.speed) && b.closed.Load() == 0 {
 		b.mu.Unlock()
 		b.advance <- true
 		b.mu.Lock()
