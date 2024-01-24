@@ -2,9 +2,8 @@ package progressbar
 
 import (
 	"fmt"
-	"gitee.com/quant1x/gox/api"
-	"gitee.com/quant1x/gox/logger"
 	"sync"
+	"sync/atomic"
 	"time"
 )
 
@@ -17,7 +16,7 @@ type Bar struct {
 	width    int
 	advance  chan bool
 	done     chan bool
-	finished chan bool // 等待结束信号
+	finished chan struct{} // 等待结束信号
 	currents map[string]int
 	current  int
 	before   int
@@ -30,7 +29,7 @@ type Bar struct {
 	srcUnit  string
 	dstUnit  string
 	change   int
-	closed   bool
+	closed   atomic.Uint32
 	start    time.Time
 }
 
@@ -73,11 +72,12 @@ func NewBar(line int, prefix string, total int) *Bar {
 		width:    100,
 		advance:  make(chan bool),
 		done:     make(chan bool),
-		finished: make(chan bool),
+		finished: make(chan struct{}),
 		currents: make(map[string]int),
 		change:   1,
 		start:    time.Now(),
 	}
+	bar.closed.Store(0)
 
 	initBar(bar.width)
 	go bar.updateCost()
@@ -107,7 +107,6 @@ func (b *Bar) SetSpeedSection(fast, slow int) {
 func (b *Bar) Add(n ...int) {
 	b.mu.Lock()
 	defer b.mu.Unlock()
-
 	step := 1
 	if len(n) > 0 {
 		step = n[0]
@@ -115,20 +114,19 @@ func (b *Bar) Add(n ...int) {
 
 	b.current += step
 
-	lastRate := b.rate
-	lastSpeed := b.speed
+	//lastRate := b.rate
+	//lastSpeed := b.speed
 
 	b.count()
 
-	if lastRate != b.rate || lastSpeed != b.speed {
-		b.advance <- true
-	}
+	//if lastRate != b.rate || lastSpeed != b.speed {
+	//	b.mu.Unlock()
+	//	b.advance <- true
+	//	b.mu.Lock()
+	//}
 
-	if b.rate >= 100 && !b.closed {
-		b.closed = true
-		close(b.advance)
-		time.Sleep(time.Millisecond)
-		close(b.done)
+	if b.rate >= 100 && b.closed.Load() == 0 {
+		b.closed.Store(1)
 	}
 }
 
@@ -158,20 +156,18 @@ func (b *Bar) count() {
 }
 
 func (b *Bar) updateCost() {
-	defer func() {
-		// 解析失败以后输出日志, 以备检查
-		if err := recover(); err != nil {
-			logger.Errorf("updateCost.done error=%+v\n", err)
-		}
-	}()
 	for {
 		select {
 		case <-time.After(time.Millisecond):
 			b.mu.Lock()
 			b.count()
 			b.mu.Unlock()
-			if !api.ChanIsClosed(b.advance) {
+			if b.closed.Load() == 0 {
+				// 这里是为了增加刷新频次
 				b.advance <- true
+			} else {
+				close(b.advance)
+				close(b.done)
 			}
 		case <-b.done:
 			return
@@ -186,19 +182,18 @@ func (b *Bar) Wait() {
 
 func (b *Bar) run() {
 	defer func() {
-		b.finished <- true
-		// 解析失败以后输出日志, 以备检查
-		if err := recover(); err != nil {
-			logger.Errorf("run.advance error=%+v\n", err)
-		}
+		b.finished <- struct{}{}
 	}()
 	for range b.advance {
-		barPrintf(b.line, "\r%s", b.barMsg())
+		text := b.barMsg()
+		barPrintf(b.line, "\r%s", text)
 	}
 }
 
 // 重置进度条消息
 func (b *Bar) barMsg() string {
+	b.mu.Lock()
+	defer b.mu.Unlock()
 	unit := ""
 	change := 1
 	if b.srcUnit != "" {

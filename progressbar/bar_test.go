@@ -51,3 +51,21 @@ func TestBar(t *testing.T) {
 	}()
 	wg.Wait()
 }
+
+func TestBar1(t *testing.T) {
+
+	b := NewBar(1, "1st", 20000)
+
+	//b.SetSpeedSection(900, 100)
+	var wg sync.WaitGroup
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		for i := 0; i < 20000; i++ {
+			b.Add()
+			time.Sleep(time.Second / 2000)
+		}
+	}()
+
+	wg.Wait()
+}
