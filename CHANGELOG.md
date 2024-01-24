@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.19.0] - 2024-01-24
+### Changed
+- 修复RollingOnce丢失窗口期的计算.
+
 ## [1.18.9] - 2024-01-24
 ### Changed
 - 修复通道关闭的情况下会继续发送数据.
@@ -1191,7 +1195,8 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.18.9...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.19.0...HEAD
+[1.19.0]: https://gitee.com/quant1x/gox/compare/v1.18.9...v1.19.0
 [1.18.9]: https://gitee.com/quant1x/gox/compare/v1.18.8...v1.18.9
 [1.18.8]: https://gitee.com/quant1x/gox/compare/v1.18.7...v1.18.8
 [1.18.7]: https://gitee.com/quant1x/gox/compare/v1.18.6...v1.18.7
