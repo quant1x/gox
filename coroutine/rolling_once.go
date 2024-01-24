@@ -28,6 +28,7 @@ func nextTimeWindow(observer, rollingWindow int64) (next, current int64, canSwit
 }
 
 // 获取当前观察点
+// 当日0的毫秒数zero + offsetMilliSeconds
 func currentObserver(offsetMilliSeconds int64) int64 {
 	zero := timestamp.Today()
 	return zero + offsetMilliSeconds
@@ -39,17 +40,22 @@ type RollingOnce struct {
 	m        sync.Mutex
 	once     sync.Once     // for ticker
 	ticker   *time.Ticker  // 定时器
-	window   int64         // TODO: 暂时未起作用, 滑动窗口的毫秒数, 这里是1天
-	offset   atomic.Int64  // 距离0点整的偏移毫秒数
-	observer atomic.Int64  // 当前窗口期的毫秒数
+	window   int64         // 滑动窗口的毫秒数, 这里默认1天
+	offset   atomic.Int64  // 相对于0点整的偏移毫秒数
+	observer atomic.Int64  // 当前窗口期起点的毫秒数
 	lazyFunc func()        // 懒加载函数指针
 	finished chan struct{} // 关闭ticker的信号
 }
 
+// Close 资源关闭方法
 func (o *RollingOnce) Close() {
 	// 发送结束信号
 	o.finished <- struct{}{}
 	close(o.finished)
+}
+
+func (o *RollingOnce) GetCurrentAnchorPoint() int64 {
+	return o.observer.Load()
 }
 
 func (o *RollingOnce) initTicker() {
