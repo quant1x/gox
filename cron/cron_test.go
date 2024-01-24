@@ -2,7 +2,9 @@ package cron
 
 import (
 	"bytes"
+	"errors"
 	"fmt"
+	"gitee.com/quant1x/gox/runtime"
 	"log"
 	"strings"
 	"sync"
@@ -699,4 +701,48 @@ func stop(cron *Cron) chan bool {
 // newWithSeconds returns a Cron with the seconds field enabled.
 func newWithSeconds() *Cron {
 	return New(WithParser(secondParser), WithChain())
+}
+
+func panicTest1() {
+	//defer runtime.CatchPanic()
+	//time.Sleep(time.Second * 3)
+	fmt.Printf("SkipIfStillRunningWithLogger: %v\n", time.Now())
+	panic(errors.New("xx"))
+}
+
+func TestScheduler(t *testing.T) {
+	intervalSnapshot := "@every 1s"
+	//intervalSnapshot = "* * * * * *"
+	//c := New()
+	c := New(WithSeconds())
+	c.Start()
+	_, err := c.AddJobWithSkipIfStillRunning(intervalSnapshot, panicTest1)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	time.Sleep(100 * time.Second)
+
+}
+
+func TestSchedulerOk(t *testing.T) {
+	intervalSnapshot := "@every 1s"
+	//intervalSnapshot = "* * * * * *"
+	//c := New()
+	c := New(WithSeconds())
+	c.Start()
+	_, err := c.AddJobWithSkipIfStillRunning(intervalSnapshot, func() {
+		defer runtime.CatchPanic()
+		//time.Sleep(time.Second * 3)
+		fmt.Printf("SkipIfStillRunningWithLogger: %v\n", time.Now())
+		panic(errors.New("xx"))
+	})
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	time.Sleep(100 * time.Second)
+
 }
