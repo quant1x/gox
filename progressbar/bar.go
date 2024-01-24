@@ -106,7 +106,6 @@ func (b *Bar) SetSpeedSection(fast, slow int) {
 
 func (b *Bar) Add(n ...int) {
 	b.mu.Lock()
-	defer b.mu.Unlock()
 	step := 1
 	if len(n) > 0 {
 		step = n[0]
@@ -114,20 +113,21 @@ func (b *Bar) Add(n ...int) {
 
 	b.current += step
 
-	//lastRate := b.rate
-	//lastSpeed := b.speed
+	lastRate := b.rate
+	lastSpeed := b.speed
 
 	b.count()
 
-	//if lastRate != b.rate || lastSpeed != b.speed {
-	//	b.mu.Unlock()
-	//	b.advance <- true
-	//	b.mu.Lock()
-	//}
+	if lastRate != b.rate || lastSpeed != b.speed {
+		b.mu.Unlock()
+		b.advance <- true
+		b.mu.Lock()
+	}
 
 	if b.rate >= 100 && b.closed.Load() == 0 {
 		b.closed.Store(1)
 	}
+	b.mu.Unlock()
 }
 
 func (b *Bar) count() {
