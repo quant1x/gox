@@ -15,8 +15,8 @@ const (
 	offsetWindow       = timestamp.MillisecondsPerHour * 9 // 每天9点整
 )
 
-// 计算的时间窗口
-func computeTimeWindow(observer, rollingWindow int64) (next, current int64, canSwitch bool) {
+// 计算下一个时间窗口
+func nextTimeWindow(observer, rollingWindow int64) (next, current int64, canSwitch bool) {
 	now := timestamp.Now()
 	next = observer + rollingWindow
 	if now >= next {
@@ -49,14 +49,15 @@ type RollingOnce struct {
 func (o *RollingOnce) Close() {
 	// 发送结束信号
 	o.finished <- struct{}{}
-	// TODO: 不确定实时性, 暂时屏蔽close操作
-	//close(o.finished)
+	close(o.finished)
 }
 
 func (o *RollingOnce) initTicker() {
-	// 1. 第一步初始化offset, // 偏移默认是常量offsetWindows
+	// 1. 设置窗口期
+	o.window = rollingWindow
+	// 2. 第一步初始化offset, // 偏移默认是常量offsetWindows
 	o.offset.CompareAndSwap(0, offsetWindow)
-	// 2. 第二步初始化当前时间窗口
+	// 3. 第二步初始化当前时间窗口观察点
 	o.observer.CompareAndSwap(0, currentObserver(o.offset.Load()))
 	o.finished = make(chan struct{})
 	if o.ticker == nil {
@@ -86,7 +87,7 @@ func (o *RollingOnce) updateObserverOfWindow() {
 
 // 检查窗口的是否过期
 func (o *RollingOnce) windowIsExpired() bool {
-	_, _, canSwitch := computeTimeWindow(o.observer.Load(), o.offset.Load())
+	_, _, canSwitch := nextTimeWindow(o.observer.Load(), o.window)
 	return canSwitch
 }
 

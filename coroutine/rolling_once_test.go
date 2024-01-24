@@ -3,6 +3,7 @@ package coroutine
 import (
 	"fmt"
 	"gitee.com/quant1x/gox/concurrent"
+	"gitee.com/quant1x/gox/timestamp"
 	"strconv"
 	"testing"
 	"time"
@@ -72,6 +73,8 @@ func TestRollingOnce(t *testing.T) {
 func Test_defaultTimeWindow(t *testing.T) {
 	observer := currentObserver(offsetWindow)
 	fmt.Println(observer)
-	a, b, c := computeTimeWindow(observer, rollingWindow)
+	a, b, c := nextTimeWindow(observer, rollingWindow)
 	fmt.Println(a, b, c)
+	nt := timestamp.Time(a)
+	fmt.Println(nt.Format(time.DateTime))
 }
