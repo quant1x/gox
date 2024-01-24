@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"gitee.com/quant1x/gox/api"
 	"gitee.com/quant1x/gox/cache"
-	"gitee.com/quant1x/gox/exception"
 	"gitee.com/quant1x/gox/mdc"
 	"gitee.com/quant1x/gox/signal"
 	"os"
@@ -350,7 +349,6 @@ func refreshLogFile(v *logValue) {
 }
 
 func flushLog(sync bool) {
-	defer exception.PanicIgnore()
 	if sync {
 		for v := range logQueue {
 			refreshLogFile(v)
