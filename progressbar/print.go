@@ -20,19 +20,19 @@ func barMove(line int) {
 	gCurrentLine = line
 }
 
-func barPrint(line int, args ...interface{}) {
+func barPrint(line int, args ...any) {
 	mu.Lock()
 	defer mu.Unlock()
 
 	barMove(line)
-	var realArgs []interface{}
+	var realArgs []any
 	realArgs = append(realArgs, "\r")
 	realArgs = append(realArgs, args...)
 	fmt.Print(realArgs...)
 	barMove(gMaxLine)
 }
 
-func barPrintf(line int, format string, args ...interface{}) {
+func barPrintf(line int, format string, args ...any) {
 	mu.Lock()
 	defer mu.Unlock()
 
@@ -41,19 +41,19 @@ func barPrintf(line int, format string, args ...interface{}) {
 	barMove(gMaxLine)
 }
 
-func barPrintln(line int, args ...interface{}) {
+func barPrintln(line int, args ...any) {
 	mu.Lock()
 	defer mu.Unlock()
 
 	barMove(line)
-	var realArgs []interface{}
+	var realArgs []any
 	realArgs = append(realArgs, "\r")
 	realArgs = append(realArgs, args...)
 	fmt.Print(realArgs...)
 	barMove(gMaxLine)
 }
 
-func Print(args ...interface{}) {
+func Print(args ...any) {
 	mu.Lock()
 	lf := countLF("", args...)
 	if gMaxLine == 0 {
@@ -66,7 +66,7 @@ func Print(args ...interface{}) {
 	barPrint(gMaxLine, args...)
 }
 
-func Printf(format string, args ...interface{}) {
+func Printf(format string, args ...any) {
 	mu.Lock()
 
 	lf := countLF(format, args...)
@@ -80,7 +80,7 @@ func Printf(format string, args ...interface{}) {
 	barPrintf(gMaxLine, format, args...)
 }
 
-func Println(args ...interface{}) {
+func Println(args ...any) {
 	mu.Lock()
 
 	lf := countLF("", args...)
@@ -95,7 +95,7 @@ func Println(args ...interface{}) {
 	barPrintln(gMaxLine, args...)
 }
 
-func countLF(format string, args ...interface{}) int {
+func countLF(format string, args ...any) int {
 	var count int
 	count = strings.Count(format, "\n")
 	for _, arg := range args {
