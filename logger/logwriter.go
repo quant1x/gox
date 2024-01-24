@@ -157,7 +157,10 @@ func gzipFile(source string) error {
 func (w *DateWriter) Write(v []byte) {
 	fullPath := filepath.Join(w.logpath, w.name+".log")
 	//isNewFile := false
-	if w.currFile == nil || w.openTime+10 < currUnixTime {
+	logMutex.RLock()
+	unixTime := currUnixTime
+	logMutex.RUnlock()
+	if w.currFile == nil || w.openTime+10 < unixTime {
 		reOpenFile(fullPath, &w.currFile, &w.openTime)
 		w.currDate = w.getFileDate()
 	}
@@ -236,6 +239,8 @@ func (w *DateWriter) cleanOldLogs() {
 }
 
 func (w *DateWriter) getCurrDate() string {
+	logMutex.RLock()
+	defer logMutex.RUnlock()
 	if w.dateType == HOUR {
 		return currDateHour
 	}

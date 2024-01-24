@@ -40,6 +40,7 @@ var (
 	logLevel     = DEBUG
 	logQueue     = make(chan *logValue, 10000)
 	loggerMap    sync.Map
+	logMutex     sync.RWMutex
 	currUnixTime int64
 	currDateHour string
 	currDateDay  string
@@ -77,9 +78,11 @@ func init() {
 			tm.Reset(d)
 			<-tm.C
 			now = time.Now()
+			logMutex.Lock()
 			currUnixTime = now.Unix()
 			currDateHour = now.Format(timeFmtHour)
 			currDateDay = now.Format(timeFmtDay)
+			logMutex.Unlock()
 		}
 	}()
 	go flushLog(true)
