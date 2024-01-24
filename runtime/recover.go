@@ -25,8 +25,8 @@ func sprintf(v ...any) string {
 }
 
 // 捕获异常, 是否忽略异常
-func catchException(ignore bool, v ...any) {
-	if err := recover(); err != nil {
+func catchException(err any, ignore bool, v ...any) {
+	if err != nil {
 		warning := sprintf(v...)
 		stack := string(debug.Stack())
 		loggerFunc := logger.Fatalf
@@ -41,10 +41,17 @@ func catchException(ignore bool, v ...any) {
 
 // CatchPanic 捕获panic
 func CatchPanic(v ...any) {
-	catchException(false, v...)
+	err := recover()
+	catchException(err, false, v...)
 }
 
 // IgnorePanic 通用捕获panic, 忽略异常, 继续执行
 func IgnorePanic(v ...any) {
-	catchException(true, v...)
+	err := recover()
+	catchException(err, true, v...)
+}
+
+// IgnorePanicAndNoLog 忽略panic且不记录日志
+func IgnorePanicAndNoLog() {
+	_ = recover()
 }
