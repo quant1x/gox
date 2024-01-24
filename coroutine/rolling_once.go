@@ -15,8 +15,8 @@ const (
 	offsetWindow       = timestamp.MillisecondsPerHour * 9 // 每天9点整
 )
 
-// 默认的时间窗口
-func defaultTimeWindow(observer, rollingWindow int64) (next, current int64, canSwitch bool) {
+// 计算的时间窗口
+func computeTimeWindow(observer, rollingWindow int64) (next, current int64, canSwitch bool) {
 	now := timestamp.Now()
 	next = observer + rollingWindow
 	if now >= next {
@@ -40,8 +40,8 @@ type RollingOnce struct {
 	once     sync.Once     // for ticker
 	ticker   *time.Ticker  // 定时器
 	window   int64         // TODO: 暂时未起作用, 滑动窗口的毫秒数, 这里是1天
-	offset   int64         // 距离0点整的偏移毫秒数
-	observer int64         // 当前窗口期的毫秒数
+	offset   atomic.Int64  // 距离0点整的偏移毫秒数
+	observer atomic.Int64  // 当前窗口期的毫秒数
 	lazyFunc func()        // 懒加载函数指针
 	finished chan struct{} // 关闭ticker的信号
 }
@@ -54,16 +54,10 @@ func (o *RollingOnce) Close() {
 }
 
 func (o *RollingOnce) initTicker() {
-	// 1. 第一步初始化offset
-	if o.offset == 0 {
-		// 偏移默认是常量offsetWindows
-		o.offset = offsetWindow
-	}
+	// 1. 第一步初始化offset, // 偏移默认是常量offsetWindows
+	o.offset.CompareAndSwap(0, offsetWindow)
 	// 2. 第二步初始化当前时间窗口
-	if o.observer == 0 {
-		// 首次设置当前时间窗口的观察时间戳
-		o.observer = currentObserver(o.offset)
-	}
+	o.observer.CompareAndSwap(0, currentObserver(o.offset.Load()))
 	o.finished = make(chan struct{})
 	if o.ticker == nil {
 		go o.runTicker()
@@ -81,33 +75,18 @@ func (o *RollingOnce) SetOffsetTime(hour, minute int) {
 //
 //	为非默认9点整重置done预留的功能性方法
 func (o *RollingOnce) SetOffsetForZero(offsetMilliSeconds int64) {
-	//o.m.Lock()
-	//defer o.m.Unlock()
-	o.offset = offsetMilliSeconds
-	o.observer = currentObserver(o.offset)
+	o.offset.Store(offsetMilliSeconds)
+	o.updateObserverOfWindow()
 }
 
-func (o *RollingOnce) Do(f func()) {
-	if o.lazyFunc == nil {
-		o.lazyFunc = f
-	}
-	o.once.Do(o.initTicker)
-	if atomic.LoadUint32(&o.done) == 0 {
-		o.doSlow(f)
-	}
+// 更新窗口期的观察点
+func (o *RollingOnce) updateObserverOfWindow() {
+	o.observer.Store(currentObserver(o.offset.Load()))
 }
 
-func (o *RollingOnce) doSlow(f func()) {
-	o.m.Lock()
-	defer o.m.Unlock()
-	if o.done == 0 {
-		defer atomic.StoreUint32(&o.done, 1)
-		f()
-	}
-}
-
+// 检查窗口的是否过期
 func (o *RollingOnce) windowIsExpired() bool {
-	_, _, canSwitch := defaultTimeWindow(o.observer, o.offset)
+	_, _, canSwitch := computeTimeWindow(o.observer.Load(), o.offset.Load())
 	return canSwitch
 }
 
@@ -135,6 +114,25 @@ func (o *RollingOnce) runTicker() {
 	}
 }
 
+func (o *RollingOnce) Do(f func()) {
+	if o.lazyFunc == nil {
+		o.lazyFunc = f
+	}
+	o.once.Do(o.initTicker)
+	if atomic.LoadUint32(&o.done) == 0 {
+		o.doSlow(f)
+	}
+}
+
+func (o *RollingOnce) doSlow(f func()) {
+	o.m.Lock()
+	defer o.m.Unlock()
+	if o.done == 0 {
+		defer atomic.StoreUint32(&o.done, 1)
+		f()
+	}
+}
+
 // Reset 被动的方式重置初始化done标志
 func (o *RollingOnce) Reset() {
 	if atomic.LoadUint32(&o.done) == 1 {
@@ -148,6 +146,6 @@ func (o *RollingOnce) resetSlow() {
 	if o.done == 1 {
 		atomic.StoreUint32(&o.done, 0)
 		// 重置观察点
-		o.observer = currentObserver(o.offset)
+		o.updateObserverOfWindow()
 	}
 }
