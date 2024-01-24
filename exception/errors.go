@@ -31,11 +31,3 @@ func (this Exception) Error() string {
 func (this Exception) Code() int {
 	return this.code
 }
-
-// PanicIgnore 忽略panic, 继续执行
-func PanicIgnore() {
-	// 解析失败以后输出日志, 以备检查
-	if err := recover(); err != nil {
-		//logger.Errorf("panic ignore, error=%+v\n", err)
-	}
-}
