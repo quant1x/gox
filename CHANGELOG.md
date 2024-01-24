@@ -3,6 +3,23 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.18.9] - 2024-01-24
+### Changed
+- 修复通道关闭的情况下会继续发送数据.
+- 调整调度函数退出机制.
+- 修复进度条计数器没走完整的bug.
+- 调整调度任务函数可继续信号的发送位置.
+- 去掉logger初始化捕获异常.
+- 去掉记录日志的panic捕获.
+- 优化捕获panic代码, panic应该是第一时间捕获, 增加隔函数调用recover返回nil.
+- 删除废弃的代码.
+- 修订测试代码.
+- 删除废弃的代码.
+- 优化进度条.
+- 改interface{}为any.
+- 修复Logger竞态数据问题.
+- 修复RollingOnce竞态数据问题.
+
 ## [1.18.8] - 2024-01-23
 ### Changed
 - 修订日志使用应用程序名时去掉扩展名.
@@ -1174,7 +1191,8 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.18.8...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.18.9...HEAD
+[1.18.9]: https://gitee.com/quant1x/gox/compare/v1.18.8...v1.18.9
 [1.18.8]: https://gitee.com/quant1x/gox/compare/v1.18.7...v1.18.8
 [1.18.7]: https://gitee.com/quant1x/gox/compare/v1.18.6...v1.18.7
 [1.18.6]: https://gitee.com/quant1x/gox/compare/v1.18.5...v1.18.6
