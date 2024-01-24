@@ -69,8 +69,6 @@ func init() {
 	finished = make(chan struct{})
 	go func() {
 		tm := time.NewTimer(time.Millisecond)
-		if err := recover(); err != nil { // avoid timer panic
-		}
 		for {
 			now := time.Now()
 			d := time.Second - time.Duration(now.Nanosecond())
