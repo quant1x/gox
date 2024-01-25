@@ -3,7 +3,6 @@ package progressbar
 import (
 	"fmt"
 	"sync"
-	"sync/atomic"
 	"time"
 )
 
@@ -31,15 +30,13 @@ type Bar struct {
 	srcUnit  string
 	dstUnit  string
 	change   int
-	closed   atomic.Uint32
 	start    time.Time
 }
 
 const (
-	defaultFast             = 20
-	defaultSlow             = 5
-	defaultTickTimes        = time.Millisecond * 1
-	waitClosingMilliseconds = time.Millisecond * 100
+	defaultFast      = 20
+	defaultSlow      = 5
+	defaultTickTimes = time.Millisecond * 500
 )
 
 func NewBar(line int, prefix string, total int) *Bar {
@@ -62,14 +59,13 @@ func NewBar(line int, prefix string, total int) *Bar {
 		fast:     defaultFast,
 		slow:     defaultSlow,
 		width:    100,
-		advance:  make(chan struct{}),
-		done:     make(chan struct{}),
+		advance:  make(chan struct{}, total),
+		done:     make(chan struct{}, total),
 		finished: make(chan struct{}),
 		currents: make(map[string]int),
 		change:   1,
 		start:    time.Now(),
 	}
-	//initBar(bar.width)
 	bar.initBar(bar.width)
 	go bar.updateCost()
 	go bar.run()
@@ -111,41 +107,21 @@ func (b *Bar) SetSpeedSection(fast, slow int) {
 // Add 进度条前进, 同时也会触发其它信号
 func (b *Bar) Add(n ...int) {
 	b.mu.Lock()
+	defer b.mu.Unlock()
 	step := 1
 	if len(n) > 0 {
 		step = n[0]
 	}
-
 	b.current += step
-
-	lastRate := b.rate
-	lastSpeed := b.speed
 	// 计算速度
 	b.count()
-	filled := b.total == b.current
-	// 速度是否有改变的条件
-	speedChanged := lastRate != b.rate || lastSpeed != b.speed || !filled
-
-	if b.closed.Load() == 0 && speedChanged {
-		// 如果速度有改变, 继续发送更新进度条的信号
-		b.mu.Unlock()
-		b.advance <- struct{}{}
-		b.mu.Lock()
-	}
+	b.advance <- struct{}{}
 	// 进度条达到100%, 通知工作协程结束并关闭channel
-	if b.rate >= 100 || filled {
+	if b.current >= b.total {
 		// 通知updateCost协程结束
-		b.mu.Unlock()
 		b.done <- struct{}{}
-		b.mu.Lock()
 		close(b.done)
-		// 阻塞, 等待updateCost协程设置关闭状态
-		for b.closed.Load() == 0 {
-			time.Sleep(waitClosingMilliseconds)
-		}
-		close(b.advance)
 	}
-	b.mu.Unlock()
 }
 
 func (b *Bar) count() {
@@ -174,7 +150,6 @@ func (b *Bar) count() {
 }
 
 func (b *Bar) updateCost() {
-	//defer runtime.IgnorePanic()
 	for {
 		select {
 		case <-time.After(defaultTickTimes):
@@ -182,15 +157,20 @@ func (b *Bar) updateCost() {
 			// 统计数据
 			b.count()
 			b.mu.Unlock()
-			if b.closed.Load() == 0 {
-				// 这里是为了增加刷新频次
-				b.advance <- struct{}{}
-			} else {
-				return
-			}
+			b.advance <- struct{}{}
 		case <-b.done:
-			// 收到结束信号, 设置关闭状态, 返回
-			b.closed.Add(1)
+			// 补全不满100%进度的信号
+			for b.rate <= 100 {
+				b.mu.Lock()
+				// 统计数据
+				b.count()
+				b.mu.Unlock()
+				b.advance <- struct{}{}
+				if b.rate >= 100 {
+					break
+				}
+			}
+			close(b.advance)
 			return
 		}
 	}
@@ -203,7 +183,6 @@ func (b *Bar) Wait() {
 
 func (b *Bar) run() {
 	defer func() {
-		b.closed.Add(1)
 		b.finished <- struct{}{}
 	}()
 	// 只有关闭channel才会结束循环, 且不能对channel加速

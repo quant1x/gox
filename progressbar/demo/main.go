@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"gitee.com/quant1x/gox/logger"
 	"sync"
 	"time"
 
@@ -13,7 +14,7 @@ func progressBarTest() {
 	b := pgbar.NewBar(1, "1st", 20000)
 	b2 := pgbar.NewBar(2, "2st", 10000)
 	b3 := pgbar.NewBar(3, "3st", 30000)
-	b4 := pgbar.NewBar(4, "4st", 4000*3)
+	b4 := pgbar.NewBar(4, "4st", 4000)
 	b.SetSpeedSection(900, 100)
 	b2.SetSpeedSection(900, 100)
 	b3.SetSpeedSection(900, 100)
@@ -46,7 +47,7 @@ func progressBarTest() {
 	go func() {
 		defer wg.Done()
 		for i := 0; i < 4000; i++ {
-			b4.Add(3)
+			b4.Add(1)
 			time.Sleep(time.Second / 300)
 		}
 	}()
@@ -54,6 +55,7 @@ func progressBarTest() {
 }
 
 func main() {
+	logger.InitLogger("/opt/logs/test", logger.INFO)
 	for i := 0; i < 100; i++ {
 		progressBarTest()
 		fmt.Printf("\n\n\n\n\n====================================================================================================")
