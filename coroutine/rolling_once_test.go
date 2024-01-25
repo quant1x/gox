@@ -71,7 +71,7 @@ func TestRollingOnce(t *testing.T) {
 }
 
 func Test_defaultTimeWindow(t *testing.T) {
-	observer := currentObserver(offsetWindow)
+	observer := getCurrentObserver(offsetWindow)
 	fmt.Println(observer)
 	a, b, c := nextTimeWindow(observer, rollingWindow)
 	fmt.Println(a, b, c)
