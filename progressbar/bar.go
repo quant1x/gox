@@ -14,8 +14,10 @@ type Bar struct {
 	prefix   string
 	total    int
 	width    int
-	advance  chan bool
-	done     chan bool
+	bar1     string
+	bar2     string
+	advance  chan struct{} // for data
+	done     chan struct{} // for updateCost
 	finished chan struct{} // 等待结束信号
 	currents map[string]int
 	current  int
@@ -34,21 +36,22 @@ type Bar struct {
 }
 
 var (
-	bar1 string
-	bar2 string
+// bar1 string
+// bar2 string
 )
 
 const (
-	defaultFast = 20
-	defaultSlow = 5
+	defaultFast      = 20
+	defaultSlow      = 5
+	defaultTickTimes = time.Millisecond * 1
 )
 
-func initBar(width int) {
-	for i := 0; i < width; i++ {
-		bar1 += "="
-		bar2 += "-"
-	}
-}
+//func initBar(width int) {
+//	for i := 0; i < width; i++ {
+//		bar1 += "="
+//		bar2 += "-"
+//	}
+//}
 
 func NewBar(line int, prefix string, total int) *Bar {
 	if total <= 0 {
@@ -70,23 +73,33 @@ func NewBar(line int, prefix string, total int) *Bar {
 		fast:     defaultFast,
 		slow:     defaultSlow,
 		width:    100,
-		advance:  make(chan bool),
-		done:     make(chan bool),
+		advance:  make(chan struct{}),
+		done:     make(chan struct{}),
 		finished: make(chan struct{}),
 		currents: make(map[string]int),
 		change:   1,
 		start:    time.Now(),
 	}
-	bar.closed.Store(0)
-
-	initBar(bar.width)
+	//initBar(bar.width)
+	bar.initBar(bar.width)
 	go bar.updateCost()
 	go bar.run()
 
 	return bar
 }
 
+func (b *Bar) initBar(width int) {
+	b.mu.Lock()
+	defer b.mu.Unlock()
+	for i := 0; i < width; i++ {
+		b.bar1 += "="
+		b.bar2 += "-"
+	}
+}
+
 func (b *Bar) SetUnit(src string, dst string, change int) {
+	b.mu.Lock()
+	defer b.mu.Unlock()
 	b.srcUnit = src
 	b.dstUnit = dst
 	b.change = change
@@ -97,6 +110,8 @@ func (b *Bar) SetUnit(src string, dst string, change int) {
 }
 
 func (b *Bar) SetSpeedSection(fast, slow int) {
+	b.mu.Lock()
+	defer b.mu.Unlock()
 	if fast > slow {
 		b.fast, b.slow = fast, slow
 	} else {
@@ -104,6 +119,7 @@ func (b *Bar) SetSpeedSection(fast, slow int) {
 	}
 }
 
+// Add 进度条前进, 同时也会触发其它信号
 func (b *Bar) Add(n ...int) {
 	b.mu.Lock()
 	step := 1
@@ -115,17 +131,31 @@ func (b *Bar) Add(n ...int) {
 
 	lastRate := b.rate
 	lastSpeed := b.speed
-
+	// 计算速度
 	b.count()
+	filled := b.total == b.current
+	// 速度是否有改变的条件
+	speedChanged := lastRate != b.rate || lastSpeed != b.speed || !filled
 
-	if (lastRate != b.rate || lastSpeed != b.speed) && b.closed.Load() == 0 {
+	if b.closed.Load() == 0 && speedChanged {
+		// 如果速度有改变, 继续发送更新进度条的信号
 		b.mu.Unlock()
-		b.advance <- true
+		b.advance <- struct{}{}
 		b.mu.Lock()
 	}
-
-	if b.rate >= 100 && b.closed.Load() == 0 {
-		b.closed.Store(1)
+	// 进度条达到100%, 通知工作协程结束并关闭channel
+	if b.rate >= 100 || filled {
+		// 通知updateCost协程结束
+		b.mu.Unlock()
+		b.done <- struct{}{}
+		b.mu.Lock()
+		close(b.done)
+		// 阻塞, 等待updateCost协程设置关闭状态
+		for b.closed.Load() == 0 {
+			fmt.Println(b.prefix, "4:add")
+			time.Sleep(defaultTickTimes)
+		}
+		close(b.advance)
 	}
 	b.mu.Unlock()
 }
@@ -156,20 +186,25 @@ func (b *Bar) count() {
 }
 
 func (b *Bar) updateCost() {
+	//defer runtime.IgnorePanic()
 	for {
 		select {
-		case <-time.After(time.Millisecond):
+		case <-time.After(defaultTickTimes):
 			b.mu.Lock()
+			// 统计数据
 			b.count()
 			b.mu.Unlock()
 			if b.closed.Load() == 0 {
 				// 这里是为了增加刷新频次
-				b.advance <- true
+				b.advance <- struct{}{}
 			} else {
-				close(b.advance)
-				close(b.done)
+				fmt.Println(b.prefix, "1:updateCost")
+				return
 			}
 		case <-b.done:
+			// 收到结束信号, 设置关闭状态, 返回
+			b.closed.Store(1)
+			fmt.Println(b.prefix, "2:updateCost")
 			return
 		}
 	}
@@ -182,8 +217,11 @@ func (b *Bar) Wait() {
 
 func (b *Bar) run() {
 	defer func() {
+		defer b.closed.Store(1)
+		fmt.Println(b.prefix, "3:run")
 		b.finished <- struct{}{}
 	}()
+	// 只有关闭channel才会结束循环, 且不能对channel加速
 	for range b.advance {
 		text := b.barMsg()
 		barPrintf(b.line, "\r%s", text)
@@ -215,10 +253,12 @@ func (b *Bar) barMsg() string {
 	bar1Len := barLen * b.rate / 100
 	bar2Len := barLen - bar1Len
 
-	realBar1 := bar1[:bar1Len]
+	//realBar1 := bar1[:bar1Len]
+	realBar1 := b.bar1[:bar1Len]
 	var realBar2 string
 	if bar2Len > 0 {
-		realBar2 = ">" + bar2[:bar2Len-1]
+		//realBar2 = ">" + bar2[:bar2Len-1]
+		realBar2 = ">" + b.bar2[:bar2Len-1]
 	}
 
 	msg := fmt.Sprintf(`%s %s%s [%s%s] %s %s in: %s`, prefix, rate, ct, realBar1, realBar2, speed, cost, estimate)
