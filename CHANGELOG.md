@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.19.2] - 2024-01-25
+### Changed
+- 调整RollingOnce部分函数和私有成员变量名.
+
 ## [1.19.1] - 2024-01-25
 ### Changed
 - RollingOnce增加返回当前周期的观察点毫秒数.
@@ -1199,7 +1203,8 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.19.1...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.19.2...HEAD
+[1.19.2]: https://gitee.com/quant1x/gox/compare/v1.19.1...v1.19.2
 [1.19.1]: https://gitee.com/quant1x/gox/compare/v1.19.0...v1.19.1
 [1.19.0]: https://gitee.com/quant1x/gox/compare/v1.18.9...v1.19.0
 [1.18.9]: https://gitee.com/quant1x/gox/compare/v1.18.8...v1.18.9
