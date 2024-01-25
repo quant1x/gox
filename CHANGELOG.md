@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.19.4] - 2024-01-25
+### Changed
+- 优化精度条.
+
 ## [1.19.3] - 2024-01-25
 ### Changed
 - 去掉废弃的代码.
@@ -1209,7 +1213,8 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.19.3...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.19.4...HEAD
+[1.19.4]: https://gitee.com/quant1x/gox/compare/v1.19.3...v1.19.4
 [1.19.3]: https://gitee.com/quant1x/gox/compare/v1.19.2...v1.19.3
 [1.19.2]: https://gitee.com/quant1x/gox/compare/v1.19.1...v1.19.2
 [1.19.1]: https://gitee.com/quant1x/gox/compare/v1.19.0...v1.19.1
