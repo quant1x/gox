@@ -152,7 +152,7 @@ func (b *Bar) Add(n ...int) {
 		close(b.done)
 		// 阻塞, 等待updateCost协程设置关闭状态
 		for b.closed.Load() == 0 {
-			fmt.Println(b.prefix, "4:add")
+			//fmt.Println(b.prefix, "4:add")
 			time.Sleep(defaultTickTimes)
 		}
 		close(b.advance)
@@ -198,13 +198,13 @@ func (b *Bar) updateCost() {
 				// 这里是为了增加刷新频次
 				b.advance <- struct{}{}
 			} else {
-				fmt.Println(b.prefix, "1:updateCost")
+				//fmt.Println(b.prefix, "1:updateCost")
 				return
 			}
 		case <-b.done:
 			// 收到结束信号, 设置关闭状态, 返回
-			b.closed.Store(1)
-			fmt.Println(b.prefix, "2:updateCost")
+			b.closed.Add(1)
+			//fmt.Println(b.prefix, "2:updateCost")
 			return
 		}
 	}
@@ -217,8 +217,8 @@ func (b *Bar) Wait() {
 
 func (b *Bar) run() {
 	defer func() {
-		defer b.closed.Store(1)
-		fmt.Println(b.prefix, "3:run")
+		defer b.closed.Add(1)
+		//fmt.Println(b.prefix, "3:run")
 		b.finished <- struct{}{}
 	}()
 	// 只有关闭channel才会结束循环, 且不能对channel加速
