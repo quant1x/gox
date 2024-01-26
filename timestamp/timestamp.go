@@ -2,6 +2,7 @@
 package timestamp
 
 import (
+	"fmt"
 	"time"
 	_ "unsafe" // for go:linkname
 )
@@ -19,17 +20,18 @@ const (
 //go:linkname now time.now
 func now() (sec int64, nsec int32, mono int64)
 
-// 调用公开结构的私有方法
-//
-//go:linkname abstime time.Time.abs
-func abstime(t time.Time) uint64
+////调用公开结构的私有方法
+////
+////go:linkname abstime time.Time.abs
+////func abstime(t time.Time) uint64
 
 var (
+	defaultLocal = time.Local
 	// 获取偏移的秒数
 	zoneName, offsetInSecondsEastOfUTC = time.Now().Zone()
 	_                                  = zoneName
 	// 本地0秒
-	zeroTime = time.Date(1970, 1, 1, 0, 0, 0, 0, time.Local)
+	zeroTime = time.Date(1970, 1, 1, 0, 0, 0, 0, defaultLocal)
 	// UTC到本地的偏移秒数
 	utcToLocal = int64(offsetInSecondsEastOfUTC)
 	// 本地到UTC的偏移秒数
@@ -48,10 +50,10 @@ func Now() int64 {
 	return milli
 }
 
-// Timestamp 获取time.Time的本地毫秒数
+// TimeToTimestamp 获取time.Time的本地毫秒数
 //
 //	UTC 转 local
-func Timestamp(t time.Time) int64 {
+func TimeToTimestamp(t time.Time) int64 {
 	utcMilliseconds := t.UnixMilli()
 	milliseconds := utcMilliseconds + utcToLocal*MillisecondsPerSecond
 	return milliseconds
@@ -83,7 +85,7 @@ func ZeroHour(milliseconds int64) int64 {
 
 // Since t当日0点整到t的毫秒数
 func Since(t time.Time) int64 {
-	milliseconds := Timestamp(t)
+	milliseconds := TimeToTimestamp(t)
 	elapsed := SinceZero(milliseconds)
 	return elapsed
 }
@@ -115,4 +117,69 @@ func TodayZero() time.Time {
 func SinceZeroHour(t time.Time) int64 {
 	zero := CurrentDateZero(t)
 	return t.Sub(zero).Milliseconds()
+}
+
+const (
+	secondsPerMinute = 60
+	secondsPerHour   = 60 * secondsPerMinute
+	secondsPerDay    = 24 * secondsPerHour
+	secondsPerWeek   = 7 * secondsPerDay
+	daysPer400Years  = 365*400 + 97
+	daysPer100Years  = 365*100 + 24
+	daysPer4Years    = 365*4 + 1
+)
+
+const (
+	// The unsigned zero year for internal calculations.
+	// Must be 1 mod 400, and times before it will not compute correctly,
+	// but otherwise can be changed at will.
+	absoluteZeroYear = -292277022399
+
+	// The year of the zero Time.
+	// Assumed by the unixToInternal computation below.
+	internalYear = 1
+
+	// Offsets to convert between internal and absolute or Unix times.
+	absoluteToInternal int64 = (absoluteZeroYear - internalYear) * 365.2425 * secondsPerDay
+	internalToAbsolute       = -absoluteToInternal
+
+	unixToInternal int64 = (1969*365 + 1969/4 - 1969/100 + 1969/400) * secondsPerDay
+	internalToUnix int64 = -unixToInternal
+
+	wallToInternal int64 = (1884*365 + 1884/4 - 1884/100 + 1884/400) * secondsPerDay
+)
+
+// Timestamp 时间戳类型
+type Timestamp int64
+
+// abs returns the time t as an absolute time, adjusted by the zone offset.
+// It is called when computing a presentation property like Month or Hour.
+func (t Timestamp) abs() uint64 {
+	//l := defaultLocal
+	ms := int64(t / MillisecondsPerSecond)
+	return uint64(ms + (unixToInternal + internalToAbsolute))
+}
+
+// 调用公开结构的私有方法
+//
+//go:linkname absDate time.absDate
+func absDate(abs uint64, full bool) (year int, month time.Month, day int, yday int)
+
+// DateTime 获取日期时间毫秒
+func (t Timestamp) DateTime() (year, month, day, hour, minute, second, millisecond int) {
+	ms := int64(t)
+	absSeconds := t.abs()
+	year, m, day, yday := absDate(absSeconds, true)
+	_ = yday
+	month = int(m)
+	hour = int((ms % MillisecondsPerDay) / MillisecondsPerHour)
+	minute = int((ms % MillisecondsPerHour) / MillisecondsPerMinute)
+	second = int((ms % MillisecondsPerMinute) / MillisecondsPerSecond)
+	millisecond = int(ms % MillisecondsPerSecond)
+	return
+}
+
+func (t Timestamp) String() string {
+	year, month, day, hour, minute, second, millisecond := t.DateTime()
+	return fmt.Sprintf("%04d-%02d-%02d %02d:%02d:%02d.%03d", year, month, day, hour, minute, second, millisecond)
 }

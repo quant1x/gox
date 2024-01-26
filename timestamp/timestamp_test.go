@@ -8,6 +8,18 @@ import (
 	"time"
 )
 
+func TestTimePrivate(t *testing.T) {
+	v := unixToInternal
+	fmt.Println(v)
+}
+
+func TestYMDHMS_SSS(t *testing.T) {
+	ms := Now()
+	ts := Timestamp(ms)
+	fmt.Println(ts.DateTime())
+	fmt.Println(ts)
+}
+
 func TestNow(t *testing.T) {
 	now := Now()
 	fmt.Println("today1 :", now-now%MillisecondsPerDay)
@@ -31,7 +43,7 @@ func TestNow(t *testing.T) {
 	fmt.Println("today2 :", ts+int64(offsetInSecondsEastOfUTC*MillisecondsPerSecond))
 	t1 := time.Unix(ts/1000, 0)
 	fmt.Println("t1 =>", t1)
-	t3 := Timestamp(tm)
+	t3 := TimeToTimestamp(tm)
 	fmt.Println("t3 =>", t3)
 	t4 := Time(t3)
 	fmt.Println("t4 =>", t4)
