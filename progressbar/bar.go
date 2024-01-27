@@ -169,6 +169,7 @@ func (b *Bar) updateCost() {
 				if b.rate >= 100 {
 					break
 				}
+				time.Sleep(defaultTickTimes)
 			}
 			close(b.advance)
 			return
