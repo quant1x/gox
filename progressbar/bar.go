@@ -34,9 +34,10 @@ type Bar struct {
 }
 
 const (
-	defaultFast      = 20
-	defaultSlow      = 5
-	defaultTickTimes = time.Millisecond * 500
+	defaultFast       = 20
+	defaultSlow       = 5
+	defaultTickTimes  = time.Millisecond * 500 // 默认定时刷新进度条的间隔时间
+	defaultSleepTimes = time.Millisecond * 100 // 默认sleep时间
 )
 
 func NewBar(line int, prefix string, total int) *Bar {
@@ -71,6 +72,13 @@ func NewBar(line int, prefix string, total int) *Bar {
 	go bar.run()
 
 	return bar
+}
+
+// SetPrefix 设置进度条前端文字
+func (b *Bar) SetPrefix(prefix string) {
+	b.mu.Lock()
+	defer b.mu.Unlock()
+	b.prefix = prefix
 }
 
 func (b *Bar) initBar(width int) {
@@ -114,8 +122,7 @@ func (b *Bar) Add(n ...int) {
 	}
 	b.current += step
 	// 计算速度
-	b.count()
-	b.advance <- struct{}{}
+	b.computeAndUpdate()
 	// 进度条达到100%, 通知工作协程结束并关闭channel
 	if b.current >= b.total {
 		// 通知updateCost协程结束
@@ -124,7 +131,7 @@ func (b *Bar) Add(n ...int) {
 	}
 }
 
-func (b *Bar) count() {
+func (b *Bar) computeAndUpdate() {
 	now := time.Now()
 	nowKey := now.Format("20060102150405")
 	befKey := now.Add(time.Minute * -1).Format("20060102150405")
@@ -147,29 +154,30 @@ func (b *Bar) count() {
 	if b.speed != 0 {
 		b.estimate = (b.total - b.current) * 100 / b.speed
 	}
+	b.advance <- struct{}{} // 发送更新进度条信号
+}
+
+// 发送bar更新信号
+func (b *Bar) sendBarUpdateSignal() {
+	b.mu.Lock()
+	defer b.mu.Unlock()
+	// 统计数据
+	b.computeAndUpdate()
 }
 
 func (b *Bar) updateCost() {
 	for {
 		select {
 		case <-time.After(defaultTickTimes):
-			b.mu.Lock()
-			// 统计数据
-			b.count()
-			b.mu.Unlock()
-			b.advance <- struct{}{}
+			b.sendBarUpdateSignal()
 		case <-b.done:
 			// 补全不满100%进度的信号
 			for b.rate <= 100 {
-				b.mu.Lock()
-				// 统计数据
-				b.count()
-				b.mu.Unlock()
-				b.advance <- struct{}{}
+				b.sendBarUpdateSignal()
 				if b.rate >= 100 {
 					break
 				}
-				time.Sleep(defaultTickTimes)
+				time.Sleep(defaultSleepTimes)
 			}
 			close(b.advance)
 			return
