@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.19.6] - 2024-01-27
+### Changed
+- 调整进度条部分代码.
+- 进度条收尾阶段的循环处理, 增加sleep防止对于advance造成假死锁的现象.
+
 ## [1.19.5] - 2024-01-26
 ### Changed
 - 时间戳新增计算年月日时分秒毫秒的方法.
@@ -1217,7 +1222,8 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.19.5...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.19.6...HEAD
+[1.19.6]: https://gitee.com/quant1x/gox/compare/v1.19.5...v1.19.6
 [1.19.5]: https://gitee.com/quant1x/gox/compare/v1.19.4...v1.19.5
 [1.19.4]: https://gitee.com/quant1x/gox/compare/v1.19.3...v1.19.4
 [1.19.3]: https://gitee.com/quant1x/gox/compare/v1.19.2...v1.19.3
