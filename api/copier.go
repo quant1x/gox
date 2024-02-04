@@ -53,11 +53,11 @@ func Copy[T any, S any](to *T, from *S) (err error) {
 }
 
 // CopyWithOption copy with option
-func CopyWithOption(toValue interface{}, fromValue interface{}, opt Option) (err error) {
+func CopyWithOption(toValue any, fromValue any, opt Option) (err error) {
 	return copier(toValue, fromValue, opt)
 }
 
-func copier(toValue interface{}, fromValue interface{}, opt Option) (err error) {
+func copier(toValue any, fromValue any, opt Option) (err error) {
 	var (
 		isSlice bool
 		amount  = 1
