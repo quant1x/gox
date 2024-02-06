@@ -11,8 +11,7 @@ type FastCache struct {
 	filename string
 	f        *os.File
 	size     int64
-	//Data     []byte
-	Data MMap
+	Data     MMap
 }
 
 func OpenCache(name string, size int64) (*FastCache, error) {
