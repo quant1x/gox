@@ -3,6 +3,15 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.19.7] - 2024-02-06
+### Changed
+- 删除废弃字段定义.
+- 修订slice长度.
+- 修复unmap windows调用错误的bug.
+- 新增mmap转slice功能.
+- 新增反射功能函数.
+- 改interface{}为any.
+
 ## [1.19.6] - 2024-01-27
 ### Changed
 - 调整进度条部分代码.
@@ -1222,7 +1231,8 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.19.6...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.19.7...HEAD
+[1.19.7]: https://gitee.com/quant1x/gox/compare/v1.19.6...v1.19.7
 [1.19.6]: https://gitee.com/quant1x/gox/compare/v1.19.5...v1.19.6
 [1.19.5]: https://gitee.com/quant1x/gox/compare/v1.19.4...v1.19.5
 [1.19.4]: https://gitee.com/quant1x/gox/compare/v1.19.3...v1.19.4
