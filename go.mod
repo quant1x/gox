@@ -5,7 +5,7 @@ go 1.21.5
 require (
 	gitee.com/quant1x/pkg v0.2.6
 	github.com/mmcloughlin/avo v0.6.0
-	golang.org/x/exp v0.0.0-20240119083558-1b970713d09a
+	golang.org/x/exp v0.0.0-20240205201215-2c58cdc269a3
 	golang.org/x/sys v0.16.0
 )
 
