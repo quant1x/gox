@@ -28,15 +28,14 @@ func TestToSlices(t *testing.T) {
 	defer fc.Close()
 	list := ToSlices[TT](fc)
 	for i := 0; i < num; i++ {
-		d := i + 10
+		d := i + 1
 		var tt TT
 		tt.A = d
 		str := fmt.Sprintf("%d", d)
 		b := [6]byte{}
 		copy(b[:], api.String2Bytes(str))
 		copy(tt.B[:], b[:])
-		list = append(list, tt)
+		list[i] = tt
 	}
-	list = append(list, TT{})
 	fmt.Println(len(list))
 }
