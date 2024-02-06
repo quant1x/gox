@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"syscall"
 	"unsafe"
 )
 
@@ -50,7 +49,7 @@ func (fc *FastCache) Close() {
 		return
 	}
 	err := fc.Data.Flush()
-	_ = syscall.Munmap(fc.Data)
+	err = fc.Data.Unmap()
 	if fc.f != nil {
 		_ = fc.f.Close()
 	}
