@@ -2,7 +2,6 @@ package num
 
 import (
 	"gitee.com/quant1x/gox/num/internal/functions"
-	"golang.org/x/exp/constraints"
 	"golang.org/x/sys/cpu"
 	"math"
 	"slices"
@@ -478,7 +477,7 @@ func CosineSimilarity(x, y []float64) float64 {
 
 // Matrices
 
-func checkDimensions[T constraints.Float](x, y []T, n int) (int, int) {
+func checkDimensions[T Float](x, y []T, n int) (int, int) {
 	if n < 1 || len(x) == 0 || len(y) == 0 {
 		panic("slices must be non-empty with positive n")
 	}
