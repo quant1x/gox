@@ -2,7 +2,6 @@ package num
 
 import (
 	"gitee.com/quant1x/gox/num/internal/functions"
-	"golang.org/x/sys/cpu"
 	"math"
 	"slices"
 	"unsafe"
@@ -1485,16 +1484,6 @@ func ToFloat32_Into(dst []float32, x []float64) []float32 {
 		functions.ToNumber_Go(dst, x)
 	}
 	return dst
-}
-
-// Misc
-
-// SetAcceleration toggles simd acceleration. Not thread safe.
-func SetAcceleration(enabled bool) {
-	if enabled && !(cpu.X86.HasAVX2 && cpu.X86.HasFMA) {
-		panic("acceleration not supported on this platform")
-	}
-	functions.UseAVX2 = enabled
 }
 
 // Validation
