@@ -3,6 +3,17 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.19.8] - 2024-02-10
+### Changed
+- Num默认开启加速.
+- 补充arm框架缺失的函数.
+- 调整部分代码.
+- 调整vek代码机构, 去掉arm64冗余代码.
+- 调整vek的license和readme源文件名.
+- 调整部分测试代码数据.
+- 微调部分代码.
+- 更新依赖库版本.
+
 ## [1.19.7] - 2024-02-06
 ### Changed
 - 删除废弃字段定义.
@@ -1231,7 +1242,8 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.19.7...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.19.8...HEAD
+[1.19.8]: https://gitee.com/quant1x/gox/compare/v1.19.7...v1.19.8
 [1.19.7]: https://gitee.com/quant1x/gox/compare/v1.19.6...v1.19.7
 [1.19.6]: https://gitee.com/quant1x/gox/compare/v1.19.5...v1.19.6
 [1.19.5]: https://gitee.com/quant1x/gox/compare/v1.19.4...v1.19.5
