@@ -11,9 +11,14 @@ import (
 // SetAcceleration toggles simd acceleration. Not thread safe.
 func SetAcceleration(enabled bool) error {
 	if enabled && !(cpu.X86.HasAVX2 && cpu.X86.HasFMA) {
+		functions.UseAVX2 = false
 		return fmt.Errorf("acceleration not supported on this platform")
 
 	}
 	functions.UseAVX2 = enabled
 	return nil
+}
+
+func init() {
+	_ = SetAcceleration(true)
 }
