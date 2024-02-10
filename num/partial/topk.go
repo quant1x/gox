@@ -11,7 +11,7 @@ import (
 // equal to the kth element, all elements in x[k:] are greater than or equal.
 // This is faster than using slices.Sort.
 func TopK[E cmp.Ordered](x []E, k int) {
-	k = min(k, len(x))
+	k = vekMin(k, len(x))
 	if k > 0 {
 		floydRivest(x, 0, len(x)-1, k-1) // 0-indexed
 	}
@@ -23,7 +23,7 @@ func TopK[E cmp.Ordered](x []E, k int) {
 // in x[:k-1] are less than or equal to the kth element, all elements in x[k:]
 // are greater than or equal. This is faster than using slices.SortFunc.
 func TopKFunc[E any](x []E, k int, cmp func(E, E) int) {
-	k = min(k, len(x))
+	k = vekMin(k, len(x))
 	if k > 0 {
 		floydRivestFunc(x, 0, len(x)-1, k-1, cmp)
 	}
@@ -44,10 +44,10 @@ func floydRivest[E cmp.Ordered](x []E, left, right, k int) {
 			var i = float64(k - left + 1)
 			var z = math.Log(n)
 			var s = 0.5 * math.Exp(2*z/3)
-			var sd = 0.5 * math.Sqrt(z*s*(n-s)/n) * float64(sign(i-n/2))
+			var sd = 0.5 * math.Sqrt(z*s*(n-s)/n) * float64(vekSign(i-n/2))
 			var kf = float64(k)
-			var newLeft = max(left, int(math.Floor(kf-i*s/n+sd)))
-			var newRight = min(right, int(math.Floor(kf+(n-i)*s/n+sd)))
+			var newLeft = vekMax(left, int(math.Floor(kf-i*s/n+sd)))
+			var newRight = vekMin(right, int(math.Floor(kf+(n-i)*s/n+sd)))
 			floydRivest(x, newLeft, newRight, k)
 		}
 		// partition the elements between left and right around t
@@ -100,10 +100,10 @@ func floydRivestFunc[E any](x []E, left, right, k int, cmp func(E, E) int) {
 			var i = float64(k - left + 1)
 			var z = math.Log(n)
 			var s = 0.5 * math.Exp(2*z/3)
-			var sd = 0.5 * math.Sqrt(z*s*(n-s)/n) * float64(sign(i-n/2))
+			var sd = 0.5 * math.Sqrt(z*s*(n-s)/n) * float64(vekSign(i-n/2))
 			var kf = float64(k)
-			var newLeft = max(left, int(math.Floor(kf-i*s/n+sd)))
-			var newRight = min(right, int(math.Floor(kf+(n-i)*s/n+sd)))
+			var newLeft = vekMax(left, int(math.Floor(kf-i*s/n+sd)))
+			var newRight = vekMin(right, int(math.Floor(kf+(n-i)*s/n+sd)))
 			floydRivestFunc(x, newLeft, newRight, k, cmp)
 		}
 		// partition the elements between left and right around t
@@ -142,21 +142,21 @@ func floydRivestFunc[E any](x []E, left, right, k int, cmp func(E, E) int) {
 	}
 }
 
-func min[E cmp.Ordered](x, y E) E {
+func vekMin[E cmp.Ordered](x, y E) E {
 	if x < y {
 		return x
 	}
 	return y
 }
 
-func max[E cmp.Ordered](x, y E) E {
+func vekMax[E cmp.Ordered](x, y E) E {
 	if x > y {
 		return x
 	}
 	return y
 }
 
-func sign(x float64) int {
+func vekSign(x float64) int {
 	if x < 0 {
 		return -1
 	}

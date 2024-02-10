@@ -1,6 +1,7 @@
 package num32
 
 import (
+	"gitee.com/quant1x/gox/num"
 	"gitee.com/quant1x/gox/num/math32"
 	"gitee.com/quant1x/pkg/testify/require"
 	"testing"
@@ -13,11 +14,11 @@ var one = []float32{1}
 var two = []float32{1, 2}
 var eight = []float32{1, 2, 3, 4, 5, 6, 7, 8} // AVX register
 var nine = []float32{1, 2, 3, 4, 5, 6, 7, 8, 9}
-var accel = []bool{false, Info().Acceleration}
+var accel = []bool{false, num.Info().Acceleration}
 
 func TestSpecial(t *testing.T) {
 	for _, accel := range accel {
-		SetAcceleration(accel)
+		num.SetAcceleration(accel)
 
 		dst := make([]float32, 4)
 
@@ -69,7 +70,7 @@ func TestSpecial(t *testing.T) {
 
 func TestConstruction(t *testing.T) {
 	for _, accel := range accel {
-		SetAcceleration(accel)
+		num.SetAcceleration(accel)
 
 		dst := make([]float32, 4)
 
