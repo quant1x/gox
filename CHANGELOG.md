@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.19.9] - 2024-02-12
+### Changed
+- Tags包适配num.
+- 独立拆分num工具包.
+
 ## [1.19.8] - 2024-02-10
 ### Changed
 - Num默认开启加速.
@@ -1242,7 +1247,8 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.19.8...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.19.9...HEAD
+[1.19.9]: https://gitee.com/quant1x/gox/compare/v1.19.8...v1.19.9
 [1.19.8]: https://gitee.com/quant1x/gox/compare/v1.19.7...v1.19.8
 [1.19.7]: https://gitee.com/quant1x/gox/compare/v1.19.6...v1.19.7
 [1.19.6]: https://gitee.com/quant1x/gox/compare/v1.19.5...v1.19.6
