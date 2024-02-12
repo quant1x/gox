@@ -3,6 +3,7 @@ package tags
 import (
 	"fmt"
 	"gitee.com/quant1x/gox/api"
+	"gitee.com/quant1x/num"
 	"reflect"
 	"strings"
 )
@@ -108,9 +109,9 @@ func GetValuesByTags(value any, tag ...string) []string {
 			var str string
 			switch v := ov.(type) {
 			case float32:
-				str = fmt.Sprintf("%.02f", api.Decimal(float64(v)))
+				str = fmt.Sprintf("%.02f", num.Decimal(float64(v)))
 			case float64:
-				str = fmt.Sprintf("%.02f", api.Decimal(v))
+				str = fmt.Sprintf("%.02f", num.Decimal(v))
 			default:
 				str = api.ToString(ov)
 			}
