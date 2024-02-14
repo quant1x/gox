@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.20.0] - 2024-02-14
+### Changed
+- 微调部分函数错误定义.
+
 ## [1.19.9] - 2024-02-12
 ### Changed
 - Tags包适配num.
@@ -1247,7 +1251,8 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.19.9...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.20.0...HEAD
+[1.20.0]: https://gitee.com/quant1x/gox/compare/v1.19.9...v1.20.0
 [1.19.9]: https://gitee.com/quant1x/gox/compare/v1.19.8...v1.19.9
 [1.19.8]: https://gitee.com/quant1x/gox/compare/v1.19.7...v1.19.8
 [1.19.7]: https://gitee.com/quant1x/gox/compare/v1.19.6...v1.19.7
