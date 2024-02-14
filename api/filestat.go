@@ -6,7 +6,7 @@ import (
 )
 
 var (
-	ErrInvaildFileStat = errors.New("invalid file stat")
+	ErrInvalidFileStat = errors.New("invalid file stat")
 )
 
 type FileStat struct {

@@ -7,6 +7,12 @@ import (
 	"fmt"
 )
 
+var (
+	ErrRangeInvalid      = errors.New("range invalid")
+	ErrLengthUndefined   = errors.New("limit undefined")
+	ErrLengthNotProvided = errors.New("end is nil so length must be provided")
+)
+
 // ScopeLimit is used to specify a range. Both Start and End are inclusive.
 // A nil value means no limit, so a Start of nil means 0
 // and an End of nil means no limit.
@@ -34,43 +40,36 @@ func (r ScopeLimit) String() string {
 // NRows returns the number of rows contained by ScopeLimit.
 // If End is nil, then length must be provided.
 func (r *ScopeLimit) NRows(length ...int) (int, error) {
-
 	if len(length) > 0 {
 		s, e, err := r.Limits(length[0])
 		if err != nil {
 			return 0, err
 		}
-
 		return e - s + 1, nil
 	}
 
 	if r.End == nil {
-		return 0, errors.New("End is nil so length must be provided")
+		return 0, ErrLengthNotProvided
 	}
 
 	var s int
-
 	if r.Start != nil {
 		s = *r.Start
 	}
-
 	if s < 0 || *r.End < 0 {
-		return 0, errors.New("range invalid")
+		return 0, ErrRangeInvalid
 	}
-
 	if *r.End < s {
-		return 0, errors.New("range invalid")
+		return 0, ErrRangeInvalid
 	}
-
 	return *r.End - s + 1, nil
 }
 
 // Limits is used to return the start and end limits of a ScopeLimit
 // object for a given Dataframe or Series with length number of rows.
 func (r *ScopeLimit) Limits(length int) (s int, e int, _ error) {
-
 	if length <= 0 {
-		return 0, 0, errors.New("limit undefined")
+		return 0, 0, ErrLengthUndefined
 	}
 
 	if r.Start == nil {
@@ -94,20 +93,24 @@ func (r *ScopeLimit) Limits(length int) (s int, e int, _ error) {
 			e = *r.End
 		}
 	}
-
 	if s < 0 || e < 0 {
-		return 0, 0, errors.New("range invalid")
+		return 0, 0, ErrRangeInvalid
 	}
-
 	if s > e {
-		return 0, 0, errors.New("range invalid")
+		return 0, 0, ErrRangeInvalid
 	}
-
 	if s >= length || e >= length {
-		return 0, 0, errors.New("range invalid")
+		return 0, 0, ErrRangeInvalid
 	}
-
 	return
+}
+
+func (r *ScopeLimit) Limited(length int) (start, end int) {
+	s, e, err := r.Limits(length)
+	if err != nil {
+		panic(err)
+	}
+	return s, e
 }
 
 // RangeFinite returns a ScopeLimit that has a finite span.
@@ -132,9 +135,7 @@ func RangeFinite(start int, end ...int) ScopeLimit {
 //	fmt.Println(IntsToRanges(ints))
 //	// Output: R{2,2}, R{4,6}, R{8,8}, R{10,11}, R{45,46}
 func IntsToRanges(ints []int) []ScopeLimit {
-
-	out := []ScopeLimit{}
-
+	var out []ScopeLimit
 OUTER:
 	for i := 0; i < len(ints); i++ {
 		v1 := ints[i]

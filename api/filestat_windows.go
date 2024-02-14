@@ -16,7 +16,7 @@ func GetFileStat(name string) (*FileStat, error) {
 	// windows下代码如下
 	fileAttr, ok := finfo.Sys().(*syscall.Win32FileAttributeData)
 	if !ok || fileAttr == nil {
-		return nil, ErrInvaildFileStat
+		return nil, ErrInvalidFileStat
 	}
 	return &FileStat{
 		CreationTime:   NanosecondToTime(fileAttr.CreationTime.Nanoseconds()),

@@ -16,7 +16,7 @@ func GetFileStat(name string) (*FileStat, error) {
 	// linux环境下代码如下
 	stat, ok := finfo.Sys().(*syscall.Stat_t)
 	if !ok || stat == nil {
-		return nil, ErrInvaildFileStat
+		return nil, ErrInvalidFileStat
 	}
 	return &FileStat{
 		CreationTime:   timespecToTime(stat.Ctim),
