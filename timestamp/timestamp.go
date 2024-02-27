@@ -20,6 +20,9 @@ const (
 //go:linkname now time.now
 func now() (sec int64, nsec int32, mono int64)
 
+//go:linkname walltime runtime.walltime
+func walltime() (int64, int32)
+
 ////调用公开结构的私有方法
 ////
 ////go:linkname abstime time.Time.abs
@@ -44,7 +47,18 @@ var (
 //
 //	UTC 转 local
 func Now() int64 {
+	return v2Now()
+}
+
+func v1Now() int64 {
 	sec, nsec, _ := now()
+	sec += int64(offsetInSecondsEastOfUTC)
+	milli := sec*MillisecondsPerSecond + int64(nsec)/1e6%MillisecondsPerSecond
+	return milli
+}
+
+func v2Now() int64 {
+	sec, nsec := walltime()
 	sec += int64(offsetInSecondsEastOfUTC)
 	milli := sec*MillisecondsPerSecond + int64(nsec)/1e6%MillisecondsPerSecond
 	return milli

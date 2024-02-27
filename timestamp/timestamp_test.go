@@ -82,3 +82,32 @@ func TestSinceZeroHour(t *testing.T) {
 	t2 := Since(now)
 	fmt.Println(t2)
 }
+
+func BenchmarkTimestamp_release(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		tm := Now()
+		_ = tm
+	}
+}
+
+func BenchmarkTimestamp_v0(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		now := time.Now()
+		tm := now.UnixMilli()
+		_ = tm
+	}
+}
+
+func BenchmarkTimestamp_v1(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		tm := v1Now()
+		_ = tm
+	}
+}
+
+func BenchmarkTimestamp_v2(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		tm := v2Now()
+		_ = tm
+	}
+}
