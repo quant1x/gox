@@ -6,6 +6,7 @@ import (
 	"runtime/debug"
 )
 
+// Deprecated: 废弃 [wangfeng on 2024/2/27 07:52]
 func sprintf(v ...any) string {
 	n := len(v)
 	switch n {
@@ -25,9 +26,10 @@ func sprintf(v ...any) string {
 }
 
 // 捕获异常, 是否忽略异常
-func catchException(err any, ignore bool, v ...any) {
+func catchException(err any, ignore bool, format string, a ...any) {
 	if err != nil {
-		warning := sprintf(v...)
+		//warning := sprintf(v...)
+		warning := fmt.Sprintf(format, a)
 		stack := string(debug.Stack())
 		loggerFunc := logger.Fatalf
 		if ignore {
@@ -40,15 +42,15 @@ func catchException(err any, ignore bool, v ...any) {
 }
 
 // CatchPanic 捕获panic
-func CatchPanic(v ...any) {
+func CatchPanic(format string, a ...any) {
 	err := recover()
-	catchException(err, false, v...)
+	catchException(err, false, format, a...)
 }
 
 // IgnorePanic 通用捕获panic, 忽略异常, 继续执行
-func IgnorePanic(v ...any) {
+func IgnorePanic(format string, a ...any) {
 	err := recover()
-	catchException(err, true, v...)
+	catchException(err, true, format, a...)
 }
 
 // IgnorePanicAndNoLog 忽略panic且不记录日志
