@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.20.5] - 2024-03-12
+### Changed
+- 非mac版本不优化Now函数.
+
 ## [1.20.4] - 2024-03-11
 ### Changed
 - 更新依赖库版本.
@@ -1268,7 +1272,8 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.20.4...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.20.5...HEAD
+[1.20.5]: https://gitee.com/quant1x/gox/compare/v1.20.4...v1.20.5
 [1.20.4]: https://gitee.com/quant1x/gox/compare/v1.20.3...v1.20.4
 [1.20.3]: https://gitee.com/quant1x/gox/compare/v1.20.2...v1.20.3
 [1.20.2]: https://gitee.com/quant1x/gox/compare/v1.20.1...v1.20.2
