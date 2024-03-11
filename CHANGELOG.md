@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.20.3] - 2024-03-11
+### Changed
+- 屏蔽v2版本的Now实现.
+
 ## [1.20.2] - 2024-02-27
 ### Changed
 - 优化Catch处理方法, 应对vet对(v ...any)中出现%的错误检查.
@@ -1260,7 +1264,8 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.20.2...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.20.3...HEAD
+[1.20.3]: https://gitee.com/quant1x/gox/compare/v1.20.2...v1.20.3
 [1.20.2]: https://gitee.com/quant1x/gox/compare/v1.20.1...v1.20.2
 [1.20.1]: https://gitee.com/quant1x/gox/compare/v1.20.0...v1.20.1
 [1.20.0]: https://gitee.com/quant1x/gox/compare/v1.19.9...v1.20.0
