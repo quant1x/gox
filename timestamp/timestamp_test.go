@@ -105,9 +105,9 @@ func BenchmarkTimestamp_v1(b *testing.B) {
 	}
 }
 
-func BenchmarkTimestamp_v2(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		tm := v2Now()
-		_ = tm
-	}
-}
+//func BenchmarkTimestamp_v2(b *testing.B) {
+//	for i := 0; i < b.N; i++ {
+//		tm := v2Now()
+//		_ = tm
+//	}
+//}
