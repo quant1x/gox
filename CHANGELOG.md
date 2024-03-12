@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.20.7] - 2024-03-12
+### Changed
+- 更新go版本.
+
 ## [1.20.6] - 2024-03-12
 ### Changed
 - 保存csv文件强制刷新磁盘.
@@ -1276,7 +1280,8 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.20.6...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.20.7...HEAD
+[1.20.7]: https://gitee.com/quant1x/gox/compare/v1.20.6...v1.20.7
 [1.20.6]: https://gitee.com/quant1x/gox/compare/v1.20.5...v1.20.6
 [1.20.5]: https://gitee.com/quant1x/gox/compare/v1.20.4...v1.20.5
 [1.20.4]: https://gitee.com/quant1x/gox/compare/v1.20.3...v1.20.4
