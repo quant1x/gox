@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.20.6] - 2024-03-12
+### Changed
+- 保存csv文件强制刷新磁盘.
+
 ## [1.20.5] - 2024-03-12
 ### Changed
 - 非mac版本不优化Now函数.
@@ -1272,7 +1276,8 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.20.5...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.20.6...HEAD
+[1.20.6]: https://gitee.com/quant1x/gox/compare/v1.20.5...v1.20.6
 [1.20.5]: https://gitee.com/quant1x/gox/compare/v1.20.4...v1.20.5
 [1.20.4]: https://gitee.com/quant1x/gox/compare/v1.20.3...v1.20.4
 [1.20.3]: https://gitee.com/quant1x/gox/compare/v1.20.2...v1.20.3
