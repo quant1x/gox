@@ -45,6 +45,10 @@ func SlicesToCsv[S ~[]E, E any](filename string, s S) error {
 		return err
 	}
 	err = gocsv.MarshalFile(s, csvFile)
+	if err == nil {
+		// 强制刷新内存副本到磁盘
+		err = csvFile.Sync()
+	}
 	CloseQuietly(csvFile)
 	return err
 }
