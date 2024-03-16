@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.20.8] - 2024-03-17
+### Changed
+- 更新依赖库版本.
+
 ## [1.20.7] - 2024-03-12
 ### Changed
 - 更新go版本.
@@ -1280,7 +1284,8 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.20.7...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.20.8...HEAD
+[1.20.8]: https://gitee.com/quant1x/gox/compare/v1.20.7...v1.20.8
 [1.20.7]: https://gitee.com/quant1x/gox/compare/v1.20.6...v1.20.7
 [1.20.6]: https://gitee.com/quant1x/gox/compare/v1.20.5...v1.20.6
 [1.20.5]: https://gitee.com/quant1x/gox/compare/v1.20.4...v1.20.5
