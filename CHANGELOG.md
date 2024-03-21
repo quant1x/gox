@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.20.9] - 2024-03-21
+### Changed
+- 切片为空就是清空文件.
+
 ## [1.20.8] - 2024-03-17
 ### Changed
 - 更新依赖库版本.
@@ -1284,7 +1288,8 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.20.8...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.20.9...HEAD
+[1.20.9]: https://gitee.com/quant1x/gox/compare/v1.20.8...v1.20.9
 [1.20.8]: https://gitee.com/quant1x/gox/compare/v1.20.7...v1.20.8
 [1.20.7]: https://gitee.com/quant1x/gox/compare/v1.20.6...v1.20.7
 [1.20.6]: https://gitee.com/quant1x/gox/compare/v1.20.5...v1.20.6
