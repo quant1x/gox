@@ -1,6 +1,6 @@
 language: go
 go:
-  - 1.16.5
+  - 1.21.8
   - tip
 env:
   matrix:
