@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.21.0] - 2024-03-30
+### Changed
+- 修订go版本.
+- 修订REAMDE中的徽章.
+
 ## [1.20.9] - 2024-03-21
 ### Changed
 - 切片为空就是清空文件.
@@ -1288,7 +1293,8 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.20.9...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.21.0...HEAD
+[1.21.0]: https://gitee.com/quant1x/gox/compare/v1.20.9...v1.21.0
 [1.20.9]: https://gitee.com/quant1x/gox/compare/v1.20.8...v1.20.9
 [1.20.8]: https://gitee.com/quant1x/gox/compare/v1.20.7...v1.20.8
 [1.20.7]: https://gitee.com/quant1x/gox/compare/v1.20.6...v1.20.7
