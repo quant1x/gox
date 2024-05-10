@@ -3,8 +3,8 @@ module gitee.com/quant1x/gox
 go 1.21.8
 
 require (
-	gitee.com/quant1x/pkg v0.2.7
-	golang.org/x/sys v0.18.0
+	gitee.com/quant1x/pkg v0.2.8
+	golang.org/x/sys v0.20.0
 )
 
 require (
