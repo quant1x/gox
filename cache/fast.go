@@ -71,8 +71,8 @@ func ToSlices[E any](fc *FastCache) []E {
 	ptr := &fc.Data[0]
 	//fmt.Printf("fc.Data addr=%p\n", fc.Data)
 	//unsafe.Slice(ptr, 2)
-	p := (*[1 << 32]E)(unsafe.Pointer(ptr))[:]
+	p := (*[1 << 32]E)(unsafe.Pointer(ptr))[:num:num]
 	//fmt.Printf("p addr=%p\n", p)
 	//p = slices.Grow(p, num)
-	return p[:num:num]
+	return p
 }
