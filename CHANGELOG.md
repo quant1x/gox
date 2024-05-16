@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.21.2] - 2024-05-16
+### Changed
+- 切片保存csv文件新增强制参数, 默认不强制刷新.
+
 ## [1.21.1] - 2024-05-11
 ### Changed
 - 调整mmap映射切片的处理方法.
@@ -1299,7 +1303,8 @@ All notable changes to this project will be documented in this file.
 - Add gitingore.
 - Initial commit.
 
-[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.21.1...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox/compare/v1.21.2...HEAD
+[1.21.2]: https://gitee.com/quant1x/gox/compare/v1.21.1...v1.21.2
 [1.21.1]: https://gitee.com/quant1x/gox/compare/v1.21.0...v1.21.1
 [1.21.0]: https://gitee.com/quant1x/gox/compare/v1.20.9...v1.21.0
 [1.20.9]: https://gitee.com/quant1x/gox/compare/v1.20.8...v1.20.9
