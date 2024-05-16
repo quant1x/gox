@@ -30,7 +30,7 @@ func CsvToSlices[S ~[]E, E any](filename string, pointer *S) error {
 }
 
 // SlicesToCsv struct切片转csv文件
-func SlicesToCsv[S ~[]E, E any](filename string, s S) error {
+func SlicesToCsv[S ~[]E, E any](filename string, s S, force ...bool) error {
 	filepath, err := homedir.Expand(filename)
 	if err != nil {
 		return err
@@ -43,8 +43,14 @@ func SlicesToCsv[S ~[]E, E any](filename string, s S) error {
 	}
 	err = gocsv.MarshalFile(s, csvFile)
 	if err == nil {
+		forceSync := false
+		if len(force) > 0 && force[0] {
+			forceSync = true
+		}
 		// 强制刷新内存副本到磁盘
-		err = csvFile.Sync()
+		if forceSync {
+			err = csvFile.Sync()
+		}
 	}
 	CloseQuietly(csvFile)
 	return err
