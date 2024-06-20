@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.21.4] - 2024-06-20
+### Changed
+- 调整mmap组件代码
+
 ## [1.21.3] - 2024-06-14
 ### Changed
 - 更新依赖库版本
@@ -10,6 +14,7 @@ All notable changes to this project will be documented in this file.
 ## [1.21.2] - 2024-05-16
 ### Changed
 - 切片保存csv文件新增强制参数, 默认不强制刷新
+- update changelog
 - update changelog
 
 ## [1.21.1] - 2024-05-11
@@ -1350,7 +1355,8 @@ All notable changes to this project will be documented in this file.
 - fix codecov
 
 
-[Unreleased]: https://gitee.com/quant1x/gox.git/compare/v1.21.3...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox.git/compare/v1.21.4...HEAD
+[1.21.4]: https://gitee.com/quant1x/gox.git/compare/v1.21.3...v1.21.4
 [1.21.3]: https://gitee.com/quant1x/gox.git/compare/v1.21.2...v1.21.3
 [1.21.2]: https://gitee.com/quant1x/gox.git/compare/v1.21.1...v1.21.2
 [1.21.1]: https://gitee.com/quant1x/gox.git/compare/v1.21.0...v1.21.1
