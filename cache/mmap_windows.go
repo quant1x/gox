@@ -21,14 +21,14 @@ import (
 
 // We keep this map so that we can get back the original handle from the memory address.
 
-type addrinfo struct {
+type addrInfo struct {
 	file     windows.Handle
 	mapview  windows.Handle
 	writable bool
 }
 
 var handleLock sync.Mutex
-var handleMap = map[uintptr]*addrinfo{}
+var handleMap = map[uintptr]*addrInfo{}
 
 func mmap(len int, prot, flags, hfile uintptr, off int64) ([]byte, error) {
 	flProtect := uint32(windows.PAGE_READONLY)
@@ -67,29 +67,29 @@ func mmap(len int, prot, flags, hfile uintptr, off int64) ([]byte, error) {
 	fileOffsetLow := uint32(off & 0xFFFFFFFF)
 	addr, errno := windows.MapViewOfFile(h, dwDesiredAccess, fileOffsetHigh, fileOffsetLow, uintptr(len))
 	if addr == 0 {
-		windows.CloseHandle(windows.Handle(h))
+		_ = windows.CloseHandle(windows.Handle(h))
 		return nil, os.NewSyscallError("MapViewOfFile", errno)
 	}
 	handleLock.Lock()
-	handleMap[addr] = &addrinfo{
+	handleMap[addr] = &addrInfo{
 		file:     windows.Handle(hfile),
 		mapview:  h,
 		writable: writable,
 	}
 	handleLock.Unlock()
 
-	m := MMap{}
+	m := MemObject{}
 	dh := m.header()
 	dh.Data = addr
 	dh.Len = len
 	dh.Cap = dh.Len
-
+	_ = flags
 	return m, nil
 }
 
-func (m MMap) flush() error {
-	addr, len := m.addrLen()
-	errno := windows.FlushViewOfFile(addr, len)
+func (m MemObject) flush() error {
+	addr, length := m.addrLen()
+	errno := windows.FlushViewOfFile(addr, length)
 	if errno != nil {
 		return os.NewSyscallError("FlushViewOfFile", errno)
 	}
@@ -111,19 +111,19 @@ func (m MMap) flush() error {
 	return nil
 }
 
-func (m MMap) lock() error {
-	addr, len := m.addrLen()
-	errno := windows.VirtualLock(addr, len)
+func (m MemObject) lock() error {
+	addr, length := m.addrLen()
+	errno := windows.VirtualLock(addr, length)
 	return os.NewSyscallError("VirtualLock", errno)
 }
 
-func (m MMap) unlock() error {
-	addr, len := m.addrLen()
-	errno := windows.VirtualUnlock(addr, len)
+func (m MemObject) unlock() error {
+	addr, length := m.addrLen()
+	errno := windows.VirtualUnlock(addr, length)
 	return os.NewSyscallError("VirtualUnlock", errno)
 }
 
-func (m MMap) unmap() error {
+func (m MemObject) unmap() error {
 	err := m.flush()
 	if err != nil {
 		return err

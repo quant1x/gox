@@ -10,18 +10,18 @@ func mmap(len int, inprot, inflags, fd uintptr, off int64) ([]byte, error) {
 	return nil, syscall.EPLAN9
 }
 
-func (m MMap) flush() error {
+func (m MemObject) flush() error {
 	return syscall.EPLAN9
 }
 
-func (m MMap) lock() error {
+func (m MemObject) lock() error {
 	return syscall.EPLAN9
 }
 
-func (m MMap) unlock() error {
+func (m MemObject) unlock() error {
 	return syscall.EPLAN9
 }
 
-func (m MMap) unmap() error {
+func (m MemObject) unmap() error {
 	return syscall.EPLAN9
 }

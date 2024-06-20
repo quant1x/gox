@@ -38,4 +38,5 @@ func TestToSlices(t *testing.T) {
 		list[i] = tt
 	}
 	fmt.Println(len(list))
+	fmt.Printf("%+v\n", list)
 }

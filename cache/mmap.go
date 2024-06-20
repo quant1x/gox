@@ -23,12 +23,12 @@ import (
 
 const (
 	// RDONLY maps the memory read-only.
-	// Attempts to write to the MMap object will result in undefined behavior.
+	// Attempts to write to the MemObject object will result in undefined behavior.
 	RDONLY = 0
-	// RDWR maps the memory as read-write. Writes to the MMap object will update the
+	// RDWR maps the memory as read-write. Writes to the MemObject object will update the
 	// underlying file.
 	RDWR = 1 << iota
-	// COPY maps the memory as copy-on-write. Writes to the MMap object will affect
+	// COPY maps the memory as copy-on-write. Writes to the MemObject object will affect
 	// memory, but the underlying file will remain unchanged.
 	COPY
 	// If EXEC is set, the mapped memory is marked as executable.
@@ -40,12 +40,12 @@ const (
 	ANON = 1 << iota
 )
 
-// MMap represents a file mapped into memory.
-type MMap []byte
+// MemObject represents a file mapped into memory.
+type MemObject []byte
 
 // FileMap maps an entire file into memory.
 // If ANON is set in flags, f is ignored.
-func FileMap(f *os.File, prot, flags int) (MMap, error) {
+func FileMap(f *os.File, prot, flags int) (MemObject, error) {
 	return MapRegion(f, -1, prot, flags, 0)
 }
 
@@ -53,7 +53,7 @@ func FileMap(f *os.File, prot, flags int) (MMap, error) {
 // The offset parameter must be a multiple of the system's page size.
 // If length < 0, the entire file will be mapped.
 // If ANON is set in flags, f is ignored.
-func MapRegion(f *os.File, length int, prot, flags int, offset int64) (MMap, error) {
+func MapRegion(f *os.File, length int, prot, flags int, offset int64) (MemObject, error) {
 	if offset%int64(os.Getpagesize()) != 0 {
 		return nil, errors.New("offset parameter must be a multiple of the system's page size")
 	}
@@ -77,30 +77,30 @@ func MapRegion(f *os.File, length int, prot, flags int, offset int64) (MMap, err
 	return mmap(length, uintptr(prot), uintptr(flags), fd, offset)
 }
 
-func (m *MMap) header() *reflect.SliceHeader {
+func (m *MemObject) header() *reflect.SliceHeader {
 	return (*reflect.SliceHeader)(unsafe.Pointer(m))
 }
 
-func (m *MMap) addrLen() (uintptr, uintptr) {
+func (m *MemObject) addrLen() (uintptr, uintptr) {
 	header := m.header()
 	return header.Data, uintptr(header.Len)
 }
 
 // Lock keeps the mapped region in physical memory, ensuring that it will not be
 // swapped out.
-func (m MMap) Lock() error {
+func (m MemObject) Lock() error {
 	return m.lock()
 }
 
 // Unlock reverses the effect of Lock, allowing the mapped region to potentially
 // be swapped out.
 // If m is already unlocked, aan error will result.
-func (m MMap) Unlock() error {
+func (m MemObject) Unlock() error {
 	return m.unlock()
 }
 
 // Flush synchronizes the mapping's contents to the file's contents on disk.
-func (m MMap) Flush() error {
+func (m MemObject) Flush() error {
 	return m.flush()
 }
 
@@ -110,7 +110,7 @@ func (m MMap) Flush() error {
 // result in undefined behavior.
 // Unmap should only be called on the slice value that was originally returned from
 // a call to FileMap. Calling Unmap on a derived slice may cause errors.
-func (m *MMap) Unmap() error {
+func (m *MemObject) Unmap() error {
 	err := m.unmap()
 	*m = nil
 	return err

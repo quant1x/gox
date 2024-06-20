@@ -35,18 +35,18 @@ func mmap(len int, inprot, inflags, fd uintptr, off int64) ([]byte, error) {
 	return b, nil
 }
 
-func (m MMap) flush() error {
+func (m MemObject) flush() error {
 	return unix.Msync([]byte(m), unix.MS_SYNC)
 }
 
-func (m MMap) lock() error {
+func (m MemObject) lock() error {
 	return unix.Mlock([]byte(m))
 }
 
-func (m MMap) unlock() error {
+func (m MemObject) unlock() error {
 	return unix.Munlock([]byte(m))
 }
 
-func (m MMap) unmap() error {
+func (m MemObject) unmap() error {
 	return unix.Munmap([]byte(m))
 }
