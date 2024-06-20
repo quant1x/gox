@@ -3,9 +3,15 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.21.5] - 2024-07-05
+### Changed
+- 优化字节数组转泛型切片
+- 更新pkg版本到0.2.10
+
 ## [1.21.4] - 2024-06-20
 ### Changed
 - 调整mmap组件代码
+- update changelog
 
 ## [1.21.3] - 2024-06-14
 ### Changed
@@ -1355,7 +1361,8 @@ All notable changes to this project will be documented in this file.
 - fix codecov
 
 
-[Unreleased]: https://gitee.com/quant1x/gox.git/compare/v1.21.4...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox.git/compare/v1.21.5...HEAD
+[1.21.5]: https://gitee.com/quant1x/gox.git/compare/v1.21.4...v1.21.5
 [1.21.4]: https://gitee.com/quant1x/gox.git/compare/v1.21.3...v1.21.4
 [1.21.3]: https://gitee.com/quant1x/gox.git/compare/v1.21.2...v1.21.3
 [1.21.2]: https://gitee.com/quant1x/gox.git/compare/v1.21.1...v1.21.2
