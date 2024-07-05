@@ -3,6 +3,14 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.21.6] - 2024-08-06
+### Changed
+- 新增解析时间类字符串的基准测试
+- 新增解析时间类字符串的基准测试代码
+- 调整hashmap部分代码
+- 调整部分测试代码
+- 更新依赖库版本
+
 ## [1.21.5] - 2024-07-05
 ### Changed
 - 优化字节数组转泛型切片
@@ -11,6 +19,7 @@ All notable changes to this project will be documented in this file.
 ## [1.21.4] - 2024-06-20
 ### Changed
 - 调整mmap组件代码
+- update changelog
 - update changelog
 
 ## [1.21.3] - 2024-06-14
@@ -1361,7 +1370,8 @@ All notable changes to this project will be documented in this file.
 - fix codecov
 
 
-[Unreleased]: https://gitee.com/quant1x/gox.git/compare/v1.21.5...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox.git/compare/v1.21.6...HEAD
+[1.21.6]: https://gitee.com/quant1x/gox.git/compare/v1.21.5...v1.21.6
 [1.21.5]: https://gitee.com/quant1x/gox.git/compare/v1.21.4...v1.21.5
 [1.21.4]: https://gitee.com/quant1x/gox.git/compare/v1.21.3...v1.21.4
 [1.21.3]: https://gitee.com/quant1x/gox.git/compare/v1.21.2...v1.21.3
