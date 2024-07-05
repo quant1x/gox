@@ -28,7 +28,7 @@ func TestToSlices(t *testing.T) {
 	defer fc.Close()
 	list := ToSlices[TT](fc)
 	for i := 0; i < num; i++ {
-		d := i + 1
+		d := i + 10
 		var tt TT
 		tt.A = d
 		str := fmt.Sprintf("%d", d)

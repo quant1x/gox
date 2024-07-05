@@ -66,10 +66,28 @@ func (c *Cache) Flush() error {
 
 // ToSlices 内存转切片
 func ToSlices[E any](cache *Cache) []E {
+	return v2ToSlices[E](cache)
+}
+
+// ToSlices 内存转切片
+func v1ToSlices[E any](cache *Cache) []E {
 	var tmpValue E
 	size := int(unsafe.Sizeof(tmpValue))
 	num := int(cache.size) / size
 	ptr := &cache.data[0]
 	s := (*[1 << 32]E)(unsafe.Pointer(ptr))[:num:num]
+	return s
+}
+
+// ToSlices 内存转切片
+func v2ToSlices[E any](cache *Cache) []E {
+	var tmpValue E
+	size := int(unsafe.Sizeof(tmpValue))
+	num := int(cache.size) / size
+	//ptr := &cache.data[0]
+	ptr := unsafe.SliceData(cache.data)
+	pointer := (*E)(unsafe.Pointer(ptr))
+	//s := (*[1 << 32]E)(unsafe.Pointer(ptr))[:num:num]
+	s := unsafe.Slice(pointer, num)
 	return s
 }
