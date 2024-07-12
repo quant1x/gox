@@ -125,3 +125,10 @@ func TestGetWeekDay(t *testing.T) {
 	s, e = GetWeekDay("20230630")
 	fmt.Println(s, e)
 }
+
+func BenchmarkParseTime(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		ts, _ := ParseTime("2020-01-02")
+		ts.Format(time.DateOnly)
+	}
+}
