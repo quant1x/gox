@@ -111,3 +111,13 @@ func BenchmarkTimestamp_v2(b *testing.B) {
 		_ = tm
 	}
 }
+
+func add_two(n int32) int32 {
+	return n + 2
+}
+
+func BenchmarkTimestamp_add_two(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		add_two(int32(i))
+	}
+}
