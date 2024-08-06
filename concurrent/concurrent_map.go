@@ -77,7 +77,7 @@ func (m *ConcurrentHashMap[K, V]) MSet(data map[K]V) {
 	}
 }
 
-// Sets the given value under the specified key.
+// Set Sets the given value under the specified key.
 func (m *ConcurrentHashMap[K, V]) Set(key K, value V) {
 	// Get map shard.
 	shard := m.GetShard(key)
@@ -86,13 +86,13 @@ func (m *ConcurrentHashMap[K, V]) Set(key K, value V) {
 	shard.Unlock()
 }
 
-// Callback to return new element to be inserted into the map
+// UpsertCb Callback to return new element to be inserted into the map
 // It is called while lock is held, therefore it MUST NOT
 // try to access other keys in same map, as it can lead to deadlock since
 // Go sync.RWLock is not reentrant
 type UpsertCb[V any] func(exist bool, valueInMap V, newValue V) V
 
-// Insert or Update - updates existing element or inserts a new one using UpsertCb
+// Upsert Insert or Update - updates existing element or inserts a new one using UpsertCb
 func (m *ConcurrentHashMap[K, V]) Upsert(key K, value V, cb UpsertCb[V]) (res V) {
 	shard := m.GetShard(key)
 	shard.Lock()
@@ -103,7 +103,7 @@ func (m *ConcurrentHashMap[K, V]) Upsert(key K, value V, cb UpsertCb[V]) (res V)
 	return res
 }
 
-// Sets the given value under the specified key if no value was associated with it.
+// SetIfAbsent Sets the given value under the specified key if no value was associated with it.
 func (m *ConcurrentHashMap[K, V]) SetIfAbsent(key K, value V) bool {
 	// Get map shard.
 	shard := m.GetShard(key)
@@ -139,7 +139,7 @@ func (m *ConcurrentHashMap[K, V]) Count() int {
 	return count
 }
 
-// Looks up an item under specified key
+// Has Looks up an item under specified key
 func (m *ConcurrentHashMap[K, V]) Has(key K) bool {
 	// Get shard
 	shard := m.GetShard(key)
@@ -195,7 +195,7 @@ func (m *ConcurrentHashMap[K, V]) IsEmpty() bool {
 	return m.Count() == 0
 }
 
-// Used by the Iter & IterBuffered functions to wrap two variables together over a channel,
+// Tuple Used by the Iter & IterBuffered functions to wrap two variables together over a channel,
 type Tuple[K comparable, V any] struct {
 	Key K
 	Val V
@@ -338,7 +338,7 @@ func (m *ConcurrentHashMap[K, V]) Keys() []K {
 	return keys
 }
 
-// Reviles ConcurrentHashMap "private" variables to json marshal.
+// MarshalJSON Reviles ConcurrentHashMap "private" variables to json marshal.
 func (m *ConcurrentHashMap[K, V]) MarshalJSON() ([]byte, error) {
 	// Create a temporary map, which will hold all item spread across shards.
 	tmp := make(map[K]V)

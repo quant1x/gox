@@ -3,6 +3,7 @@ package concurrent
 import (
 	"encoding/json"
 	"hash/fnv"
+	"log"
 	"sort"
 	"strconv"
 	"testing"
@@ -640,4 +641,10 @@ func TestUnDrainedIterBuffered(t *testing.T) {
 	if counter != 200 {
 		t.Error("We should have counted 200 elements.")
 	}
+}
+
+func TestConcurrentHashMap_Clear(t *testing.T) {
+	m := NewHashMap[string, int]()
+	m.Clear()
+	log.Print("ok")
 }
