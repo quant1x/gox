@@ -1,10 +1,12 @@
 module gitee.com/quant1x/gox
 
-go 1.21.8
+go 1.21.11
+
+toolchain go1.21.12
 
 require (
-	gitee.com/quant1x/pkg v0.2.10
-	golang.org/x/sys v0.22.0
+	gitee.com/quant1x/pkg v0.2.12
+	golang.org/x/sys v0.23.0
 )
 
 require (
