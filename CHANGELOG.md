@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.21.7] - 2024-08-06
+### Changed
+- 更新依赖库版本
+
 ## [1.21.6] - 2024-08-06
 ### Changed
 - 新增解析时间类字符串的基准测试
@@ -15,6 +19,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - 优化字节数组转泛型切片
 - 更新pkg版本到0.2.10
+- update changelog
 
 ## [1.21.4] - 2024-06-20
 ### Changed
@@ -1370,7 +1375,8 @@ All notable changes to this project will be documented in this file.
 - fix codecov
 
 
-[Unreleased]: https://gitee.com/quant1x/gox.git/compare/v1.21.6...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox.git/compare/v1.21.7...HEAD
+[1.21.7]: https://gitee.com/quant1x/gox.git/compare/v1.21.6...v1.21.7
 [1.21.6]: https://gitee.com/quant1x/gox.git/compare/v1.21.5...v1.21.6
 [1.21.5]: https://gitee.com/quant1x/gox.git/compare/v1.21.4...v1.21.5
 [1.21.4]: https://gitee.com/quant1x/gox.git/compare/v1.21.3...v1.21.4
