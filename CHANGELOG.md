@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.21.8] - 2024-08-06
+### Changed
+- 更新依赖库版本
+
 ## [1.21.7] - 2024-08-06
 ### Changed
 - 更新依赖库版本
@@ -14,6 +18,7 @@ All notable changes to this project will be documented in this file.
 - 调整hashmap部分代码
 - 调整部分测试代码
 - 更新依赖库版本
+- update changelog
 
 ## [1.21.5] - 2024-07-05
 ### Changed
@@ -1375,7 +1380,8 @@ All notable changes to this project will be documented in this file.
 - fix codecov
 
 
-[Unreleased]: https://gitee.com/quant1x/gox.git/compare/v1.21.7...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox.git/compare/v1.21.8...HEAD
+[1.21.8]: https://gitee.com/quant1x/gox.git/compare/v1.21.7...v1.21.8
 [1.21.7]: https://gitee.com/quant1x/gox.git/compare/v1.21.6...v1.21.7
 [1.21.6]: https://gitee.com/quant1x/gox.git/compare/v1.21.5...v1.21.6
 [1.21.5]: https://gitee.com/quant1x/gox.git/compare/v1.21.4...v1.21.5
