@@ -3,9 +3,14 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.22.0] - 2025-02-15
+### Changed
+- 更新以支持go1.24
+
 ## [1.21.9] - 2024-08-06
 ### Changed
 - 更新依赖库版本
+- update changelog
 
 ## [1.21.8] - 2024-08-06
 ### Changed
@@ -1385,7 +1390,8 @@ All notable changes to this project will be documented in this file.
 - fix codecov
 
 
-[Unreleased]: https://gitee.com/quant1x/gox.git/compare/v1.21.9...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox.git/compare/v1.22.0...HEAD
+[1.22.0]: https://gitee.com/quant1x/gox.git/compare/v1.21.9...v1.22.0
 [1.21.9]: https://gitee.com/quant1x/gox.git/compare/v1.21.8...v1.21.9
 [1.21.8]: https://gitee.com/quant1x/gox.git/compare/v1.21.7...v1.21.8
 [1.21.7]: https://gitee.com/quant1x/gox.git/compare/v1.21.6...v1.21.7
