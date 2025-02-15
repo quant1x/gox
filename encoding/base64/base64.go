@@ -12,11 +12,16 @@ const (
 	BASE64CHAR = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
 )
 
+func getRandFromSeed(seed int64) *rand.Rand {
+	return rand.New(rand.NewSource(seed))
+}
+
 // Base64GetEncoder 生成一个新的base64的码表
 func Base64GetEncoder() string {
 	encoder := slices.Clone(api.String2Bytes(BASE64CHAR))
-	rand.Seed(time.Now().UnixNano())
-	rand.Shuffle(len(encoder), func(i, j int) {
+	seed := time.Now().UnixNano()
+	r := getRandFromSeed(seed)
+	r.Shuffle(len(encoder), func(i, j int) {
 		encoder[i], encoder[j] = encoder[j], encoder[i]
 	})
 	return api.Bytes2String(encoder)
@@ -24,10 +29,11 @@ func Base64GetEncoder() string {
 
 func getBase64Encoder(seed int64) string {
 	encoder := slices.Clone(api.String2Bytes(BASE64CHAR))
-	rand.Seed(seed)
-	rand.Shuffle(len(encoder), func(i, j int) {
+	r := getRandFromSeed(seed)
+	r.Shuffle(len(encoder), func(i, j int) {
 		encoder[i], encoder[j] = encoder[j], encoder[i]
 	})
+	r = nil
 	return api.Bytes2String(encoder)
 }
 

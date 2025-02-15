@@ -21,9 +21,6 @@ func Caller() (function, file string, line int) {
 	return FuncInfo(pc)
 }
 
-//go:linkname runtimeFunctionForPC runtime.FuncForPC
-func runtimeFunctionForPC(pc uintptr) *runtime.Func
-
 // 获取pc
 func programCounters(v any) uintptr {
 	value := reflect.ValueOf(v)
@@ -46,7 +43,7 @@ func FuncInfo(v any) (nameOfFunction, filename string, lineNumber int) {
 	if pc == invalidProgramCounters {
 		return invalidFunctionName, unknownFilename, unknownLine
 	}
-	f := runtimeFunctionForPC(pc)
+	f := runtime.FuncForPC(pc)
 	if f == nil {
 		return invalidFunctionName, unknownFilename, unknownLine
 	}
@@ -61,7 +58,7 @@ func FuncName(v any) (nameOfFunction string) {
 	if pc == invalidProgramCounters {
 		return invalidFunctionName
 	}
-	f := runtimeFunctionForPC(pc)
+	f := runtime.FuncForPC(pc)
 	if f == nil {
 		return invalidFunctionName
 	}

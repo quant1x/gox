@@ -6,7 +6,7 @@ package api
 import (
 	"testing"
 
-	"gitee.com/quant1x/pkg/testify/assert"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestSnakeCase(t *testing.T) {

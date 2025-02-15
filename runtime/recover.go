@@ -29,7 +29,7 @@ func sprintf(v ...any) string {
 func catchException(err any, ignore bool, format string, a ...any) {
 	if err != nil {
 		//warning := sprintf(v...)
-		warning := fmt.Sprintf(format, a)
+		warning := fmt.Sprintf(format, a...)
 		stack := string(debug.Stack())
 		loggerFunc := logger.Fatalf
 		if ignore {

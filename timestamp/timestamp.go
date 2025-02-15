@@ -20,11 +20,6 @@ const (
 //go:linkname now time.now
 func now() (sec int64, nsec int32, mono int64)
 
-////调用公开结构的私有方法
-////
-////go:linkname abstime time.Time.abs
-////func abstime(t time.Time) uint64
-
 var (
 	defaultLocal = time.Local
 	// 获取偏移的秒数

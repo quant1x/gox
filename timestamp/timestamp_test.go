@@ -3,7 +3,6 @@ package timestamp
 import (
 	"fmt"
 	"gitee.com/quant1x/gox/api"
-	//"github.com/golang-module/carbon/v2"
 	"testing"
 	"time"
 )
@@ -54,6 +53,7 @@ func TestNow(t *testing.T) {
 
 func TestTime1(t *testing.T) {
 	formatTimeStr := "2017-04-11 13:33:37"
+	formatTimeStr = "2024-12-24 03:25:05 +0000 GMT"
 	formatTime, err := time.Parse("2006-01-02 15:04:05", formatTimeStr)
 	if err == nil {
 		fmt.Println(formatTime) //打印结果：2017-04-11 13:33:37 +0000 UTC
