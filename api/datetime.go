@@ -88,13 +88,13 @@ func GetWeekDay(date ...string) (string, string) {
 		}
 	}
 	offset := int(time.Monday - now.Weekday())
-	//周日做特殊判断 因为time.Monday = 0
+	//周日做特殊判断 因为time.Sunday = 0
 	if offset > 0 {
 		offset = -6
 	}
 
 	lastoffset := int(time.Saturday - now.Weekday())
-	//周日做特殊判断 因为time.Monday = 0
+	//周日做特殊判断 因为time.Sunday = 0
 	if lastoffset == 6 {
 		lastoffset = -1
 	}
