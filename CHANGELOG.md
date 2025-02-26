@@ -3,11 +3,16 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.22.2] - 2025-02-26
+### Changed
+- 依据最大行数预先输出足够的行
+
 ## [1.22.1] - 2025-02-26
 ### Changed
 - 修订周期0的注释错误,应该是Sunday=0
 - 新增一个获取指定日期的周开始时间和结束时间
 - 优化进度条
+- update changelog
 
 ## [1.22.0] - 2025-02-15
 ### Changed
@@ -1397,7 +1402,8 @@ All notable changes to this project will be documented in this file.
 - fix codecov
 
 
-[Unreleased]: https://gitee.com/quant1x/gox.git/compare/v1.22.1...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox.git/compare/v1.22.2...HEAD
+[1.22.2]: https://gitee.com/quant1x/gox.git/compare/v1.22.1...v1.22.2
 [1.22.1]: https://gitee.com/quant1x/gox.git/compare/v1.22.0...v1.22.1
 [1.22.0]: https://gitee.com/quant1x/gox.git/compare/v1.21.9...v1.22.0
 [1.21.9]: https://gitee.com/quant1x/gox.git/compare/v1.21.8...v1.21.9
