@@ -3,9 +3,16 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.22.1] - 2025-02-26
+### Changed
+- 修订周期0的注释错误,应该是Sunday=0
+- 新增一个获取指定日期的周开始时间和结束时间
+- 优化进度条
+
 ## [1.22.0] - 2025-02-15
 ### Changed
 - 更新以支持go1.24
+- update changelog
 
 ## [1.21.9] - 2024-08-06
 ### Changed
@@ -1390,7 +1397,8 @@ All notable changes to this project will be documented in this file.
 - fix codecov
 
 
-[Unreleased]: https://gitee.com/quant1x/gox.git/compare/v1.22.0...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox.git/compare/v1.22.1...HEAD
+[1.22.1]: https://gitee.com/quant1x/gox.git/compare/v1.22.0...v1.22.1
 [1.22.0]: https://gitee.com/quant1x/gox.git/compare/v1.21.9...v1.22.0
 [1.21.9]: https://gitee.com/quant1x/gox.git/compare/v1.21.8...v1.21.9
 [1.21.8]: https://gitee.com/quant1x/gox.git/compare/v1.21.7...v1.21.8
