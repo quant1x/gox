@@ -44,7 +44,7 @@ func adjustLine(line int) int {
 		gMaxLine = line
 	}
 	if old > 0 && gMaxLine > old {
-		fmt.Printf(strings.Repeat("\n", gMaxLine-old))
+		fmt.Printf(strings.Repeat("\r\n", gMaxLine-old))
 	}
 	_ = old
 	return line
