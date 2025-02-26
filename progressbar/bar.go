@@ -45,13 +45,7 @@ func NewBar(line int, prefix string, total int) *Bar {
 		return nil
 	}
 
-	if line <= 0 {
-		gMaxLine++
-		line = gMaxLine
-	}
-	if line > gMaxLine {
-		gMaxLine = line
-	}
+	line = adjustLine(line)
 
 	bar := &Bar{
 		line:     line,

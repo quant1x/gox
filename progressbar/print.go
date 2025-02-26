@@ -14,6 +14,42 @@ var (
 	gMaxLine     = 0 //最大行
 )
 
+func Reset() {
+	mu.Lock()
+	defer mu.Unlock()
+	gSrcLine = 0
+	gCurrentLine = 0
+	gMaxLine = 0
+}
+
+func GetMaxLine() int {
+	return gMaxLine
+}
+
+func SetMaxLine(line int) {
+	mu.Lock()
+	defer mu.Unlock()
+	gMaxLine = line
+}
+
+func adjustLine(line int) int {
+	mu.Lock()
+	defer mu.Unlock()
+	old := gMaxLine
+	if line <= 0 {
+		gMaxLine++
+		line = gMaxLine
+	}
+	if line > gMaxLine {
+		gMaxLine = line
+	}
+	if old > 0 && gMaxLine > old {
+		fmt.Printf(strings.Repeat("\n", gMaxLine-old))
+	}
+	_ = old
+	return line
+}
+
 func barMove(line int) {
 	//fmt.Println("\n\n\n\n", gCurrentLine, line)
 	fmt.Printf("\033[%dA\033[%dB", gCurrentLine, line)
