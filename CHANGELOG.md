@@ -3,9 +3,15 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.22.3] - 2025-03-02
+### Changed
+- 删除部分废弃的代码
+- 删除部分废弃的代码
+
 ## [1.22.2] - 2025-02-26
 ### Changed
 - 依据最大行数预先输出足够的行
+- update changelog
 
 ## [1.22.1] - 2025-02-26
 ### Changed
@@ -1402,7 +1408,8 @@ All notable changes to this project will be documented in this file.
 - fix codecov
 
 
-[Unreleased]: https://gitee.com/quant1x/gox.git/compare/v1.22.2...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox.git/compare/v1.22.3...HEAD
+[1.22.3]: https://gitee.com/quant1x/gox.git/compare/v1.22.2...v1.22.3
 [1.22.2]: https://gitee.com/quant1x/gox.git/compare/v1.22.1...v1.22.2
 [1.22.1]: https://gitee.com/quant1x/gox.git/compare/v1.22.0...v1.22.1
 [1.22.0]: https://gitee.com/quant1x/gox.git/compare/v1.21.9...v1.22.0
