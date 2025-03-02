@@ -220,11 +220,9 @@ func (b *Bar) barMsg() string {
 	bar1Len := barLen * b.rate / 100
 	bar2Len := barLen - bar1Len
 
-	//realBar1 := bar1[:bar1Len]
 	realBar1 := b.bar1[:bar1Len]
 	var realBar2 string
 	if bar2Len > 0 {
-		//realBar2 = ">" + bar2[:bar2Len-1]
 		realBar2 = ">" + b.bar2[:bar2Len-1]
 	}
 
