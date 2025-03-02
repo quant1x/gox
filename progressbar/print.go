@@ -50,8 +50,8 @@ func adjustLine(line int) int {
 	return line
 }
 
+// 移动光标到指定的进度条的行号
 func barMove(line int) {
-	//fmt.Println("\n\n\n\n", gCurrentLine, line)
 	fmt.Printf("\033[%dA\033[%dB", gCurrentLine, line)
 	gCurrentLine = line
 }
