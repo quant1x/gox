@@ -122,7 +122,7 @@ func (o *RollingOnce) runTicker() {
 			}
 		case <-o.finished:
 			// 收到结束信号, 退出循环
-			break
+			return
 		}
 	}
 }
