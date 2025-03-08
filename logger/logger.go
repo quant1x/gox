@@ -337,7 +337,7 @@ func refreshLogFile(v *logValue) {
 	}
 	v.writer.Write(v.value)
 	defer pool.Release(v)
-	if v == nil || !v.fatal {
+	if !v.fatal {
 		return
 	}
 	// 致命的日志, 同时输出到控制台
