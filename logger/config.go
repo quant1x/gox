@@ -8,6 +8,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"sync"
 	"time"
 )
 
@@ -64,6 +65,10 @@ var (
 	}
 	logger *zap.SugaredLogger = nil
 )
+var (
+	mu  sync.Mutex
+	bws []*zapcore.BufferedWriteSyncer
+)
 
 func init() {
 	tempPath := os.TempDir()
@@ -72,12 +77,16 @@ func init() {
 	//logger = zapLogger.Sugar()
 	InitLogger(tempPath, defaultLevel)
 	chSignal := signal.Notify()
-	go func() {
-		s := <-chSignal
-		Infof("exit sign, [%+v]", s)
-		fmt.Println("exit", s)
-		os.Exit(0)
-	}()
+	go waitForStop(chSignal)
+}
+
+func addBufferWriteSyncer(bw *zapcore.BufferedWriteSyncer) {
+	if bw == nil {
+		return
+	}
+	mu.Lock()
+	defer mu.Unlock()
+	bws = append(bws, bw)
 }
 
 // SetLevel 在临时路径记录日志

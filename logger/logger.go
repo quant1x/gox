@@ -55,13 +55,14 @@ func getLogger(cfg Config, level zapcore.Level) (zapcore.Core, error) {
 	}
 	writeSyncer := zapcore.AddSync(rl)
 	// 带缓冲的 WriteSyncer（缓冲区大小 256KB）
-	bufferedWriteSyncer := zapcore.BufferedWriteSyncer{
+	bufferedWriteSyncer := &zapcore.BufferedWriteSyncer{
 		WS:            writeSyncer,
 		Size:          cfg.BufferSize * 1024,           // 缓冲区大小
 		FlushInterval: cfg.FlushInterval * time.Second, // 定时刷新间隔
 	}
 	var syncers []zapcore.WriteSyncer
-	syncers = append(syncers, &bufferedWriteSyncer)
+	syncers = append(syncers, bufferedWriteSyncer)
+	addBufferWriteSyncer(bufferedWriteSyncer)
 	if cfg.EnableConsole {
 		syncers = append(syncers, console)
 	}
@@ -171,5 +172,5 @@ func NewTextLoggerWithCompression(cfg Config) *zap.Logger {
 	// --------------------------------------------
 	// 4. 构建 Logger
 	// --------------------------------------------
-	return zap.New(core, zap.AddCaller())
+	return zap.New(core, zap.AddCaller(), zap.AddCallerSkip(1))
 }
