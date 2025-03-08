@@ -1,427 +1,175 @@
 package logger
 
 import (
-	"bytes"
-	"context"
-	"fmt"
+	"compress/gzip"
 	"gitee.com/quant1x/gox/api"
-	"gitee.com/quant1x/gox/cache"
-	"gitee.com/quant1x/gox/mdc"
-	"gitee.com/quant1x/gox/signal"
+	"gitee.com/quant1x/gox/rotatelogs"
+	"go.uber.org/zap"
+	"go.uber.org/zap/zapcore"
+	"io"
 	"os"
 	"path/filepath"
-	"reflect"
-	"runtime"
-	"strings"
-	"sync"
 	"time"
 )
 
-const (
-	DEBUG LogLevel = iota
-	INFO
-	WARN
-	ERROR
-	OFF
-	FATAL
-)
-
-const (
-	loggerRollerDays int = 7 // 保持7天
-	loggerLocalSkip      = 2
-	timeFmtTimestamp     = "2006-01-02T15:04:05.000"
-	timeFmtHour          = "2006010215"
-	timeFmtDay           = "20060102"
-	loggerTraceId        = mdc.APP_TRACEID
-)
-
 var (
-	loggerPath   string
-	logLevel     = DEBUG
-	logQueue     = make(chan *logValue, 10000)
-	loggerMap    sync.Map
-	logMutex     sync.RWMutex
-	currUnixTime int64
-	currDateHour string
-	currDateDay  string
-	finished     chan struct{}
-	pool         cache.Pool[logValue]
+	mapLevelToFilename = map[zapcore.Level]string{
+		zapcore.DebugLevel:  "debug",
+		zapcore.InfoLevel:   "info",
+		zapcore.WarnLevel:   "warn",
+		zapcore.ErrorLevel:  "error",
+		zapcore.DPanicLevel: "fatal",
+		zapcore.PanicLevel:  "fatal",
+		zapcore.FatalLevel:  "fatal",
+	}
+	console = zapcore.AddSync(os.Stdout)
 )
 
-type Logger struct {
-	name   string
-	writer LogWriter
-}
-type LogLevel uint8
+func getLogger(cfg Config, level zapcore.Level) (zapcore.Core, error) {
+	filename, ok := mapLevelToFilename[level]
+	if !ok {
+		panic("invalid log level")
+	}
+	// 配置日志滚动器，按天切割
+	path := filepath.Join(cfg.Path, filename+"_%Y%m%d.log")
+	rl, err := rotatelogs.New(
+		path,                              // 文件名格式，带日期
+		rotatelogs.WithMaxAge(cfg.MaxAge), // 保留7天的日志
+		rotatelogs.WithRotationTime(cfg.RotationTime), // 每24小时切割一次
+		rotatelogs.WithHandler(rotatelogs.HandlerFunc(
+			func(e rotatelogs.Event) {
+				if e.Type() == rotatelogs.FileRotatedEventType {
+					if fre, ok := e.(*rotatelogs.FileRotatedEvent); ok {
+						oldFilename := fre.PreviousFile()
+						if oldFilename == "" {
+							return
+						}
+						compressOldLogs(oldFilename)
+					}
+				}
+			})),
+	)
 
-type logValue struct {
-	level  LogLevel
-	value  []byte
-	fileNo string
-	writer LogWriter
-	fatal  bool
+	if err != nil {
+		return nil, err
+	}
+	writeSyncer := zapcore.AddSync(rl)
+	// 带缓冲的 WriteSyncer（缓冲区大小 256KB）
+	bufferedWriteSyncer := zapcore.BufferedWriteSyncer{
+		WS:            writeSyncer,
+		Size:          cfg.BufferSize * 1024,           // 缓冲区大小
+		FlushInterval: cfg.FlushInterval * time.Second, // 定时刷新间隔
+	}
+	var syncers []zapcore.WriteSyncer
+	syncers = append(syncers, &bufferedWriteSyncer)
+	if cfg.EnableConsole {
+		syncers = append(syncers, console)
+	}
+	core := zapcore.NewCore(
+		textEncoder,
+		zapcore.NewMultiWriteSyncer(syncers...),
+		zap.LevelEnablerFunc(func(lvl zapcore.Level) bool {
+			//ret := false
+			//switch lvl {
+			//case zapcore.DebugLevel, zapcore.InfoLevel, zapcore.WarnLevel, zapcore.ErrorLevel:
+			//	ret = lvl == level
+			//default:
+			//	ret = lvl <= zapcore.FatalLevel
+			//}
+			//return ret
+			return lvl == level
+		}),
+	)
+	return core, nil
 }
 
-func init() {
-	now := time.Now()
-	currUnixTime = now.Unix()
-	currDateHour = now.Format(timeFmtHour)
-	currDateDay = now.Format(timeFmtDay)
-	finished = make(chan struct{})
-	go func() {
-		tm := time.NewTimer(time.Millisecond)
-		for {
-			now := time.Now()
-			d := time.Second - time.Duration(now.Nanosecond())
-			tm.Reset(d)
-			<-tm.C
-			now = time.Now()
-			logMutex.Lock()
-			currUnixTime = now.Unix()
-			currDateHour = now.Format(timeFmtHour)
-			currDateDay = now.Format(timeFmtDay)
-			logMutex.Unlock()
+// 压缩旧日志文件的钩子函数
+func compressOldLogs(previousFile string) {
+	const logExt = ".log"
+	const logExtLength = len(logExt)
+	if filepath.Ext(previousFile) == logExt {
+		src, err := os.Open(previousFile)
+		if err != nil {
+			return
 		}
-	}()
-	go flushLog(true)
+		// 压缩文件：原文件 → 原文件.gz
+		gzPath := previousFile[:len(previousFile)-logExtLength] + ".gz"
+		dst, _ := os.Create(gzPath)
+		defer api.CloseQuietly(dst)
 
-	// 创建监听退出chan
-	sigs := signal.Notify()
-
-	_, cancel := context.WithCancel(context.Background())
-
-	go func() {
-		s := <-sigs
-		Infof("exit sign, [%+v]", s)
-		FlushLogger()
-		fmt.Println("exit", s)
-		cancel()
-		os.Exit(0)
-	}()
-
-}
-
-func (lv *LogLevel) String() string {
-	switch *lv {
-	case DEBUG:
-		return "DEBUG"
-	case INFO:
-		return "INFO"
-	case WARN:
-		return "WARN"
-	case ERROR:
-		return "ERROR"
-	case FATAL:
-		return "FATAL"
-	default:
-		return "UNKNOWN"
-	}
-}
-
-// SetLogPath 设置日志路径, 默认是INFO级别日志
-//
-//	Deprecated: 推荐使用 InitLogger
-func SetLogPath(path string) {
-	InitLogger(path, INFO)
-}
-
-// getApplicationName 获取执行文件名
-func getApplicationName() string {
-	path, _ := os.Executable()
-	_, exec := filepath.Split(path)
-	arr := strings.Split(exec, ".")
-	__applicationName := arr[0]
-	return __applicationName
-}
-
-// InitLogger 初始化
-func InitLogger(path string, level ...LogLevel) {
-	// 日志路径非空, 赋值
-	if !api.IsEmpty(path) {
-		loggerPath = path
-	}
-	name := getApplicationName()
-	loggerPath = filepath.Join(loggerPath, name)
-
-	// 日志级别默认是INFO
-	optLevel := INFO
-	if len(level) > 0 {
-		optLevel = level[0]
-	}
-	SetLevel(optLevel)
-}
-
-// GetLogger return an logger instance
-func GetLogger(name string) *Logger {
-	v, found := loggerMap.Load(name)
-	if found {
-		return v.(*Logger)
-	}
-	lg := &Logger{
-		name:   name,
-		writer: &ConsoleWriter{},
-	}
-	_ = lg.SetDayRoller(loggerPath, loggerRollerDays)
-	loggerMap.Store(name, lg)
-	return lg
-}
-
-func SetLevel(level LogLevel) {
-	logLevel = level
-}
-
-// IsDebug 是否DEBUG模式
-func IsDebug() bool {
-	if DEBUG < logLevel {
-		return false
-	}
-	return true
-}
-
-func StringToLevel(level string) LogLevel {
-	switch level {
-	case "DEBUG":
-		return DEBUG
-	case "INFO":
-		return INFO
-	case "WARN":
-		return WARN
-	case "ERROR":
-		return ERROR
-	case "FATAL":
-		return FATAL
-	default:
-		return DEBUG
-	}
-}
-
-func (l *Logger) SetLogName(name string) {
-	l.name = name
-}
-
-func (l *Logger) SetFileRoller(logpath string, num int, sizeMB int) error {
-	if err := os.MkdirAll(logpath, 0755); err != nil {
-		panic(err)
-	}
-	w := NewRollFileWriter(logpath, l.name, num, sizeMB)
-	l.writer = w
-	return nil
-}
-
-func (l *Logger) IsConsoleWriter() bool {
-	if reflect.TypeOf(l.writer) == reflect.TypeOf(&ConsoleWriter{}) {
-		return true
-	}
-	return false
-}
-
-func (l *Logger) SetWriter(w LogWriter) {
-	l.writer = w
-}
-
-func (l *Logger) SetDayRoller(logpath string, num int) error {
-	if err := os.MkdirAll(logpath, 0755); err != nil {
-		return err
-	}
-	w := NewDateWriter(logpath, l.name, DAY, num)
-	l.writer = w
-	return nil
-}
-
-func (l *Logger) SetHourRoller(logpath string, num int) error {
-	if err := os.MkdirAll(logpath, 0755); err != nil {
-		return err
-	}
-	w := NewDateWriter(logpath, l.name, HOUR, num)
-	l.writer = w
-	return nil
-}
-
-func (l *Logger) SetConsole() {
-	l.writer = &ConsoleWriter{}
-}
-
-func (l *Logger) Debug(v ...any) {
-	l.writef(loggerLocalSkip, DEBUG, "", v)
-}
-
-func (l *Logger) Info(v ...any) {
-	l.writef(loggerLocalSkip, INFO, "", v)
-}
-
-func (l *Logger) Warn(v ...any) {
-	l.writef(loggerLocalSkip, WARN, "", v)
-}
-
-func (l *Logger) Error(v ...any) {
-	l.writef(loggerLocalSkip, ERROR, "", v)
-}
-
-func (l *Logger) Debugf(format string, v ...any) {
-	l.writef(loggerLocalSkip, DEBUG, format, v)
-}
-
-func (l *Logger) Infof(format string, v ...any) {
-	l.writef(loggerLocalSkip, INFO, format, v)
-}
-
-func (l *Logger) Warnf(format string, v ...any) {
-	l.writef(loggerLocalSkip, WARN, format, v)
-}
-
-func (l *Logger) Errorf(format string, v ...any) {
-	l.writef(loggerLocalSkip, ERROR, format, v)
-}
-
-func (l *Logger) Fatal(v ...any) {
-	l.writef(loggerLocalSkip, FATAL, "", v)
-	waitForExit()
-}
-
-func (l *Logger) Fatalf(format string, v ...any) {
-	l.writef(loggerLocalSkip, FATAL, format, v)
-	waitForExit()
-}
-
-func getTraceId() string {
-	traceId := mdc.Get(loggerTraceId)
-	t := reflect.ValueOf(traceId)
-	if t.Kind() == reflect.String {
-		return t.String()
-	}
-	return ""
-}
-
-func (l *Logger) writef(skip int, level LogLevel, format string, v []any) {
-	if level < logLevel {
-		return
-	}
-
-	t := time.Now()
-	buf := bytes.NewBuffer(nil)
-	if l.writer.NeedPrefix() {
-		traceId := getTraceId()
-		_, _ = fmt.Fprintf(buf, "%s|%s|", t.Format(timeFmtTimestamp), traceId)
-		if logLevel == DEBUG {
-			_, file, line, ok := runtime.Caller(skip)
-			if !ok {
-				file = "???"
-				line = 0
-			} else {
-				file = filepath.Base(file)
-			}
-			_, _ = fmt.Fprintf(buf, "%s:%d|", file, line)
+		gzWriter := gzip.NewWriter(dst)
+		defer api.CloseQuietly(gzWriter)
+		fileStat, err := src.Stat()
+		if err != nil {
+			return
 		}
-	}
-	buf.WriteString(level.String())
-	buf.WriteByte('|')
 
-	if format == "" {
-		_, _ = fmt.Fprint(buf, v...)
-	} else {
-		_, _ = fmt.Fprintf(buf, format, v...)
-	}
-	if l.writer.NeedPrefix() {
-		buf.WriteByte('\n')
-	}
-	lv := pool.Acquire()
-	lv.value = buf.Bytes()
-	lv.writer = l.writer
-	lv.fatal = level == FATAL
-	logQueue <- lv
-}
-
-func FlushLogger() {
-	flushLog(false)
-}
-
-// 等待结束信号并退出
-func waitForExit() {
-	<-finished
-	os.Exit(-1)
-}
-
-func refreshLogFile(v *logValue) {
-	if v == nil {
-		return
-	}
-	v.writer.Write(v.value)
-	defer pool.Release(v)
-	if !v.fatal {
-		return
-	}
-	// 致命的日志, 同时输出到控制台
-	fmt.Println(api.Bytes2String(v.value))
-	// 发送结束信号
-	finished <- struct{}{}
-}
-
-func flushLog(sync bool) {
-	if sync {
-		for v := range logQueue {
-			refreshLogFile(v)
+		gzWriter.Name = fileStat.Name()
+		gzWriter.ModTime = fileStat.ModTime()
+		_, err = io.Copy(gzWriter, src) // 压缩内容
+		if err != nil {
+			return
 		}
-	} else {
-		for {
-			select {
-			case v := <-logQueue:
-				refreshLogFile(v)
-				continue
-			default:
-				return
-			}
-		}
+		_ = src.Close()
+		_ = os.Remove(previousFile) // 删除原文件
 	}
 }
 
-func Info(v ...any) {
-	logger := GetLogger("runtime")
-	logger.writef(loggerLocalSkip, INFO, "", v)
-}
+// NewTextLoggerWithCompression 初始化支持压缩的纯文本日志配置
+func NewTextLoggerWithCompression(cfg Config) *zap.Logger {
+	// --------------------------------------------
+	// 2. 按级别配置日志文件（启用压缩）
+	// --------------------------------------------
+	// 配置日志滚动器，按天切割
+	var cores []zapcore.Core
+	// debug日志
+	if cfg.Level <= zapcore.DebugLevel {
+		debugLogger, err := getLogger(cfg, zap.DebugLevel)
+		if err != nil {
+			panic(err)
+		}
+		cores = append(cores, debugLogger)
+	}
+	// info日志
+	if cfg.Level <= zapcore.InfoLevel {
+		infoLogger, err := getLogger(cfg, zap.InfoLevel)
+		if err != nil {
+			panic(err)
+		}
+		cores = append(cores, infoLogger)
+	}
+	// error日志
+	if cfg.Level <= zapcore.ErrorLevel {
+		errorLogger, err := getLogger(cfg, zap.ErrorLevel)
+		if err != nil {
+			panic(err)
+		}
+		cores = append(cores, errorLogger)
+	}
+	// warn日志
+	if cfg.Level <= zapcore.WarnLevel {
+		warnLogger, err := getLogger(cfg, zap.WarnLevel)
+		if err != nil {
+			panic(err)
+		}
+		cores = append(cores, warnLogger)
+	}
+	// fatal日志
+	if cfg.Level <= zapcore.FatalLevel {
+		fatalLogger, err := getLogger(cfg, zap.FatalLevel)
+		if err != nil {
+			panic(err)
+		}
+		cores = append(cores, fatalLogger)
+	}
+	// --------------------------------------------
+	// 3. 创建不同级别的 Core 并合并
+	// --------------------------------------------
 
-func Infof(format string, v ...any) {
-	logger := GetLogger("runtime")
-	logger.writef(loggerLocalSkip, INFO, format, v)
-}
+	core := zapcore.NewTee(cores...)
 
-func Debug(v ...any) {
-	logger := GetLogger("debug")
-	logger.writef(loggerLocalSkip, DEBUG, "", v)
-}
-
-func Debugf(format string, v ...any) {
-	logger := GetLogger("debug")
-	logger.writef(loggerLocalSkip, DEBUG, format, v)
-}
-
-func Warn(v ...any) {
-	logger := GetLogger("warn")
-	logger.writef(loggerLocalSkip, WARN, "", v)
-}
-
-func Warnf(format string, v ...any) {
-	logger := GetLogger("warn")
-	logger.writef(loggerLocalSkip, WARN, format, v)
-}
-
-func Error(v ...any) {
-	logger := GetLogger("error")
-	logger.writef(loggerLocalSkip, ERROR, "", v)
-}
-
-func Errorf(format string, v ...any) {
-	logger := GetLogger("error")
-	logger.writef(loggerLocalSkip, ERROR, format, v)
-}
-
-func Fatal(v ...any) {
-	logger := GetLogger("error")
-	logger.writef(loggerLocalSkip, FATAL, "", v)
-	waitForExit()
-}
-
-func Fatalf(format string, v ...any) {
-	logger := GetLogger("error")
-	logger.writef(loggerLocalSkip, FATAL, format, v)
-	waitForExit()
+	// --------------------------------------------
+	// 4. 构建 Logger
+	// --------------------------------------------
+	return zap.New(core, zap.AddCaller())
 }
