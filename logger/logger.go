@@ -12,6 +12,7 @@ import (
 	"path/filepath"
 	"reflect"
 	"runtime"
+	"strings"
 	"sync"
 	"time"
 )
@@ -124,13 +125,22 @@ func SetLogPath(path string) {
 	InitLogger(path, INFO)
 }
 
+// getApplicationName 获取执行文件名
+func getApplicationName() string {
+	path, _ := os.Executable()
+	_, exec := filepath.Split(path)
+	arr := strings.Split(exec, ".")
+	__applicationName := arr[0]
+	return __applicationName
+}
+
 // InitLogger 初始化
 func InitLogger(path string, level ...LogLevel) {
 	// 日志路径非空, 赋值
 	if !api.IsEmpty(path) {
 		loggerPath = path
 	}
-	name := ApplicationName()
+	name := getApplicationName()
 	loggerPath = filepath.Join(loggerPath, name)
 
 	// 日志级别默认是INFO
