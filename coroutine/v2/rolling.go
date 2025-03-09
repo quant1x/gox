@@ -49,9 +49,9 @@ func NewRollingOnceWithHourAndMinute(hour, minute int, task func()) (*RollingOnc
 	if minute < 0 || minute > 59 {
 		return nil, fmt.Errorf("invalid minute: %d", minute)
 	}
-	windowMs := defaultRollingWindow
-	offsetMs := timestamp.MillisecondsPerHour*hour + timestamp.MillisecondsPerMinute*minute
-	return NewRollingOnce(int64(windowMs), int64(offsetMs), task)
+	windowMs := int64(defaultRollingWindow)
+	offsetMs := timestamp.MillisecondsPerHour*int64(hour) + timestamp.MillisecondsPerMinute*int64(minute)
+	return NewRollingOnce(windowMs, offsetMs, task)
 }
 
 // NewRollingOnce 创建新的RollingOnce实例
