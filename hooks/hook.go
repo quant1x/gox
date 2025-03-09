@@ -7,6 +7,7 @@ import (
 	"sort"
 	"sync"
 	"sync/atomic"
+	"syscall"
 	"time"
 )
 
@@ -35,11 +36,14 @@ type HookManager struct {
 	once       sync.Once
 	exitSignal chan struct{}
 	exiting    atomic.Bool
+	shutdown   chan os.Signal
 }
 
 func NewHookManager() *HookManager {
 	hm := &HookManager{
 		exitSignal: make(chan struct{}),
+		shutdown:   nil,
+		//shutdown:   make(chan os.Signal),
 	}
 	return hm
 }
@@ -65,9 +69,9 @@ func (hm *HookManager) Register(fn HookFunc, opts ...Option) {
 // Listen 启动信号监听
 func (hm *HookManager) Listen() {
 	hm.once.Do(func() {
-		sigCh := signal.Notify()
+		hm.shutdown = signal.Notify()
 		go func() {
-			s := <-sigCh
+			s := <-hm.shutdown
 			hm.Trigger(s)
 		}()
 	})
@@ -124,6 +128,10 @@ func (hm *HookManager) Trigger(s os.Signal) {
 func (hm *HookManager) Done() {
 	//fmt.Println("hook done")
 	close(hm.exitSignal)
+}
+func (hm *HookManager) SendExitSignal() {
+	hm.shutdown <- syscall.SIGINT
+	//close(hm.shutdown)
 }
 
 //// 劫持 os.Exit

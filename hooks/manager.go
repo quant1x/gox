@@ -10,6 +10,7 @@ const (
 
 func init() {
 	hm = NewHookManager()
+	hm.Listen()
 }
 
 // Register 注册hook
@@ -19,11 +20,10 @@ func Register(fn HookFunc, opts ...Option) {
 
 // Done 主动结束进程
 func Done() {
-	hm.exitSignal <- struct{}{}
+	hm.SendExitSignal()
 }
 
 // WaitForShutdown 等待进程结束信号
 func WaitForShutdown() {
-	hm.Listen()
 	hm.Wait()
 }

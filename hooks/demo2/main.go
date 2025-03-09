@@ -24,5 +24,10 @@ func main() {
 
 	// 主程序逻辑
 	fmt.Println("Server running, press Ctrl+C to exit")
+	go func() {
+		// 模拟关闭信号
+		time.Sleep(time.Second)
+		hooks.Done()
+	}()
 	hooks.WaitForShutdown() // 阻塞直到退出信号
 }
