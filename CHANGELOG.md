@@ -3,6 +3,14 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.22.5] - 2025-03-09
+### Changed
+- 拆分原logger
+- 单独处理日期更新
+- 统一退出控制
+- 优化压缩旧文件的处理过程, 修复原文件没有释放的bug
+- 修复defer调用文件关闭方法的警告信息
+
 ## [1.22.4] - 2025-03-08
 ### Changed
 - 修复Possible misuse of 'unsafe.Pointer'警告
@@ -10,6 +18,7 @@ All notable changes to this project will be documented in this file.
 - 新建第2个版本的RollingOnce
 - 剔除冗余的判断
 - 整理日志记录器的部分代码, 去掉冗余的应用程序名称获取的sync/once用法
+- update changelog
 
 ## [1.22.3] - 2025-03-02
 ### Changed
@@ -1417,7 +1426,8 @@ All notable changes to this project will be documented in this file.
 - fix codecov
 
 
-[Unreleased]: https://gitee.com/quant1x/gox.git/compare/v1.22.4...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox.git/compare/v1.22.5...HEAD
+[1.22.5]: https://gitee.com/quant1x/gox.git/compare/v1.22.4...v1.22.5
 [1.22.4]: https://gitee.com/quant1x/gox.git/compare/v1.22.3...v1.22.4
 [1.22.3]: https://gitee.com/quant1x/gox.git/compare/v1.22.2...v1.22.3
 [1.22.2]: https://gitee.com/quant1x/gox.git/compare/v1.22.1...v1.22.2
