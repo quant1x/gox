@@ -1,9 +1,7 @@
 package logger
 
 import (
-	"compress/gzip"
 	"gitee.com/quant1x/gox/api"
-	"io"
 	"os"
 	"path/filepath"
 	"time"
@@ -13,7 +11,7 @@ type DateWriter struct {
 	logpath  string
 	name     string
 	dateType DateType
-	num      int
+	maxAge   int
 	currDate string
 	currFile *os.File
 	openTime int64
@@ -23,50 +21,15 @@ func NewDateWriter(logpath, name string, dateType DateType, num int) *DateWriter
 	w := &DateWriter{
 		logpath:  logpath,
 		name:     name,
-		num:      num,
+		maxAge:   num,
 		dateType: dateType,
 	}
 	w.currDate = w.getCurrDate()
+	go w.cleanOldLogs()
 	return w
 }
 
 type DateType uint8
-
-// 压缩 使用gzip压缩成tar.gz
-func gzipFile(source string) error {
-	dest := source + ".gz"
-	_ = os.Remove(dest)
-	newfile, err := os.Create(dest)
-	if err != nil {
-		return err
-	}
-	defer api.CloseQuietly(newfile)
-
-	file, err := os.Open(source)
-	if err != nil {
-		return err
-	}
-
-	zw := gzip.NewWriter(newfile)
-
-	filestat, err := file.Stat()
-	if err != nil {
-		return nil
-	}
-
-	zw.Name = filestat.Name()
-	zw.ModTime = filestat.ModTime()
-	_, err = io.Copy(zw, file)
-	if err != nil {
-		return nil
-	}
-
-	_ = zw.Flush()
-	if err := zw.Close(); err != nil {
-		return nil
-	}
-	return nil
-}
 
 func (w *DateWriter) Write(v []byte) {
 	fullPath := filepath.Join(w.logpath, w.name+".log")
@@ -122,23 +85,42 @@ func (w *DateWriter) getFormat() string {
 }
 
 func (w *DateWriter) cleanOldLogs() {
-	format := timeFmtDay
 	duration := -time.Hour * 24
 	if w.dateType == HOUR {
-		format = timeFmtHour
 		duration = -time.Hour
 	}
 
-	t := time.Now()
-	t = t.Add(duration * time.Duration(w.num))
-	for i := 0; i < 30; i++ {
-		t = t.Add(duration)
-		k := t.Format(format)
-		fullPath := filepath.Join(w.logpath, w.name+".log."+k+".gz")
-		if _, err := os.Stat(fullPath); !os.IsNotExist(err) {
-			_ = os.Remove(fullPath)
-		}
+	earliestTime := time.Now()
+	earliestTime = earliestTime.Add(duration * time.Duration(w.maxAge))
+	globPattern := filepath.Join(w.logpath, w.name+".log.*")
+	matches, err := filepath.Glob(globPattern)
+	if err != nil {
+		return
 	}
+	deleteFiles := make([]string, 0, len(matches))
+	for _, path := range matches {
+		fi, err := os.Stat(path)
+		if err != nil {
+			continue
+		}
+		fl, err := os.Lstat(path)
+		if err != nil {
+			continue
+		}
+		if w.maxAge > 0 && fi.ModTime().After(earliestTime) {
+			continue
+		}
+
+		if fl.Mode()&os.ModeSymlink == os.ModeSymlink {
+			continue
+		}
+		deleteFiles = append(deleteFiles, path)
+	}
+	go func() {
+		for _, path := range deleteFiles {
+			_ = os.Remove(path)
+		}
+	}()
 	return
 }
 
