@@ -43,6 +43,12 @@ type RollingOnce struct {
 
 // NewRollingOnceWithHourAndMinute 创建指定时分的每日初始化RollingOnce实例
 func NewRollingOnceWithHourAndMinute(hour, minute int, task func()) (*RollingOnce, error) {
+	if hour < 0 || hour > 23 {
+		return nil, fmt.Errorf("invalid hour: %d", hour)
+	}
+	if minute < 0 || minute > 59 {
+		return nil, fmt.Errorf("invalid minute: %d", minute)
+	}
 	windowMs := defaultRollingWindow
 	offsetMs := timestamp.MillisecondsPerHour*hour + timestamp.MillisecondsPerMinute*minute
 	return NewRollingOnce(int64(windowMs), int64(offsetMs), task)
