@@ -3,9 +3,14 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.22.11] - 2025-03-10
+### Changed
+- 优化泛型Channel的数据功能
+
 ## [1.22.10] - 2025-03-10
 ### Changed
 - 优化部分代码
+- update changelog
 
 ## [1.22.9] - 2025-03-10
 ### Changed
@@ -1455,7 +1460,8 @@ All notable changes to this project will be documented in this file.
 - fix codecov
 
 
-[Unreleased]: https://gitee.com/quant1x/gox.git/compare/v1.22.10...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox.git/compare/v1.22.11...HEAD
+[1.22.11]: https://gitee.com/quant1x/gox.git/compare/v1.22.10...v1.22.11
 [1.22.10]: https://gitee.com/quant1x/gox.git/compare/v1.22.9...v1.22.10
 [1.22.9]: https://gitee.com/quant1x/gox.git/compare/v1.22.8...v1.22.9
 [1.22.8]: https://gitee.com/quant1x/gox.git/compare/v1.22.7...v1.22.8
