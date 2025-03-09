@@ -4,9 +4,9 @@ go 1.24
 
 require (
 	gitee.com/quant1x/pkg v0.4.0
-	github.com/petermattis/goid v0.0.0-20250211185408-f2b9d978cd7a
+	github.com/petermattis/goid v0.0.0-20250303134427-723919f7f203
 	github.com/stretchr/testify v1.10.0
-	golang.org/x/sys v0.30.0
+	golang.org/x/sys v0.31.0
 )
 
 require (
