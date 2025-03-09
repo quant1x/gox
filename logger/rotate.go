@@ -1,7 +1,6 @@
 package logger
 
 import (
-	"fmt"
 	"sync"
 	"time"
 )
@@ -35,7 +34,6 @@ func (t *TimeRotate) Close() {
 	for len(t.ticker.C) > 0 {
 		<-t.ticker.C
 	}
-	fmt.Println("close time rotate")
 }
 
 func (t *TimeRotate) GetUnixTime() int64 {
