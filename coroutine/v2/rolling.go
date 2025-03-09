@@ -41,10 +41,11 @@ type RollingOnce struct {
 	closeOnce   sync.Once     // 确保关闭操作只执行一次
 }
 
-func NewRollingOnceWithHour(hour, minute int, task func()) *RollingOnce {
+// NewRollingOnceWithHourAndMinute 创建指定时分的每日初始化RollingOnce实例
+func NewRollingOnceWithHourAndMinute(hour, minute int, task func()) (*RollingOnce, error) {
 	windowMs := defaultRollingWindow
 	offsetMs := timestamp.MillisecondsPerHour*hour + timestamp.MillisecondsPerMinute*minute
-	return NewRollingOnceWithHour(windowMs, offsetMs, task)
+	return NewRollingOnce(int64(windowMs), int64(offsetMs), task)
 }
 
 // NewRollingOnce 创建新的RollingOnce实例
