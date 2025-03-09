@@ -3,9 +3,16 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.22.7] - 2025-03-09
+### Changed
+- 去掉终端输出的调试信息
+- 新增系统信号的hook功能, 允许注册和主动发送关闭信号
+- 修复信号不准确的bug
+
 ## [1.22.6] - 2025-03-09
 ### Changed
 - 更新依赖库版本
+- update changelog
 
 ## [1.22.5] - 2025-03-09
 ### Changed
@@ -1431,7 +1438,8 @@ All notable changes to this project will be documented in this file.
 - fix codecov
 
 
-[Unreleased]: https://gitee.com/quant1x/gox.git/compare/v1.22.6...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox.git/compare/v1.22.7...HEAD
+[1.22.7]: https://gitee.com/quant1x/gox.git/compare/v1.22.6...v1.22.7
 [1.22.6]: https://gitee.com/quant1x/gox.git/compare/v1.22.5...v1.22.6
 [1.22.5]: https://gitee.com/quant1x/gox.git/compare/v1.22.4...v1.22.5
 [1.22.4]: https://gitee.com/quant1x/gox.git/compare/v1.22.3...v1.22.4
