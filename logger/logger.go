@@ -41,6 +41,7 @@ var (
 	timeRotate = NewTimeRotate()
 	pool       cache.Pool[logValue]
 	finished   chan struct{}
+	ctxCancel  context.CancelFunc
 )
 
 type Logger struct {
@@ -65,18 +66,23 @@ func init() {
 	// 创建监听退出chan
 	sigs := signal.Notify()
 
-	_, cancel := context.WithCancel(context.Background())
+	_, ctxCancel = context.WithCancel(context.Background())
 
 	go func() {
 		s := <-sigs
 		Infof("exit sign, [%+v]", s)
-		FlushLogger()
 		fmt.Println("exit", s)
-		cancel()
-		timeRotate.Close()
-		os.Exit(0)
+		loggerClose(0)
 	}()
 
+}
+
+// 全局关闭日志记录器, 并退出
+func loggerClose(code int) {
+	FlushLogger()
+	ctxCancel()
+	timeRotate.Close()
+	os.Exit(code)
 }
 
 func (lv *LogLevel) String() string {
@@ -316,7 +322,7 @@ func FlushLogger() {
 // 等待结束信号并退出
 func waitForExit() {
 	<-finished
-	os.Exit(-1)
+	loggerClose(-1)
 }
 
 func refreshLogFile(v *logValue) {
