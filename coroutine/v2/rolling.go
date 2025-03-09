@@ -85,11 +85,16 @@ func NewRollingOnce(windowMs, offsetMs int64, task func()) (*RollingOnce, error)
 // 更新观察点到下一个有效时间窗口
 func (o *RollingOnce) updateObserver() {
 	now := timestamp.Now()
-	base := now - (now % timestamp.MillisecondsPerDay)
-	newObserver := base + o.offset.Load()
+	//current := o.observer.Load()
+	window := o.windowSize.Load()
+	offset := o.offset.Load()
+
+	// 计算基准时间, 窗口对齐点
+	base := now - (now % window)
+	newObserver := base + offset
 
 	if now >= newObserver {
-		newObserver += timestamp.MillisecondsPerDay
+		newObserver += window
 	}
 	o.observer.Store(newObserver)
 	logger.Debugf("[%s]窗口观察点更新为: %s", o.name, time.Unix(newObserver/1000, 0).Format(time.RFC3339)) // 修正此处
@@ -174,7 +179,7 @@ func (o *RollingOnce) Close() {
 
 // AdjustOffset 动态调整时间偏移量（线程安全）
 func (o *RollingOnce) AdjustOffset(newOffsetMs int64) error {
-	if newOffsetMs < 0 || newOffsetMs >= timestamp.MillisecondsPerDay {
+	if newOffsetMs < 0 || newOffsetMs >= o.windowSize.Load() {
 		return ErrInvalidOffset
 	}
 
