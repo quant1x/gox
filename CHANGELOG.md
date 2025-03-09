@@ -3,11 +3,16 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.22.10] - 2025-03-10
+### Changed
+- 优化部分代码
+
 ## [1.22.9] - 2025-03-10
 ### Changed
 - 修复在NewRollingOnceWithHour方法中存在致命错误
 - 检测hour和minute参数的有效性
 - 传入参数前对齐数据类型
+- update changelog
 
 ## [1.22.8] - 2025-03-10
 ### Changed
@@ -1450,7 +1455,8 @@ All notable changes to this project will be documented in this file.
 - fix codecov
 
 
-[Unreleased]: https://gitee.com/quant1x/gox.git/compare/v1.22.9...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox.git/compare/v1.22.10...HEAD
+[1.22.10]: https://gitee.com/quant1x/gox.git/compare/v1.22.9...v1.22.10
 [1.22.9]: https://gitee.com/quant1x/gox.git/compare/v1.22.8...v1.22.9
 [1.22.8]: https://gitee.com/quant1x/gox.git/compare/v1.22.7...v1.22.8
 [1.22.7]: https://gitee.com/quant1x/gox.git/compare/v1.22.6...v1.22.7
