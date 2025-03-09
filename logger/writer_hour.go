@@ -1,24 +1,10 @@
 package logger
 
 import (
-	"fmt"
 	"os"
 	"path/filepath"
 	"strconv"
 )
-
-func reopenFile(path string, currFile **os.File, openTime *int64) {
-	*openTime = currUnixTime
-	if *currFile != nil {
-		_ = (*currFile).Close()
-	}
-	of, err := os.OpenFile(path, os.O_WRONLY|os.O_APPEND|os.O_CREATE, 0666)
-	if err == nil {
-		*currFile = of
-	} else {
-		fmt.Println("open log file error", err)
-	}
-}
 
 type RollFileWriter struct {
 	logpath  string
@@ -46,7 +32,7 @@ func NewRollFileWriter(logpath, name string, num, sizeMB int) *RollFileWriter {
 }
 
 func (w *RollFileWriter) Write(v []byte) {
-	if w.currFile == nil || w.openTime+10 < currUnixTime {
+	if w.currFile == nil || w.openTime+10 < timeRotate.GetUnixTime() {
 		fullPath := filepath.Join(w.logpath, w.name+".log")
 		reopenFile(fullPath, &w.currFile, &w.openTime)
 	}

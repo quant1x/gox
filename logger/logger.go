@@ -30,22 +30,17 @@ const (
 	loggerRollerDays int = 7 // 保持7天
 	loggerLocalSkip      = 2
 	timeFmtTimestamp     = "2006-01-02T15:04:05.000"
-	timeFmtHour          = "2006010215"
-	timeFmtDay           = "20060102"
 	loggerTraceId        = mdc.APP_TRACEID
 )
 
 var (
-	loggerPath   string
-	logLevel     = DEBUG
-	logQueue     = make(chan *logValue, 10000)
-	loggerMap    sync.Map
-	logMutex     sync.RWMutex
-	currUnixTime int64
-	currDateHour string
-	currDateDay  string
-	finished     chan struct{}
-	pool         cache.Pool[logValue]
+	loggerPath string
+	logLevel   = DEBUG
+	logQueue   = make(chan *logValue, 10000)
+	loggerMap  sync.Map
+	timeRotate = NewTimeRotate()
+	pool       cache.Pool[logValue]
+	finished   chan struct{}
 )
 
 type Logger struct {
@@ -63,26 +58,8 @@ type logValue struct {
 }
 
 func init() {
-	now := time.Now()
-	currUnixTime = now.Unix()
-	currDateHour = now.Format(timeFmtHour)
-	currDateDay = now.Format(timeFmtDay)
 	finished = make(chan struct{})
-	go func() {
-		tm := time.NewTimer(time.Millisecond)
-		for {
-			now := time.Now()
-			d := time.Second - time.Duration(now.Nanosecond())
-			tm.Reset(d)
-			<-tm.C
-			now = time.Now()
-			logMutex.Lock()
-			currUnixTime = now.Unix()
-			currDateHour = now.Format(timeFmtHour)
-			currDateDay = now.Format(timeFmtDay)
-			logMutex.Unlock()
-		}
-	}()
+	go timeRotate.AutoUpdate()
 	go flushLog(true)
 
 	// 创建监听退出chan
@@ -96,6 +73,7 @@ func init() {
 		FlushLogger()
 		fmt.Println("exit", s)
 		cancel()
+		timeRotate.Close()
 		os.Exit(0)
 	}()
 
@@ -366,7 +344,6 @@ func flushLog(sync bool) {
 			select {
 			case v := <-logQueue:
 				refreshLogFile(v)
-				continue
 			default:
 				return
 			}

@@ -70,9 +70,7 @@ func gzipFile(source string) error {
 
 func (w *DateWriter) Write(v []byte) {
 	fullPath := filepath.Join(w.logpath, w.name+".log")
-	logMutex.RLock()
-	unixTime := currUnixTime
-	logMutex.RUnlock()
+	unixTime := timeRotate.GetUnixTime()
 	if w.currFile == nil || w.openTime+10 < unixTime {
 		reopenFile(fullPath, &w.currFile, &w.openTime)
 		w.currDate = w.getFileDate()
@@ -81,18 +79,22 @@ func (w *DateWriter) Write(v []byte) {
 		return
 	}
 
+	// 获取当前日期
 	currDate := w.getCurrDate()
 	if w.currDate != currDate {
-		// 文件改名
+		// 1. 文件改名
 		sourceFile := fullPath
 		destFile := filepath.Join(w.logpath, w.name+".log."+w.currDate)
-		// 删除已有的目标文件
+		// 1.2 关闭当前文件
 		api.CloseQuietly(w.currFile)
 		w.currFile = nil
+		// 1.3 删除目标文件, 预防无法改名
 		err := os.Remove(destFile)
+		// 1.4 文件改名, 原文件名增加后缀带日期
 		err = os.Rename(sourceFile, destFile)
 		if err != nil {
-			// 改名失败
+			// 改名失败, 源文件裁减长度为0
+			_ = os.Truncate(sourceFile, 0)
 		} else {
 			// 改名成功
 		}
@@ -141,12 +143,10 @@ func (w *DateWriter) cleanOldLogs() {
 }
 
 func (w *DateWriter) getCurrDate() string {
-	logMutex.RLock()
-	defer logMutex.RUnlock()
 	if w.dateType == HOUR {
-		return currDateHour
+		return timeRotate.GetDateHour()
 	}
-	return currDateDay // DAY
+	return timeRotate.GetDateDay() // DAY
 }
 
 func (w *DateWriter) getFileDate() string {
