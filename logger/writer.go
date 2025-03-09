@@ -41,7 +41,7 @@ func gzipFile(source string) (err error) {
 	if err != nil {
 		return fmt.Errorf("无法打开源文件: %w", err)
 	}
-	defer srcFile.Close()
+	defer api.CloseQuietly(srcFile)
 
 	// 获取文件元数据
 	fileStat, err := srcFile.Stat()
@@ -55,14 +55,14 @@ func gzipFile(source string) (err error) {
 	if err != nil {
 		return fmt.Errorf("创建压缩文件失败: %w", err)
 	}
-	defer gzFile.Close()
+	defer api.CloseQuietly(gzFile)
 
 	// 初始化gzip写入器（带错误检查）
 	gzWriter, err := gzip.NewWriterLevel(gzFile, gzip.DefaultCompression)
 	if err != nil {
 		return fmt.Errorf("初始化压缩器失败: %w", err)
 	}
-	defer gzWriter.Close()
+	defer api.CloseQuietly(gzWriter)
 
 	// 设置压缩文件头信息
 	gzWriter.Name = filepath.Base(source) // 确保文件名不含路径
