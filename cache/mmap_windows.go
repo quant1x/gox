@@ -111,12 +111,14 @@ func (m MemObject) flush() error {
 	return nil
 }
 
+// windows.VirtualLock 将进程的虚拟内存地址空间中的某段内存锁定在物理内存（RAM）中，防止被交换到磁盘页面文件
 func (m MemObject) lock() error {
 	addr, length := m.addrLen()
 	errno := windows.VirtualLock(addr, length)
 	return os.NewSyscallError("VirtualLock", errno)
 }
 
+// windows.VirtualUnlock 解除内存区域的物理锁定，允许操作系统再次将内存交换到磁盘
 func (m MemObject) unlock() error {
 	addr, length := m.addrLen()
 	errno := windows.VirtualUnlock(addr, length)
