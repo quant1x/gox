@@ -1,4 +1,4 @@
-package cache
+package v1
 
 import (
 	"gitee.com/quant1x/gox/sys/mem"
