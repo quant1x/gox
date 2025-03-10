@@ -77,3 +77,56 @@ func mmap_region(f *os.File, length int, prot, flags int, offset int64) ([]byte,
 func FileMap(f *os.File, prot, flags int) ([]byte, error) {
 	return mmap_region(f, -1, prot, flags, 0)
 }
+
+// MemObject represents a file mapped into memory.
+type Object []byte
+
+// OpenMapper maps an entire file into memory.
+//
+//	If ANON is set in flags, f is ignored.
+func OpenMapper(f *os.File, prot, flags int) (Object, error) {
+	return mmap_region(f, -1, prot, flags, 0)
+}
+
+func (m *Object) header() *sliceHeader {
+	return (*sliceHeader)(unsafe.Pointer(m))
+}
+
+func (m *Object) addrLen() (uintptr, uintptr) {
+	header := m.header()
+	return header.Data, uintptr(header.Len)
+}
+func (m *Object) data() []byte {
+	buf := ([]byte)(*m)
+	return buf
+}
+
+// Lock keeps the mapped region in physical memory, ensuring that it will not be
+// swapped out.
+func (m Object) Lock() error {
+	return mlock(m.data())
+}
+
+// Unlock reverses the effect of Lock, allowing the mapped region to potentially
+// be swapped out.
+// If m is already unlocked, aan error will result.
+func (m Object) Unlock() error {
+	return munlock(m.data())
+}
+
+// Flush synchronizes the mapping's contents to the file's contents on disk.
+func (m Object) Flush() error {
+	return mflush(m.data())
+}
+
+// Unmap deletes the memory mapped region, flushes any remaining changes, and sets
+// m to nil.
+// Trying to read or write any remaining references to m after Unmap is called will
+// result in undefined behavior.
+// Unmap should only be called on the slice value that was originally returned from
+// a call to FileMap. Calling Unmap on a derived slice may cause errors.
+func (m *Object) Unmap() error {
+	err := munmap(m.data())
+	*m = nil
+	return err
+}

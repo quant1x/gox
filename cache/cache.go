@@ -9,10 +9,10 @@ import (
 
 // Cache 使用跨平台的mmap构建的快速缓存
 type Cache struct {
-	filename string        // 文件名
-	f        *os.File      // 文件对象
-	size     int64         // 尺寸
-	data     mem.MemObject // 内存映射对象
+	filename string     // 文件名
+	f        *os.File   // 文件对象
+	size     int64      // 尺寸
+	data     mem.Object // 内存映射对象
 }
 
 // OpenCache 打开本地缓存
@@ -32,7 +32,7 @@ func OpenCache(name string, size int64) (*Cache, error) {
 		return nil, err
 	}
 	//data , err :=mem.FileMap(f, mem.RDWR, 0)
-	data, err := mem.OpenMapper(int(size), mem.RDWR, 0, f.Fd(), 0)
+	data, err := mem.OpenMapper(f, mem.RDWR, 0)
 	if nil != err {
 		return nil, err
 	}
@@ -86,10 +86,8 @@ func v2ToSlices[E any](cache *Cache) []E {
 	var tmpValue E
 	size := int(unsafe.Sizeof(tmpValue))
 	num := int(cache.size) / size
-	//ptr := &cache.data[0]
 	ptr := unsafe.SliceData(cache.data)
 	pointer := (*E)(unsafe.Pointer(ptr))
-	//s := (*[1 << 32]E)(unsafe.Pointer(ptr))[:num:num]
 	s := unsafe.Slice(pointer, num)
 	return s
 }
