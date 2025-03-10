@@ -1,173 +1,68 @@
-// Copyright 2011 Evan Shaw. All rights reserved.
-// Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
-// These tests are adapted from gommap: http://labix.org/gommap
-// Copyright (c) 2010, Gustavo Niemeyer <gustavo@niemeyer.net>
-
 package mem
 
 import (
-	"bytes"
-	"io/ioutil"
+	"fmt"
 	"os"
 	"path/filepath"
 	"testing"
 )
 
-var testData = []byte("0123456789ABCDEF")
-var testPath = filepath.Join(os.TempDir(), "testdata")
+var (
+	name = "mmap.dat"
+)
 
-func init() {
-	f := openFile(os.O_RDWR | os.O_CREATE | os.O_TRUNC)
-	f.Write(testData)
-	f.Close()
-}
-
-func openFile(flags int) *os.File {
-	f, err := os.OpenFile(testPath, flags, 0644)
+func Test_mmap(t *testing.T) {
+	size := 1024
+	dir := filepath.Dir(name)
+	err := os.MkdirAll(dir, 0755)
 	if err != nil {
-		panic(err.Error())
+		fmt.Println(err)
+		return
 	}
-	return f
-}
-
-func TestUnmap(t *testing.T) {
-	f := openFile(os.O_RDONLY)
-	defer f.Close()
-	mmap, err := FileMap(f, RDONLY, 0)
-	if err != nil {
-		t.Errorf("error mapping: %s", err)
+	filename := name
+	f, err := os.OpenFile(filename, os.O_RDWR|os.O_CREATE, 0644)
+	if nil != err {
+		fmt.Println(err)
+		return
 	}
-	if err := mmap.Unmap(); err != nil {
-		t.Errorf("error unmapping: %s", err)
+	err = f.Truncate(int64(size))
+	if nil != err {
+		fmt.Println(err)
+		return
 	}
-}
-
-func TestReadWrite(t *testing.T) {
-	f := openFile(os.O_RDWR)
-	defer f.Close()
-	mmap, err := FileMap(f, RDWR, 0)
-	if err != nil {
-		t.Errorf("error mapping: %s", err)
+	//data , err :=mem.FileMap(f, mem.RDWR, 0)
+	//data, err := mem.OpenMapper(int(size), mem.RDWR, 0, f.Fd(), 0)
+	data, err := mmap(size, RDWR, 0, f.Fd(), 0)
+	if nil != err {
+		fmt.Println(err)
+		return
 	}
-	defer mmap.Unmap()
-	if !bytes.Equal(testData, mmap) {
-		t.Errorf("mmap != testData: %q, %q", mmap, testData)
+	fmt.Println(data)
+	data[1] = 49
+	err = mlock(data)
+	if nil != err {
+		fmt.Println(err)
+		return
 	}
-
-	mmap[9] = 'X'
-	mmap.Flush()
-
-	fileData, err := ioutil.ReadAll(f)
-	if err != nil {
-		t.Errorf("error reading file: %s", err)
+	err = munlock(data)
+	if nil != err {
+		fmt.Println(err)
+		return
 	}
-	if !bytes.Equal(fileData, []byte("012345678XABCDEF")) {
-		t.Errorf("file wasn't modified")
+	err = mflush(data)
+	if nil != err {
+		fmt.Println(err)
+		return
 	}
-
-	// leave things how we found them
-	mmap[9] = '9'
-	mmap.Flush()
-}
-
-func TestProtFlagsAndErr(t *testing.T) {
-	f := openFile(os.O_RDONLY)
-	defer f.Close()
-	if _, err := FileMap(f, RDWR, 0); err == nil {
-		t.Errorf("expected error")
+	err = munmap(data)
+	if nil != err {
+		fmt.Println(err)
+		return
 	}
-}
-
-func TestFlags(t *testing.T) {
-	f := openFile(os.O_RDWR)
-	defer f.Close()
-	mmap, err := FileMap(f, COPY, 0)
-	if err != nil {
-		t.Errorf("error mapping: %s", err)
-	}
-	defer mmap.Unmap()
-
-	mmap[9] = 'X'
-	mmap.Flush()
-
-	fileData, err := ioutil.ReadAll(f)
-	if err != nil {
-		t.Errorf("error reading file: %s", err)
-	}
-	if !bytes.Equal(fileData, testData) {
-		t.Errorf("file was modified")
-	}
-}
-
-// Test that we can map files from non-0 offsets
-// The page size on most Unixes is 4KB, but on Windows it's 64KB
-func TestNonZeroOffset(t *testing.T) {
-	const pageSize = 65536
-
-	// Create a 2-page sized file
-	bigFilePath := filepath.Join(os.TempDir(), "nonzero")
-	fileobj, err := os.OpenFile(bigFilePath, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0644)
-	if err != nil {
-		panic(err.Error())
-	}
-
-	bigData := make([]byte, 2*pageSize, 2*pageSize)
-	fileobj.Write(bigData)
-	fileobj.Close()
-
-	// FileMap the first page by itself
-	fileobj, err = os.OpenFile(bigFilePath, os.O_RDONLY, 0)
-	if err != nil {
-		panic(err.Error())
-	}
-	m, err := MmapRegion(fileobj, pageSize, RDONLY, 0, 0)
-	if err != nil {
-		t.Errorf("error mapping file: %s", err)
-	}
-	m.Unmap()
-	fileobj.Close()
-
-	// FileMap the second page by itself
-	fileobj, err = os.OpenFile(bigFilePath, os.O_RDONLY, 0)
-	if err != nil {
-		panic(err.Error())
-	}
-	m, err = MmapRegion(fileobj, pageSize, RDONLY, 0, pageSize)
-	if err != nil {
-		t.Errorf("error mapping file: %s", err)
-	}
-	err = m.Unmap()
-	if err != nil {
-		t.Error(err)
-	}
-
-	m, err = MmapRegion(fileobj, pageSize, RDONLY, 0, 1)
-	if err == nil {
-		t.Error("expect error because offset is not multiple of page size")
-	}
-
-	fileobj.Close()
-}
-
-func TestAnonymousMapping(t *testing.T) {
-	const size = 4 * 1024
-
-	// Make an anonymous region
-	mem, err := MmapRegion(nil, size, RDWR, ANON, 0)
-	if err != nil {
-		t.Fatalf("failed to allocate memory for buffer: %v", err)
-	}
-
-	// Check memory writable
-	for i := 0; i < size; i++ {
-		mem[i] = 0x55
-	}
-
-	// And unmap it
-	err = mem.Unmap()
-	if err != nil {
-		t.Fatalf("failed to unmap memory for buffer: %v", err)
+	fmt.Println("ok")
+	err = f.Close()
+	if nil != err {
+		fmt.Println(err)
+		return
 	}
 }

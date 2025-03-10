@@ -1,25 +1,14 @@
-// Copyright 2011 Evan Shaw. All rights reserved.
-// Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
-// This file defines the common package interface and contains a little bit of
-// factored out logic.
-
-// Package mmap allows mapping files into memory. It tries to provide a simple, reasonably portable interface,
-// but doesn't go out of its way to abstract away every little platform detail.
-// This specifically means:
-//   - forked processes may or may not inherit mappings
-//   - a file's timestamp may or may not be updated by writes through mappings
-//   - specifying a size larger than the file's actual size can increase the file's size
-//   - If the mapped file is being modified by another process while your program's running, don't expect consistent results between platforms
 package mem
 
 import (
 	"errors"
 	"os"
-	"reflect"
 	"unsafe"
 )
+
+func syscallError(funcname string, e error) error {
+	return os.NewSyscallError(funcname, e)
+}
 
 const (
 	// RDONLY maps the memory read-only.
@@ -31,34 +20,35 @@ const (
 	// COPY maps the memory as copy-on-write. Writes to the MemObject object will affect
 	// memory, but the underlying file will remain unchanged.
 	COPY
-	// If EXEC is set, the mapped memory is marked as executable.
+	// EXEC If EXEC is set, the mapped memory is marked as executable.
 	EXEC
 )
 
 const (
-	// If the ANON flag is set, the mapped memory will not be backed by a file.
+	// ANON If the ANON flag is set, the mapped memory will not be backed by a file.
 	ANON = 1 << iota
 )
 
-// OpenMapper 打开一个内存映射
-func OpenMapper(len int, prot, flags, hfile uintptr, off int64) ([]byte, error) {
-	return mmap(len, prot, flags, hfile, off)
+type sliceHeader struct {
+	Data uintptr
+	Len  int
+	Cap  int
 }
 
-// MemObject represents a file mapped into memory.
-type MemObject []byte
-
-// FileMap maps an entire file into memory.
-// If ANON is set in flags, f is ignored.
-func FileMap(f *os.File, prot, flags int) (MemObject, error) {
-	return MmapRegion(f, -1, prot, flags, 0)
+func addressAndLength(data []byte) (uintptr, uintptr) {
+	//addr := (uintptr)(unsafe.Pointer(&data))
+	//length := uintptr(len(data))
+	header := (*sliceHeader)(unsafe.Pointer(&data))
+	addr := header.Data
+	length := uintptr(header.Len)
+	return addr, length
 }
 
-// MmapRegion maps part of a file into memory.
+// mmap_region maps part of a file into memory.
 // The offset parameter must be a multiple of the system's page size.
 // If length < 0, the entire file will be mapped.
 // If ANON is set in flags, f is ignored.
-func MmapRegion(f *os.File, length int, prot, flags int, offset int64) (MemObject, error) {
+func mmap_region(f *os.File, length int, prot, flags int, offset int64) ([]byte, error) {
 	if offset%int64(os.Getpagesize()) != 0 {
 		return nil, errors.New("offset parameter must be a multiple of the system's page size")
 	}
@@ -82,41 +72,8 @@ func MmapRegion(f *os.File, length int, prot, flags int, offset int64) (MemObjec
 	return mmap(length, uintptr(prot), uintptr(flags), fd, offset)
 }
 
-func (m *MemObject) header() *reflect.SliceHeader {
-	return (*reflect.SliceHeader)(unsafe.Pointer(m))
-}
-
-func (m *MemObject) addrLen() (uintptr, uintptr) {
-	header := m.header()
-	return header.Data, uintptr(header.Len)
-}
-
-// Lock keeps the mapped region in physical memory, ensuring that it will not be
-// swapped out.
-func (m MemObject) Lock() error {
-	return m.lock()
-}
-
-// Unlock reverses the effect of Lock, allowing the mapped region to potentially
-// be swapped out.
-// If m is already unlocked, aan error will result.
-func (m MemObject) Unlock() error {
-	return m.unlock()
-}
-
-// Flush synchronizes the mapping's contents to the file's contents on disk.
-func (m MemObject) Flush() error {
-	return m.flush()
-}
-
-// Unmap deletes the memory mapped region, flushes any remaining changes, and sets
-// m to nil.
-// Trying to read or write any remaining references to m after Unmap is called will
-// result in undefined behavior.
-// Unmap should only be called on the slice value that was originally returned from
-// a call to FileMap. Calling Unmap on a derived slice may cause errors.
-func (m *MemObject) Unmap() error {
-	err := m.unmap()
-	*m = nil
-	return err
+// FileMap maps an entire file into memory.
+// If ANON is set in flags, f is ignored.
+func FileMap(f *os.File, prot, flags int) ([]byte, error) {
+	return mmap_region(f, -1, prot, flags, 0)
 }

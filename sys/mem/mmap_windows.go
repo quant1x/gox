@@ -1,15 +1,10 @@
-// Copyright 2011 Evan Shaw. All rights reserved.
-// Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
 package mem
 
 import (
 	"errors"
-	"os"
-	"sync"
-
 	"golang.org/x/sys/windows"
+	"sync"
+	"unsafe"
 )
 
 // mmap on Windows is a two-step process.
@@ -58,7 +53,7 @@ func mmap(len int, prot, flags, hfile uintptr, off int64) ([]byte, error) {
 	// TODO: Do we need to set some security attributes? It might help portability.
 	h, errno := windows.CreateFileMapping(windows.Handle(hfile), nil, flProtect, maxSizeHigh, maxSizeLow, nil)
 	if h == 0 {
-		return nil, os.NewSyscallError("CreateFileMapping", errno)
+		return nil, syscallError("CreateFileMapping", errno)
 	}
 
 	// Actually map a view of the data into memory. The view's size
@@ -68,7 +63,7 @@ func mmap(len int, prot, flags, hfile uintptr, off int64) ([]byte, error) {
 	addr, errno := windows.MapViewOfFile(h, dwDesiredAccess, fileOffsetHigh, fileOffsetLow, uintptr(len))
 	if addr == 0 {
 		_ = windows.CloseHandle(windows.Handle(h))
-		return nil, os.NewSyscallError("MapViewOfFile", errno)
+		return nil, syscallError("MapViewOfFile", errno)
 	}
 	handleLock.Lock()
 	handleMap[addr] = &addrInfo{
@@ -78,20 +73,25 @@ func mmap(len int, prot, flags, hfile uintptr, off int64) ([]byte, error) {
 	}
 	handleLock.Unlock()
 
-	m := MemObject{}
-	dh := m.header()
-	dh.Data = addr
-	dh.Len = len
-	dh.Cap = dh.Len
+	pointer := (*byte)(unsafe.Pointer(addr))
+	m := unsafe.Slice(pointer, len)
 	_ = flags
 	return m, nil
 }
 
-func (m MemObject) flush() error {
-	addr, length := m.addrLen()
+func mlock(data []byte) error {
+	return mem_windows_lock(data)
+}
+
+func munlock(data []byte) error {
+	return mem_windows_unlock(data)
+}
+
+func mflush(data []byte) error {
+	addr, length := addressAndLength(data)
 	errno := windows.FlushViewOfFile(addr, length)
 	if errno != nil {
-		return os.NewSyscallError("FlushViewOfFile", errno)
+		return syscallError("FlushViewOfFile", errno)
 	}
 
 	handleLock.Lock()
@@ -104,34 +104,15 @@ func (m MemObject) flush() error {
 
 	if handle.writable && handle.file != windows.Handle(^uintptr(0)) {
 		if err := windows.FlushFileBuffers(handle.file); err != nil {
-			return os.NewSyscallError("FlushFileBuffers", err)
+			return syscallError("FlushFileBuffers", err)
 		}
 	}
 
 	return nil
 }
 
-// windows.VirtualLock 将进程的虚拟内存地址空间中的某段内存锁定在物理内存（RAM）中，防止被交换到磁盘页面文件
-func (m MemObject) lock() error {
-	addr, length := m.addrLen()
-	errno := windows.VirtualLock(addr, length)
-	return os.NewSyscallError("VirtualLock", errno)
-}
-
-// windows.VirtualUnlock 解除内存区域的物理锁定，允许操作系统再次将内存交换到磁盘
-func (m MemObject) unlock() error {
-	addr, length := m.addrLen()
-	errno := windows.VirtualUnlock(addr, length)
-	return os.NewSyscallError("VirtualUnlock", errno)
-}
-
-func (m MemObject) unmap() error {
-	err := m.flush()
-	if err != nil {
-		return err
-	}
-
-	addr := m.header().Data
+func munmap(data []byte) error {
+	addr, _ := addressAndLength(data)
 	// Lock the UnmapViewOfFile along with the handleMap deletion.
 	// As soon as we unmap the view, the OS is free to give the
 	// same addr to another new map. We don't want another goroutine
@@ -139,7 +120,7 @@ func (m MemObject) unmap() error {
 	// we're trying to remove our old addr/handle pair.
 	handleLock.Lock()
 	defer handleLock.Unlock()
-	err = windows.UnmapViewOfFile(addr)
+	err := windows.UnmapViewOfFile(addr)
 	if err != nil {
 		return err
 	}
@@ -152,5 +133,5 @@ func (m MemObject) unmap() error {
 	delete(handleMap, addr)
 
 	e := windows.CloseHandle(windows.Handle(handle.mapview))
-	return os.NewSyscallError("CloseHandle", e)
+	return syscallError("CloseHandle", e)
 }

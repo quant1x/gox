@@ -1,6 +1,7 @@
 package cache
 
 import (
+	"gitee.com/quant1x/gox/sys/mem"
 	"os"
 	"path/filepath"
 	"unsafe"
@@ -8,10 +9,10 @@ import (
 
 // Cache 使用跨平台的mmap构建的快速缓存
 type Cache struct {
-	filename string    // 文件名
-	f        *os.File  // 文件对象
-	size     int64     // 尺寸
-	data     MemObject // 内存映射对象
+	filename string        // 文件名
+	f        *os.File      // 文件对象
+	size     int64         // 尺寸
+	data     mem.MemObject // 内存映射对象
 }
 
 // OpenCache 打开本地缓存
@@ -30,7 +31,8 @@ func OpenCache(name string, size int64) (*Cache, error) {
 	if nil != err {
 		return nil, err
 	}
-	data, err := mmap(int(size), RDWR, 0, f.Fd(), 0)
+	//data , err :=mem.FileMap(f, mem.RDWR, 0)
+	data, err := mem.OpenMapper(int(size), mem.RDWR, 0, f.Fd(), 0)
 	if nil != err {
 		return nil, err
 	}

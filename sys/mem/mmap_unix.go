@@ -1,7 +1,3 @@
-// Copyright 2011 Evan Shaw. All rights reserved.
-// Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
 //go:build darwin || dragonfly || freebsd || linux || openbsd || solaris || netbsd
 // +build darwin dragonfly freebsd linux openbsd solaris netbsd
 
@@ -10,6 +6,14 @@ package mem
 import (
 	"golang.org/x/sys/unix"
 )
+
+// 内存映射
+// 参数说明：
+// fd:    文件描述符
+// offset: 文件偏移量（必须页对齐）
+// length: 映射长度
+// prot:  保护标志 (PROT_READ, PROT_WRITE 等)
+// flags: 映射标志 (MAP_SHARED, MAP_PRIVATE 等)
 
 func mmap(len int, inprot, inflags, fd uintptr, off int64) ([]byte, error) {
 	flags := unix.MAP_SHARED
@@ -35,18 +39,18 @@ func mmap(len int, inprot, inflags, fd uintptr, off int64) ([]byte, error) {
 	return b, nil
 }
 
-func (m MemObject) flush() error {
-	return unix.Msync([]byte(m), unix.MS_SYNC)
+func mflush(data []byte) error {
+	return unix.Msync(data, unix.MS_SYNC)
 }
 
-func (m MemObject) lock() error {
-	return unix.Mlock([]byte(m))
+func mlock(data []byte) error {
+	return unix.Mlock(data)
 }
 
-func (m MemObject) unlock() error {
-	return unix.Munlock([]byte(m))
+func munlock(data []byte) error {
+	return unix.Munlock(data)
 }
 
-func (m MemObject) unmap() error {
-	return unix.Munmap([]byte(m))
+func munmap(data []byte) error {
+	return unix.Munmap(data)
 }
