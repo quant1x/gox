@@ -2,11 +2,12 @@ package cache
 
 import (
 	"fmt"
+	"gitee.com/quant1x/gox/api"
+	"gitee.com/quant1x/gox/sys/mem"
 	"hash/crc32"
 	"io"
 	"os"
 	"path/filepath"
-	"runtime"
 	"sync"
 	"unsafe"
 )
@@ -47,6 +48,7 @@ var (
 	ErrInvalidFile   = fmt.Errorf("invalid cache file")
 	ErrInvalidAccess = fmt.Errorf("invalid memory access")
 	ErrChecksum      = fmt.Errorf("data checksum mismatch")
+	ErrOutOfSpace    = fmt.Errorf("out of space")
 )
 
 // OpenCache 创建或打开内存映射缓存
@@ -56,12 +58,12 @@ func OpenCache(name string, size int64) (*Cache, error) {
 	}
 
 	// 确保目录存在
-	if err := os.MkdirAll(filepath.Dir(name), 0755); err != nil {
+	if err := os.MkdirAll(filepath.Dir(name), api.CACHE_DIR_MODE); err != nil {
 		return nil, fmt.Errorf("create directory failed: %w", err)
 	}
 
 	// 打开文件
-	f, err := os.OpenFile(name, os.O_RDWR|os.O_CREATE, 0644)
+	f, err := os.OpenFile(name, os.O_RDWR|os.O_CREATE, api.CACHE_FILE_MODE)
 	if err != nil {
 		return nil, fmt.Errorf("open file failed: %w", err)
 	}
@@ -175,8 +177,34 @@ func (c *Cache) WriteData(offset uint32, src []byte) error {
 	return nil
 }
 
+// 更新校验和
+func (c *Cache) updateChecksum() {
+	data := c.data.Bytes()[headerSize : headerSize+c.header.DataSize]
+	c.checksum = crc32.ChecksumIEEE(data)
+}
+
+// 验证数据完整性
+func (c *Cache) verifyData() error {
+	data := c.data.Bytes()[headerSize : headerSize+c.header.DataSize]
+	if crc32.ChecksumIEEE(data) != c.checksum {
+		return ErrChecksum
+	}
+	return nil
+}
+
+// 跨平台mmap实现
+func mmap(size int, f *os.File) (MemObject, error) {
+	//// Windows与其他系统实现差异处理
+	//if runtime.GOOS == "windows" {
+	//	return windowsMmap(size, f)
+	//}
+	//return posixMmap(size, f)
+	obj, err := mem.OpenMmap(size, f)
+	return &obj, err
+}
+
 // ToSlice 安全转换为类型切片
-func ToSlice[E any](c *Cache) ([]E, error) {
+func v1ToSlice[E any](c *Cache) ([]E, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 
@@ -201,26 +229,28 @@ func ToSlice[E any](c *Cache) ([]E, error) {
 	return unsafe.Slice((*E)(ptr), sliceSize), nil
 }
 
-// 更新校验和
-func (c *Cache) updateChecksum() {
-	data := c.data.Bytes()[headerSize : headerSize+c.header.DataSize]
-	c.checksum = crc32.ChecksumIEEE(data)
-}
+// ToSlice 安全转换为类型切片
+func ToSlice[E any](c *Cache) ([]E, error) {
+	c.mu.RLock()
+	defer c.mu.RUnlock()
 
-// 验证数据完整性
-func (c *Cache) verifyData() error {
-	data := c.data.Bytes()[headerSize : headerSize+c.header.DataSize]
-	if crc32.ChecksumIEEE(data) != c.checksum {
-		return ErrChecksum
+	var e E
+	eSize := unsafe.Sizeof(e)
+	if eSize == 0 {
+		return nil, fmt.Errorf("zero-sized type")
 	}
-	return nil
-}
 
-// 跨平台mmap实现
-func mmap(size int, f *os.File) (MemObject, error) {
-	// Windows与其他系统实现差异处理
-	if runtime.GOOS == "windows" {
-		return windowsMmap(size, f)
+	// 检查类型对齐
+	dataStart := uintptr(unsafe.Pointer(&c.data.Bytes()[headerSize]))
+	if dataStart%unsafe.Alignof(e) != 0 {
+		return nil, fmt.Errorf("misaligned memory access for type %T (required alignment %d)", e, unsafe.Alignof(e))
 	}
-	return posixMmap(size, f)
+
+	// 计算有效元素数量（允许返回空切片）
+	dataSize := c.header.DataSize
+	sliceSize := int(dataSize) / int(eSize)
+
+	// 创建切片（自动处理dataSize=0的情况）
+	ptr := unsafe.Pointer(dataStart)
+	return unsafe.Slice((*E)(ptr), sliceSize), nil
 }
