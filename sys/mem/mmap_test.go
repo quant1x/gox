@@ -8,7 +8,7 @@ import (
 )
 
 var (
-	name = "mmap.dat"
+	name = "data.dat"
 )
 
 func Test_mmap(t *testing.T) {
