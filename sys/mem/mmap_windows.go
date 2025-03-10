@@ -47,7 +47,7 @@ func mmap(len int, prot, flags, hfile uintptr, off int64) ([]byte, error) {
 	// The maximum size is the area of the file, starting from 0,
 	// that we wish to allow to be mappable. It is the sum of
 	// the length the user requested, plus the offset where that length
-	// is starting from. This does not map the data into memory.
+	// is starting from. This does not map the Bytes into memory.
 	maxSizeHigh := uint32((off + int64(len)) >> 32)
 	maxSizeLow := uint32((off + int64(len)) & 0xFFFFFFFF)
 	// TODO: Do we need to set some security attributes? It might help portability.
@@ -56,7 +56,7 @@ func mmap(len int, prot, flags, hfile uintptr, off int64) ([]byte, error) {
 		return nil, syscallError("CreateFileMapping", errno)
 	}
 
-	// Actually map a view of the data into memory. The view's size
+	// Actually map a view of the Bytes into memory. The view's size
 	// is the length the user requested.
 	fileOffsetHigh := uint32(off >> 32)
 	fileOffsetLow := uint32(off & 0xFFFFFFFF)

@@ -36,8 +36,8 @@ type sliceHeader struct {
 }
 
 func addressAndLength(data []byte) (uintptr, uintptr) {
-	//addr := (uintptr)(unsafe.Pointer(&data))
-	//length := uintptr(len(data))
+	//addr := (uintptr)(unsafe.Pointer(&Bytes))
+	//length := uintptr(len(Bytes))
 	header := (*sliceHeader)(unsafe.Pointer(&data))
 	addr := header.Data
 	length := uintptr(header.Len)
@@ -78,7 +78,7 @@ func FileMap(f *os.File, prot, flags int) ([]byte, error) {
 	return mmap_region(f, -1, prot, flags, 0)
 }
 
-// MemObject represents a file mapped into memory.
+// Object represents a file mapped into memory.
 type Object []byte
 
 // OpenMapper maps an entire file into memory.
@@ -86,6 +86,10 @@ type Object []byte
 //	If ANON is set in flags, f is ignored.
 func OpenMapper(f *os.File, prot, flags int) (Object, error) {
 	return mmap_region(f, -1, prot, flags, 0)
+}
+
+func OpenMmap(size int, f *os.File) (Object, error) {
+	return mmap_region(f, -1, RDWR, size, 0)
 }
 
 func (m *Object) header() *sliceHeader {
@@ -96,27 +100,27 @@ func (m *Object) addrLen() (uintptr, uintptr) {
 	header := m.header()
 	return header.Data, uintptr(header.Len)
 }
-func (m *Object) data() []byte {
+func (m *Object) Bytes() []byte {
 	buf := ([]byte)(*m)
 	return buf
 }
 
 // Lock keeps the mapped region in physical memory, ensuring that it will not be
 // swapped out.
-func (m Object) Lock() error {
-	return mlock(m.data())
+func (m *Object) Lock() error {
+	return mlock(m.Bytes())
 }
 
 // Unlock reverses the effect of Lock, allowing the mapped region to potentially
 // be swapped out.
 // If m is already unlocked, aan error will result.
-func (m Object) Unlock() error {
-	return munlock(m.data())
+func (m *Object) Unlock() error {
+	return munlock(m.Bytes())
 }
 
 // Flush synchronizes the mapping's contents to the file's contents on disk.
-func (m Object) Flush() error {
-	return mflush(m.data())
+func (m *Object) Flush() error {
+	return mflush(m.Bytes())
 }
 
 // Unmap deletes the memory mapped region, flushes any remaining changes, and sets
@@ -126,7 +130,7 @@ func (m Object) Flush() error {
 // Unmap should only be called on the slice value that was originally returned from
 // a call to FileMap. Calling Unmap on a derived slice may cause errors.
 func (m *Object) Unmap() error {
-	err := munmap(m.data())
+	err := munmap(m.Bytes())
 	*m = nil
 	return err
 }
