@@ -5,7 +5,7 @@
 //go:build darwin || dragonfly || freebsd || linux || openbsd || solaris || netbsd
 // +build darwin dragonfly freebsd linux openbsd solaris netbsd
 
-package cache
+package mem
 
 import (
 	"golang.org/x/sys/unix"

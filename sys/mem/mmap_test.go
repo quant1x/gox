@@ -5,7 +5,7 @@
 // These tests are adapted from gommap: http://labix.org/gommap
 // Copyright (c) 2010, Gustavo Niemeyer <gustavo@niemeyer.net>
 
-package cache
+package mem
 
 import (
 	"bytes"
@@ -122,7 +122,7 @@ func TestNonZeroOffset(t *testing.T) {
 	if err != nil {
 		panic(err.Error())
 	}
-	m, err := MapRegion(fileobj, pageSize, RDONLY, 0, 0)
+	m, err := MmapRegion(fileobj, pageSize, RDONLY, 0, 0)
 	if err != nil {
 		t.Errorf("error mapping file: %s", err)
 	}
@@ -134,7 +134,7 @@ func TestNonZeroOffset(t *testing.T) {
 	if err != nil {
 		panic(err.Error())
 	}
-	m, err = MapRegion(fileobj, pageSize, RDONLY, 0, pageSize)
+	m, err = MmapRegion(fileobj, pageSize, RDONLY, 0, pageSize)
 	if err != nil {
 		t.Errorf("error mapping file: %s", err)
 	}
@@ -143,7 +143,7 @@ func TestNonZeroOffset(t *testing.T) {
 		t.Error(err)
 	}
 
-	m, err = MapRegion(fileobj, pageSize, RDONLY, 0, 1)
+	m, err = MmapRegion(fileobj, pageSize, RDONLY, 0, 1)
 	if err == nil {
 		t.Error("expect error because offset is not multiple of page size")
 	}
@@ -155,7 +155,7 @@ func TestAnonymousMapping(t *testing.T) {
 	const size = 4 * 1024
 
 	// Make an anonymous region
-	mem, err := MapRegion(nil, size, RDWR, ANON, 0)
+	mem, err := MmapRegion(nil, size, RDWR, ANON, 0)
 	if err != nil {
 		t.Fatalf("failed to allocate memory for buffer: %v", err)
 	}
