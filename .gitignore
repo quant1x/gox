@@ -14,4 +14,4 @@ assembly/version.properties
 
 # go.test.sh
 coverage.txt
-data.dat
+*.dat
