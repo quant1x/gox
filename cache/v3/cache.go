@@ -3,12 +3,16 @@ package cache
 
 import (
 	"fmt"
-	"gitee.com/quant1x/gox/api"
 	"hash/crc32"
 	"os"
 	"path/filepath"
 	"sync"
 	"unsafe"
+)
+
+const (
+	dirMode  = 0755
+	fileMode = 0644
 )
 
 // MemObject 封装内存映射操作接口
@@ -63,11 +67,11 @@ func OpenCache(name string, userSize int64) (*Cache, error) {
 			userSize, maxFileSize-headerSize)
 	}
 
-	if err := os.MkdirAll(filepath.Dir(name), api.CACHE_DIR_MODE); err != nil {
+	if err := os.MkdirAll(filepath.Dir(name), dirMode); err != nil {
 		return nil, fmt.Errorf("create directory failed: %w", err)
 	}
 
-	f, err := os.OpenFile(name, os.O_RDWR|os.O_CREATE, api.CACHE_FILE_MODE)
+	f, err := os.OpenFile(name, os.O_RDWR|os.O_CREATE, fileMode)
 	if err != nil {
 		return nil, fmt.Errorf("open file failed: %w", err)
 	}
