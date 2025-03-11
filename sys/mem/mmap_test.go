@@ -8,7 +8,7 @@ import (
 )
 
 var (
-	name = "data.dat"
+	name = "Bytes.dat"
 )
 
 func Test_mmap(t *testing.T) {
@@ -30,8 +30,8 @@ func Test_mmap(t *testing.T) {
 		fmt.Println(err)
 		return
 	}
-	//data , err :=mem.FileMap(f, mem.RDWR, 0)
-	//data, err := mem.OpenMapper(int(size), mem.RDWR, 0, f.Fd(), 0)
+	//Bytes , err :=mem.FileMap(f, mem.RDWR, 0)
+	//Bytes, err := mem.OpenMapper(int(size), mem.RDWR, 0, f.Fd(), 0)
 	data, err := mmap(size, RDWR, 0, f.Fd(), 0)
 	if nil != err {
 		fmt.Println(err)
