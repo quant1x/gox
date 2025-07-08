@@ -3,9 +3,31 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.22.12] - 2025-07-08
+### Changed
+- 增加内存锁定的注释
+- 新增内存锁定功能
+- mmap功能迁移至sys/mem
+- 调整部分代码的布局
+- 修正mmap功能函数
+- 调整测试mmap产生的临时文件名, 避免git加入仓库
+- 调整内存映射封装的结构体名
+- 预备std标准功能
+- 早前的cache功能改名到v1版本
+- 新增第2个版本的cache功能
+- 新增第2个版本的cache功能
+- 重构跨平台的mmap功能
+- 调整.gitignore配置,.dat文件都要需要git仓库忽略
+- 标准库array增加实验性扩容函数
+- 调整第3版内存映射
+- 新增私有常量, 文件系统权限
+- 更新依赖库版本
+- 删除废弃的cache代码
+
 ## [1.22.11] - 2025-03-10
 ### Changed
 - 优化泛型Channel的数据功能
+- update changelog
 
 ## [1.22.10] - 2025-03-10
 ### Changed
@@ -1460,7 +1482,8 @@ All notable changes to this project will be documented in this file.
 - fix codecov
 
 
-[Unreleased]: https://gitee.com/quant1x/gox.git/compare/v1.22.11...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox.git/compare/v1.22.12...HEAD
+[1.22.12]: https://gitee.com/quant1x/gox.git/compare/v1.22.11...v1.22.12
 [1.22.11]: https://gitee.com/quant1x/gox.git/compare/v1.22.10...v1.22.11
 [1.22.10]: https://gitee.com/quant1x/gox.git/compare/v1.22.9...v1.22.10
 [1.22.9]: https://gitee.com/quant1x/gox.git/compare/v1.22.8...v1.22.9
