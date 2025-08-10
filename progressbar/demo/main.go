@@ -1,9 +1,10 @@
 package main
 
 import (
-	"gitee.com/quant1x/gox/logger"
 	"sync"
 	"time"
+
+	"gitee.com/quant1x/gox/logger"
 
 	pgbar "gitee.com/quant1x/gox/progressbar"
 )

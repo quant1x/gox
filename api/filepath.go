@@ -1,9 +1,10 @@
 package api
 
 import (
-	"gitee.com/quant1x/gox/util/homedir"
 	"os"
 	"path/filepath"
+
+	"gitee.com/quant1x/gox/util/homedir"
 )
 
 const (

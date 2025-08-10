@@ -6,6 +6,7 @@ package main
 
 import (
 	"fmt"
+
 	rbt "gitee.com/quant1x/gox/util/redblacktree"
 )
 

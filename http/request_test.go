@@ -2,9 +2,10 @@ package http
 
 import (
 	"fmt"
-	"gitee.com/quant1x/gox/api"
 	"testing"
 	"time"
+
+	"gitee.com/quant1x/gox/api"
 )
 
 func TestHttpGet(t *testing.T) {

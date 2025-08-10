@@ -2,11 +2,12 @@ package coroutine
 
 import (
 	"fmt"
-	"gitee.com/quant1x/gox/concurrent"
-	"gitee.com/quant1x/gox/timestamp"
 	"strconv"
 	"testing"
 	"time"
+
+	"gitee.com/quant1x/gox/concurrent"
+	"gitee.com/quant1x/gox/timestamp"
 )
 
 var (

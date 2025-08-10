@@ -1,12 +1,13 @@
 package coroutine
 
 import (
-	"gitee.com/quant1x/gox/logger"
-	"gitee.com/quant1x/gox/runtime"
-	"gitee.com/quant1x/gox/timestamp"
 	"sync"
 	"sync/atomic"
 	"time"
+
+	"gitee.com/quant1x/gox/logger"
+	"gitee.com/quant1x/gox/runtime"
+	"gitee.com/quant1x/gox/timestamp"
 )
 
 const (

@@ -2,9 +2,10 @@ package coroutine
 
 import (
 	"context"
+	"sync"
+
 	"gitee.com/quant1x/gox/logger"
 	"gitee.com/quant1x/gox/signal"
-	"sync"
 )
 
 var (

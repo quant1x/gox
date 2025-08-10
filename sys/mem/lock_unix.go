@@ -4,9 +4,10 @@
 package mem
 
 import (
-	"golang.org/x/sys/unix"
 	"unsafe"
 	_ "unsafe" // for go:linkname
+
+	"golang.org/x/sys/unix"
 )
 
 //go:linkname mem_unix_lock gitee.com/quant1x/gox/sys/mem.Lock

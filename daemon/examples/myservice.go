@@ -3,12 +3,13 @@ package main
 
 import (
 	"fmt"
-	"gitee.com/quant1x/gox/daemon"
 	"log"
 	"net"
 	"os"
 	"os/signal"
 	"syscall"
+
+	"gitee.com/quant1x/gox/daemon"
 )
 
 const (

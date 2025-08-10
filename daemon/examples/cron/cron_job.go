@@ -2,13 +2,14 @@ package main
 
 import (
 	"fmt"
-	"gitee.com/quant1x/gox/cron"
-	"gitee.com/quant1x/gox/daemon"
 	"log"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
+
+	"gitee.com/quant1x/gox/cron"
+	"gitee.com/quant1x/gox/daemon"
 )
 
 const (

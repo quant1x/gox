@@ -2,9 +2,10 @@ package mem
 
 import (
 	"errors"
-	"golang.org/x/sys/windows"
 	"sync"
 	"unsafe"
+
+	"golang.org/x/sys/windows"
 )
 
 // mmap on Windows is a two-step process.

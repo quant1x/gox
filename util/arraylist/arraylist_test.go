@@ -6,8 +6,9 @@ package arraylist
 
 import (
 	"fmt"
-	"gitee.com/quant1x/gox/util/internal"
 	"testing"
+
+	"gitee.com/quant1x/gox/util/internal"
 )
 
 func TestListNew(t *testing.T) {

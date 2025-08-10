@@ -4,10 +4,11 @@ import (
 	"bufio"
 	"compress/gzip"
 	"fmt"
-	"gitee.com/quant1x/gox/api"
 	"io"
 	"os"
 	"path/filepath"
+
+	"gitee.com/quant1x/gox/api"
 )
 
 const (

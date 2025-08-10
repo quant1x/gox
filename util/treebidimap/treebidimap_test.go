@@ -6,8 +6,9 @@ package treebidimap
 
 import (
 	"fmt"
-	"gitee.com/quant1x/gox/util/internal"
 	"testing"
+
+	"gitee.com/quant1x/gox/util/internal"
 )
 
 func TestMapPut(t *testing.T) {

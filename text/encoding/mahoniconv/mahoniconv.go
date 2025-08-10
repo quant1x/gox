@@ -2,10 +2,11 @@ package main
 
 import (
 	"flag"
-	"gitee.com/quant1x/gox/text/encoding"
 	"io"
 	"log"
 	"os"
+
+	"gitee.com/quant1x/gox/text/encoding"
 )
 
 // An iconv workalike using mahonia.

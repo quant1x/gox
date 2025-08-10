@@ -4,13 +4,14 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"gitee.com/quant1x/gox/runtime"
 	"log"
 	"strings"
 	"sync"
 	"sync/atomic"
 	"testing"
 	"time"
+
+	"gitee.com/quant1x/gox/runtime"
 )
 
 // Many tests schedule a job for every second, and then wait at most a second

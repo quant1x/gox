@@ -2,10 +2,11 @@ package base64
 
 import (
 	"encoding/base64"
-	"gitee.com/quant1x/gox/api"
 	"math/rand"
 	"slices"
 	"time"
+
+	"gitee.com/quant1x/gox/api"
 )
 
 const (

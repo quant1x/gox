@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
+	"time"
+
 	"gitee.com/quant1x/gox/coroutine/v2"
 	"gitee.com/quant1x/gox/timestamp"
-	"time"
 )
 
 func main() {

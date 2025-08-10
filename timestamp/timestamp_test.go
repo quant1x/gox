@@ -2,9 +2,10 @@ package timestamp
 
 import (
 	"fmt"
-	"gitee.com/quant1x/gox/api"
 	"testing"
 	"time"
+
+	"gitee.com/quant1x/gox/api"
 )
 
 func TestTimePrivate(t *testing.T) {

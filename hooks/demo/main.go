@@ -3,8 +3,9 @@ package main
 import (
 	"context"
 	"fmt"
-	"gitee.com/quant1x/gox/hooks"
 	"time"
+
+	"gitee.com/quant1x/gox/hooks"
 )
 
 func main() {

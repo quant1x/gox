@@ -2,6 +2,7 @@ package serialization
 
 import (
 	"fmt"
+
 	"gitee.com/quant1x/gox/util/arraylist"
 	"gitee.com/quant1x/gox/util/hashmap"
 )

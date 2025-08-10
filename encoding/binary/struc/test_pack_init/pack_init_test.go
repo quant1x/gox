@@ -2,9 +2,10 @@ package test_pack_init
 
 import (
 	"bytes"
-	"gitee.com/quant1x/gox/encoding/binary/struc"
 	"sync"
 	"testing"
+
+	"gitee.com/quant1x/gox/encoding/binary/struc"
 )
 
 type Example struct {

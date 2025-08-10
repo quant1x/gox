@@ -6,6 +6,7 @@ package avltree
 
 import (
 	"encoding/json"
+
 	"gitee.com/quant1x/gox/util/internal"
 )
 

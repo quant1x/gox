@@ -2,8 +2,9 @@ package runtime
 
 import (
 	"fmt"
-	"gitee.com/quant1x/gox/logger"
 	"runtime/debug"
+
+	"gitee.com/quant1x/gox/logger"
 )
 
 // Deprecated: 废弃 [wangfeng on 2024/2/27 07:52]

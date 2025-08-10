@@ -19,9 +19,10 @@ package treebidimap
 
 import (
 	"fmt"
+	"strings"
+
 	"gitee.com/quant1x/gox/util/internal"
 	"gitee.com/quant1x/gox/util/redblacktree"
-	"strings"
 )
 
 func assertMapImplementation() {

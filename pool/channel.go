@@ -3,9 +3,10 @@ package pool
 import (
 	"errors"
 	"fmt"
-	"gitee.com/quant1x/gox/logger"
 	"sync"
 	"time"
+
+	"gitee.com/quant1x/gox/logger"
 )
 
 // Config 连接池相关配置

@@ -2,13 +2,14 @@ package hooks
 
 import (
 	"context"
-	"gitee.com/quant1x/gox/signal"
 	"os"
 	"sort"
 	"sync"
 	"sync/atomic"
 	"syscall"
 	"time"
+
+	"gitee.com/quant1x/gox/signal"
 )
 
 // HookFunc Hook 函数类型

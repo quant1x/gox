@@ -2,9 +2,10 @@ package tags
 
 import (
 	"fmt"
-	"gitee.com/quant1x/gox/api"
 	"reflect"
 	"strings"
+
+	"gitee.com/quant1x/gox/api"
 )
 
 const (

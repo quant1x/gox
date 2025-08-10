@@ -3,10 +3,11 @@
 package devices
 
 import (
-	"gitee.com/quant1x/gox/api"
 	"os"
 	"os/exec"
 	"strings"
+
+	"gitee.com/quant1x/gox/api"
 )
 
 const (

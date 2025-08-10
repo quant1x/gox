@@ -1,9 +1,10 @@
 package runewidth
 
 import (
-	"gitee.com/quant1x/gox/text/uniseg"
 	"os"
 	"strings"
+
+	"gitee.com/quant1x/gox/text/uniseg"
 )
 
 //go:generate go run script/generate.go

@@ -13,8 +13,9 @@ package redblacktree
 
 import (
 	"fmt"
-	"gitee.com/quant1x/gox/util/internal"
 	"sync"
+
+	"gitee.com/quant1x/gox/util/internal"
 )
 
 func assertTreeImplementation() {

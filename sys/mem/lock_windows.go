@@ -1,10 +1,11 @@
 package mem
 
 import (
-	"golang.org/x/sys/windows"
 	"os"
 	"unsafe"   // for go:linkname
 	_ "unsafe" // for go:linkname
+
+	"golang.org/x/sys/windows"
 )
 
 // windows.VirtualLock 将进程的虚拟内存地址空间中的某段内存锁定在物理内存（RAM）中，防止被交换到磁盘页面文件

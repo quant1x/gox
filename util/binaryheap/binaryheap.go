@@ -13,9 +13,10 @@ package binaryheap
 
 import (
 	"fmt"
+	"strings"
+
 	"gitee.com/quant1x/gox/util/arraylist"
 	"gitee.com/quant1x/gox/util/internal"
-	"strings"
 )
 
 func assertTreeImplementation() {

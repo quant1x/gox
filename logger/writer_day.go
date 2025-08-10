@@ -1,10 +1,11 @@
 package logger
 
 import (
-	"gitee.com/quant1x/gox/api"
 	"os"
 	"path/filepath"
 	"time"
+
+	"gitee.com/quant1x/gox/api"
 )
 
 type DateWriter struct {

@@ -1,8 +1,9 @@
 package tests
 
 import (
-	"gitee.com/quant1x/gox/encoding/binary/cstruct"
 	"testing"
+
+	"gitee.com/quant1x/gox/encoding/binary/cstruct"
 )
 
 type mystruct_sint12 struct {

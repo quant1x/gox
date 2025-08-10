@@ -5,15 +5,16 @@ import (
 	"compress/flate"
 	"compress/gzip"
 	"fmt"
-	"gitee.com/quant1x/gox/api"
-	"gitee.com/quant1x/gox/exception"
-	"gitee.com/quant1x/gox/logger"
 	"io"
 	"maps"
 	"net/http"
 	URL "net/url"
 	"strings"
 	"time"
+
+	"gitee.com/quant1x/gox/api"
+	"gitee.com/quant1x/gox/exception"
+	"gitee.com/quant1x/gox/logger"
 )
 
 const (

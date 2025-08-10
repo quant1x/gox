@@ -4,10 +4,6 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"gitee.com/quant1x/gox/api"
-	"gitee.com/quant1x/gox/cache"
-	"gitee.com/quant1x/gox/mdc"
-	"gitee.com/quant1x/gox/signal"
 	"os"
 	"path/filepath"
 	"reflect"
@@ -15,6 +11,11 @@ import (
 	"strings"
 	"sync"
 	"time"
+
+	"gitee.com/quant1x/gox/api"
+	"gitee.com/quant1x/gox/cache"
+	"gitee.com/quant1x/gox/mdc"
+	"gitee.com/quant1x/gox/signal"
 )
 
 const (

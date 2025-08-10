@@ -2,6 +2,7 @@ package concurrent
 
 import (
 	"cmp"
+
 	rbt "gitee.com/quant1x/gox/util/redblacktree"
 )
 

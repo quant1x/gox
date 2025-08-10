@@ -2,8 +2,9 @@ package tests
 
 import (
 	"fmt"
-	"gitee.com/quant1x/gox/encoding/binary/cstruct"
 	"testing"
+
+	"gitee.com/quant1x/gox/encoding/binary/cstruct"
 )
 
 type mystruct44 struct {

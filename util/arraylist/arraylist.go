@@ -11,8 +11,9 @@ package arraylist
 
 import (
 	"fmt"
-	"gitee.com/quant1x/gox/util/internal"
 	"strings"
+
+	"gitee.com/quant1x/gox/util/internal"
 )
 
 func assertListImplementation() {

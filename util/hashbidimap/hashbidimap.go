@@ -17,6 +17,7 @@ package hashbidimap
 
 import (
 	"fmt"
+
 	"gitee.com/quant1x/gox/util/hashmap"
 	"gitee.com/quant1x/gox/util/internal"
 )

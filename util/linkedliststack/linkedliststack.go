@@ -11,9 +11,10 @@ package linkedliststack
 
 import (
 	"fmt"
+	"strings"
+
 	"gitee.com/quant1x/gox/util/internal"
 	"gitee.com/quant1x/gox/util/singlylinkedlist"
-	"strings"
 )
 
 func assertStackImplementation() {

@@ -2,9 +2,10 @@ package progressbar
 
 import (
 	"fmt"
-	"gitee.com/quant1x/gox/api"
 	"strings"
 	"sync"
+
+	"gitee.com/quant1x/gox/api"
 )
 
 var (
