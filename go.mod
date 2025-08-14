@@ -1,9 +1,9 @@
 module gitee.com/quant1x/gox
 
-go 1.24
+go 1.25
 
 require (
-	gitee.com/quant1x/pkg v0.6.0
+	gitee.com/quant1x/pkg v0.7.0
 	github.com/petermattis/goid v0.0.0-20250721140440-ea1c0173183e
 	github.com/stretchr/testify v1.10.0
 	golang.org/x/sys v0.35.0
