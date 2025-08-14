@@ -3,9 +3,14 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.23.1] - 2025-08-14
+### Changed
+- 更新依赖库版本
+
 ## [1.23.0] - 2025-08-14
 ### Changed
 - gox最低支持go1.25
+- update changelog
 
 ## [1.22.13] - 2025-08-11
 ### Changed
@@ -1492,7 +1497,8 @@ All notable changes to this project will be documented in this file.
 - fix codecov
 
 
-[Unreleased]: https://gitee.com/quant1x/gox.git/compare/v1.23.0...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox.git/compare/v1.23.1...HEAD
+[1.23.1]: https://gitee.com/quant1x/gox.git/compare/v1.23.0...v1.23.1
 [1.23.0]: https://gitee.com/quant1x/gox.git/compare/v1.22.13...v1.23.0
 [1.22.13]: https://gitee.com/quant1x/gox.git/compare/v1.22.12...v1.22.13
 [1.22.12]: https://gitee.com/quant1x/gox.git/compare/v1.22.11...v1.22.12
