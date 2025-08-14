@@ -4,7 +4,7 @@ go 1.25
 
 require (
 	gitee.com/quant1x/pkg v0.7.0
-	github.com/petermattis/goid v0.0.0-20250721140440-ea1c0173183e
+	github.com/petermattis/goid v0.0.0-20250813065127-a731cc31b4fe
 	github.com/stretchr/testify v1.10.0
 	golang.org/x/sys v0.35.0
 )
