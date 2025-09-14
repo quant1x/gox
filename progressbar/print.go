@@ -5,7 +5,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/quant1x/gox/api"
+	"gitee.com/quant1x/gox/api"
 )
 
 var (

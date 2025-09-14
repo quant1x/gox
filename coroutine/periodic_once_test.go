@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/quant1x/gox/concurrent"
+	"gitee.com/quant1x/gox/concurrent"
 )
 
 var (

@@ -9,7 +9,7 @@ import (
 //import (
 //	"encoding/binary"
 //	"fmt"
-//	"github.com/quant1x/gox/api"
+//	"gitee.com/quant1x/gox/api"
 //	"testing"
 //)
 //

@@ -13,8 +13,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/quant1x/gox/util/arraylist"
-	"github.com/quant1x/gox/util/internal"
+	"gitee.com/quant1x/gox/util/arraylist"
+	"gitee.com/quant1x/gox/util/internal"
 )
 
 func assertStackImplementation() {

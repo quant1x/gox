@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/quant1x/gox/coroutine/v2"
-	"github.com/quant1x/gox/timestamp"
+	"gitee.com/quant1x/gox/coroutine/v2"
+	"gitee.com/quant1x/gox/timestamp"
 )
 
 func main() {

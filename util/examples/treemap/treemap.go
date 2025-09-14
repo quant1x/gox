@@ -4,7 +4,7 @@
 
 package main
 
-import "github.com/quant1x/gox/util/treemap"
+import "gitee.com/quant1x/gox/util/treemap"
 
 // TreeMapExample to demonstrate basic usage of TreeMap
 func main() {

@@ -5,9 +5,9 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/quant1x/gox/logger"
-	"github.com/quant1x/gox/runtime"
-	"github.com/quant1x/gox/timestamp"
+	"gitee.com/quant1x/gox/logger"
+	"gitee.com/quant1x/gox/runtime"
+	"gitee.com/quant1x/gox/timestamp"
 )
 
 const (

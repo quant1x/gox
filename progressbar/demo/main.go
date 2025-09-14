@@ -4,9 +4,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/quant1x/gox/logger"
+	"gitee.com/quant1x/gox/logger"
 
-	pgbar "github.com/quant1x/gox/progressbar"
+	pgbar "gitee.com/quant1x/gox/progressbar"
 )
 
 func v1ProgressBarTest() {

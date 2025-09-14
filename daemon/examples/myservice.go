@@ -9,7 +9,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/quant1x/gox/daemon"
+	"gitee.com/quant1x/gox/daemon"
 )
 
 const (

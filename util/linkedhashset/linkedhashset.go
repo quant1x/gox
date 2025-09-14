@@ -17,8 +17,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/quant1x/gox/util/doublylinkedlist"
-	"github.com/quant1x/gox/util/internal"
+	"gitee.com/quant1x/gox/util/doublylinkedlist"
+	"gitee.com/quant1x/gox/util/internal"
 )
 
 func assertSetImplementation() {

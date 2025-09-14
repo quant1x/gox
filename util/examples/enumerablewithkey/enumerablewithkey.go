@@ -7,7 +7,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/quant1x/gox/util/treemap"
+	"gitee.com/quant1x/gox/util/treemap"
 )
 
 func printMap(txt string, m *treemap.Map) {

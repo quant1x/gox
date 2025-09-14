@@ -4,7 +4,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/quant1x/gox/util/homedir"
+	"gitee.com/quant1x/gox/util/homedir"
 )
 
 const (

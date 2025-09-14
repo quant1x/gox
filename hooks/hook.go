@@ -9,7 +9,7 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/quant1x/gox/signal"
+	"gitee.com/quant1x/gox/signal"
 )
 
 // HookFunc Hook 函数类型

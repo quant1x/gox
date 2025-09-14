@@ -6,8 +6,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/quant1x/gox/logger"
-	"github.com/quant1x/gox/runtime"
+	"gitee.com/quant1x/gox/logger"
+	"gitee.com/quant1x/gox/runtime"
 )
 
 // Cron keeps track of any number of entries, invoking the associated func as

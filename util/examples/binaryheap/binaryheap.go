@@ -5,8 +5,8 @@
 package main
 
 import (
-	"github.com/quant1x/gox/util/binaryheap"
-	"github.com/quant1x/gox/util/internal"
+	"gitee.com/quant1x/gox/util/binaryheap"
+	"gitee.com/quant1x/gox/util/internal"
 )
 
 // BinaryHeapExample to demonstrate basic usage of BinaryHeap

@@ -12,9 +12,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/quant1x/gox/api"
-	"github.com/quant1x/gox/exception"
-	"github.com/quant1x/gox/logger"
+	"gitee.com/quant1x/gox/api"
+	"gitee.com/quant1x/gox/exception"
+	"gitee.com/quant1x/gox/logger"
 )
 
 const (

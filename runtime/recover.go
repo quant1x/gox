@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"runtime/debug"
 
-	"github.com/quant1x/gox/logger"
+	"gitee.com/quant1x/gox/logger"
 )
 
 // Deprecated: 废弃 [wangfeng on 2024/2/27 07:52]

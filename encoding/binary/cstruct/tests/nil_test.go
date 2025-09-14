@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/quant1x/gox/encoding/binary/cstruct"
+	"gitee.com/quant1x/gox/encoding/binary/cstruct"
 )
 
 type mystruct11 struct {

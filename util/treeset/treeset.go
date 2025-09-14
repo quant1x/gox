@@ -13,8 +13,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/quant1x/gox/util/internal"
-	rbt "github.com/quant1x/gox/util/redblacktree"
+	"gitee.com/quant1x/gox/util/internal"
+	rbt "gitee.com/quant1x/gox/util/redblacktree"
 )
 
 func assertSetImplementation() {

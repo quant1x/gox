@@ -5,8 +5,8 @@
 package main
 
 import (
-	"github.com/quant1x/gox/util/internal"
-	"github.com/quant1x/gox/util/treebidimap"
+	"gitee.com/quant1x/gox/util/internal"
+	"gitee.com/quant1x/gox/util/treebidimap"
 )
 
 // TreeBidiMapExample to demonstrate basic usage of TreeBidiMap

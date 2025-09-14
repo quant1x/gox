@@ -8,7 +8,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/quant1x/gox/api"
+	"gitee.com/quant1x/gox/api"
 )
 
 const (

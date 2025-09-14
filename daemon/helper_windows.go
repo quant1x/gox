@@ -7,7 +7,7 @@ package daemon
 import (
 	"fmt"
 
-	"github.com/quant1x/gox/util/homedir"
+	"gitee.com/quant1x/gox/util/homedir"
 	"golang.org/x/sys/windows/registry"
 )
 

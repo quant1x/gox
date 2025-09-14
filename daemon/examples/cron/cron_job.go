@@ -8,8 +8,8 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/quant1x/gox/cron"
-	"github.com/quant1x/gox/daemon"
+	"gitee.com/quant1x/gox/cron"
+	"gitee.com/quant1x/gox/daemon"
 )
 
 const (

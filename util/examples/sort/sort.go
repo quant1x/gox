@@ -5,7 +5,7 @@
 package main
 
 import (
-	"github.com/quant1x/gox/util/internal"
+	"gitee.com/quant1x/gox/util/internal"
 )
 
 // SortExample to demonstrate basic usage of basic sort

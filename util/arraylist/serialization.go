@@ -7,7 +7,7 @@ package arraylist
 import (
 	"encoding/json"
 
-	"github.com/quant1x/gox/util/internal"
+	"gitee.com/quant1x/gox/util/internal"
 )
 
 func assertSerializationImplementation() {

@@ -6,7 +6,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/quant1x/gox/text/encoding"
+	"gitee.com/quant1x/gox/text/encoding"
 )
 
 // An iconv workalike using mahonia.

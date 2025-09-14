@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/quant1x/gox/api"
+	"gitee.com/quant1x/gox/api"
 )
 
 func TestTimePrivate(t *testing.T) {

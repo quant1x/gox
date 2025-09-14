@@ -5,7 +5,7 @@
 package arraylist
 
 import (
-	"github.com/quant1x/gox/util/internal"
+	"gitee.com/quant1x/gox/util/internal"
 )
 
 func assertIteratorImplementation() {

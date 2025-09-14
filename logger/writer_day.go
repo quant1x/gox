@@ -5,7 +5,7 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/quant1x/gox/api"
+	"gitee.com/quant1x/gox/api"
 )
 
 type DateWriter struct {

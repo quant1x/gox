@@ -13,8 +13,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/quant1x/gox/util/internal"
-	"github.com/quant1x/gox/util/singlylinkedlist"
+	"gitee.com/quant1x/gox/util/internal"
+	"gitee.com/quant1x/gox/util/singlylinkedlist"
 )
 
 func assertStackImplementation() {

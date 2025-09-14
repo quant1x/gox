@@ -1,8 +1,8 @@
 package mdc
 
 import (
-	"github.com/quant1x/gox/gls"
-	"github.com/quant1x/pkg/uuid"
+	"gitee.com/quant1x/gox/gls"
+	"gitee.com/quant1x/pkg/uuid"
 )
 
 const (
