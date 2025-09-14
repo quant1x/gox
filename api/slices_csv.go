@@ -4,8 +4,7 @@ import (
 	"os"
 
 	"github.com/quant1x/gox/util/homedir"
-	//"github.com/quant1x/pkg/gocsv"
-	"github.com/gocarina/gocsv"
+	"github.com/quant1x/pkg/gocsv"
 )
 
 const (

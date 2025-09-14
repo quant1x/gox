@@ -3,7 +3,6 @@ module github.com/quant1x/gox
 go 1.25
 
 require (
-	github.com/gocarina/gocsv v0.0.0-20240520201108-78e41c74b4b1
 	github.com/petermattis/goid v0.0.0-20250904145737-900bdf8bb490
 	github.com/quant1x/pkg v0.8.1
 	github.com/stretchr/testify v1.11.1

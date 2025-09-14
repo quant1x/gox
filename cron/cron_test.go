@@ -734,7 +734,7 @@ func TestSchedulerOk(t *testing.T) {
 	c := New(WithSeconds())
 	c.Start()
 	_, err := c.AddJobWithSkipIfStillRunning(intervalSnapshot, func() {
-		defer runtime.CatchPanic()
+		defer runtime.CatchPanic("job exception")
 		//time.Sleep(time.Second * 3)
 		fmt.Printf("SkipIfStillRunningWithLogger: %v\n", time.Now())
 		panic(errors.New("xx"))
