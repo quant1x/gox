@@ -3,9 +3,14 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.24.4] - 2025-09-14
+### Changed
+- 更新依赖库版本
+
 ## [1.24.3] - 2025-09-14
 ### Changed
 - 删除废弃的gitee和github同步脚本
+- update changelog
 
 ## [1.24.2] - 2025-09-14
 ### Changed
@@ -1522,7 +1527,8 @@ All notable changes to this project will be documented in this file.
 - fix codecov
 
 
-[Unreleased]: https://gitee.com/quant1x/gox.git/compare/v1.24.3...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox.git/compare/v1.24.4...HEAD
+[1.24.4]: https://gitee.com/quant1x/gox.git/compare/v1.24.3...v1.24.4
 [1.24.3]: https://gitee.com/quant1x/gox.git/compare/v1.24.2...v1.24.3
 [1.24.2]: https://gitee.com/quant1x/gox.git/compare/v1.24.1...v1.24.2
 [1.24.1]: https://gitee.com/quant1x/gox.git/compare/v1.24.0...v1.24.1
