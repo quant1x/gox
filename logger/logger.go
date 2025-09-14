@@ -12,10 +12,10 @@ import (
 	"sync"
 	"time"
 
-	"gitee.com/quant1x/gox/api"
-	"gitee.com/quant1x/gox/cache"
-	"gitee.com/quant1x/gox/mdc"
-	"gitee.com/quant1x/gox/signal"
+	"github.com/quant1x/gox/api"
+	"github.com/quant1x/gox/cache"
+	"github.com/quant1x/gox/mdc"
+	"github.com/quant1x/gox/signal"
 )
 
 const (

@@ -7,7 +7,7 @@ package main
 import (
 	"fmt"
 
-	rbt "gitee.com/quant1x/gox/util/redblacktree"
+	rbt "github.com/quant1x/gox/util/redblacktree"
 )
 
 // RedBlackTreeExample to demonstrate basic usage of RedBlackTree

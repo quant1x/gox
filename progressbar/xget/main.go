@@ -7,7 +7,7 @@ import (
 	"os"
 	"strings"
 
-	pgbar "gitee.com/quant1x/gox/progressbar"
+	pgbar "github.com/quant1x/gox/progressbar"
 )
 
 type Downloader struct {

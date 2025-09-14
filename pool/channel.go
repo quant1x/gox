@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	"gitee.com/quant1x/gox/logger"
+	"github.com/quant1x/gox/logger"
 )
 
 // Config 连接池相关配置

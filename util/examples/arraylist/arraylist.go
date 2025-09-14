@@ -5,8 +5,8 @@
 package main
 
 import (
-	"gitee.com/quant1x/gox/util/arraylist"
-	"gitee.com/quant1x/gox/util/internal"
+	"github.com/quant1x/gox/util/arraylist"
+	"github.com/quant1x/gox/util/internal"
 )
 
 // ArrayListExample to demonstrate basic usage of ArrayList

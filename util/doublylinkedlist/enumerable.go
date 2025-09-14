@@ -5,7 +5,7 @@
 package doublylinkedlist
 
 import (
-	"gitee.com/quant1x/gox/util/internal"
+	"github.com/quant1x/gox/util/internal"
 )
 
 func assertEnumerableImplementation() {

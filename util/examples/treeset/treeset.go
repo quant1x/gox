@@ -4,7 +4,7 @@
 
 package main
 
-import "gitee.com/quant1x/gox/util/treeset"
+import "github.com/quant1x/gox/util/treeset"
 
 // TreeSetExample to demonstrate basic usage of TreeSet
 func main() {

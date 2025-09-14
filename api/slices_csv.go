@@ -3,8 +3,9 @@ package api
 import (
 	"os"
 
-	"gitee.com/quant1x/gox/util/homedir"
-	"github.com/quant1x/pkg/gocsv"
+	"github.com/quant1x/gox/util/homedir"
+	//"github.com/quant1x/pkg/gocsv"
+	"github.com/gocarina/gocsv"
 )
 
 const (

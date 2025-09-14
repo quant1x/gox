@@ -3,8 +3,8 @@ package serialization
 import (
 	"fmt"
 
-	"gitee.com/quant1x/gox/util/arraylist"
-	"gitee.com/quant1x/gox/util/hashmap"
+	"github.com/quant1x/gox/util/arraylist"
+	"github.com/quant1x/gox/util/hashmap"
 )
 
 // ListSerializationExample demonstrates how to serialize and deserialize lists to and from JSON

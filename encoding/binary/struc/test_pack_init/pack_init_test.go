@@ -5,7 +5,7 @@ import (
 	"sync"
 	"testing"
 
-	"gitee.com/quant1x/gox/encoding/binary/struc"
+	"github.com/quant1x/gox/encoding/binary/struc"
 )
 
 type Example struct {

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"gitee.com/quant1x/gox/hooks"
+	"github.com/quant1x/gox/hooks"
 )
 
 func main() {
