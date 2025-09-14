@@ -7,16 +7,16 @@ import (
 	"os"
 	"strings"
 
-	pgbar "gitee.com/quant1x/gox/progressbar"
+	mpb "gitee.com/quant1x/gox/progressbar"
 )
 
 type Downloader struct {
 	io.Reader
-	bar *pgbar.Bar
+	bar *mpb.Bar
 }
 
 func NewDownloader(resp *http.Response) *Downloader {
-	nb := pgbar.NewBar(0, "下载进度", int(resp.ContentLength))
+	nb := mpb.NewBar(0, "下载进度", int(resp.ContentLength))
 	if resp.ContentLength > 10*1024 {
 		nb.SetUnit("B", "kb", 1024*1024)
 	}
