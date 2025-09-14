@@ -3,9 +3,14 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.24.0] - 2025-09-14
+### Changed
+- 更新依赖库版本,仓库改为github
+
 ## [1.23.2] - 2025-09-14
 ### Changed
 - 更新依赖库版本
+- update changelog
 
 ## [1.23.1] - 2025-08-14
 ### Changed
@@ -1502,7 +1507,8 @@ All notable changes to this project will be documented in this file.
 - fix codecov
 
 
-[Unreleased]: https://gitee.com/quant1x/gox.git/compare/v1.23.2...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox.git/compare/v1.24.0...HEAD
+[1.24.0]: https://gitee.com/quant1x/gox.git/compare/v1.23.2...v1.24.0
 [1.23.2]: https://gitee.com/quant1x/gox.git/compare/v1.23.1...v1.23.2
 [1.23.1]: https://gitee.com/quant1x/gox.git/compare/v1.23.0...v1.23.1
 [1.23.0]: https://gitee.com/quant1x/gox.git/compare/v1.22.13...v1.23.0
