@@ -2,7 +2,7 @@ package mdc
 
 import (
 	"gitee.com/quant1x/gox/gls"
-	"gitee.com/quant1x/pkg/uuid"
+	"github.com/quant1x/pkg/uuid"
 )
 
 const (

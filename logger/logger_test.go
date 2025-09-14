@@ -9,7 +9,7 @@ import (
 	"gitee.com/quant1x/gox/api"
 	"gitee.com/quant1x/gox/gls"
 	"gitee.com/quant1x/gox/mdc"
-	"gitee.com/quant1x/pkg/uuid"
+	"github.com/quant1x/pkg/uuid"
 )
 
 func TestGoId(t *testing.T) {
