@@ -262,12 +262,15 @@ func (c *channelPool) CloseAll() {
 	if c.conns == nil || c.close == nil {
 		return
 	}
-	select {
-	case wrapConn := <-c.conns:
-		_ = c.close(wrapConn.conn)
-		c.openingConns--
-	default:
-		break
+	// 关闭所有连接并清空通道
+	for {
+		select {
+		case wrapConn := <-c.conns:
+			_ = c.close(wrapConn.conn)
+			c.openingConns--
+		default:
+			return // 通道为空时退出
+		}
 	}
 }
 
