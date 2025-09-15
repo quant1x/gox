@@ -3,9 +3,14 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.24.8] - 2025-09-15
+### Changed
+- 修改字符串测试的源文件名
+
 ## [1.24.7] - 2025-09-15
 ### Changed
 - 修改字符串源文件名
+- update changelog
 
 ## [1.24.6] - 2025-09-15
 ### Changed
@@ -1542,7 +1547,8 @@ All notable changes to this project will be documented in this file.
 - fix codecov
 
 
-[Unreleased]: https://gitee.com/quant1x/gox.git/compare/v1.24.7...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox.git/compare/v1.24.8...HEAD
+[1.24.8]: https://gitee.com/quant1x/gox.git/compare/v1.24.7...v1.24.8
 [1.24.7]: https://gitee.com/quant1x/gox.git/compare/v1.24.6...v1.24.7
 [1.24.6]: https://gitee.com/quant1x/gox.git/compare/v1.24.5...v1.24.6
 [1.24.5]: https://gitee.com/quant1x/gox.git/compare/v1.24.4...v1.24.5
