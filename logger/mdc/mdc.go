@@ -1,7 +1,7 @@
 package mdc
 
 import (
-	"gitee.com/quant1x/gox/gls"
+	"gitee.com/quant1x/gox/logger/gls"
 	"gitee.com/quant1x/pkg/uuid"
 )
 

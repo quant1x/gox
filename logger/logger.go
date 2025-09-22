@@ -14,7 +14,7 @@ import (
 
 	"gitee.com/quant1x/gox/api"
 	"gitee.com/quant1x/gox/cache"
-	"gitee.com/quant1x/gox/mdc"
+	"gitee.com/quant1x/gox/logger/mdc"
 	"gitee.com/quant1x/gox/signal"
 )
 

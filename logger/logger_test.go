@@ -7,8 +7,8 @@ import (
 	"time"
 
 	"gitee.com/quant1x/gox/api"
-	"gitee.com/quant1x/gox/gls"
-	"gitee.com/quant1x/gox/mdc"
+	"gitee.com/quant1x/gox/logger/gls"
+	"gitee.com/quant1x/gox/logger/mdc"
 	"gitee.com/quant1x/pkg/uuid"
 )
 
