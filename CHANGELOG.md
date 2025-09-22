@@ -3,10 +3,15 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.25.1] - 2025-09-22
+### Changed
+- 更新依赖库版本
+
 ## [1.25.0] - 2025-09-22
 ### Changed
 - 新增对象池
 - gls和mdc两个功能模块归于logger
+- update changelog
 - update changelog
 
 ## [1.24.10] - 2025-09-15
@@ -1564,7 +1569,8 @@ All notable changes to this project will be documented in this file.
 - fix codecov
 
 
-[Unreleased]: https://gitee.com/quant1x/gox.git/compare/v1.25.0...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox.git/compare/v1.25.1...HEAD
+[1.25.1]: https://gitee.com/quant1x/gox.git/compare/v1.25.0...v1.25.1
 [1.25.0]: https://gitee.com/quant1x/gox.git/compare/v1.24.10...v1.25.0
 [1.24.10]: https://gitee.com/quant1x/gox.git/compare/v1.24.9...v1.24.10
 [1.24.9]: https://gitee.com/quant1x/gox.git/compare/v1.24.8...v1.24.9
