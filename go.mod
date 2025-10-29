@@ -3,10 +3,10 @@ module gitee.com/quant1x/gox
 go 1.25
 
 require (
-	gitee.com/quant1x/pkg v0.8.3
+	gitee.com/quant1x/pkg v0.9.1
 	github.com/petermattis/goid v0.0.0-20250904145737-900bdf8bb490
 	github.com/stretchr/testify v1.11.1
-	golang.org/x/sys v0.36.0
+	golang.org/x/sys v0.37.0
 )
 
 require (
