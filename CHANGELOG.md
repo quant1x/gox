@@ -3,9 +3,14 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.26.0] - 2026-06-12
+### Changed
+- 调整go版本代码地址
+
 ## [1.25.2] - 2025-10-29
 ### Changed
 - 更新依赖库pkg版本到0.9.1
+- update changelog
 
 ## [1.25.1] - 2025-09-22
 ### Changed
@@ -1574,7 +1579,8 @@ All notable changes to this project will be documented in this file.
 - fix codecov
 
 
-[Unreleased]: https://gitee.com/quant1x/gox.git/compare/v1.25.2...HEAD
+[Unreleased]: https://gitee.com/quant1x/gox.git/compare/v1.26.0...HEAD
+[1.26.0]: https://gitee.com/quant1x/gox.git/compare/v1.25.2...v1.26.0
 [1.25.2]: https://gitee.com/quant1x/gox.git/compare/v1.25.1...v1.25.2
 [1.25.1]: https://gitee.com/quant1x/gox.git/compare/v1.25.0...v1.25.1
 [1.25.0]: https://gitee.com/quant1x/gox.git/compare/v1.24.10...v1.25.0
