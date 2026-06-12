@@ -7,7 +7,7 @@ package main
 import (
 	"fmt"
 
-	"gitee.com/quant1x/gox/util/btree"
+	"github.com/quant1x/gox/util/btree"
 )
 
 // BTreeExample to demonstrate basic usage of BTree

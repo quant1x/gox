@@ -7,7 +7,7 @@ package redblacktreeextended
 import (
 	"fmt"
 
-	rbt "gitee.com/quant1x/gox/util/redblacktree"
+	rbt "github.com/quant1x/gox/util/redblacktree"
 )
 
 // RedBlackTreeExtended to demonstrate how to extend a RedBlackTree to include new functions

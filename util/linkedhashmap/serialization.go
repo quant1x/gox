@@ -8,7 +8,7 @@ import (
 	"bytes"
 	"encoding/json"
 
-	"gitee.com/quant1x/gox/util/internal"
+	"github.com/quant1x/gox/util/internal"
 )
 
 func assertSerializationImplementation() {

@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
-	"gitee.com/quant1x/gox/concurrent"
-	"gitee.com/quant1x/gox/timestamp"
+	"github.com/quant1x/gox/concurrent"
+	"github.com/quant1x/gox/timestamp"
 )
 
 var (

@@ -7,7 +7,7 @@ import (
 	"os"
 	"strings"
 
-	mpb "gitee.com/quant1x/gox/progressbar"
+	mpb "github.com/quant1x/gox/progressbar"
 )
 
 type Downloader struct {

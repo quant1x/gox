@@ -5,8 +5,8 @@
 package treeset
 
 import (
-	"gitee.com/quant1x/gox/util/internal"
-	rbt "gitee.com/quant1x/gox/util/redblacktree"
+	"github.com/quant1x/gox/util/internal"
+	rbt "github.com/quant1x/gox/util/redblacktree"
 )
 
 func assertIteratorImplementation() {

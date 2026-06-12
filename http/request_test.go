@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"gitee.com/quant1x/gox/api"
+	"github.com/quant1x/gox/api"
 )
 
 func TestHttpGet(t *testing.T) {

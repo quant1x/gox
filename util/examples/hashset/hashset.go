@@ -4,7 +4,7 @@
 
 package main
 
-import "gitee.com/quant1x/gox/util/hashset"
+import "github.com/quant1x/gox/util/hashset"
 
 // HashSetExample to demonstrate basic usage of HashSet
 func main() {

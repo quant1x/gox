@@ -21,8 +21,8 @@ import (
 	"fmt"
 	"strings"
 
-	"gitee.com/quant1x/gox/util/internal"
-	"gitee.com/quant1x/gox/util/redblacktree"
+	"github.com/quant1x/gox/util/internal"
+	"github.com/quant1x/gox/util/redblacktree"
 )
 
 func assertMapImplementation() {

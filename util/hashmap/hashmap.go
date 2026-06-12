@@ -14,7 +14,7 @@ package hashmap
 import (
 	"fmt"
 
-	"gitee.com/quant1x/gox/util/internal"
+	"github.com/quant1x/gox/util/internal"
 )
 
 func assertMapImplementation() {

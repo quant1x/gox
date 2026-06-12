@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"testing"
 
-	"gitee.com/quant1x/gox/util/internal"
+	"github.com/quant1x/gox/util/internal"
 )
 
 func TestListNew(t *testing.T) {

@@ -5,8 +5,8 @@
 package main
 
 import (
-	dll "gitee.com/quant1x/gox/util/doublylinkedlist"
-	"gitee.com/quant1x/gox/util/internal"
+	dll "github.com/quant1x/gox/util/doublylinkedlist"
+	"github.com/quant1x/gox/util/internal"
 )
 
 // DoublyLinkedListExample to demonstrate basic usage of DoublyLinkedList
